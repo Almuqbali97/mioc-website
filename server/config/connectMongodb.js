@@ -1,0 +1,36 @@
+import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+dotenv.config();
+// database setup
+const mongoDBURL = process.env.MONGODB_URL;
+// creating new client
+const mongoClient = new MongoClient(mongoDBURL, {
+    family: 4,
+});
+
+// creating db
+const db = mongoClient.db(process.env.DB_NAME);
+
+async function connectDB() {
+    try {
+        await mongoClient.connect();
+        console.log('mongodb connected');
+    } catch (error) {
+        console.error('Failed to connect to MongoDB', error);
+        process.exit(1);
+    };
+}
+
+async function closeDB() {
+    try {
+        await mongoClient.close();
+        console.log('MongoDB connection closed');
+    } catch (error) {
+        console.error('Error closing MongoDB connection', error);
+    }
+}
+
+// Close connection gracefully
+process.on('SIGINT', closeDB);
+process.on('SIGTERM', closeDB);
+export { db, connectDB }

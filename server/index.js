@@ -1,0 +1,46 @@
+import express from 'express';
+import { connectDB } from './config/connectMongodb.js'; // Update path as needed
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import userRoutes from './routes/userRoutes.js'
+import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
+import { isAdmin } from './middlewares/isAuthorizedAdmin.js'
+
+const app = express();
+const port = process.env.PORT;;
+
+
+//middlewares
+// cors handiling
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // allow all domains
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT,POST,DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//     res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+//     next();
+// });
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your client URL
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true // Allow cookies to be sent
+}));
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+//routes
+app.use('/user', userRoutes);
+
+// testing admin auth
+app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
+    res.json({ user: req.user });
+});
+
+(async () => {
+    await connectDB();
+    app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+    });
+})();
