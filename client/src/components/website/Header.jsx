@@ -1,11 +1,15 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
+import Navbar from '../common/Navbar.jsx'
+import Hero from './Hero.jsx';
 const Header = () => {
-    const { isLogin } = useContext(AuthContext);
+    // const { isLogin } = useContext(AuthContext);
     return (
         <header>
-            <nav>
+            <Navbar />
+            {/* <Hero /> */}
+            {/* <nav>
                 <ul>
                     {isLogin ?
                         <>
@@ -18,7 +22,8 @@ const Header = () => {
                         </>
                     }
                 </ul>
-            </nav>
+            </nav> */}
+
         </header>
     );
 }
