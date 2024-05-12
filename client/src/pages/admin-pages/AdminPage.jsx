@@ -31,7 +31,30 @@ const AdminPage = () => {
 
         fetchData();
     }, []); // Dependency array can be updated if needed
-
+    const file = 'peakpx.jpg'
+    const handleDownload = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/abstract/download/${file}`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const blob = await response.blob();
+            console.log('Blob:', blob);
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.setAttribute('download', file);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+            console.error('Failed to download the file:', error);
+        }
+    };
     return (
         <div>
             <Link to={'/'}><button>Home</button></Link>
@@ -43,6 +66,7 @@ const AdminPage = () => {
                 </div>
             )}
             {fetchMsg && <p>{fetchMsg}</p>}
+            <button onClick={handleDownload}>download file</button>
         </div>
     );
 };

@@ -2,9 +2,10 @@ import express from 'express';
 import { connectDB } from './config/connectMongodb.js'; // Update path as needed
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import userRoutes from './routes/userRoutes.js'
+import userRoutes from './routes/userRoutes.js';
+import abstractRoutes from './routes/abstractRoutes.js';
 import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
-import { isAdmin } from './middlewares/isAuthorizedAdmin.js'
+import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
 
 const app = express();
 const port = process.env.PORT;;
@@ -20,6 +21,8 @@ const port = process.env.PORT;;
 //     next();
 // });
 
+
+
 app.use(cors({
     origin: 'http://localhost:5173', // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
@@ -32,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //routes
 app.use('/user', userRoutes);
+app.use('/abstract', abstractRoutes)
 
 // testing admin auth
 app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
