@@ -8,22 +8,6 @@ const Header = () => {
     return (
         <header>
             <Navbar />
-            {/* <Hero /> */}
-            {/* <nav>
-                <ul>
-                    {isLogin ?
-                        <>
-                            <li><Link to={'/logout'}>Logout</Link></li>
-                            <li><Link to={'/user/profile'}>Porfile</Link></li>
-                            <li><Link to={'/admin'}>Admin panel</Link></li>
-                        </> : <>
-                            <li><Link to={'/login'}>Login</Link></li>
-                            <li><Link to={'/register'}>Register</Link></li>
-                        </>
-                    }
-                </ul>
-            </nav> */}
-
         </header>
     );
 }

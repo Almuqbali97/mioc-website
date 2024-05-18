@@ -31,7 +31,9 @@ const AdminPage = () => {
 
         fetchData();
     }, []); // Dependency array can be updated if needed
-    const file = 'peakpx.jpg'
+
+    const file = 'Jobs.txt'
+
     const handleDownload = async () => {
         try {
             const response = await fetch(`http://localhost:3000/abstract/download/${file}`, {

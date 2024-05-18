@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { isAuthenticated } from '../middlewares/isAuenticatedMiddleware.js';
-import { submitAbstract, downloadSpesificAbstract } from '../controllers/abstractController.js';
+import { submitAbstract, downloadSpesificAbstract, getAllAbstracts, approveAbstract, rejectAbstract } from '../controllers/abstractController.js';
 import { isAdmin } from '../middlewares/isAuthorizedAdmin.js';
 
 
@@ -16,5 +16,12 @@ const upload = multer({ dest: '../uploads/' }); // Files will go in the 'uploads
 
 router.post('/submit', isAuthenticated, upload.single('file'), submitAbstract);
 
-router.get('/download/:key',  downloadSpesificAbstract);
+router.get('/download/:key', isAuthenticated, isAuthenticated, downloadSpesificAbstract);
+
+router.get('/get/all', isAuthenticated, isAuthenticated, getAllAbstracts);
+
+router.put('/approve/:id', isAuthenticated, isAuthenticated, approveAbstract);
+router.put('/reject/:id', isAuthenticated, isAuthenticated, rejectAbstract);
+
 export default router;
+

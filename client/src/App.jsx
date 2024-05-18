@@ -26,6 +26,8 @@ import VisaInformation from './pages/website-pages/travel/VisaInformation.jsx';
 import Accommodation from './pages/website-pages/travel/Accommodation.jsx';
 import TestComponantes from './components/TestComponantes.jsx';
 import Website from './layouts/Website.jsx';
+import AdminPanel from './layouts/AdminPanel.jsx';
+import AbstractsManagement from './pages/admin-pages/AbstractsManagement.jsx';
 
 function App() {
 
@@ -66,12 +68,19 @@ function App() {
             <Route path='/submit-abstract' element={<AbstractSubmission />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/user/profile' element={<UserProfile />} />
-            <Route path='/admin' element={<AdminPage />} />
           </Route>
         </Route>
+
+        <Route element={<RequireAuth />}>
+          <Route element={<AdminPanel />}>
+            <Route path='/admin' element={<AdminPage />} />
+            <Route path='/admin/abstracts' element={<AbstractsManagement />} />
+          </Route>
+        </Route>
+
       </Routes>
       {/* <TestComponantes /> */}
-
+  
     </>
   )
 }
