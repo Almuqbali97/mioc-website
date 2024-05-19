@@ -30,9 +30,9 @@ const Hero = () => {
             <img src={omanVisionWhite} className='h-12 sm:h-24 md:h-28 lg:h-36 hidden sm:block absolute top-50 sm:right-0 sm:top-0 text-white ' />
 
             <div className='flex justify-center items-start mt-7'>
-                <div class="flex justify-center items-center text-white dark:bg-gray-800">
-                    <div class="text-center max-w-7xl md:max-w-6xl mx-7 md:mx-10">
-                        <h1 class="mb-2 md:mb-3 text-xl sm:text-2xl font-semibold tracking-tight myTextShadoe  md:text-4xl dark:text-gray-100 ">
+                <div className="flex justify-center items-center text-white dark:bg-gray-800">
+                    <div className="text-center max-w-7xl md:max-w-6xl mx-7 md:mx-10">
+                        <h1 className="mb-2 md:mb-3 text-xl sm:text-2xl font-semibold tracking-tight myTextShadoe  md:text-4xl dark:text-gray-100 ">
                             20<sup>th</sup> Muscat International Ophthalmology<br />Conference (MIOC)
                         </h1>
 
@@ -41,18 +41,18 @@ const Hero = () => {
                             <span className='absolute bg-primary_brown rounded-xl px-5'>JOINTLY WITH</span>
                         </div>
 
-                        <h1 class="my-2 md:my-3 text-xl sm:text-2xl font-semibold tracking-tight myTextShadoe  md:text-4xl dark:text-gray-100">
+                        <h1 className="my-2 md:my-3 text-xl sm:text-2xl font-semibold tracking-tight myTextShadoe  md:text-4xl dark:text-gray-100">
                             4<sup>th</sup> Eastern
                             Mediterranean Council of <br />Optometry Conference (EMCO) and <br /> the International Keratoconus Society (IKS)
                         </h1>
 
-                        <div class="flex font-semibold text-xl flex-col items-center justify-center gap-5 mt-10 md:mt-14 md:flex-row">
+                        <div className="flex font-semibold text-xl flex-col items-center justify-center gap-5 mt-10 md:mt-14 md:flex-row">
                             <a
-                                class="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
-                                href="">Register Now!
+                                className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                href="/registration-checklist">Register Now!
                             </a>
-                            <a class="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md shadow-lg sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
-                                href="">Submit Abstract
+                            <a className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md shadow-lg sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
+                                href="/abstract-info">Submit Abstract
                             </a>
 
                         </div>

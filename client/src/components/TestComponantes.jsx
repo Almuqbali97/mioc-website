@@ -1,238 +1,202 @@
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react'
+import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import {
+    ArrowPathIcon,
+    Bars3Icon,
+    ChartPieIcon,
+    CursorArrowRaysIcon,
+    FingerPrintIcon,
+    SquaresPlusIcon,
+    XMarkIcon,
+} from '@heroicons/react/24/outline'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
-const TestComponantes = () => {
-    const [expanded, setExpanded] = useState(false);
+const products = [
+    { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
+    { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+    { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+    { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
+    { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
+]
+const callsToAction = [
+    { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
+    { name: 'Contact sales', href: '#', icon: PhoneIcon },
+]
 
-    const toggleExpanded = () => {
-        setExpanded(!expanded);
-    };
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+export default function Example() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     return (
-        <div>
-            <div className="overflow-x-hidden bg-gray-50">
-                <header className="py-4 md:py-6">
-                    <div className="container px-4 mx-auto sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between">
-                            <div className="flex-shrink-0">
-                                <a
-                                    href="#"
-                                    title=""
-                                    className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                >
-                                    <img
-                                        className="w-auto h-8"
-                                        src="https://cdn.rareblocks.xyz/collection/clarity/images/logo.svg"
-                                        alt=""
-                                    />
-                                </a>
-                            </div>
+        <header className="bg-white">
+            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div className="flex lg:flex-1">
+                    <a href="#" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Your Company</span>
+                        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                    </a>
+                </div>
+                <div className="flex lg:hidden">
+                    <button
+                        type="button"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        onClick={() => setMobileMenuOpen(true)}
+                    >
+                        <span className="sr-only">Open main menu</span>
+                        <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+                <Popover.Group className="hidden lg:flex lg:gap-x-12">
+                    <Popover className="relative">
+                        <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                            Product
+                            <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                        </Popover.Button>
 
-                            <div className="flex lg:hidden">
-                                <button
-                                    type="button"
-                                    className="text-gray-900"
-                                    onClick={toggleExpanded}
-                                    aria-expanded={expanded}
-                                >
-                                    {expanded ? (
-                                        <svg
-                                            className="w-7 h-7"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="opacity-0 translate-y-1"
+                            enterTo="opacity-100 translate-y-0"
+                            leave="transition ease-in duration-150"
+                            leaveFrom="opacity-100 translate-y-0"
+                            leaveTo="opacity-0 translate-y-1"
+                        >
+                            <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                                <div className="p-4">
+                                    {products.map((item) => (
+                                        <div
+                                            key={item.name}
+                                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M6 18L18 6M6 6l12 12"
-                                            />
-                                        </svg>
-                                    ) : (
-                                        <svg
-                                            className="w-7 h-7"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
+                                            <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                                                <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                                            </div>
+                                            <div className="flex-auto">
+                                                <a href={item.href} className="block font-semibold text-gray-900">
+                                                    {item.name}
+                                                    <span className="absolute inset-0" />
+                                                </a>
+                                                <p className="mt-1 text-gray-600">{item.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                    {callsToAction.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="1.5"
-                                                d="M4 6h16M4 12h16M4 18h16"
-                                            />
-                                        </svg>
+                                            <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </Popover.Panel>
+                        </Transition>
+                    </Popover>
+
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        Features
+                    </a>
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        Marketplace
+                    </a>
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        Company
+                    </a>
+                </Popover.Group>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        Log in <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+            </nav>
+            <Dialog className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                <div className="fixed inset-0 z-10" />
+                <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div className="flex items-center justify-between">
+                        <a href="#" className="-m-1.5 p-1.5">
+                            <span className="sr-only">Your Company</span>
+                            <img
+                                className="h-8 w-auto"
+                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                alt=""
+                            />
+                        </a>
+                        <button
+                            type="button"
+                            className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            <span className="sr-only">Close menu</span>
+                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                    </div>
+                    <div className="mt-6 flow-root">
+                        <div className="-my-6 divide-y divide-gray-500/10">
+                            <div className="space-y-2 py-6">
+                                <Disclosure as="div" className="-mx-3">
+                                    {({ open }) => (
+                                        <>
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                                Product
+                                                <ChevronDownIcon
+                                                    className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
+                                                    aria-hidden="true"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {[...products, ...callsToAction].map((item) => (
+                                                    <Disclosure.Button
+                                                        key={item.name}
+                                                        as="a"
+                                                        href={item.href}
+                                                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                                    >
+                                                        {item.name}
+                                                    </Disclosure.Button>
+                                                ))}
+                                            </Disclosure.Panel>
+                                        </>
                                     )}
-                                </button>
-                            </div>
-
-                            <div className="hidden lg:flex lg:ml-16 lg:items-center lg:justify-center lg:space-x-10 xl:space-x-16">
+                                </Disclosure>
                                 <a
                                     href="#"
-                                    title=""
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Features
                                 </a>
-
                                 <a
                                     href="#"
-                                    title=""
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Pricing
+                                    Marketplace
                                 </a>
-
                                 <a
                                     href="#"
-                                    title=""
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Automation
+                                    Company
                                 </a>
                             </div>
-
-                            <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
+                            <div className="py-6">
                                 <a
                                     href="#"
-                                    title=""
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
-                                    Customer Login
-                                </a>
-
-                                <a
-                                    href="#"
-                                    title=""
-                                    className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                                    role="button"
-                                >
-                                    Sign up
+                                    Log in
                                 </a>
                             </div>
                         </div>
-
-                        {expanded && (
-                            <nav >
-                                <div className="px-1 py-8">
-                                    <div className="grid gap-y-7">
-                                        <a
-                                            href="#"
-                                            title=""
-                                            className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                        >
-                                            Features
-                                        </a>
-
-                                        <a
-                                            href="#"
-                                            title=""
-                                            className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                        >
-                                            Pricing
-                                        </a>
-
-                                        <a
-                                            href="#"
-                                            title=""
-                                            className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                        >
-                                            Automation
-                                        </a>
-
-                                        <a
-                                            href="#"
-                                            title=""
-                                            className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                        >
-                                            Customer Login
-                                        </a>
-
-                                        <a
-                                            href="#"
-                                            title=""
-                                            className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                                            role="button"
-                                        >
-                                            Sign up
-                                        </a>
-                                    </div>
-                                </div>
-                            </nav>
-                        )}
                     </div>
-                </header>
-
-                <section className="pt-12 bg-gray-50 sm:pt-16">
-                    <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        <div className="max-w-2xl mx-auto text-center">
-                            <h1 className="px-6 text-lg text-gray-600 font-inter">
-                                Smart email campaign builder, made for Developers
-                            </h1>
-                            <p className="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">
-                                Turn your visitors into profitable
-                                <span className="relative inline-flex sm:inline">
-                                    <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
-                                    <span className="relative"> business </span>
-                                </span>
-                            </p>
-
-                            <div className="px-8 sm:items-center sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
-                                <a
-                                    href="#"
-                                    title=""
-                                    className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-gray-900 border-2 border-transparent sm:w-auto rounded-xl font-pj hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                                    role="button"
-                                >
-                                    Get more customers
-                                </a>
-
-                                <a
-                                    href="#"
-                                    title=""
-                                    className="inline-flex items-center justify-center w-full px-6 py-3 mt-4 text-lg font-bold text-gray-900 transition-all duration-200 border-2 border-gray-400 sm:w-auto sm:mt-0 rounded-xl font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-900 focus:bg-gray-900 hover:text-white focus:text-white hover:border-gray-900 focus:border-gray-900"
-                                    role="button"
-                                >
-                                    <svg
-                                        className="w-5 h-5 mr-2"
-                                        viewBox="0 0 18 18"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M8.18003 13.4261C6.8586 14.3918 5 13.448 5 11.8113V5.43865C5 3.80198 6.8586 2.85821 8.18003 3.82387L12.5403 7.01022C13.6336 7.80916 13.6336 9.44084 12.5403 10.2398L8.18003 13.4261Z"
-                                            strokeWidth="2"
-                                            strokeMiterlimit="10"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                    Watch free demo
-                                </a>
-                            </div>
-
-                            <p className="mt-8 text-base text-gray-500 font-inter">
-                                60 Days free trial · No credit card required
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="pb-12 bg-white">
-                        <div className="relative">
-                            <div className="absolute inset-0 h-2/3 bg-gray-50"></div>
-                            <div className="relative mx-auto">
-                                <div className="lg:max-w-6xl lg:mx-auto">
-                                    <img className="transform scale-110" src="https://cdn.rareblocks.xyz/collection/clarity/images/hero/2/illustration.png" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    );
+                </Dialog.Panel>
+            </Dialog>
+        </header>
+    )
 }
-
-export default TestComponantes;

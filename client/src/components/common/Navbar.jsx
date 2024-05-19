@@ -42,7 +42,7 @@ const registration = [
 
 const abstract = [
     { name: 'Info', description: 'Get more info before sumitting an abstract!', href: '/abstract-info', icon: InformationCircleIcon },
-    { name: 'Submit Abstract', description: 'Here you can sumbit your abstract', href: '/submit-abstract', icon: DocumentTextIcon },
+    { name: 'Submit Abstract', description: 'Here you can sumbit your abstract', href: '/abstract-info', icon: DocumentTextIcon },
 ]
 
 const program = [

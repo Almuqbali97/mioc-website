@@ -28,6 +28,7 @@ import TestComponantes from './components/TestComponantes.jsx';
 import Website from './layouts/Website.jsx';
 import AdminPanel from './layouts/AdminPanel.jsx';
 import AbstractsManagement from './pages/admin-pages/AbstractsManagement.jsx';
+import AbstractInfo from './pages/website-pages/abstract/AbstractInfo.jsx';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
           <Route path='/transportation' element={<Transportation />} />
           <Route path='/visa-information' element={<VisaInformation />} />
           <Route path='/accommodation' element={<Accommodation />} />
+          <Route path='/abstract-info' element={<AbstractInfo />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
@@ -80,7 +82,7 @@ function App() {
 
       </Routes>
       {/* <TestComponantes /> */}
-  
+
     </>
   )
 }
