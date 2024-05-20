@@ -59,7 +59,7 @@ const travel = [
     { name: 'Accommodation', description: 'Check our recommendation for accommodation`', href: '/accommodation', icon: BuildingOffice2Icon },
 ]
 const sponsersAndExhibitors = [
-    { name: 'Reserve your place', description: 'Be part of our event!', href: '/reserve-your-space',  },
+    { name: 'Reserve your place', description: 'Be part of our event!', href: '/reserve-your-space', },
     { name: 'Sponsers & Exhibitors', description: 'Get a look at transportation options', href: '/sponsers-and-exhibitors', },
 ]
 const callsToAction = [
@@ -317,7 +317,7 @@ export default function Navbar() {
                         </Transition>
                     </Popover>
 
-                    
+
                     <Popover className="relative">
                         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6  hover:text-blue-500 uppercase">
                             Travel
@@ -497,7 +497,31 @@ export default function Navbar() {
                                 >
                                     Faculty
                                 </a>
-
+                                <Disclosure as="div" className="-mx-3">
+                                    {({ open }) => (
+                                        <>
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                                Sponsers/Exhibitors
+                                                <ChevronDownIcon
+                                                    className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
+                                                    aria-hidden="true"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {[...sponsersAndExhibitors].map((item) => (
+                                                    <Disclosure.Button
+                                                        key={item.name}
+                                                        as="a"
+                                                        href={item.href}
+                                                        className="block bg-primary_blue  rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200"
+                                                    >
+                                                        {item.name}
+                                                    </Disclosure.Button>
+                                                ))}
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
