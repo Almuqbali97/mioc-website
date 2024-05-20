@@ -58,6 +58,10 @@ const travel = [
     { name: 'Visa information', description: 'Get more information about applying for visa!', href: '/visa-information', icon: InformationCircleIcon },
     { name: 'Accommodation', description: 'Check our recommendation for accommodation`', href: '/accommodation', icon: BuildingOffice2Icon },
 ]
+const sponsersAndExhibitors = [
+    { name: 'Reserve your place', description: 'Be part of our event!', href: '/reserve-your-space',  },
+    { name: 'Sponsers & Exhibitors', description: 'Get a look at transportation options', href: '/sponsers-and-exhibitors', },
+]
 const callsToAction = [
     { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
     { name: 'Contact sales', href: '#', icon: PhoneIcon },
@@ -92,7 +96,7 @@ export default function Navbar() {
 
     return (
         <header id='navBar' className="bg-white shadow-md sticky top-0 z-10 transition-all text-black hover:text-gray-700">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 sm:p-6 lg:px-8" aria-label="Global">
+            <nav className="mx-auto flex max-w-8xl items-center justify-between p-4 sm:p-6 lg:px-6" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <a href="/" className="-m-1.5">
                         <span className="sr-only">Your Company</span>
@@ -110,7 +114,7 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                <PopoverGroup className="hidden lg:flex lg:space-x-10">
+                <PopoverGroup className="hidden lg:flex space-x-7 xl:space-x-10">
                     {/* <Link to={"/"} className="text-sm font-semibold hover:text-blue-500 leading-6  uppercase">
                         Home
                     </Link> */}
@@ -274,6 +278,46 @@ export default function Navbar() {
                         Faculty
                     </a>
 
+                    <Popover className="relative">
+                        <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6  hover:text-blue-500 uppercase">
+                            Sponsers/Exhibitors
+                            <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                        </Popover.Button>
+
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="opacity-0 translate-y-1"
+                            enterTo="opacity-100 translate-y-0"
+                            leave="transition ease-in duration-150"
+                            leaveFrom="opacity-100 translate-y-0"
+                            leaveTo="opacity-0 translate-y-1"
+                        >
+                            <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                                <div className="p-4">
+                                    {sponsersAndExhibitors.map((item) => (
+                                        <div
+                                            key={item.name}
+                                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200"
+                                        >
+                                            {/* <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-200 group-hover:bg-white">
+                                                <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                                            </div> */}
+                                            <div className="flex-auto">
+                                                <a href={item.href} className="block font-semibold ">
+                                                    {item.name}
+                                                    <span className="absolute inset-0" />
+                                                </a>
+                                                <p className="mt-1 text-gray-600">{item.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </PopoverPanel>
+                        </Transition>
+                    </Popover>
+
+                    
                     <Popover className="relative">
                         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6  hover:text-blue-500 uppercase">
                             Travel

@@ -1,9 +1,10 @@
 import React from 'react';
+import ComingSoon from '../../../components/website/ComingSoon';
 
 const ProgramAtGlance = () => {
     return (
         <div>
-            program ar a glance
+            <ComingSoon />
         </div>
     );
 }

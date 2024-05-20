@@ -1,9 +1,10 @@
 import React from 'react';
+import ComingSoon from '../../../components/website/ComingSoon';
 
 const SponsersAndExhibitors = () => {
     return (
         <div>
-            sponsers and exhibitors
+            <ComingSoon/>
         </div>
     );
 }

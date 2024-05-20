@@ -1,9 +1,9 @@
 import React from 'react';
-
+import ComingSoon from '../../../components/website/ComingSoon';
 const Accommodation = () => {
     return (
         <div>
-            accommodation
+            <ComingSoon />
         </div>
     );
 }

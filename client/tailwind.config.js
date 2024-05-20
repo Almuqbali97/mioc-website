@@ -25,6 +25,9 @@ export default {
         primary_brown: '#d8a757',
         primary_blue: '#016699'
       },
+      fontFamily: {
+        custom: ['Roboto', 'Helvetica', 'Arial', 'Verdana', 'sans-serif'],
+      },
     },
   },
   darkMode: 'class',

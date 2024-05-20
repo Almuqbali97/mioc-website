@@ -31,7 +31,7 @@ const customBg = `data:image/svg+xml;base64,${btoa(
 )}`
 const SposersAndOrganizersSection = () => {
     return (
-        <div className='h-52 sm:h-72 md:h-96 bg-gray-500 flex justify-center items-center' style={{
+        <div className='h-52 md:h-72 bg-gray-500 flex justify-center items-center' style={{
             backgroundImage: `url(${customBg})`,
             backgroundSize: 'cover',
             width: '100%',
@@ -57,7 +57,7 @@ const SposersAndOrganizersSection = () => {
                     </div>
                 </div>
             </div> */}
-            <img src={organizers} className='px-2 sm:px-0 w-[60rem]'/>
+            <img src={organizers} className='px-2 sm:px-0 w-[57rem]'/>
         </div>
     );
 }

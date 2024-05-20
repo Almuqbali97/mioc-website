@@ -60,12 +60,12 @@ const bgSvg = `data:image/svg+xml;base64,${btoa(
 )}`;
 
 const slides = [
+    'https://meaco-oman.org/wp-content/uploads/2023/10/393416043_910460634035599_4046318621734586269_n.jpg',
     'https://i.ibb.co/ncrXc2V/1.png',
     'https://i.ibb.co/B3s7v4h/2.png',
     'https://i.ibb.co/XXR8kzF/3.png',
     'https://i.ibb.co/yg7BSdM/4.png',
     'https://img.freepik.com/free-photo/genderneutral-hand-modifying-settings-3d-printer-finish-printing-round-white-object-from-recycled-plastic-futuristic-concept-new-working-possibilities-small-businesses-by-3d-printing_633478-540.jpg?t=st=1716085488~exp=1716089088~hmac=7ca66f4f29205dde05d2ec59c4aca5fe1c9d5b6cc6d017ab2776a7f38b7d2910&w=360',
-    'https://meaco-oman.org/wp-content/uploads/2023/10/393416043_910460634035599_4046318621734586269_n.jpg'
 ];
 
 

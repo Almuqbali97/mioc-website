@@ -18,7 +18,7 @@ const Home = () => {
             <FeaturesSection />
             <InstagramGallery />
             <MuscatPreviewSection />
-            <SposersAndOrganizersSection />
+            {/* <SposersAndOrganizersSection /> */}
             {/* <MapSection /> */}
 
         </section>

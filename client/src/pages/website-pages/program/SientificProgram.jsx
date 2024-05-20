@@ -1,9 +1,10 @@
 import React from 'react';
-
+import ComingSoon from '../../../components/website/ComingSoon';
 const SientificProgram = () => {
     return (
         <div>
-            Sientific Program
+            
+            <ComingSoon />
         </div>
     );
 }
