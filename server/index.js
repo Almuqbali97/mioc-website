@@ -2,12 +2,12 @@ import express from 'express';
 // import { connectDB } from './config/connectMongodb.js'; // Update path as needed
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-// import userRoutes from './routes/userRoutes.js';
-// import abstractRoutes from './routes/abstractRoutes.js';
-// import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
-// import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
-// import ticketRoutes from './routes/ticketPaymentRoutes.js'
-// import registrants from './routes/registrantsRoutes.js'
+import userRoutes from './routes/userRoutes.js';
+import abstractRoutes from './routes/abstractRoutes.js';
+import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
+import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
+import ticketRoutes from './routes/ticketPaymentRoutes.js'
+import registrants from './routes/registrantsRoutes.js'
 const app = express();
 const port = process.env.PORT ||3000;
 
@@ -37,17 +37,16 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.json("Hello from api")
 })
-    //routes
-    
-// app.use('/user', userRoutes);
+//routes
+app.use('/user', userRoutes);
 // app.use('/abstract', abstractRoutes)
-// app.use('/', ticketRoutes)
-// app.use('/', registrants)
+app.use('/', ticketRoutes)
+app.use('/', registrants)
 
-// // testing admin auth
-// app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
-//     res.json({ user: req.user });
-// });
+// testing admin auth
+app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
+    res.json({ user: req.user });
+});
 
 (async () => {
     await connectDB();
