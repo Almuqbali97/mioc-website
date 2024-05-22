@@ -51,7 +51,7 @@ export default function Navbar() {
     };
 
     return (
-        <header id='navBar' className="bg-white shadow-md fixed top-0 z-10 transition-all text-black hover:text-gray-700">
+        <header id='navBar' className="bg-white shadow-md relative top-0 z-10 transition-all text-black hover:text-gray-700">
             <nav className="mx-auto flex max-w-8xl items-center justify-between p-4 sm:p-6 lg:px-6" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <Link to="/" className="-m-1.5">
