@@ -40,8 +40,8 @@ function App() {
 
   return (
     <>
-      <Routes>
          <ScrollToTop />
+      <Routes>
         <Route element={<Website />}>
           {/* general */}
           <Route path='/' element={<Home />} />
