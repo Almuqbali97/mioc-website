@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
     res.json("Hello from api")
 })
 //routes
