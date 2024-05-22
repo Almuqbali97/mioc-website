@@ -7,6 +7,7 @@ import { CalendarDaysIcon, } from '@heroicons/react/24/outline'
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
 import PrimaryButtonBrown from '../../../components/website/PrimaryButtonBrown';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
+import checklistImg from '../../../assets/images/checklistImg.avif'
 
 let abstractDates = [
     { text: 'Abstract Submission Open', date: '01 June 2024' },
@@ -49,7 +50,7 @@ const AbstractInfo = () => {
     return (
         <div>
 
-            <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} image={'https://img.freepik.com/free-photo/high-angle-uncompleted-checking-boxes_23-2148265488.jpg?t=st=1716216341~exp=1716219941~hmac=d5a78be512ff8294ce97d6f9648cf68fdccd64004896a44a2f8c6f145b30404b&w=996'} />
+            <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} image={checklistImg} />
             <ContentContainer>
                 <CommonParagraph>
                     The scientific program of MIOC 2024 will include a wide range of Free Paper Presentation, Case Presentation, Poster Presentation and Videos, as well as lectures by world renowned and eminent guest speakers during plenary and special sessions.

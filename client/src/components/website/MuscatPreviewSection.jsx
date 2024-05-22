@@ -16,8 +16,8 @@ const MuscatPreviewSection = () => {
         //     // height: '100vh'
         // }}
         >
-            <div class="flex flex-col justify-center items-center  min-h-screen w-full">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
+            <div className="flex flex-col justify-center items-center  min-h-screen w-full">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
                     <div className='relative w-full h-64'>
                         {isPlaying ? (
                             <iframe
@@ -38,31 +38,31 @@ const MuscatPreviewSection = () => {
                             </>
                         )}
                     </div>
-                    <div class="p-6">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-2">MUSCAT</h2>
-                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">Your Host City</h3>
-                        <p class="text-gray-700 leading-tight mb-4">
+                    <div className="p-6">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-2">MUSCAT</h2>
+                        <h3 className="text-2xl font-semibold text-blue-700 mb-2">Your Host City</h3>
+                        <p className="text-gray-700 leading-tight mb-4">
                             The Sultanate of Oman is located in the southern part of the Arabian Peninsula with a total area of 309,500 square kilometers.Oman is a high-income country with and divided 11 governorates.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center">
                                 <PrimaryButtonBlue text='About Muscat' link={'/muscat-city'} />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col justify-center items-center min-h-screen w-full">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
-                    <img src="https://www.worldconstructionnetwork.com/wp-content/uploads/sites/26/2017/10/1l-image-99.jpg" alt="Mountain" class="w-full h-64 object-cover" />
-                    <div class="p-6">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-2">CONFERENCE VENUE</h2>
-                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">Convention & Exhibition Center Muscat</h3>
-                        <p class="text-gray-700 leading-tight mb-4">
+            <div className="flex flex-col justify-center items-center min-h-screen w-full">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
+                    <img src="https://www.worldconstructionnetwork.com/wp-content/uploads/sites/26/2017/10/1l-image-99.jpg" alt="Mountain" className="w-full h-64 object-cover" />
+                    <div className="p-6">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-2">CONFERENCE VENUE</h2>
+                        <h3 className="text-2xl font-semibold text-blue-700 mb-2">Convention & Exhibition Center Muscat</h3>
+                        <p className="text-gray-700 leading-tight mb-4">
                             Oman Convention and Exhibition centre is one of largest event venue in the region and its strategically located in the business district, within a 15 minute drive from Muscat International Airpor.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center">
                                 <PrimaryButtonBlue text='Travel page' link={'/transportation'} />
                             </div>
                         </div>

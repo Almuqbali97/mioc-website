@@ -2,6 +2,7 @@ import React from 'react';
 import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 import ContentContainer from '../../../components/common/ContentContainer';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
+import impDatesImg from '../../../assets/images/impDatesImg.avif'
 
 let importantDates = [
     { text: 'Abstract Submission Open', date: '01 June 2024' },
@@ -20,7 +21,7 @@ let importantDates = [
 const ImportantDates = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title='important dates ' image={'https://img.freepik.com/premium-photo/calendar-page-flipping-sheet-wood-table_293060-1995.jpg?w=1380'} />
+            <SectionHeadingTitleAndImage title='important dates ' image={impDatesImg} />
             <ContentContainer>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {importantDates.map((date, index) => {

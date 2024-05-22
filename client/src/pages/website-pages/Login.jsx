@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthProvider.jsx';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'
 import ImageBgContainer from '../../components/common/ImageBgContainer.jsx';
+import loginImg from '../../assets/images/loginImg.avif'
 
 const Login = () => {
     const navigateTo = useNavigate();
@@ -104,7 +105,7 @@ const Login = () => {
     }
 
     return (
-        <ImageBgContainer bgURL={'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}>
+        <ImageBgContainer bgURL={loginImg}>
             <div className="bg-white w-full md:max-w-md rounded-lg lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-[80vh] px-6 lg:px-16 xl:px-12 flex items-center justify-center">
 
                 <div className="w-full h-100">
@@ -115,12 +116,12 @@ const Login = () => {
                     <form className="mt-6" onSubmit={handleSubmit}>
                         <div>
                             <label className="block text-gray-700">Email Address</label>
-                            <input type='email' name='email' value={loginForm.email} onChange={handleChange} placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" autofocus autocomplete required />
+                            <input type='email' name='email' value={loginForm.email} onChange={handleChange} placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" autoFocus  required />
                         </div>
 
                         <div className="mt-4">
                             <label className="block text-gray-700">Password</label>
-                            <input type='password' name='password' value={loginForm.password} onChange={handleChange} placeholder="Enter Password" minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" required />
+                            <input type='password' name='password' value={loginForm.password} onChange={handleChange} placeholder="Enter Password" minLength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" required />
                         </div>
 
                         <div className="text-right mt-2">

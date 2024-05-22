@@ -3,11 +3,13 @@ import SectionHeadingTitleAndImage from '../../../components/website/SectionHead
 import ContentContainer from '../../../components/common/ContentContainer';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
+import cmeImg from '../../../assets/images/cmeImg.avif'
+
 const Cme = () => {
     return (
         <div>
 
-            <SectionHeadingTitleAndImage title={'CME'} image={'https://img.freepik.com/free-photo/businessman-businesswoman-signing-contract-office-generated-by-ai_24640-87360.jpg?t=st=1716219397~exp=1716222997~hmac=433b1de042b47fcff04b31bfddac804cc4a39325b24ecc42d10d19fd99dd56ac&w=1060'} />
+            <SectionHeadingTitleAndImage title={'CME'} image={cmeImg} />
             <ContentContainer>
                 <ParagraphTitle title={'CME Accredation'} />
                 <CommonParagraph>

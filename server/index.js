@@ -6,7 +6,8 @@ import userRoutes from './routes/userRoutes.js';
 import abstractRoutes from './routes/abstractRoutes.js';
 import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
 import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
-
+import ticketRoutes from './routes/ticketPaymentRoutes.js'
+import registrants from './routes/registrantsRoutes.js'
 const app = express();
 const port = process.env.PORT;;
 
@@ -24,7 +25,7 @@ const port = process.env.PORT;;
 
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your client URL
+    origin: 'http://localhost:5000', // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Allow cookies to be sent
@@ -36,6 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 //routes
 app.use('/user', userRoutes);
 app.use('/abstract', abstractRoutes)
+app.use('/', ticketRoutes)
+app.use('/', registrants)
 
 // testing admin auth
 app.get('/admin', isAuthenticated, isAdmin, (req, res) => {

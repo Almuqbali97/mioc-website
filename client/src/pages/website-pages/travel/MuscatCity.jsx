@@ -2,15 +2,17 @@ import React from 'react';
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
+import muscat from '../../../assets/images/muscat.avif'
+import muscatCorniche from '../../../assets/images/muscat-corniche.avif'
 
 const MuscatCity = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'MUSCAT CITY'} image={'https://www.flydubai.com/en/media/Muscat-1920x720_tcm8-5939.jpg'}/>
+            <SectionHeadingTitleAndImage title={'MUSCAT CITY'} image={muscat} />
             <ContentContainer>
                 <div className='flex justify-center items-center w-full mb-10'>
                     <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-md w-[30rem] mx-auto">
-                        <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/12/10/15/muscat-corniche.jpg" alt="University of Southern California" className="absolute inset-0 h-full w-full object-cover" />
+                        <img src={muscatCorniche} alt="University of Southern California" className="absolute inset-0 h-full w-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                         <h3 className="z-10 mt-3 text-3xl font-bold text-white">Muscat</h3>
                         <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Your New Destination!</div>

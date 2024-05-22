@@ -3,11 +3,12 @@ import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
+import transportImg from '../../../assets/images/transport.jpg'
 
 const Transportation = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'TRANSPORTATION'} image={'https://img.freepik.com/free-photo/panoramic-long-asphalt-road-surrounded-by-grassy-fields-iceland_181624-54734.jpg?t=st=1716231024~exp=1716234624~hmac=428def2bc3d8347c76d6a3cad1d9120d3f0a7e16f23664404c9002782f8b8c20&w=1380'} />
+            <SectionHeadingTitleAndImage title={'TRANSPORTATION'} image={transportImg} />
             <ContentContainer>
                 <ParagraphTitle title={'Local Transportation'} />
                 <CommonParagraph>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
+import registerImg from '../../assets/images/registerImg.jpg'
 
 const Register = () => {
     const navigateTo = useNavigate();
@@ -69,7 +70,7 @@ const Register = () => {
                 <div className="flex justify-center px-6 py-9">
                     <div className="w-full xl:w-3/4 lg:w-11/12 flex shadow-lg">
                         <div className="w-full h-auto bg-gray-400 dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover bg-center rounded-l-lg"
-                            style={{ backgroundImage: "url('https://img.freepik.com/free-vector/global-network-technology-icon-neon-gradient-background_53876-119516.jpg?t=st=1715447175~exp=1715450775~hmac=571b8b6958887af529d8b8b40393b5d02b246dc6ed8ef4294cb82a41ae0f03a3&w=740')" }}>
+                            style={{ backgroundImage: `url(${registerImg})` }}>
                         </div>
                         <div className="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
                             <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">Create an Account!</h3>

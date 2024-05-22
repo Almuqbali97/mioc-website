@@ -3,11 +3,12 @@ import SectionHeadingTitleAndImage from '../../../components/website/SectionHead
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import drRashidImg from '../../../assets/images/drRashid-original.png'
+import welcomMsgImg from '../../../assets/images/welcomImage.avif'
 const WelcomeMessage = () => {
     return (
         <section>
             <SectionHeadingTitleAndImage
-                image='https://img.freepik.com/premium-photo/person-business_163305-219373.jpg?w=1380'
+                image={welcomMsgImg}
                 title={'Welcome Message'} />
 
             <ContentContainer>

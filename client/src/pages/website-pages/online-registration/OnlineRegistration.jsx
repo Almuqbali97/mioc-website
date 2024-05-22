@@ -1,15 +1,28 @@
 import React from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ContentContainer from '../../../components/common/ContentContainer';
+import ParagraphTitle from '../../../components/website/ParagraphTitle';
+import CommonParagraph from '../../../components/common/CommonParagraph';
+import PricingTable from '../../../components/website/PricingTable';
+import Accordian from '../../../components/website/Accordian';
+import onlineRegImg from '../../../assets/images/onlinRegImg.avif'
+
 
 const OnlineRegistration = () => {
     return (
         <div>
-            {/* <SectionHeadingTitleAndImage title={'ONLINE REGISTRATION'} image={'https://img.freepik.com/free-vector/worldwide-connection-blue-background-illustration-vector_53876-61764.jpg?t=st=1716216125~exp=1716219725~hmac=d0e38813e06117a6abab9678476ee563e149ca4ac314530682af34b251c80ebd&w=996'} /> */}
-            <SectionHeadingTitleAndImage title={'ONLINE REGISTRATION'} image={'https://img.freepik.com/free-vector/blue-futuristic-networking-technology_53876-100679.jpg?t=st=1716216272~exp=1716219872~hmac=5a858a7802f6f332cde2ac009964a3cd0986b59e2d591ed678db80442560fc10&w=996'} />
-            <ContentContainer>
-
-            </ContentContainer>
+            <SectionHeadingTitleAndImage title={'ONLINE REGISTRATION'} image={onlineRegImg} />
+            <div className='max-w-[90%] mx-auto my-20'>
+                <ParagraphTitle title={'Register for MIOC 2024'} />
+                <CommonParagraph>
+                    The MIOC 2024 offers a unique platform and the opportunity to meet with and network with a truly international audience and gain insight into the latest product information and trends. Do not miss this opportunity to network and learn from experts in the field.
+                </CommonParagraph>
+                <CommonParagraph>
+                    Please register as per your relevant category. The conference organizers reserve the right to request proof of profession or ID at the time of check-in.
+                </CommonParagraph>
+                <PricingTable />
+                <Accordian />
+            </div>
         </div>
     );
 }

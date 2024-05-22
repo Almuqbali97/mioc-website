@@ -29,6 +29,10 @@ import Website from './layouts/Website.jsx';
 import AdminPanel from './layouts/AdminPanel.jsx';
 import AbstractsManagement from './pages/admin-pages/AbstractsManagement.jsx';
 import AbstractInfo from './pages/website-pages/abstract/AbstractInfo.jsx';
+import CheckoutPage from './pages/website-pages/online-registration/CheckoutPage.jsx';
+import CancelPayment from './pages/website-pages/online-registration/CancelPayment.jsx';
+import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
+import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
 
 function App() {
 
@@ -48,6 +52,9 @@ function App() {
           {/* registration */}
           <Route path='/online-registration' element={<OnlineRegistration />} />
           <Route path='/registration-checklist' element={<RegistrationChecklist />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path='/payment/cancel' element={<CancelPayment />} />
+          <Route path='/payment/success' element={<SuccessPayment />} />
           {/* program */}
           <Route path='/cme' element={<Cme />} />
           <Route path='/program-at-a-glance' element={<ProgramAtGlance />} />
@@ -77,6 +84,7 @@ function App() {
           <Route element={<AdminPanel />}>
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/abstracts' element={<AbstractsManagement />} />
+            <Route path='/admin/registrers' element={<RegistrersManagement />} />
           </Route>
         </Route>
 

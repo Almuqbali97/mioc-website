@@ -3,10 +3,12 @@ import SectionHeadingTitleAndImage from '../../../components/website/SectionHead
 import ContentContainer from '../../../components/common/ContentContainer';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
+import checklistImg from '../../../assets/images/checklistImg.avif'
+
 const RegistrationChecklist = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'REGISTRATION CHECKLIST'} image={'https://img.freepik.com/free-photo/high-angle-uncompleted-checking-boxes_23-2148265488.jpg?t=st=1716216341~exp=1716219941~hmac=d5a78be512ff8294ce97d6f9648cf68fdccd64004896a44a2f8c6f145b30404b&w=996'} />
+            <SectionHeadingTitleAndImage title={'REGISTRATION CHECKLIST'} image={checklistImg} />
             <ContentContainer>
                 <ParagraphTitle title={'Getting Started'} />
                 <CommonParagraph>

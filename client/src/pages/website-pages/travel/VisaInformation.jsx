@@ -3,10 +3,11 @@ import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
+import visaApplicatoin from '../../../assets/images/visaApplication.jpg'
 const VisaInformation = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'VISA INFORMATION'} image={'https://img.freepik.com/free-photo/visa-application-form-smartphone_23-2149117778.jpg?t=st=1716231612~exp=1716235212~hmac=c1b17108ccfb9c7a31d3a82d98733291529f5c85f8c702c47dbfe115070a18b9&w=996'} />
+            <SectionHeadingTitleAndImage title={'VISA INFORMATION'} image={visaApplicatoin} />
             <ContentContainer>
                 <ParagraphTitle title={'Visa Requirements'} />
                 <CommonParagraph>The Sultanate of Oman welcomes visitors from around the globe with tourist visas issued on arrival at Muscat International Airport to passport holders of more than 100 countries for up to 14 days as per the list below.</CommonParagraph>

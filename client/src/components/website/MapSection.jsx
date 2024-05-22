@@ -43,7 +43,7 @@ const MapSection = () => {
                         </div>
                         <div>
                             <div className="max-w-full mx-auto rounded-lg overflow-hidden">
-                              
+
                                 <div className="px-6 py-4">
                                     <h2 className="text-3xl font-bold mb-2 text-white">Let's get in touch</h2>
                                     <p className="mt-1 text-white">We appreciate your comments, suggestions and questions.</p>
@@ -54,8 +54,8 @@ const MapSection = () => {
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Contact</h3>
-                                    <p className="mt-1 text-white">Email: info@example.com</p>
-                                    <p className="mt-1 text-white">Phone: +968 90070116</p>
+                                    <p className="mt-1 text-white">Email: info@mioc.org.om</p>
+                                    <p className="mt-1 text-white">Phone: +968 79191556</p>
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Social</h3>

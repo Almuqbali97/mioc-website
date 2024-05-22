@@ -1,17 +1,18 @@
 import React from 'react';
 import SocialIcons from './SocialIcons';
+import comoingSoonImg from '../../assets/images/comingSoon.avif'
 
 const ComingSoon = () => {
     return (
         <div
             className="relative h-screen w-full flex items-center justify-center bg-cover bg-center text-center px-5 -z-10"
-            style={{ backgroundImage: 'url(https://img.freepik.com/free-photo/room-used-official-event_23-2151054260.jpg?t=st=1716226348~exp=1716229948~hmac=07422d2e2108913fb58cf57b986debe101b3ad78395af261a412cd5dc998cfcf&w=1060)' }}
+            style={{ backgroundImage: `url(${comoingSoonImg})` }}
         >
             <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-50"></div>
 
             <div className="z-50 flex flex-col justify-center text-white w-full h-screen">
-                <h1 className="text-5xl">We are <b>Almost</b> there!</h1>
-                <p>Stay tuned for something amazing!!!</p>
+                <h1 className="text-5xl">This Section is <b>Coming Soon</b> !</h1>
+                <p className='mt-5'>Stay tuned for something amazing!!!</p>
 
                 <div className="mt-10 mb-5">
                     <div className="shadow w-full bg-white mt-2 max-w-2xl mx-auto rounded-full">

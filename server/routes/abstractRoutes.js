@@ -20,8 +20,8 @@ router.get('/download/:key', isAuthenticated, isAuthenticated, downloadSpesificA
 
 router.get('/get/all', isAuthenticated, isAuthenticated, getAllAbstracts);
 
-router.put('/approve/:id', isAuthenticated, isAuthenticated, approveAbstract);
-router.put('/reject/:id', isAuthenticated, isAuthenticated, rejectAbstract);
+router.put('/approve/:id', isAuthenticated, isAdmin, approveAbstract);
+router.put('/reject/:id', isAuthenticated, isAdmin, rejectAbstract);
 
 export default router;
 

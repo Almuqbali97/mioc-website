@@ -2,12 +2,12 @@ import { abstractsCollection } from "../models/abstractModel.js";
 import { validateEmail } from "../helpers/validateEmail.js";
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { v4 as uuidv4 } from 'uuid';
 // import AWS from 'aws-sdk';
 import { GetObjectCommand, S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from 'fs';
 import util from 'util';
 // import { title } from "process";
-import { ObjectId } from "mongodb";
 dotenv.config();
 const unlinkFile = util.promisify(fs.unlink); // Promisify the unlink function
 
@@ -29,8 +29,10 @@ const s3Client = new S3Client({
 
 
 export const submitAbstract = async (req, res) => {
-  console.log(req.body);
-  const { firstName, lastName, email, mobile, topic, title, author } = req.body;
+  // console.log(req.body);
+  const uniqueFileName = uuidv4();
+  const id = uuidv4();
+  const { firstName, lastName, email, mobile, topic, title, mainAuthor, mainAuthorEmail, mainAuthorOrganization } = req.body;
 
   if (!req.file) {
     return res.status(401).json({ message: 'Please upload your abstract file' });
@@ -50,7 +52,7 @@ export const submitAbstract = async (req, res) => {
 
   const uploadParams = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: originalname,
+    Key: uniqueFileName + originalname,
     Body: fs.createReadStream(path)
   };
 
@@ -62,13 +64,16 @@ export const submitAbstract = async (req, res) => {
     await unlinkFile(path); // Delete the file safely after upload
 
     const newAbstract = {
+      id: id,
       firstName,
       lastName,
       email: email.toLowerCase(),
       phoneNo: mobile,
-      fileName: originalname,
+      fileName: uniqueFileName + originalname,
       title: title,
-      author: author,
+      mainAuthor: mainAuthor,
+      mainAuthorEmail: mainAuthorEmail,
+      mainAuthorOrganization: mainAuthorOrganization,
       status: 'pending',
       topic: topic,
       created_at: new Date()
@@ -76,6 +81,7 @@ export const submitAbstract = async (req, res) => {
 
     await abstractsCollection.insertOne(newAbstract);
     sendConfirmationEmail(email, confirmHtmlContent);
+    notificationEmail(topic)
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
   } catch (error) {
@@ -134,54 +140,55 @@ export const getAllAbstracts = async (req, res) => {
 
 export const approveAbstract = async (req, res) => {
   const { email } = req.body;
-  console.log(email);
-  // sendConfirmationEmail(email, approveHtmlContent); // this should be after updateing the db
+  const id = req.params.id;
+
   try {
-    const id = new ObjectId(req.params.id);
     const result = await abstractsCollection.findOneAndUpdate(
-      { _id: id },
+      { id: id },
       { $set: { status: 'approved', edited_at: new Date() } },
       { returnDocument: 'after' } // Ensures the returned document is the updated one
     );
 
-    if (!result.value) {
+    if (!result) {
       // If no document was found and updated, return a 404 error
       return res.status(404).json({ message: 'Abstract not found.' });
     }
 
     // Return a 200 OK status with a message and the updated document
-    res.status(200).json({ message: 'Abstract approved', product: result.value });
+    sendConfirmationEmail(email, approveHtmlContent); // this should be after updating the db
+    return res.status(200).json({ message: 'Abstract approved', product: result.value });
   } catch (error) {
     // Log the error message and return a 500 Internal Server Error status
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 };
 
 
+
 export const rejectAbstract = async (req, res) => {
   const { email } = req.body;
-  console.log(email);
-  sendConfirmationEmail(email, rejectHtmlContent);
+  const id = req.params.id;
+
   try {
-    const id = new ObjectId(req.params.id);
     const result = await abstractsCollection.findOneAndUpdate(
-      { _id: id },
+      { id: id },
       { $set: { status: 'rejected', edited_at: new Date() } },
       { returnDocument: 'after' } // Ensures the returned document is the updated one
     );
 
-    if (!result.value) {
+    if (!result) {
       // If no document was found and updated, return a 404 error
       return res.status(404).json({ message: 'Abstract not found.' });
     }
 
     // Return a 200 OK status with a message and the updated document
-    res.status(200).json({ message: 'Abstract rejected', product: result.value });
+    sendConfirmationEmail(email, rejectHtmlContent); // this should be after updating the db
+    return res.status(200).json({ message: 'Abstract rejected', product: result });
   } catch (error) {
     // Log the error message and return a 500 Internal Server Error status
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 };
 
@@ -195,10 +202,35 @@ function sendConfirmationEmail(email, html) {
   });
 
   const mailOptions = {
-    from: 'richnature@store.om',
+    from: 'musaab.dev@gmail.com',
     to: email,
     subject: 'Test Email Service',
     html: html,
+
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending confirmation email:', error);
+    } else {
+      console.log('Confirmation email sent:', info.response);
+    }
+  });
+}
+function notificationEmail(topic) {
+  const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'musaab.dev@gmail.com',
+      pass: 'pdpg ugdz dgtz qcxt'
+    }
+  });
+
+  const mailOptions = {
+    from: 'musaab.dev@gmail.com',
+    to: 'musaab.dev@gmail.com',
+    subject: 'Test Email Service',
+    html: `<h3>Somone submitted an abstract of ${topic}</h3>,`
 
   };
 
@@ -356,7 +388,7 @@ a[x-apple-data-detectors] {
                   <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
                    <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr style="border-collapse:collapse">
-                      <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:30px;color:#333333;font-size:20px">Congrats your abstract has been approved!</p></td>
+                      <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-left:20px;padding-right:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:30px;color:#333333;font-size:20px">We have recived your abstract, We will get back to you soon!</p></td>
                      </tr>
                      <tr style="border-collapse:collapse">
                       <td align="center" style="padding:0;Margin:0;padding-bottom:25px"><span class="es-button-border" style="border-style:solid;border-color:#3D5CA3;background:#fafafa;border-width:2px;display:inline-block;border-radius:4px;width:auto"><a href="https://www.google.com/" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#3D5CA3;font-size:16px;display:inline-block;background:none 0% 0% repeat scroll #fafafa;border-radius:4px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:10px 15px 10px 15px;mso-padding-alt:0;mso-border-alt:10px solid none 0% 0% repeat scroll #fafafa">Visit Our Website »</a></span></td>

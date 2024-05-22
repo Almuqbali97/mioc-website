@@ -23,7 +23,7 @@ const Hero = () => {
     }, []);
     return (
         <div className='bg-[#33689c] bg-opacity-50 h-screen w-full relative text-center'>
-            <img key={heroImages[0]} src={heroImages[0]} className='w-full h-full object-cover absolute -z-50 ' />
+            <img key={heroImages[0]} src={heroImages[3]} className='w-full h-full object-cover absolute -z-50 ' />
             {/* // className='w-full h-full object-cover absolute -z-50 fading' /> */}
             <TopLogos />
             <img src={omanVisionWhite} className='h-16 sm:hidden mx-auto text-white ' />

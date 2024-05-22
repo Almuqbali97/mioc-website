@@ -1,11 +1,15 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ServerApiVersion } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 // database setup
 const mongoDBURL = process.env.MONGODB_URL;
 // creating new client
 const mongoClient = new MongoClient(mongoDBURL, {
-    family: 4,
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
 });
 
 // creating db
