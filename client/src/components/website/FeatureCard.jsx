@@ -1,5 +1,6 @@
 import React from 'react';
 import { CursorArrowRaysIcon, EllipsisHorizontalIcon, CheckBadgeIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 
 const FeatureCard = ({ title, text, link, linkText }) => {
     return (
@@ -16,12 +17,12 @@ const FeatureCard = ({ title, text, link, linkText }) => {
                 </p>
             </div>
             <div>
-                <a href={link} className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500 mt-auto">
+                <Link to={link} className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500 mt-auto">
                     <span className='font-semibold mr-2'>{linkText}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                </a>
+                </Link>
             </div>
 
         </div>

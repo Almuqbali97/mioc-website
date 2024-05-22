@@ -39,7 +39,7 @@ const AbstractsManagement = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/abstract/get/all', {
+                const response = await fetch(import.meta.env.VITE_API_URL + '/abstract/get/all', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'
@@ -64,7 +64,7 @@ const AbstractsManagement = () => {
     const handleDownload = async (e, id, fileName) => {
         setDownloadingAbstracts(prevState => ({ ...prevState, [id]: true }));
         try {
-            const response = await fetch(`http://localhost:3000/abstract/download/${fileName}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/download/${fileName}`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -93,7 +93,7 @@ const AbstractsManagement = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:3000/abstract/${type}/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/${type}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

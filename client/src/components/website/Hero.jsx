@@ -6,6 +6,7 @@ import HeroImg4 from '../../assets/images/hero4.jpg';
 import omanVision from '../../assets/images/oman-vision.svg';
 import omanVisionWhite from '../../assets/images/omanVisionWhite.png';
 import TopLogos from './TopLogos';
+import { Link } from 'react-router-dom';
 
 
 
@@ -47,13 +48,13 @@ const Hero = () => {
                         </h1>
 
                         <div className="flex font-semibold text-xl flex-col items-center justify-center gap-5 mt-10 md:mt-14 md:flex-row">
-                            <a
+                            <Link
                                 className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
-                                href="/registration-checklist">Register Now!
-                            </a>
-                            <a className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md shadow-lg sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
-                                href="/abstract-info">Submit Abstract
-                            </a>
+                                to="/registration-checklist">Register Now!
+                            </Link>
+                            <Link className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md shadow-lg sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
+                                to="/abstract-info">Submit Abstract
+                            </Link>
 
                         </div>
 

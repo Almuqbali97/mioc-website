@@ -25,7 +25,7 @@ const port = process.env.PORT;;
 
 
 app.use(cors({
-    origin: 'http://localhost:5000', // Replace with your client URL
+    origin: ['http://localhost:5000', process.env.FRONT_END_ORIGIN], // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Allow cookies to be sent

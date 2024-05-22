@@ -11,7 +11,7 @@ const RegistrantsManagement = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/registrants/get/all', {
+                const response = await fetch(import.meta.env.VITE_API_URL + '/registrants/get/all', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'

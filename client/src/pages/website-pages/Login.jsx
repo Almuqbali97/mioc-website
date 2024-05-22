@@ -32,7 +32,7 @@ const Login = () => {
         try {
             setIsLoading(true);
             // Assuming you're making a POST request to submit the form data
-            const response = await fetch('http://localhost:3000/user/login', {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ const Login = () => {
 
     async function handleGoogleAuthCallbackResponse(authResponse) {
         const decodedUserInfor = jwtDecode(authResponse.credential);
-        const response = await fetch('http://localhost:3000/user/oauth/google/success', {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/user/oauth/google/success', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const Login = () => {
                     <form className="mt-6" onSubmit={handleSubmit}>
                         <div>
                             <label className="block text-gray-700">Email Address</label>
-                            <input type='email' name='email' value={loginForm.email} onChange={handleChange} placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" autoFocus  required />
+                            <input type='email' name='email' value={loginForm.email} onChange={handleChange} placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" autoFocus required />
                         </div>
 
                         <div className="mt-4">

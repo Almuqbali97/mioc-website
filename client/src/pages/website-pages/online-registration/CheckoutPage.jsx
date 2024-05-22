@@ -22,8 +22,8 @@ const CheckoutPage = () => {
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: selectedPrice,
-        redirect_url: 'http://localhost:3000/payment/success',
-        cancel_url: 'http://localhost:3000/payment/cancel',
+        redirect_url: import.meta.env.VITE_API_URL + '/payment/success',
+        cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
         billing_name: personalInfo.firstName + ' ' + personalInfo.lastName,
         billing_address: addressInfo.address,
@@ -52,7 +52,7 @@ const CheckoutPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
         try {
-            const response = await fetch('http://localhost:3000/ccavRequestHandler', {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/ccavRequestHandler', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
