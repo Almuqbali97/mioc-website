@@ -1,7 +1,7 @@
 import express from 'express';
 // import { connectDB } from './config/connectMongodb.js'; // Update path as needed
 import cors from 'cors';
-// import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 // import userRoutes from './routes/userRoutes.js';
 // import abstractRoutes from './routes/abstractRoutes.js';
 // import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
