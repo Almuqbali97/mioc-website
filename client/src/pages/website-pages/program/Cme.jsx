@@ -34,7 +34,7 @@ const Cme = () => {
                 <ParagraphTitle title={'Royal College of Physicians and Surgeons of Canada'} />
                 <CommonParagraph>
                     Live educational activities, occurring outside of Canada, recognized by the UEMS-EACCME for ECMEC credits are deemed to be Accredited Group Learning Activities (Section 1) as defined by the Maintenance of Certification Program of The Royal College of Physicians and Surgeons of Canada. For more information, visit:
-                    <span className='text-primary_brown'><a href=' http://www.royalcollege.ca/rcsite/cpd/providers/international-accreditation-agreements-e'> http://www.royalcollege.ca/rcsite/cpd/providers/</br>international-accreditation-agreements-e.</a></span>
+                    <span className='text-primary_brown'><a href=' http://www.royalcollege.ca/rcsite/cpd/providers/international-accreditation-agreements-e'> http://www.royalcollege.ca/rcsite/cpd/providers/<br/>international-accreditation-agreements-e.</a></span>
                 </CommonParagraph>
 
                 <ParagraphTitle title={'To Receive Your CME/CPD Certificate'} />
