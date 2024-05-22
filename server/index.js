@@ -9,7 +9,7 @@ import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
 import ticketRoutes from './routes/ticketPaymentRoutes.js'
 import registrants from './routes/registrantsRoutes.js'
 const app = express();
-const port = process.env.PORT;;
+const port = process.env.PORT ||3000;
 
 
 //middlewares
@@ -34,6 +34,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (res, req) => {
+    res.json("Hello from api")
+})
 //routes
 app.use('/user', userRoutes);
 app.use('/abstract', abstractRoutes)
