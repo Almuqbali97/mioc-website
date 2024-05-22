@@ -29,7 +29,6 @@ const s3Client = new S3Client({
 
 
 export const submitAbstract = async (req, res) => {
-  // console.log(req.body);
   const uniqueFileName = uuidv4();
   const id = uuidv4();
   const { firstName, lastName, email, mobile, topic, title, mainAuthor, mainAuthorEmail, mainAuthorOrganization } = req.body;
@@ -38,22 +37,17 @@ export const submitAbstract = async (req, res) => {
     return res.status(401).json({ message: 'Please upload your abstract file' });
   }
 
-  const { originalname, path } = req.file;
-
   if (!email || !mobile || !topic) {
     return res.status(401).json({ message: 'Please enter all required fields' });
   }
   if (!validateEmail(email)) {
     return res.status(401).json({ message: 'Invalid email address' });
   }
-  if (!originalname) {
-    return res.status(401).json({ message: 'Please upload your abstract file' });
-  }
 
   const uploadParams = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: uniqueFileName + originalname,
-    Body: fs.createReadStream(path)
+    Key: uniqueFileName + req.file.originalname,
+    Body: req.file.buffer
   };
 
   try {
@@ -61,7 +55,6 @@ export const submitAbstract = async (req, res) => {
     await s3Client.send(command);
     const fileURL = `https://${uploadParams.Bucket}.s3.${process.env.AWS_S3_BUCKET_REGION}.amazonaws.com/${uploadParams.Key}`;
     console.log('File uploaded successfully:', fileURL);
-    await unlinkFile(path); // Delete the file safely after upload
 
     const newAbstract = {
       id: id,
@@ -69,7 +62,7 @@ export const submitAbstract = async (req, res) => {
       lastName,
       email: email.toLowerCase(),
       phoneNo: mobile,
-      fileName: uniqueFileName + originalname,
+      fileName: uniqueFileName + req.file.originalname,
       title: title,
       mainAuthor: mainAuthor,
       mainAuthorEmail: mainAuthorEmail,
@@ -86,16 +79,10 @@ export const submitAbstract = async (req, res) => {
 
   } catch (error) {
     console.error('Error:', error);
-    await unlinkFile(path); // Ensure the file is deleted even if an error occurs
-    if (error.name === 'NoSuchBucket') {
-      return res.status(500).json({ message: 'Bucket does not exist' });
-    }
-    if (error.code === 11000) {
-      return res.status(400).json({ message: 'File name already used' });
-    }
     return res.status(500).json({ message: 'Something went wrong' });
   }
 };
+
 
 
 export const downloadSpesificAbstract = async (req, res) => {

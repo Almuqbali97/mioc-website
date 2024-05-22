@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-         <ScrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route element={<Website />}>
           {/* general */}
