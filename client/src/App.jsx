@@ -25,6 +25,7 @@ import Transportation from './pages/website-pages/travel/Transportation.jsx';
 import VisaInformation from './pages/website-pages/travel/VisaInformation.jsx';
 import Accommodation from './pages/website-pages/travel/Accommodation.jsx';
 import TestComponantes from './components/TestComponantes.jsx';
+import ScrollToTop from './components/common/ScrollToTop.jsx';
 import Website from './layouts/Website.jsx';
 import AdminPanel from './layouts/AdminPanel.jsx';
 import AbstractsManagement from './pages/admin-pages/AbstractsManagement.jsx';
@@ -34,11 +35,13 @@ import CancelPayment from './pages/website-pages/online-registration/CancelPayme
 import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
 import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
 
+
 function App() {
 
   return (
     <>
       <Routes>
+         <ScrollToTop />
         <Route element={<Website />}>
           {/* general */}
           <Route path='/' element={<Home />} />
