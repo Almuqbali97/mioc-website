@@ -10,7 +10,7 @@ const Logout = () => {
         async function logoutFn() {
             try {
                 googleLogout();
-                const response = await fetch("http://localhost:3000/user/logout", {
+                const response = await fetch(import.meta.env.VITE_API_URL + "/user/logout", {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
