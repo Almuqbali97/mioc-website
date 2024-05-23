@@ -57,7 +57,8 @@ router.post('/ccavRequestHandler', (req, res) => {
 });
 
 router.post('/payment/cancel', (req, res) => {
-    res.redirect('http://localhost:5000/payment/cancel');
+    // res.redirect('http://localhost:5000/payment/cancel');
+    res.redirect('https://mioc.org.om/payment/cancel');
 });
 
 router.post('/payment/success', async (req, res) => {
@@ -105,7 +106,8 @@ router.post('/payment/success', async (req, res) => {
         console.error('Error storing user info in MongoDB', error);
     }
 
-    res.redirect('http://localhost:5000/payment/success');
+    // res.redirect('http://localhost:5000/payment/success');
+    res.redirect('https://mioc.org.om/payment/success');
 });
 
 function encrypt(raw, key) {
