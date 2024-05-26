@@ -6,9 +6,5 @@ export default defineConfig({
   build: {
     outDir: 'dist', // Ensure this is set correctly
   },
-  // server: {
-  //   proxy: {
-  //     '/api': 'http://localhost:3000'
-  //   }
-  // }
+
 });

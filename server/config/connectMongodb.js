@@ -5,6 +5,7 @@ dotenv.config();
 const mongoDBURL = process.env.MONGODB_URL;
 // creating new client
 const mongoClient = new MongoClient(mongoDBURL, {
+    family: 4,
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
