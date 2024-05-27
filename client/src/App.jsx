@@ -34,6 +34,7 @@ import CheckoutPage from './pages/website-pages/online-registration/CheckoutPage
 import CancelPayment from './pages/website-pages/online-registration/CancelPayment.jsx';
 import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
 import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
+import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/privacy-terms' element={<PrivacyTerms />} />
           {/* organizaion */}
           <Route path='/welcom-message' element={<WelcomeMessage />} />
           <Route path='/important-dates' element={<ImportantDates />} />

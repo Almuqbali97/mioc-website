@@ -85,7 +85,11 @@ const PricingTable = () => {
     };
 
     const nextStep = () => {
-        setStep(step + 1);
+        if (step === 1 && selectedCountry !== 'Oman') {
+            setStep(3);
+        } else {
+            setStep(step + 1);
+        }
     };
 
     const prevStep = () => {
@@ -184,7 +188,7 @@ const PricingTable = () => {
                     <form onSubmit={handleSubmit}>
                         {step === 1 && (
                             <div className="mb-4">
-                                <label htmlFor="country" className="block text-gray-700 mb-2">Country</label>
+                                <label htmlFor="country" className="block text-gray-700 mb-2">Country <span className="text-red-500">*</span></label>
                                 <select
                                     id="country"
                                     name="country"
@@ -201,10 +205,10 @@ const PricingTable = () => {
                                 <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
                             </div>
                         )}
-                        {step === 2 && (
+                        {step === 2 && selectedCountry === 'Oman' && (
                             <>
                                 <div className="mb-4">
-                                    <label htmlFor="redeemCode" className="block text-gray-700 mb-2">Are you OOS Member?</label>
+                                    <label htmlFor="redeemCode" className="block text-gray-700 mb-2">Are you OOS Member? <span className="text-red-500">*</span></label>
                                     <select
                                         id="redeemCode"
                                         name="redeemCode"
@@ -213,38 +217,35 @@ const PricingTable = () => {
                                         className="w-full p-2 border rounded"
                                         required
                                     >
-                                        <option value="no">No</option>
+                                        <option value="">Select option</option>
                                         <option value="yes">Yes</option>
+                                        <option value="no">No</option>
                                     </select>
                                 </div>
                                 {hasRedeemCode && (
                                     <div className="mb-4">
-                                        <label htmlFor="redeemCodeInput" className="block text-gray-700 mb-2">Enter Redeem Code</label>
+                                        <label htmlFor="redeemCodeInput" className="block text-gray-700 mb-2">Enter OOS Member Code</label>
                                         <input
-                                            type="text"
                                             id="redeemCodeInput"
                                             name="redeemCodeInput"
+                                            type="text"
                                             value={redeemCode}
                                             onChange={(e) => setRedeemCode(e.target.value)}
                                             className="w-full p-2 border rounded"
-                                            required
                                         />
                                     </div>
                                 )}
-                                <div className="flex justify-between">
-                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
-                                    <button type="button" className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
-                                </div>
+                                <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
                             </>
                         )}
                         {step === 3 && (
                             <>
                                 <div className="mb-4">
-                                    <label htmlFor="firstName" className="block text-gray-700 mb-2">First Name</label>
+                                    <label htmlFor="firstName" className="block text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
                                     <input
-                                        type="text"
                                         id="firstName"
                                         name="firstName"
+                                        type="text"
                                         value={personalInfo.firstName}
                                         onChange={handleInputChange}
                                         className="w-full p-2 border rounded"
@@ -252,11 +253,11 @@ const PricingTable = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="lastName" className="block text-gray-700 mb-2">Last Name</label>
+                                    <label htmlFor="lastName" className="block text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
                                     <input
-                                        type="text"
                                         id="lastName"
                                         name="lastName"
+                                        type="text"
                                         value={personalInfo.lastName}
                                         onChange={handleInputChange}
                                         className="w-full p-2 border rounded"
@@ -264,11 +265,11 @@ const PricingTable = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
+                                    <label htmlFor="email" className="block text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
                                     <input
-                                        type="email"
                                         id="email"
                                         name="email"
+                                        type="email"
                                         value={personalInfo.email}
                                         onChange={handleInputChange}
                                         className="w-full p-2 border rounded"
@@ -276,31 +277,28 @@ const PricingTable = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="mobile" className="block text-gray-700 mb-2">Mobile</label>
+                                    <label htmlFor="mobile" className="block text-gray-700 mb-2">Mobile <span className="text-red-500">*</span></label>
                                     <input
-                                        type="text"
                                         id="mobile"
                                         name="mobile"
+                                        type="text"
                                         value={personalInfo.mobile}
                                         onChange={handleInputChange}
                                         className="w-full p-2 border rounded"
                                         required
                                     />
                                 </div>
-                                <div className="flex justify-between">
-                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
-                                    <button type="button" className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
-                                </div>
+                                <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
                             </>
                         )}
                         {step === 4 && (
                             <>
                                 <div className="mb-4">
-                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address</label>
+                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
                                     <input
-                                        type="text"
                                         id="address"
                                         name="address"
+                                        type="text"
                                         value={addressInfo.address}
                                         onChange={handleAddressChange}
                                         className="w-full p-2 border rounded"
@@ -308,30 +306,24 @@ const PricingTable = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">Billing Address</label>
+                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">Billing Address <span className="text-red-500">*</span></label>
                                     <input
-                                        type="text"
                                         id="billingAddress"
                                         name="billingAddress"
+                                        type="text"
                                         value={addressInfo.billingAddress}
                                         onChange={handleAddressChange}
                                         className="w-full p-2 border rounded"
                                         required
                                     />
                                 </div>
-                                <div className="flex justify-between">
-                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
-                                    <button type="submit" className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Continue to Checkout</button>
-                                </div>
+                                <button type="submit" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Submit</button>
                             </>
                         )}
+                        {step > 1 && (
+                            <button type="button" className="mt-4 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Previous</button>
+                        )}
                     </form>
-                    <button
-                        onClick={closeModal}
-                        className="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
-                    >
-                        Close
-                    </button>
                 </div>
             </Modal>
         </div>

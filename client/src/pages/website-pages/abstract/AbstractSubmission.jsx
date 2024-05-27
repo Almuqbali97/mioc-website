@@ -359,60 +359,63 @@ const AbstractSubmission = () => {
                                     </div>
                                     <h2 className="text-xl font-semibold text-gray-700 dark:text-white mt-4 mb-2">Additional Authors</h2>
                                     {formData.additionalAuthors.map((author, index) => (
-                                        <div key={index} className="grid sm:grid-cols-2 gap-4 mb-2">
-                                            <input
-                                                type="text"
-                                                value={author.firstName}
-                                                onChange={(e) => handleAuthorChange(index, 'firstName', e.target.value)}
-                                                placeholder="First Name"
-                                                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                                                required
-                                            />
-                                            <input
-                                                type="text"
-                                                value={author.lastName}
-                                                onChange={(e) => handleAuthorChange(index, 'lastName', e.target.value)}
-                                                placeholder="Last Name"
-                                                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                                                required
-                                            />
-                                            <input
-                                                type="email"
-                                                value={author.email}
-                                                onChange={(e) => handleAuthorChange(index, 'email', e.target.value)}
-                                                placeholder="Email"
-                                                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                                                required
-                                            />
-                                            <input
-                                                type="text"
-                                                value={author.organization}
-                                                onChange={(e) => handleAuthorChange(index, 'organization', e.target.value)}
-                                                placeholder="Organization"
-                                                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                                                required
-                                            />
-                                            <input
-                                                type="text"
-                                                value={author.nationality}
-                                                onChange={(e) => handleAuthorChange(index, 'nationality', e.target.value)}
-                                                placeholder="Nationality"
-                                                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                                                required
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => handleRemoveAuthor(index)}
-                                                className="px-4 py-2 text-red-600 border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition duration-300"
-                                            >
-                                                Remove author
-                                            </button>
-                                            {errors[`additionalAuthors[${index}][firstName]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][firstName]`]}</p>}
-                                            {errors[`additionalAuthors[${index}][lastName]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][lastName]`]}</p>}
-                                            {errors[`additionalAuthors[${index}][email]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][email]`]}</p>}
-                                            {errors[`additionalAuthors[${index}][organization]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][organization]`]}</p>}
-                                            {errors[`additionalAuthors[${index}][nationality]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][nationality]`]}</p>}
-                                        </div>
+                                        <>
+                                            <div key={index} className="grid sm:grid-cols-2 gap-4 mb-2">
+                                                <input
+                                                    type="text"
+                                                    value={author.firstName}
+                                                    onChange={(e) => handleAuthorChange(index, 'firstName', e.target.value)}
+                                                    placeholder="First Name"
+                                                    className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                                                    required
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={author.lastName}
+                                                    onChange={(e) => handleAuthorChange(index, 'lastName', e.target.value)}
+                                                    placeholder="Last Name"
+                                                    className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                                                    required
+                                                />
+                                                <input
+                                                    type="email"
+                                                    value={author.email}
+                                                    onChange={(e) => handleAuthorChange(index, 'email', e.target.value)}
+                                                    placeholder="Email"
+                                                    className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                                                    required
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={author.organization}
+                                                    onChange={(e) => handleAuthorChange(index, 'organization', e.target.value)}
+                                                    placeholder="Organization"
+                                                    className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                                                    required
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={author.nationality}
+                                                    onChange={(e) => handleAuthorChange(index, 'nationality', e.target.value)}
+                                                    placeholder="Nationality"
+                                                    className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                                                    required
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleRemoveAuthor(index)}
+                                                    className="px-4 py-2 text-red-600 border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition duration-300"
+                                                >
+                                                    Remove author
+                                                </button>
+                                                {errors[`additionalAuthors[${index}][firstName]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][firstName]`]}</p>}
+                                                {errors[`additionalAuthors[${index}][lastName]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][lastName]`]}</p>}
+                                                {errors[`additionalAuthors[${index}][email]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][email]`]}</p>}
+                                                {errors[`additionalAuthors[${index}][organization]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][organization]`]}</p>}
+                                                {errors[`additionalAuthors[${index}][nationality]`] && <p className="text-red-500 text-sm col-span-6">{errors[`additionalAuthors[${index}][nationality]`]}</p>}
+                                            </div>
+                                            <hr className='my-9'/>
+                                        </>
                                     ))}
                                     <button
                                         type="button"
@@ -561,7 +564,7 @@ const AbstractSubmission = () => {
                     )}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

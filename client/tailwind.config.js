@@ -23,7 +23,8 @@ export default {
         // primary1: '#8C57FF',
         primary2: '#1D2B53',
         primary_brown: '#d8a757',
-        primary_blue: '#016699'
+        primary_blue: '#095C9F'
+        // primary_blue: '#016699'
       },
       fontFamily: {
         custom: ['Roboto', 'Helvetica', 'Arial', 'Verdana', 'sans-serif'],
@@ -31,5 +32,7 @@ export default {
     },
   },
   darkMode: 'class',
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ]
 }

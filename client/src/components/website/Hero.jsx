@@ -23,8 +23,8 @@ const Hero = () => {
         return () => clearInterval(intervalId); // Clean up the interval on component unmount
     }, []);
     return (
-        <div className='bg-[#33689c] bg-opacity-50 h-screen w-full relative text-center'>
-            <img key={heroImages[currentIndex]} src={heroImages[currentIndex]} className='w-full h-full object-cover absolute -z-50 fading' />
+        <div className='bg-[#33689c] bg-opacity-40 h-screen w-full relative text-center'>
+            <img key={heroImages[0]} src={heroImages[0]} className='w-full h-full object-cover absolute -z-50 ' />
             {/* // className='w-full h-full object-cover absolute -z-50 fading' /> */}
             <TopLogos />
             <img src={omanVisionWhite} className='h-16 sm:hidden mx-auto text-white ' />
@@ -49,10 +49,10 @@ const Hero = () => {
 
                         <div className="flex font-semibold text-xl flex-col items-center justify-center gap-5 mt-10 md:mt-14 md:flex-row">
                             <Link
-                                className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
+                                className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-b dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
                                 to="/registration-checklist">Register Now!
                             </Link>
-                            <Link className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md shadow-lg sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
+                            <Link className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
                                 to="/abstract-info">Submit Abstract
                             </Link>
 

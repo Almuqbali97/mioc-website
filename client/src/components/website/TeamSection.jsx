@@ -73,7 +73,7 @@ const TeamSection = () => {
                                 <h2 className='text-2xl sm:text-4xl font-light mb-8'>
                                     Bringing a global perspective to the latest clinical and scientific advances in Ophthalmology and related disciplines.
                                 </h2>
-                                <p className='mb-4 -mt- hidden sm:block'><span className='font-semibold'>Figure: Dr Rashid Al Saidi,MD,FEBO.</span>
+                                <p className='mb-4 -mt- hidden sm:block'><span className='font-semibold'>Dr Rashid Al Saidi,MD,FEBO.</span>
                                     <br />Chairman of the Joint Organizing Committee</p>
                                 <PrimaryButtonBlue text='Program at a glance' link={'/program-at-a-glance'} />
 

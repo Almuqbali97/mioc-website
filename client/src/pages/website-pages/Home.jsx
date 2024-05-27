@@ -14,7 +14,7 @@ const Home = () => {
             <a href="#top-bar" className=" fixed text-primary_brown z-50 bottom-5 right-5"><ArrowUpCircleIcon className="h-7 w-7" /></a>
             <Hero />
             <TeamSection />
-            <Statistics />
+            {/* <Statistics /> */}
             <FeaturesSection />
             <InstagramGallery />
             <MuscatPreviewSection />
