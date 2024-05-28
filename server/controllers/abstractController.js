@@ -154,7 +154,7 @@ export const submitAbstract = async (req, res) => {
       methods,
       results,
       conclusions,
-      fileURL: fileURL,
+      fileName: uniqueFileName + req.file.originalname,
       additionalAuthors: additionalAuthors ? JSON.parse(additionalAuthors) : [],
       created_at: new Date(),
     };

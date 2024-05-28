@@ -25,7 +25,7 @@ const port = process.env.PORT || 3000;
 
 
 app.use(cors({
-    origin: ['http://localhost:5000', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om'], // Replace with your client URL
+    origin: ['http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om'], // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Allow cookies to be sent
