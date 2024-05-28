@@ -91,6 +91,106 @@ const Accordian = () => {
                     </div>
                 </div>
 
+                <h3 id="accordion-flush-heading-4">
+                    <button type="button"
+                        class="flex items-center justify-between w-full py-5 px-4 font-medium text-left border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                        data-accordion-target="#accordion-flush-body-4" aria-expanded="true"
+                        aria-controls="accordion-flush-body-4">
+                        <span>Credit Card Payment FAQs</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0 rotate-180" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </h3>
+                <div id="accordion-flush-body-4" class="" aria-labelledby="accordion-flush-heading-4">
+                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <ol class="list-decimal ml-5 space-y-4">
+                            <li>
+                                Which credit cards are accepted for payment?
+                                <ul class="list-disc ml-5 mt-2">
+                                    <li>We only accept Visa and MasterCard.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                What should I do when I face any error in registration or abstract submission?
+                                <ul class="list-disc ml-5 mt-2">
+                                    <li>You should contact <a href="mailto:info@meaco-oman.org" class="text-yellow-500">info@mioc.org.om</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                What are the credit card requirements?
+                                <ul class="list-disc ml-5 mt-2 space-y-2">
+                                    <li>Kindly be informed that credit or debit cards need to be 3-D Secure compliant in order to pay the registration fee online.</li>
+                                    <li>If you are facing a difficulty or unable to make the payment online, you may need to check if you are registered for 3-D secure, if you have not done so already.</li>
+                                    <li>Kindly check with your card-issuing bank if you are not sure whether your card is 3-D secure or not.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                What is 3D secure compliance?
+                                <ul class="list-disc ml-5 mt-2 space-y-2">
+                                    <li>Kindly be informed that credit or debit cards need to be 3-D Secure compliant in order to pay the registration fee online. If you are facing a difficulty or unable to make the payment online, you may need to check if you are registered for 3-D secure, if you have not done so already. Kindly check with your card-issuing bank if you are not sure whether your card is 3-D secure or not.</li>
+                                    <li>3-D Secure is a protocol designed to be an additional security layer for online credit and debit card transactions. It is an established means of reducing all types of online fraud.</li>
+                                    <li>The UAE Central Bank has mandated the compliance to 3-D Secure protocol for online transactions. A transaction being carried out through 3-D Secure technology redirects the payment process to the website of the bank that has issued the card to authenticate the transaction.</li>
+                                    <li>3-D Secure asks shoppers to enter either a static or dynamic password to help confirm the identity of the cardholder during the time of purchase. For first time shoppers, a registration process may be available at the time of transaction itself.</li>
+                                </ul>
+                            </li>
+                            <div class="ml-5 mt-4">
+                                <p class="font-bold">Types of 3-D Secure</p>
+                                <p>Services based on the 3-D Secure protocol have been adopted by the following companies:</p>
+                                <ul class="list-disc ml-5 mt-2 space-y-2">
+                                    <li>Verified by Visa: 3D Secure by Visa is called Verified by Visa.</li>
+                                    <li>MasterCard Secure Code: 3D Secure by MasterCard is called Secure Code.</li>
+                                    <li>JCB J/Secure: 3D Secure by JCB is called J/Secure.</li>
+                                </ul>
+                            </div>
+
+                            <div class="ml-5 mt-4">
+                                <p class="font-bold">Important note</p>
+                                <p>In the event that credit card payment is still not possible after the steps listed on the document, we have introduced the possibility to register now and pay later. In this case, please select the pay later option and our staff will contact you to organize an alternative payment method.</p>
+                            </div>
+                            <li>
+                                What is CVV number?
+                                <ul class="list-disc ml-5 mt-2">
+                                    <li>CVV number refers to the security number on the back of the card and comprises of the last 3 digits within the security strip.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                How will I know that the payment was successful?
+                                <ul class="list-disc ml-5 mt-2 space-y-2">
+                                    <li>At the end of the process, you will be presented with a screen entitled ‘Transaction Approved’. You will also receive an email confirming your payment transaction within two working days.</li>
+                                    <li>
+                                        <p>What are the usual reasons for online payment failure? (If payment process fails, you will get an error message ‘Unable to complete transaction’.)</p>
+                                        <ul class="list-disc ml-5 mt-2 space-y-2">
+                                            <li>The most common reasons that you will receive a payment failed message are:</li>
+                                            <li>You are using a Debit card rather than a typical Credit card.</li>
+                                            <li>Your billing address and/or zip code does not match what is on file with your financial institution.</li>
+                                            <li>Some P.O. Box addresses will not be accepted.</li>
+                                            <li>Your (CVV) 3 digit security code is incorrect.</li>
+                                            <li>Your transaction was declined by your financial institution.</li>
+                                            <li>You might be using an old version of browser or your pop-up blocker is activated.</li>
+                                            <li>You have a slow internet connection so it times out during the registration process.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                What should I do to make a successful payment?
+                                <ul class="list-disc ml-5 mt-2 space-y-2">
+                                    <li>Please use Visa and MasterCard.</li>
+                                    <li>Be sure to enter correct credentials.</li>
+                                    <li>Double check your (CVV) 3 digit security code is correct.</li>
+                                    <li>Deactivate any pop-up blocker in your browser and mark our website as a safe website.</li>
+                                    <li>Be sure that your browser is up to date.</li>
+                                    <li>Please use a good internet connection such as Broadband ISDN, DSL, ADSL, ISDN etc.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
             </div>
         </div>
 
