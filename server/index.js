@@ -48,20 +48,6 @@ app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
     res.json({ user: req.user });
 });
 
-app.get('/api/instagram-posts', async (req, res) => {
-    try {
-        const response = await fetch(`https://graph.instagram.com/7606891449401857/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=IGQWRORnRwUFJGbWZAzSE5UeFA1SEpFWFhVNVYtWFJuY3RzMjBDNzF4a1RwY0FlR0FEb1VZARHZABX0FzaXRfQ25zZAzdCckJScGlhbmo1WmNHNHdOR2pCamhsM2JuVHluMDJ2YVNjdGZAlWkhMUTBQZA1hGMFYzbU1NaU0ZD`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        res.json(data);
-    } catch (error) {
-        console.error('Error fetching Instagram posts:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 (async () => {
     await connectDB();
     app.listen(port, () => {

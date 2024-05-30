@@ -13,8 +13,7 @@ export const AuthProvider = ({ children }) => {
 
         if (userProfile && loginTime) {
             const currentTime = new Date().getTime();
-            // const oneMonthInMilliseconds = 30 * 24 * 60 * 60 * 1000;
-            const oneMonthInMilliseconds = 20000;
+            const oneMonthInMilliseconds = 30 * 24 * 60 * 60 * 1000;
 
             if (currentTime - loginTime > oneMonthInMilliseconds) {
                 localStorage.removeItem("userProfile");
