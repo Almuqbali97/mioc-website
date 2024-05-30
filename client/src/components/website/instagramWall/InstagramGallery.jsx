@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -59,20 +59,49 @@ const bgSvg = `data:image/svg+xml;base64,${btoa(
 </svg>`
 )}`;
 
-const slides = [
-    'https://meaco-oman.org/wp-content/uploads/2023/10/393416043_910460634035599_4046318621734586269_n.jpg',
-    'https://i.ibb.co/ncrXc2V/1.png',
-    'https://i.ibb.co/B3s7v4h/2.png',
-    'https://i.ibb.co/XXR8kzF/3.png',
-    'https://i.ibb.co/yg7BSdM/4.png',
-    'https://img.freepik.com/free-photo/genderneutral-hand-modifying-settings-3d-printer-finish-printing-round-white-object-from-recycled-plastic-futuristic-concept-new-working-possibilities-small-businesses-by-3d-printing_633478-540.jpg?t=st=1716085488~exp=1716089088~hmac=7ca66f4f29205dde05d2ec59c4aca5fe1c9d5b6cc6d017ab2776a7f38b7d2910&w=360',
-];
 
 
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/20/solid'
+const instagramId = import.meta.env.VITE_INSTAGRAM_ID;
+const instagramToken = import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN;
 const InstagramGallery = () => {
-    return (
+    const [instagramPosts, setInstagramPosts] = useState([])
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        async function getInstagramPosts() {
+            try {
+                const response = await fetch(`https://graph.instagram.com/${instagramId}/media?fields=id,media_url,timestamp,media_type,username&access_token=${instagramToken}`);
+                console.log(response.data);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
 
+                const data = await response.json();
+                const images = data.data.filter(post => post.media_type === 'IMAGE');
+
+                // Sort by timestamp in ascending order
+                images.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                // Get the last 10 images
+                const last10Images = images.slice(-9).reverse();
+
+                setInstagramPosts(last10Images);
+                setLoading(false);
+                // console.log(data.data);
+            } catch (error) {
+                console.error('Error fetching Instagram posts:', error);
+            }
+        }
+
+        getInstagramPosts();
+
+    }, []);
+
+
+    if (loading) {
+        return <p className="text-center text-white">Loading...</p>;
+    }
+    return (
         <div className='w-full py-2' style={{
             backgroundImage: `url(${bgSvg})`,
             backgroundSize: 'cover',
@@ -102,16 +131,15 @@ const InstagramGallery = () => {
                     modules={[EffectCoverflow, Pagination, Navigation]}
                     className="swiper_container"
                 >
-                    {slides.map((slide, index) => {
-                        return <SwiperSlide key={index}>
-                            <img className="w-sm" src={slide} alt="slide_image" />
+                    {instagramPosts.map((slide) => {
+                        return <SwiperSlide key={slide.id}>
+                            <img className="w-sm" src={slide.media_url} alt="slide_image" />
                         </SwiperSlide>
                     })}
 
 
                     <div className="slider-controler">
                         <div className="swiper-button-prev slider-arrow">
-                            {/* &lt; */}
                             <ArrowLeftCircleIcon className='text-white' />
                         </div>
                         <div className="swiper-button-next slider-arrow ">

@@ -8,23 +8,36 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
     // const navigate = useNavigate();
     const [user, setUser] = useState(() => {
-        // Try to retrieve authentication information from localStorage on app start
         const userProfile = localStorage.getItem("userProfile");
-        return userProfile ? JSON.parse(userProfile) : null;
+        const loginTime = localStorage.getItem("loginTime");
+
+        if (userProfile && loginTime) {
+            const currentTime = new Date().getTime();
+            // const oneMonthInMilliseconds = 30 * 24 * 60 * 60 * 1000;
+            const oneMonthInMilliseconds = 20000;
+
+            if (currentTime - loginTime > oneMonthInMilliseconds) {
+                localStorage.removeItem("userProfile");
+                localStorage.removeItem("loginTime");
+                return null;
+            }
+            return JSON.parse(userProfile);
+        }
+        return null;
     });
     const [isLogin, setIslogin] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem('userProfile', JSON.stringify(user));
         if (user) {
+            localStorage.setItem('userProfile', JSON.stringify(user));
+            localStorage.setItem('loginTime', new Date().getTime());
             setIslogin(true);
-        }
-        if (user === null) {
-            localStorage.removeItem('userProfile')
+        } else {
+            localStorage.removeItem('userProfile');
+            localStorage.removeItem('loginTime');
             setIslogin(false);
         }
     }, [user]);
-
 
     return (
         <AuthContext.Provider value={{ user, setUser, isLogin }}>

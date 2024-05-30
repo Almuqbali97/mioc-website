@@ -61,11 +61,9 @@ const AbstractInfo = () => {
                 <CommonParagraph>
                     Submissions are only accepted online. Helpful information is available under the <span className='text-primary_brown font-bold'><a href='/author-agreement'>author agreement</a></span>, <span className='text-primary_brown font-bold'><a href='/poster-presenter-guidelines'>poster presenter guidelines</a></span>.
                 </CommonParagraph>
-                <div className='mt-7'>
-                    <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
-                </div>
 
-                <div className='w-full mt-7 flex flex-col space-x-3 lg:flex-row font-custom' >
+
+                <div className='w-full mt-11 flex flex-col-reverse gap-11 lg:flex-row font-custom' >
                     <div className='flex flex-col w-full'>
                         {abstractDates.map((date, index) => {
                             return <div className='flex items-start space-x-3'>
@@ -77,9 +75,12 @@ const AbstractInfo = () => {
                             </div>
                         })}
 
-                        <div className='mt-5'>
-                            <PrimaryButtonBrown text={'More Important Dates'} link={'/important-dates'} />
+                        <div className='mt-7'>
+                            <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
                         </div>
+                        {/* <div className='mt-5'>
+                            <PrimaryButtonBrown text={'More Important Dates'} link={'/important-dates'} />
+                        </div> */}
                     </div>
                     <div className='mt-11 lg:mt-0'>
                         <ParagraphTitle title={'Guidelines for submitting an abstract :'} />
@@ -94,6 +95,8 @@ const AbstractInfo = () => {
                         </ul>
                     </div>
                 </div>
+
+
                 <div className='w-full h-[1.5px] bg-gradient-to-r from-transparent via-blue-900 to-transparent my-11'></div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 font-custom font-light">
                     {topics.map((topic, index) => (

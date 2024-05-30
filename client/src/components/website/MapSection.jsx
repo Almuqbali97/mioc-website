@@ -38,7 +38,7 @@ const MapSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="rounded-lg overflow-hidden">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672.945750644447!2d-122.42107853750231!3d37.7730507907087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858070cc2fbd55%3A0xa71491d736f62d5c!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1619524992238!5m2!1sen!2sus"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14627.625307802917!2d58.306235074996955!3d23.57180754583634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8e00f6179b8d43%3A0x6f79c844903bc554!2sOman%20Convention%20Centre!5e0!3m2!1sen!2som!4v1717076429038!5m2!1sen!2som"
                                 width="100%" height="480" style={{ border: "0" }} allowFullScreen="" loading="lazy"></iframe>
                         </div>
                         <div>
