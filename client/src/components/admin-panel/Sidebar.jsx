@@ -78,7 +78,7 @@ const Sidebar = () => {
                                 </clipPath>
                             </defs>
                         </svg>} />
-                    <SideBarItem
+                    {/* <SideBarItem
                         path="/admin/newsletters"
                         content="News Letters"
                         svg={<svg
@@ -109,7 +109,7 @@ const Sidebar = () => {
                                     />
                                 </clipPath>
                             </defs>
-                        </svg>} />
+                        </svg>} /> */}
 
                 </ul>
                 {/* <SidebarSectionTitle content={"WEBSITE"} />

@@ -9,7 +9,7 @@ const TopBar = () => {
                     <li className='hover:scale-110 transition-all'> <a href='/'>HOME</a></li>
                     <li className='hover:scale-110 transition-all'><a href='#bottom-bar'>SUBPPORT</a></li>
                     <li className='hover:scale-110 transition-all'><a href='#bottom-bar'>CONTACT</a></li>
-                    <li className='hover:scale-110 transition-all'>ABOUT</li>
+                    {/* <li className='hover:scale-110 transition-all'>ABOUT</li> */}
                 </ul>
                 <SocialIcons />
             </div>

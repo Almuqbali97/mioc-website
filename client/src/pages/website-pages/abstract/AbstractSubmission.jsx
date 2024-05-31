@@ -6,6 +6,7 @@ import 'react-phone-input-2/lib/style.css';
 import Loading2 from '../../../components/common/Loading2';
 import { countries } from '../../../constants';
 import { topics } from '../../../constants';
+import { handleFileDownload } from '../../../helper/handleFilesDownload';
 
 const presentationType = ['Oral presentation', 'Poster', 'Video'];
 
@@ -22,27 +23,27 @@ const AbstractSubmission = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        email: user.email || '',
-        mobile: user.mobile || '',
-        title: '',
-        mainAuthorFirstName: '',
-        mainAuthorLastName: '',
-        mainAuthorEmail: '',
-        mainAuthorOrganization: '',
-        mainAuthorCountry: '',
-        topic: '',
-        presentationType: '',
-        researchType: '',
-        file: null,
-        fileName: '',
-        additionalAuthors: [],
-        objective: '',
-        methods: '',
-        results: '',
-        conclusions: '',
-        description: ''
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            email: user.email || '',
+            mobile: user.mobile || '',
+            title: '',
+            mainAuthorFirstName: '',
+            mainAuthorLastName: '',
+            mainAuthorEmail: '',
+            mainAuthorOrganization: '',
+            mainAuthorCountry: '',
+            topic: '',
+            presentationType: '',
+            researchType: '',
+            file: null,
+            fileName: '',
+            additionalAuthors: [],
+            objective: '',
+            methods: '',
+            results: '',
+            conclusions: '',
+            description: ''
     });
 
     const [charCount, setCharCount] = useState({
@@ -285,6 +286,10 @@ const AbstractSubmission = () => {
             setErrors({ ...errors, server: 'Failed to submit abstract' });
             console.error('Error:', error);
         }
+    };
+    async function handleVideoGuidanceDownload() {
+        const fileName = 'Presentation_Guidelines_101.pdf';
+        await handleFileDownload(fileName)
     };
 
     return (
@@ -536,8 +541,9 @@ const AbstractSubmission = () => {
                                 {errors.presentationType && <p className="text-red-500 text-sm">{errors.presentationType}</p>}
                                 {formData.presentationType === 'Oral presentation' || formData.presentationType === 'Poster' ? (
                                     <>
-                                        {formData.presentationType === 'Poster' && <button className='border-2 rounded-lg border-blue-500  p-2'>Download poster Guidelines here</button>
-                                        }
+                                        {formData.presentationType === 'Oral presentation' ? <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Presentation Guidelines Here</button> : 
+                                            <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Poster Guidelines Here</button>}
+                                       
                                         <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white">Select Research Type *</label>
                                         <div className="flex space-x-4">
                                             <label className="flex items-center">
@@ -640,7 +646,7 @@ const AbstractSubmission = () => {
                                     </>
                                 ) : formData.presentationType === 'Video' ? (
                                     <>
-                                        <button className='border-2 rounded-lg border-blue-500  p-2'>Download video Guidelines here</button>
+                                        <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Video Guidelines Here</button>
                                         <label htmlFor="description" className="block my-2 text-sm font-medium text-gray-900 dark:text-white">Description *</label>
                                         <textarea
                                             id="description"

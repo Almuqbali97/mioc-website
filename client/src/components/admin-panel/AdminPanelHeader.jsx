@@ -1,9 +1,11 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthProvider.jsx';
+
 // import ProfileImg from '../../assets/profile.jpg'
 
-
 const AdminPanelHeader = () => {
+    const { user } = useContext(AuthContext);
     return (
         <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-2 dark:bg-boxdark dark:drop-shadow-none">
             <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
@@ -72,11 +74,7 @@ const AdminPanelHeader = () => {
                                 </svg>
                             </button>
 
-                            <input
-                                type="text"
-                                placeholder="Type to search..."
-                                className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
-                            />
+                         
                         </div>
                     </form>
                 </div>
@@ -133,9 +131,9 @@ const AdminPanelHeader = () => {
                         to="#">
                         <span className="hidden text-right lg:block">
                             <span className="block text-sm font-medium text-black dark:text-white">
-                                Musaab
+                                {user.firstName} {user.lastName}
                             </span>
-                            <span className="block text-xs">Super Admin</span>
+                            <span className="block text-xs">Admin</span>
                         </span>
 
                         <span className="h-12 w-12 rounded-full">

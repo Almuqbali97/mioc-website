@@ -36,6 +36,7 @@ import SuccessPayment from './pages/website-pages/online-registration/SuccessPay
 import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
 import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 import EmailVerification from './components/website/EmailVerification.jsx';
+import ReviewAbstract from './pages/admin-pages/ReviewAbstract.jsx';
 
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/abstracts' element={<AbstractsManagement />} />
             <Route path='/admin/registrers' element={<RegistrersManagement />} />
+            <Route path="/review-abstract/:id" element={<ReviewAbstract />} /> {/* New route */}
           </Route>
         </Route>
 

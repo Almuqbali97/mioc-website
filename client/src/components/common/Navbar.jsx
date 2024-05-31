@@ -32,7 +32,6 @@ const travel = [
 ];
 const sponsersAndExhibitors = [
     { name: 'Reserve your place', description: 'Be part of our event!', href: '/reserve-your-space' },
-    { name: 'Sponsers & Exhibitors', description: 'Get a look at transportation options', href: '/sponsers-and-exhibitors' },
 ];
 const download = [
     { name: 'Download ppt template', href: '/#' },
@@ -96,7 +95,7 @@ export default function Navbar() {
                             <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
                                     {organization.map((item) => (
-                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200">
+                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
                                                 <Link to={item.href} className="block font-semibold" onClick={handleLinkClick} >
                                                     {item.name}
@@ -120,7 +119,7 @@ export default function Navbar() {
                             <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
                                     {registration.map((item) => (
-                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200">
+                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
                                                 <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
@@ -149,7 +148,7 @@ export default function Navbar() {
                             <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
                                     {program.map((item) => (
-                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200">
+                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
                                                 <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
@@ -177,7 +176,7 @@ export default function Navbar() {
                             <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
                                     {sponsersAndExhibitors.map((item) => (
-                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200">
+                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
                                                 <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
@@ -201,7 +200,7 @@ export default function Navbar() {
                             <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
                                     {travel.map((item) => (
-                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200">
+                                        <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
                                                 <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
@@ -244,13 +243,13 @@ export default function Navbar() {
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
                                                 Organization
                                                 <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {organization.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -261,13 +260,13 @@ export default function Navbar() {
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
                                                 Registration
                                                 <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {registration.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -275,19 +274,19 @@ export default function Navbar() {
                                         </>
                                     )}
                                 </Disclosure>
-                                <Link to="/abstract-info" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200" onClick={handleLinkClick}>
+                                <Link to="/abstract-info" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                     Abstract
                                 </Link>
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
                                                 Program
                                                 <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {program.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -295,19 +294,19 @@ export default function Navbar() {
                                         </>
                                     )}
                                 </Disclosure>
-                                <Link to="/faculty" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200" onClick={handleLinkClick}>
+                                <Link to="/faculty" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                     Faculty
                                 </Link>
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
                                                 Sponsers/Exhibitors
                                                 <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {sponsersAndExhibitors.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -318,13 +317,13 @@ export default function Navbar() {
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
                                         <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-200">
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
                                                 Travel
                                                 <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {travel.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-200" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}

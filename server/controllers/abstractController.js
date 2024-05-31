@@ -39,8 +39,10 @@ export const submitAbstract = async (req, res) => {
     mainAuthorOrganization,
     mainAuthorCountry,
     presentationType,
+    researchType,
     objective,
     methods,
+    description,
     results,
     conclusions,
     additionalAuthors,
@@ -70,6 +72,8 @@ export const submitAbstract = async (req, res) => {
       status: 'pending',
       topic: topic,
       presentationType: presentationType,
+      researchType: researchType,
+      description,
       objective,
       methods,
       results,
@@ -171,6 +175,24 @@ export const submitVideoAbstract = async (req, res) => {
   }
 };
 
+export const getAbstractById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const abstract = await abstractsCollection.findOne({ id });
+
+    if (!abstract) {
+      return res.status(404).json({ message: 'Abstract not found' });
+    }
+
+    return res.status(200).json(abstract);
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Something went wrong, please try again' });
+  }
+};
+
+
 export const downloadSpesificAbstract = async (req, res) => {
 
 
@@ -211,59 +233,94 @@ export const getAllAbstracts = async (req, res) => {
 }
 
 
-export const approveAbstract = async (req, res) => {
-  const { email } = req.body;
-  const id = req.params.id;
+export const reviewAbstract = async (req, res) => {
+  const { id } = req.params;
+  const { rating, comment } = req.body;
+
+  if (!rating || !comment) {
+    return res.status(400).json({ message: 'Rating and comment are required.' });
+  }
 
   try {
-    const result = await abstractsCollection.findOneAndUpdate(
-      { id: id },
-      { $set: { status: 'approved', edited_at: new Date() } },
-      { returnDocument: 'after' } // Ensures the returned document is the updated one
+    const updateResult = await abstractsCollection.updateOne(
+      { id },
+      {
+        $set: {
+          status: 'reviewed',
+          review: {
+            rating: parseInt(rating, 10),
+            comment: comment,
+            reviewedAt: new Date(),
+          },
+        },
+      }
     );
 
-    if (!result) {
-      // If no document was found and updated, return a 404 error
+    if (updateResult.matchedCount === 0) {
       return res.status(404).json({ message: 'Abstract not found.' });
     }
 
-    // Return a 200 OK status with a message and the updated document
-    sendConfirmationEmail(email, approveHtmlContent); // this should be after updating the db
-    return res.status(200).json({ message: 'Abstract approved', product: result.value });
+    return res.status(200).json({ message: 'Review submitted successfully.' });
   } catch (error) {
-    // Log the error message and return a 500 Internal Server Error status
-    console.log(error.message);
-    return res.status(500).send({ message: error.message });
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Something went wrong, please try again.' });
   }
 };
 
 
+// export const approveAbstract = async (req, res) => {
+//   const { email } = req.body;
+//   const id = req.params.id;
 
-export const rejectAbstract = async (req, res) => {
-  const { email } = req.body;
-  const id = req.params.id;
+//   try {
+//     const result = await abstractsCollection.findOneAndUpdate(
+//       { id: id },
+//       { $set: { status: 'approved', edited_at: new Date() } },
+//       { returnDocument: 'after' } // Ensures the returned document is the updated one
+//     );
 
-  try {
-    const result = await abstractsCollection.findOneAndUpdate(
-      { id: id },
-      { $set: { status: 'rejected', edited_at: new Date() } },
-      { returnDocument: 'after' } // Ensures the returned document is the updated one
-    );
+//     if (!result) {
+//       // If no document was found and updated, return a 404 error
+//       return res.status(404).json({ message: 'Abstract not found.' });
+//     }
 
-    if (!result) {
-      // If no document was found and updated, return a 404 error
-      return res.status(404).json({ message: 'Abstract not found.' });
-    }
+//     // Return a 200 OK status with a message and the updated document
+//     sendConfirmationEmail(email, approveHtmlContent); // this should be after updating the db
+//     return res.status(200).json({ message: 'Abstract approved', product: result.value });
+//   } catch (error) {
+//     // Log the error message and return a 500 Internal Server Error status
+//     console.log(error.message);
+//     return res.status(500).send({ message: error.message });
+//   }
+// };
 
-    // Return a 200 OK status with a message and the updated document
-    sendConfirmationEmail(email, rejectHtmlContent); // this should be after updating the db
-    return res.status(200).json({ message: 'Abstract rejected', product: result });
-  } catch (error) {
-    // Log the error message and return a 500 Internal Server Error status
-    console.log(error.message);
-    return res.status(500).send({ message: error.message });
-  }
-};
+
+
+// export const rejectAbstract = async (req, res) => {
+//   const { email } = req.body;
+//   const id = req.params.id;
+
+//   try {
+//     const result = await abstractsCollection.findOneAndUpdate(
+//       { id: id },
+//       { $set: { status: 'rejected', edited_at: new Date() } },
+//       { returnDocument: 'after' } // Ensures the returned document is the updated one
+//     );
+
+//     if (!result) {
+//       // If no document was found and updated, return a 404 error
+//       return res.status(404).json({ message: 'Abstract not found.' });
+//     }
+
+//     // Return a 200 OK status with a message and the updated document
+//     sendConfirmationEmail(email, rejectHtmlContent); // this should be after updating the db
+//     return res.status(200).json({ message: 'Abstract rejected', product: result });
+//   } catch (error) {
+//     // Log the error message and return a 500 Internal Server Error status
+//     console.log(error.message);
+//     return res.status(500).send({ message: error.message });
+//   }
+// };
 
 function sendConfirmationEmail(email, html) {
   const transporter = nodemailer.createTransport({

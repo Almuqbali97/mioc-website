@@ -5,7 +5,7 @@ const BottomBar = () => {
     return (
         <div id='bottom-bar' className='h-[35px] bg-gradient-to-r from-[#d8a757] to-primary_blue '>
             <div className='flex justify-center gap-9 items-center h-full text-white'>
-                <p className=''>@ 2024 All Rights Reserved </p>
+                <p className=''>@2024 MIOC All Rights Reserved </p>
                 <Link to={'/privacy-terms'}>Privacy terms</Link>
             </div>
         </div>

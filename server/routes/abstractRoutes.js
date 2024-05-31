@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { isAuthenticated } from '../middlewares/isAuenticatedMiddleware.js';
-import { submitAbstract, downloadSpesificAbstract, getAllAbstracts, approveAbstract, rejectAbstract, submitVideoAbstract } from '../controllers/abstractController.js';
+import { submitAbstract, downloadSpesificAbstract, getAllAbstracts, submitVideoAbstract,getAbstractById, reviewAbstract } from '../controllers/abstractController.js';
 import { isAdmin } from '../middlewares/isAuthorizedAdmin.js';
 
 
@@ -27,13 +27,16 @@ const upload = multer({ storage: storage });
 // router.post('/submit', isAuthenticated, upload.single('file'), submitAbstract);
 router.post('/submit', isAuthenticated,upload.none(), submitAbstract);
 router.post('/submit/video', upload.single('file'), submitVideoAbstract);
+router.post('/review/:id', isAuthenticated, isAuthenticated, reviewAbstract);
 
 router.get('/download/:key', isAuthenticated, isAuthenticated, downloadSpesificAbstract);
 
 router.get('/get/all', isAuthenticated, isAuthenticated, getAllAbstracts);
+router.get('/get/spesific/:id', isAuthenticated, isAuthenticated, getAbstractById);
 
-router.put('/approve/:id', isAuthenticated, isAdmin, approveAbstract);
-router.put('/reject/:id', isAuthenticated, isAdmin, rejectAbstract);
+
+// router.put('/approve/:id', isAuthenticated, isAdmin, approveAbstract);
+// router.put('/reject/:id', isAuthenticated, isAdmin, rejectAbstract);
 
 export default router;
 
