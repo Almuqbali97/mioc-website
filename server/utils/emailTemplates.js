@@ -1,65 +1,4 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import dotenv from "dotenv";
-dotenv.config();
-
-const sesAcessKey = process.env.AMAZON_SES_ACCESS_KEY;
-const sesSecretKey = process.env.AMAZON_SES_SECRET_KEY;
-const awsRegion = process.env.AMAZON_SES_REGION;
-
-
-const sesClient = new SESClient({
-    region: awsRegion,
-    credentials: {
-        accessKeyId: sesAcessKey,
-        secretAccessKey: sesSecretKey,
-    },
-});
-
-export async function abstractNotificationEmail(topic) {
-    const params = {
-        Destination: {
-            ToAddresses: ['almuqbalimusab@gmail.com'], // Replace with your recipient's email address
-        },
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: `
-                        <html>
-                            <body>
-                                <h3>There is a new abstract submission of ${topic}</h3>
-                            </body>
-                        </html>`
-                },
-                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
-            },
-            Subject: { Data: "Abstract Submission Notificatoin" }, // Replace with your email subject
-        },
-        Source: "MIOC Notification <no-replay@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["no-replay@mioc.org.om"],
-        // ConfigurationSetName: 'EventsLogs',
-    };
-
-    try {
-        const data = await sesClient.send(new SendEmailCommand(params));
-        console.log("Email sent successfully:", data);
-    } catch (err) {
-        console.error("Error sending email:", err);
-    }
-}
-
-
-
-export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName,title,id) {
-    const params = {
-        Destination: {
-            ToAddresses: [email], // Replace with your recipient's email address
-        },
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: `<!DOCTYPE html
+export const textTemplate = `<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en"
     style="padding:0;Margin:0">
@@ -888,20 +827,3 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
 </body>
 
 </html>`
-                },
-                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
-            },
-            Subject: { Data: "Abstract Submission Notificatoin" }, // Replace with your email subject
-        },
-        Source: "MIOC Abstract Submission <no-replay@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["no-replay@mioc.org.om"],
-        // ConfigurationSetName: 'EventsLogs',
-    };
-
-    try {
-        const data = await sesClient.send(new SendEmailCommand(params));
-        console.log("Email sent successfully:", data);
-    } catch (err) {
-        console.error("Error sending email:", err);
-    }
-}
