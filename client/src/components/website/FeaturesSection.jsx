@@ -41,7 +41,7 @@ const FeaturesSection = () => {
                     <FeatureCard
                         title='Become a Sponsor'
                         text='MIOC 2024 will provide sponsors with exposure and access to delegates who have the capacity to influence the selection of products and services with their organizations.'
-                        link=''
+                        link='/reserve-your-space'
                         linkText='Reserve Your Space' />
                 </div>
             </div>

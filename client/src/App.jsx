@@ -35,6 +35,7 @@ import CancelPayment from './pages/website-pages/online-registration/CancelPayme
 import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
 import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
 import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
+import EmailVerification from './components/website/EmailVerification.jsx';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           {/* general */}
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
           <Route path='/login' element={<Login />} />
           <Route path='/privacy-terms' element={<PrivacyTerms />} />
           {/* organizaion */}

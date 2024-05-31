@@ -3,6 +3,9 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { validateEmail } from '../helpers/validateEmail.js';
+import { sendVerificationEmail } from '../utils/emeilVerificationEmail.js'
+import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 dotenv.config();
 
 
@@ -10,6 +13,8 @@ dotenv.config();
 export const register = async (req, res) => {
     // NOTE that in the userModel.js there are more fields can be added here, address,phone number ... etc.
     const { firstName, lastName, email, password } = req.body;
+    const verificationCode = crypto.randomBytes(32).toString('hex');
+    const id = uuidv4();
 
     const existingEmail = await usersCollection.findOne({ email: email.toLowerCase() });
     // we check if user already registred with google accounts
@@ -28,15 +33,19 @@ export const register = async (req, res) => {
         const hashedPassword = await bcryptjs.hash(password, 10);
         // new user object
         const newUser = {
+            id: id,
             firstName: firstName,
             lastName: lastName,
             email: email.toLowerCase(),
+            isVerified: false, // new field
+            verificationToken: verificationCode, // new field
             password: hashedPassword,
             admin_role: false,
             created_at: new Date()
         }
 
         await usersCollection.insertOne(newUser);
+        await sendVerificationEmail(email, verificationCode)
         return res.status(201).json({ message: 'User created successfully' });
 
     } catch (error) {
@@ -51,29 +60,42 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
-        // check for valid user
+        // Check for valid user
         const validUser = await usersCollection.findOne({ email: email.toLowerCase() });
-        // we check if uer registred with google and not with local auth,
+
+        if (!validUser) {
+            return res.status(401).json({ message: 'Sorry, we cannot find an account with this email address' });
+        }
+
+        // Check if user registered with Google and not with local auth
         if (validUser.email && validUser.googleId && !validUser.password) {
-            return res.status(401).json({ message: "This user registred with google accounts, Use google login" })
+            return res.status(401).json({ message: "This user registered with Google accounts, use Google login" });
         }
 
-        if (!validUser) return res.status(401).json({ message: 'Sorry, we cannot find an account with this email address' });
-        // checking the password
+        // Check if email is verified
+        if (!validUser.isVerified) {
+            return res.status(401).json({ message: 'Your email is not verified. Please check your email for the verification link.' });
+        }
+
+        // Checking the password
         const validPassword = bcryptjs.compareSync(password, validUser.password);
-        if (!validPassword) return res.status(401).json({ message: 'Wrong email or password' });
-        // in case of correct inputs
-        if (validUser && validPassword) {
-            // we create a special token that can be used to authenticate the user and access without needing to login again in other routes
-            const { password, _id, ...userData } = validUser; // we remove the password from the user object so we dont send to client
-            const accessToken = jwt.sign({ ...userData }, process.env.JWT_SECRET, { expiresIn: '30d' });
-            // we can add expiry time for the cookie ... example 1 hour then sign in again...
-            res.cookie('access_token', accessToken, { httpOnly: true, withCredentials: true, sameSite: 'None', secure: true }).status(200).json({ user: userData });
+        if (!validPassword) {
+            return res.status(401).json({ message: 'Wrong email or password' });
         }
 
+        // In case of correct inputs
+        if (validUser && validPassword) {
+            // Create a special token that can be used to authenticate the user and access without needing to login again in other routes
+            const { password, _id, ...userData } = validUser; // Remove the password from the user object so we don't send to client
+            const accessToken = jwt.sign({ ...userData }, process.env.JWT_SECRET, { expiresIn: '30d' });
+
+            // Add expiry time for the cookie (e.g., 1 hour then sign in again)
+            res.cookie('access_token', accessToken, { httpOnly: true, withCredentials: true, sameSite: 'None', secure: true })
+                .status(200).json({ user: userData });
+        }
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'Somthing went wrong, or no user is registred with this email' });
+        res.status(500).json({ message: 'Something went wrong, or no user is registered with this email' });
     }
 };
 
@@ -128,3 +150,38 @@ export const logout = (req, res) => {
 
     res.status(200).json({ message: 'User logged out' });
 };
+
+
+
+// Email verification handler
+export const verifyEmail = async (req, res) => {
+    const { token } = req.query;
+    // console.log('Received token:', token);
+
+    if (!token) {
+        // console.log('Token not provided');
+        return res.status(400).json({ message: 'Invalid verification link.' });
+    }
+
+    try {
+        const user = await usersCollection.findOne({ verificationToken: token });
+        // console.log('User found:', user);
+
+        if (!user) {
+            // console.log('Invalid token or token expired');
+            return res.status(400).json({ message: 'Invalid verification link or token has expired.' });
+        }
+
+        await usersCollection.updateOne(
+            { id: user.id }, // Use _id for updating the user
+            { $set: { isVerified: true }, $unset: { verificationToken: "" } }
+        );
+
+        console.log('User verified successfully');
+        return res.status(200).json({ message: 'Email verified successfully. You can now log in.' });
+    } catch (error) {
+        console.error('Error during email verification:', error);
+        return res.status(500).json({ message: 'An error occurred during verification.' });
+    }
+};
+

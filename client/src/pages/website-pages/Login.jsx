@@ -6,6 +6,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'
 import ImageBgContainer from '../../components/common/ImageBgContainer.jsx';
 import loginImg from '../../assets/images/loginImg.avif'
+import Loading2 from '../../components/common/Loading2.jsx';
+
 
 const Login = () => {
     const navigateTo = useNavigate();
@@ -143,8 +145,9 @@ const Login = () => {
                             }}
                         />
                     </div>
-                    <div className='text-center mt-1'>
-                        {loginFetchResMsg && <p style={{ color: "red" }}>{loginFetchResMsg} </p>}
+                    <div className='text-center mt-3 flex justify-center'>
+                        {isLoading && <Loading2 loadingMsg={'logging in ...'} />}
+                        {loginFetchResMsg && <p style={{ color: "black" }}>{loginFetchResMsg} </p>}
                     </div>
                     <p className="mt-8">Need an account? <Link to={'/register'} className="text-primary_blue hover:text-blue-700 font-semibold">Create an
                         account</Link>

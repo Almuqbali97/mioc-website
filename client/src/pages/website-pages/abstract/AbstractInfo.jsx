@@ -14,35 +14,7 @@ let abstractDates = [
     { text: 'Abstract submission deadline', date: '01 September 2024' },
     { text: 'Abstract notification of acceptance', date: '01 October 2024' },
 ]
-
-const topics = [
-    "Cataract & Lens Surgery",
-    "Contact Lens and Refraction",
-    "Glaucoma",
-    "Medical Retina",
-    "Surgical Retina",
-    "Neuro-ophthalmology",
-    "Ocular Imaging",
-    "Ocular Oncology",
-    "Cornea, External Eye Diseases, and Eye Banking",
-    "Oculoplasty",
-    "Ophthalmic Education/Young",
-    "Ophthalmologists",
-    "Ophthalmic Epidemiology",
-    "Ophthalmic Trauma",
-    "Ophthalmic Pathology and Microbiology",
-    "Ophthalmic Nursing",
-    "Ophthalmic Assistants & Technicians Optometry",
-    "Orbital, Oculoplastic, and Lacrimal Diseases",
-    "Pathology",
-    "Pediatric Ophthalmology and Strabismus",
-    "Refractive Surgery",
-    "Uveitis",
-    "Vision Rehabilitation",
-    "Vision Sciences Vitreoretina",
-    "Video Presentation",
-    "Other (please specify)"
-];
+import { topics } from '../../../constants';
 
 let abstractStrcuture = ['Background and Purpose', 'Methods', 'Results', 'Conclusions'];
 
@@ -66,7 +38,7 @@ const AbstractInfo = () => {
                 <div className='w-full mt-11 flex flex-col-reverse gap-11 lg:flex-row font-custom' >
                     <div className='flex flex-col w-full'>
                         {abstractDates.map((date, index) => {
-                            return <div className='flex items-start space-x-3'>
+                            return <div key={index} className='flex items-start space-x-3'>
                                 <CalendarDaysIcon className='text-primary_brown h-7' />
                                 <div>
                                     <h1 className='font-bold text-blue-950 font-custom'>{date.text}</h1>

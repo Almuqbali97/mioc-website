@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, logout, googleOAuth } from '../controllers/userAuthController.js';
+import { register, login, logout, googleOAuth, verifyEmail } from '../controllers/userAuthController.js';
 import { userProfile } from '../controllers/userController.js';
 import { isAuthenticated } from '../middlewares/isAuenticatedMiddleware.js';
 
@@ -12,6 +12,8 @@ router.get('/logout', logout)
 router.post('/register', register);
 
 router.post('/login', login);
+
+router.get('/verify-email', verifyEmail);
 
 router.get('/profile', isAuthenticated, userProfile)
 

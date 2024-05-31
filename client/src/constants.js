@@ -196,3 +196,30 @@ export const countries = [
     "Zambia",
     "Zimbabwe"
 ];
+
+export const topics = [
+    "Cataract & Lens Surgery",
+    "Contact Lens and Refraction",
+    "Cornea, External Eye Diseases and Eye Banking",
+    "Glaucoma",
+    "Keratoconus",
+    "Neuro-ophthalmology",
+    "Ocular Imaging",
+    "Ocular Oncology",
+    "Ophthalmic Assistants & Technicians",
+    "Ophthalmic Education/Young Ophthalmologists",
+    "Ophthalmic Epidemiology",
+    "Ophthalmic Nursing",
+    "Ophthalmic Pathology and Microbiology",
+    "Ophthalmic Trauma",
+    "Optometry",
+    "Orbital, Oculoplastic, and Lacrimal Diseases",
+    "Pediatric Ophthalmology and Strabismus",
+    "Refractive Surgery",
+    "Retina - Medical",
+    "Retina - Surgical",
+    "Uveitis",
+    "Video Presentation",
+    "Vision Rehabilitation",
+    "Miscellaneous"
+];
