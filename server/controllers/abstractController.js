@@ -83,7 +83,7 @@ export const submitAbstract = async (req, res) => {
     };
 
     await abstractsCollection.insertOne(newAbstract);
-    // await abstractSuccssfullSubmissionEmail(email);
+    await abstractSuccssfullSubmissionEmail(email);
     // await abstractNotificationEmail(topic);
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
@@ -165,7 +165,7 @@ export const submitVideoAbstract = async (req, res) => {
     };
 
     await abstractsCollection.insertOne(newAbstract);
-    // await abstractSuccssfullSubmissionEmail(email);
+    await abstractSuccssfullSubmissionEmail(email);
     // await abstractNotificationEmail(topic);
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
