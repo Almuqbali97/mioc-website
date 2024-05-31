@@ -16,7 +16,8 @@ const sesClient = new SESClient({
 });
 
 export async function sendVerificationEmail(email, verificationCode) {
-    const verificationLink = `http://localhost:5000/verify-email?token=${verificationCode}`;
+    // const verificationLink = `http://localhost:5000/verify-email?token=${verificationCode}`; // for testing not production
+    const verificationLink = `https://mioc.org.om//verify-email?token=${verificationCode}`;
     const params = {
         Destination: {
             ToAddresses: [email], // Replace with your recipient's email address
