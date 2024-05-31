@@ -4,6 +4,7 @@ import ContentContainer from '../../../components/common/ContentContainer';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import checklistImg from '../../../assets/images/checklistImg.avif'
+import { Link } from 'react-router-dom';
 
 const RegistrationChecklist = () => {
     return (
@@ -31,7 +32,7 @@ const RegistrationChecklist = () => {
                 <ParagraphTitle title={'Step 4: Package Selection'} />
                 <CommonParagraph>
                     Step 4: Package Selection
-                    You will register for MEACO – MIOC 2023 and choose the registration category applicable for you. View <span className='text-primary_brown font-bold'><a href='/online-registration'>Registration categories and prices</a></span>
+                    You will register for MIOC 2024 and choose the registration category applicable for you. View <span className='text-primary_brown font-bold'><Link to='/online-registration'>Registration categories and prices</Link></span>
                 </CommonParagraph>
                 <ParagraphTitle title={'Step 5: Review Information'} />
                 <CommonParagraph>Please be sure to review all of your information carefully along with the terms and conditions.</CommonParagraph>
@@ -39,8 +40,8 @@ const RegistrationChecklist = () => {
                 <CommonParagraph>You will be asked to enter your payment information.</CommonParagraph>
                 <ParagraphTitle title={'Step 7: Confirm'} />
                 <CommonParagraph><span className='font-bold'>Online Payment:</span> A confirmation will be sent to the email address you entered along with the payment receipt and tax invoice for your registration which serves as a confirmation of your registration</CommonParagraph>
-                <CommonParagraph><span className='font-bold'>Pay Later:</span> An email will be sent with the summary of your registration information and a quote with our bank details to process the bank transfer. It is important to include the quote reference in the transfer remarks while processing the payment. Proof of payment must be submitted via email to exampl@email....</CommonParagraph>
-                <CommonParagraph>You must be registered for MEACO – MIOC 2023 in order to book your accommodation. For questions about registration or housing, please contact info@email ....</CommonParagraph>
+                <CommonParagraph><span className='font-bold'>Pay Later:</span> An email will be sent with the summary of your registration information and a quote with our bank details to process the bank transfer. It is important to include the quote reference in the transfer remarks while processing the payment. Proof of payment must be submitted via email to <span className='text-primary_brown font-bold'>info@mioc.org.om</span></CommonParagraph>
+                <CommonParagraph>You must be registered for MIOC 2024 in order to book your accommodation. For questions about registration or housing, please contact <span className='text-primary_brown font-bold'>info@mioc.org.om</span></CommonParagraph>
             </ContentContainer>
         </div>
     );

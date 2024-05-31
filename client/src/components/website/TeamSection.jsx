@@ -57,8 +57,8 @@ const TeamSection = () => {
                 <div className="lg:absolute lg:inset-y-0 lg:-right-20 xl:right-0 lg:w-1/2 " ref={sectionRef}>
                     <img className="h-56 w-full object-cover object-top sm:h-72 md:h-96 lg:w-full lg:h-full" src={drRashid} alt="" />
                 </div>
-                <p className='block sm:hidden mt-2 text-center'><span className='font-semibold'> Dr Rashid Al Saidi,MD,FEBO.</span>
-                    <br />Chairman of the Joint Organizing Committee</p>
+                <p className='block sm:hidden mt-2 text-center text-primary_brown'><span className='font-semibold text-primary_brown'> Dr Rashid Al Saidi,MD,FEBO.</span>
+                    <br /> <span className='text-primary_blue'>Chairman of the Joint Organizing Committee</span></p>
                 <div className="max-w-7xl mx-auto">
                     <div className="relative pb-8 bg-white sm:pb-16 lg:max-w-2xl lg:w-full lg:pb-[5.5rem]">
                         <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
@@ -78,8 +78,8 @@ const TeamSection = () => {
                                     </span>
                                      <span> perspective to the latest clinical and scientific advances in Ophthalmology and related disciplines.</span> 
                                 </h2>
-                                <p className='mb-4 -mt- hidden sm:block'><span className='font-semibold'>Dr Rashid Al Saidi,MD,FEBO.</span>
-                                    <br />Chairman of the Joint Organizing Committee</p>
+                                <p className='mb-4 -mt- hidden sm:block'><span className='font-semibold text-primary_brown'>Dr Rashid Al Saidi,MD,FEBO.</span>
+                                    <br /><span className='text-primary_blue'>Chairman of the Joint Organizing Committee</span></p>
                                 <PrimaryButtonBlue text='Program at a glance' link={'/program-at-a-glance'} />
 
                             </div>

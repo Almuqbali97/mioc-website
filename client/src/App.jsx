@@ -37,6 +37,7 @@ import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
 import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 import EmailVerification from './components/website/EmailVerification.jsx';
 import ReviewAbstract from './pages/admin-pages/ReviewAbstract.jsx';
+import AuthorAgreement from './pages/website-pages/abstract/AuthorAgreement.jsx';
 
 
 function App() {
@@ -79,12 +80,14 @@ function App() {
           <Route path='/visa-information' element={<VisaInformation />} />
           <Route path='/accommodation' element={<Accommodation />} />
           <Route path='/abstract-info' element={<AbstractInfo />} />
+          <Route path='/author-agreement' element={<AuthorAgreement />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
             <Route path='/submit-abstract' element={<AbstractSubmission />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/user/profile' element={<UserProfile />} />
+
           </Route>
         </Route>
 

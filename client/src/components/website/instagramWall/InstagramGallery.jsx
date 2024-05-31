@@ -64,14 +64,17 @@ const bgSvg = `data:image/svg+xml;base64,${btoa(
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/20/solid'
 const instagramId = import.meta.env.VITE_INSTAGRAM_ID;
 const instagramToken = import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN;
+
 const InstagramGallery = () => {
-    const [instagramPosts, setInstagramPosts] = useState([])
+    const [instagramPosts, setInstagramPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
     useEffect(() => {
         async function getInstagramPosts() {
             try {
                 const response = await fetch(`https://graph.instagram.com/${instagramId}/media?fields=id,media_url,timestamp,media_type,username&access_token=${instagramToken}`);
-                console.log(response.data);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -87,26 +90,39 @@ const InstagramGallery = () => {
 
                 setInstagramPosts(last10Images);
                 setLoading(false);
-                // console.log(data.data);
             } catch (error) {
                 console.error('Error fetching Instagram posts:', error);
             }
         }
 
         getInstagramPosts();
-
     }, []);
 
+    const handleImageClick = (image) => {
+        setSelectedImage(image);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedImage(null);
+    };
+
+    const handleModalClick = (e) => {
+        if (e.target === e.currentTarget) {
+            closeModal();
+        }
+    };
 
     if (loading) {
         return <p className="text-center text-white">Loading...</p>;
     }
+
     return (
         <div className='w-full py-2' style={{
             backgroundImage: `url(${bgSvg})`,
             backgroundSize: 'cover',
             width: '100%',
-            // height: '100vh'
         }}>
             <div className="slider-container">
                 <h1 className="text-center p-4 text-white text-2xl tracking-wide">Instagram Wall</h1>
@@ -131,12 +147,11 @@ const InstagramGallery = () => {
                     modules={[EffectCoverflow, Pagination, Navigation]}
                     className="swiper_container"
                 >
-                    {instagramPosts.map((slide) => {
-                        return <SwiperSlide key={slide.id}>
-                            <img className="w-sm" src={slide.media_url} alt="slide_image" />
+                    {instagramPosts.map((slide) => (
+                        <SwiperSlide key={slide.id}>
+                            <img className="w-sm cursor-pointer" src={slide.media_url} alt="slide_image" onClick={() => handleImageClick(slide.media_url)} />
                         </SwiperSlide>
-                    })}
-
+                    ))}
 
                     <div className="slider-controler">
                         <div className="swiper-button-prev slider-arrow">
@@ -149,6 +164,18 @@ const InstagramGallery = () => {
                     </div>
                 </Swiper>
             </div>
+
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" onClick={handleModalClick}>
+                    <div className="bg-white rounded-lg shadow-lg relative">
+                        <button className="absolute top-0 right-0 m-4 text-red-500 text-2xl" onClick={closeModal}>
+                            &times;
+                        </button>
+                        <a href='https://www.instagram.com/mioc_oman?igsh=dzQ5bGZ0M2h3M2Z2' className='absolute -bottom-11 rounded-xl right-[50%] translate-x-[50%] px-2 py-1 bg-blue-300 font-semibold'>Go to instagram</a>
+                        <img src={selectedImage} alt="Full Size" className="max-h-[80vh] max-w-full" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

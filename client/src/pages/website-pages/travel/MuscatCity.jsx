@@ -4,6 +4,7 @@ import CommonParagraph from '../../../components/common/CommonParagraph';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import muscat from '../../../assets/images/muscat.avif'
 import muscatCorniche from '../../../assets/images/muscat-corniche.avif'
+import InfoCards from './InfoCards';
 
 const MuscatCity = () => {
     return (
@@ -25,7 +26,7 @@ const MuscatCity = () => {
                 <CommonParagraph>
                     Muscat means ‘safe anchorage’, and the sea continues to constitute a major part of the city: it brings people on cruise ships and goods in containers to the historic ports of Old Muscat and Muttrah. It contributes to the city’s economy through the onshore refinery near Qurum, and provides a livelihood for fishermen along the beaches of Shatti al-Qurm and Athaiba
                 </CommonParagraph>
-
+                <InfoCards />
 
             </ContentContainer>
 

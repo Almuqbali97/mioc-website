@@ -97,26 +97,26 @@ const PricingTable = () => {
     };
 
     return (
-        <div className="container mx-auto my-16 p-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="container mx-auto my-16 p-4 flex">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="col-span-1">
                     <div className="bg-white shadow-lg rounded-lg p-6 mt-3 h-full flex flex-col justify-between">
                         <div>
                             <h3 className="text-xl font-semibold text-gray-700">Standard Fee</h3>
-                            <p className="mt-2 text-gray-500">From 2nd November 2024</p>
+                            <p className="mt-2 text-gray-500">From 1st November 2024</p>
                             <div className="mt-4 border-b border-gray-300 ">
                                 <p className="text-gray-500">Early Bird</p>
-                                <p className="text-gray-700">From 26 April 2024</p>
+                                <p className="text-gray-700">From 01 June 2024</p>
                             </div>
                             <div className="mt-4 border-b border-gray-300">
                                 <p className="text-gray-500">Onsite Fee</p>
-                                <p className="text-gray-700">From 29 November 2024</p>
+                                <p className="text-gray-700">From 28 November 2024</p>
                             </div>
                             <div className="mt-4 space-y-2">
                                 <p className="text-gray-700 border-b border-gray-300 pb-2">Access to Session Halls</p>
                                 <p className="text-gray-700 border-b border-gray-300 pb-2">Access to Exhibition Halls</p>
-                                <p className="text-gray-700 border-b border-gray-300 pb-2">Delegate Bag</p>
                                 <p className="text-gray-700 border-b border-gray-300 pb-2">Final Program</p>
+                                <p className="text-gray-700 border-b border-gray-300 pb-2">Lunch</p>
                                 <p className="text-gray-700 border-b border-gray-300 pb-2">Coffee Breaks</p>
                             </div>
                         </div>
@@ -125,49 +125,42 @@ const PricingTable = () => {
                 {[
                     {
                         title: 'OPHTHALMOLOGIST/ PHYSICIAN',
-                        price: 550,
-                        earlyBirdPrice: 450,
-                        onsitePrice: 650,
+                        price: 65,
+                        earlyBirdPrice: 55,
+                        onsitePrice: 70,
                         key: 1
                     },
                     {
-                        title: 'YOUNG OPHTHALMOLOGIST',
-                        price: 350,
-                        earlyBirdPrice: 250,
-                        onsitePrice: 450,
+                        title: 'NON-OPHTHALMOLOGIST',
+                        price: 40,
+                        earlyBirdPrice: 35,
+                        onsitePrice: 45,
                         key: 2
                     },
-                    {
-                        title: 'OPTOMETRIST / ALLIED HEALTH / RESIDENTS',
-                        price: 200,
-                        earlyBirdPrice: 150,
-                        onsitePrice: 250,
-                        key: 3
-                    }
                 ].map(card => (
                     <div key={card.key} className="col-span-1 transform transition-transform hover:scale-105">
                         <div className="bg-white shadow-lg rounded-lg p-6 h-full flex flex-col justify-between text-center">
                             <div>
                                 <h3 className="text-2xl font-semibold text-gray-700">{card.title}</h3>
                                 <div className="my-4">
-                                    <div className="text-4xl font-bold text-primary_blue">US$ {card.price}</div>
+                                    <div className="text-4xl font-bold text-primary_blue">{card.price} OMR</div>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-gray-500">Early Bird US$ {card.earlyBirdPrice}</p>
+                                    <p className="text-gray-500">Early Bird {card.earlyBirdPrice} OMR</p>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-gray-500">Onsite Fee US$ {card.onsitePrice}</p>
+                                    <p className="text-gray-500">Onsite Fee {card.onsitePrice} OMR</p>
                                 </div>
                                 <div className="mt-4 space-y-2">
-                                    <p className="text-green-500 border-b border-gray-300 pb-2">&#10003; Access to Session Halls</p>
-                                    <p className="text-green-500 border-b border-gray-300 pb-2">&#10003; Access to Exhibition Halls</p>
-                                    <p className="text-green-500 border-b border-gray-300 pb-2">&#10003; Delegate Bag</p>
-                                    <p className="text-green-500 border-b border-gray-300 pb-2">&#10003; Final Program</p>
-                                    <p className="text-green-500 border-b border-gray-300 pb-2">&#10003; Coffee Breaks</p>
+                                    <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Access to Session Halls</p>
+                                    <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Access to Exhibition Halls</p>
+                                    <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Final Program</p>
+                                    <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Lunch</p>
+                                    <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Coffee Breaks</p>
                                 </div>
                             </div>
                             <button
-                                className="mt-6 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700"
+                                className="mt-6 bg-primary_blue text-white py-2 px-4 rounded-lg hover:bg-blue-800"
                                 onClick={() => openModal(card.price)}
                             >
                                 Register Now
@@ -183,8 +176,11 @@ const PricingTable = () => {
                 className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
                 overlayClassName="fixed inset-0 bg-black bg-opacity-50"
             >
-                <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
-                    <h2 className="text-2xl font-bold mb-4">Register</h2>
+                {/* <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto"> */}
+                <div className="bg-white p-6 rounded-lg text-center shadow-lg w-full max-w-md mx-auto">
+                    <h2 className="text-2xl font-bold mb-4">Registration will be available soon</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-primary_blue">Be Ready!</h2>
+                    {/* <h2 className="text-2xl font-bold mb-4">Register</h2>
                     <form onSubmit={handleSubmit}>
                         {step === 1 && (
                             <div className="mb-4">
@@ -323,7 +319,7 @@ const PricingTable = () => {
                         {step > 1 && (
                             <button type="button" className="mt-4 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Previous</button>
                         )}
-                    </form>
+                    </form> */}
                 </div>
             </Modal>
         </div>
