@@ -116,7 +116,8 @@ router.get('/presigned-url', async (req, res) => {
     }
 });
 
-router.post('/submit', isAuthenticated, upload.none(), submitAbstract);
+// router.post('/submit', isAuthenticated, upload.none(), submitAbstract);
+router.post('/submit', upload.none(), submitAbstract);
 router.post('/review/:id', isAuthenticated, isAdmin, reviewAbstract);
 
 router.get('/download/:key', downloadSpesificAbstract); // This function is used to download files on the website
