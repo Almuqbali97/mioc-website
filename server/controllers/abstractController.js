@@ -94,8 +94,88 @@ export const submitAbstract = async (req, res) => {
 };
 
 
+// export const submitVideoAbstract = async (req, res) => {
+//   const uniqueFileName = uuidv4();
+//   const id = uuidv4();
+//   const {
+//     firstName,
+//     lastName,
+//     email,
+//     mobile,
+//     topic,
+//     title,
+//     mainAuthorFirstName,
+//     mainAuthorLastName,
+//     mainAuthorEmail,
+//     mainAuthorOrganization,
+//     mainAuthorCountry,
+//     presentationType,
+//     description,
+//     additionalAuthors,
+//   } = req.body;
+
+//   if (!email || !mobile || !topic || !title || !presentationType) {
+//     return res.status(401).json({ message: 'Please enter all required fields' });
+//   }
+
+//   if (!validateEmail(email)) {
+//     return res.status(401).json({ message: 'Invalid email address' });
+//   }
+
+//   if (!req.file) {
+//     return res.status(401).json({ message: 'Please upload your video file' });
+//   }
+
+//   try {
+//     let fileURL = null;
+//     let fileName = null;
+//     if (req.file) {
+//       const uploadParams = {
+//         Bucket: process.env.AWS_S3_BUCKET_NAME,
+//         Key: uniqueFileName + req.file.originalname,
+//         Body: req.file.buffer,
+//       };
+
+//       const command = new PutObjectCommand(uploadParams);
+//       await s3Client.send(command);
+//       fileURL = `https://${uploadParams.Bucket}.s3.${process.env.AWS_S3_BUCKET_REGION}.amazonaws.com/${uploadParams.Key}`;
+//       console.log('File uploaded successfully:', fileURL);
+//       fileName = uniqueFileName + req.file.originalname;
+//     }
+
+//     const newAbstract = {
+//       id: id,
+//       firstName,
+//       lastName,
+//       email: email.toLowerCase(),
+//       phoneNo: mobile,
+//       title: title,
+//       mainAuthorFirstName,
+//       mainAuthorLastName,
+//       mainAuthorEmail,
+//       mainAuthorOrganization,
+//       mainAuthorCountry,
+//       status: 'pending',
+//       topic: topic,
+//       presentationType: presentationType,
+//       description,
+//       fileName: fileName,
+//       additionalAuthors: additionalAuthors ? JSON.parse(additionalAuthors) : [],
+//       created_at: new Date(),
+//     };
+
+//     await abstractsCollection.insertOne(newAbstract);
+//     await abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id);
+//     // await abstractNotificationEmail(topic);
+//     return res.status(201).json({ message: 'Abstract submitted successfully' });
+
+//   } catch (error) {
+//     console.error('Error:', error);
+//     return res.status(500).json({ message: 'Something went wrong please try again' });
+//   }
+// };
+
 export const submitVideoAbstract = async (req, res) => {
-  const uniqueFileName = uuidv4();
   const id = uuidv4();
   const {
     firstName,
@@ -112,8 +192,8 @@ export const submitVideoAbstract = async (req, res) => {
     presentationType,
     description,
     additionalAuthors,
+    fileName, // Expecting the filename to be provided in the request body
   } = req.body;
-
   if (!email || !mobile || !topic || !title || !presentationType) {
     return res.status(401).json({ message: 'Please enter all required fields' });
   }
@@ -122,27 +202,11 @@ export const submitVideoAbstract = async (req, res) => {
     return res.status(401).json({ message: 'Invalid email address' });
   }
 
-  if (!req.file) {
-    return res.status(401).json({ message: 'Please upload your video file' });
+  if (!fileName) {
+    return res.status(401).json({ message: 'Please provide the uploaded video file name' });
   }
 
   try {
-    let fileURL = null;
-    let fileName = null;
-    if (req.file) {
-      const uploadParams = {
-        Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: uniqueFileName + req.file.originalname,
-        Body: req.file.buffer,
-      };
-
-      const command = new PutObjectCommand(uploadParams);
-      await s3Client.send(command);
-      fileURL = `https://${uploadParams.Bucket}.s3.${process.env.AWS_S3_BUCKET_REGION}.amazonaws.com/${uploadParams.Key}`;
-      console.log('File uploaded successfully:', fileURL);
-      fileName = uniqueFileName + req.file.originalname;
-    }
-
     const newAbstract = {
       id: id,
       firstName,
@@ -159,14 +223,13 @@ export const submitVideoAbstract = async (req, res) => {
       topic: topic,
       presentationType: presentationType,
       description,
-      fileName: fileName,
+      fileName: fileName, // Use the provided filename
       additionalAuthors: additionalAuthors ? JSON.parse(additionalAuthors) : [],
       created_at: new Date(),
     };
 
     await abstractsCollection.insertOne(newAbstract);
     await abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id);
-    // await abstractNotificationEmail(topic);
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
   } catch (error) {
@@ -197,6 +260,7 @@ export const downloadSpesificAbstract = async (req, res) => {
 
 
   const key = req.params.key;
+  console.log(key);
   const downloadParams = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
     Key: key

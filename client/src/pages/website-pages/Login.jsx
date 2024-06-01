@@ -73,6 +73,7 @@ const Login = () => {
     };
 
     async function handleGoogleAuthCallbackResponse(authResponse) {
+        setIsLoading(true)
         const decodedUserInfor = jwtDecode(authResponse.credential);
         const response = await fetch(import.meta.env.VITE_API_URL + '/user/oauth/google/success', {
             method: 'POST',
@@ -85,6 +86,7 @@ const Login = () => {
         if (response.ok) {
             // Redirect after successful form submission
             const successRes = await response.json();
+            setIsLoading(false)
             setLoginFetchMsg('Logged in successfully')
             // we can use this to not store db user ID in the localstorage
             const { _id, ...userData } = successRes.user;
@@ -98,7 +100,7 @@ const Login = () => {
             // redircting to log in page, we could add a button to navigate to login page instead of auto redirection
             setTimeout(() => {
                 navigateTo('/');
-            }, 1200);
+            }, 3000);
         } else {
             setIsLoading(false);
             const errRes = await response.json()

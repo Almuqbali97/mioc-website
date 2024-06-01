@@ -23,27 +23,27 @@ const AbstractSubmission = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-            firstName: user.firstName || '',
-            lastName: user.lastName || '',
-            email: user.email || '',
-            mobile: user.mobile || '',
-            title: '',
-            mainAuthorFirstName: '',
-            mainAuthorLastName: '',
-            mainAuthorEmail: '',
-            mainAuthorOrganization: '',
-            mainAuthorCountry: '',
-            topic: '',
-            presentationType: '',
-            researchType: '',
-            file: null,
-            fileName: '',
-            additionalAuthors: [],
-            objective: '',
-            methods: '',
-            results: '',
-            conclusions: '',
-            description: ''
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        mobile: user.mobile || '',
+        title: '',
+        mainAuthorFirstName: '',
+        mainAuthorLastName: '',
+        mainAuthorEmail: '',
+        mainAuthorOrganization: '',
+        mainAuthorCountry: '',
+        topic: '',
+        presentationType: '',
+        researchType: '',
+        file: null,
+        fileName: '',
+        additionalAuthors: [],
+        objective: '',
+        methods: '',
+        results: '',
+        conclusions: '',
+        description: ''
     });
 
     const [charCount, setCharCount] = useState({
@@ -208,47 +208,72 @@ const AbstractSubmission = () => {
         if (!validateStep()) return;
         setIsLoading(true);
 
-        const data = new FormData();
-        data.append('firstName', formData.firstName);
-        data.append('lastName', formData.lastName);
-        data.append('email', formData.email);
-        data.append('mobile', formData.mobile);
-        data.append('title', formData.title);
-        data.append('mainAuthorFirstName', formData.mainAuthorFirstName);
-        data.append('mainAuthorLastName', formData.mainAuthorLastName);
-        data.append('mainAuthorEmail', formData.mainAuthorEmail);
-        data.append('mainAuthorOrganization', formData.mainAuthorOrganization);
-        data.append('mainAuthorCountry', formData.mainAuthorCountry);
-        data.append('topic', formData.topic);
-        data.append('presentationType', formData.presentationType);
-        data.append('researchType', formData.researchType);
-        if (formData.researchType === 'Original Research') {
-            data.append('objective', formData.objective);
-            data.append('methods', formData.methods);
-            data.append('results', formData.results);
-            data.append('conclusions', formData.conclusions);
-        } else if (formData.researchType === 'Case Presentation' || formData.presentationType === 'Video') {
-            data.append('description', formData.description);
-        }
-        if (formData.presentationType === 'Video') {
-            data.append('file', formData.file);
-        }
-        data.append('additionalAuthors', JSON.stringify(formData.additionalAuthors));
-
-        const url = formData.presentationType === 'Video'
-            ? `${import.meta.env.VITE_API_URL}/abstract/submit/video`
-            : `${import.meta.env.VITE_API_URL}/abstract/submit`;
-
         try {
-            const response = await fetch(url, {
+            let videoFileName = null;
+            if (formData.presentationType === 'Video' && formData.file) {
+                const presignedResponse = await fetch(`${import.meta.env.VITE_API_URL}/abstract/presigned-url`);
+                if (!presignedResponse.ok) {
+                    throw new Error('Failed to get presigned URL');
+                }
+
+                const { presignedURL, key } = await presignedResponse.json();
+
+                const s3Response = await fetch(presignedURL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'video/mp4',
+                    },
+                    body: formData.file,
+                });
+
+                if (!s3Response.ok) {
+                    throw new Error('Failed to upload video to S3');
+                }
+
+                videoFileName = key;
+            }
+
+            const data = new FormData();
+            data.append('firstName', formData.firstName);
+            data.append('lastName', formData.lastName);
+            data.append('email', formData.email);
+            data.append('mobile', formData.mobile);
+            data.append('title', formData.title);
+            data.append('mainAuthorFirstName', formData.mainAuthorFirstName);
+            data.append('mainAuthorLastName', formData.mainAuthorLastName);
+            data.append('mainAuthorEmail', formData.mainAuthorEmail);
+            data.append('mainAuthorOrganization', formData.mainAuthorOrganization);
+            data.append('mainAuthorCountry', formData.mainAuthorCountry);
+            data.append('topic', formData.topic);
+            data.append('presentationType', formData.presentationType);
+            data.append('researchType', formData.researchType);
+            if (formData.researchType === 'Original Research') {
+                data.append('objective', formData.objective);
+                data.append('methods', formData.methods);
+                data.append('results', formData.results);
+                data.append('conclusions', formData.conclusions);
+            } else if (formData.researchType === 'Case Presentation' || formData.presentationType === 'Video') {
+                data.append('description', formData.description);
+            }
+            if (formData.presentationType === 'Video') {
+                data.append('fileName', videoFileName);
+            }
+            data.append('additionalAuthors', JSON.stringify(formData.additionalAuthors));
+
+            const url = formData.presentationType === 'Video'
+                ? `${import.meta.env.VITE_API_URL}/abstract/submit/video`
+                : `${import.meta.env.VITE_API_URL}/abstract/submit`;
+
+            const abstractResponse = await fetch(url, {
                 method: 'POST',
                 credentials: 'include',
                 body: data,
             });
 
-            const result = await response.json();
+            const result = await abstractResponse.json();
             setIsLoading(false);
-            if (response.ok) {
+
+            if (abstractResponse.ok) {
                 setSuccessMessage(result.message);
                 setFormData({
                     firstName: user.firstName || '',
@@ -272,21 +297,21 @@ const AbstractSubmission = () => {
                     results: '',
                     conclusions: '',
                     description: ''
-                })
+                });
                 window.scrollTo(0, 0);
-                // setTimeout(() => {
-                //     navigate('/');
-                // }, 6500);
             } else {
                 setSuccessMessage('');
                 setErrors({ ...errors, server: result.message || 'Failed to submit abstract' });
             }
         } catch (error) {
             setIsLoading(false);
-            setErrors({ ...errors, server: 'Failed to submit abstract' });
+            setErrors({ ...errors, server: error.message || 'Failed to submit abstract' });
             console.error('Error:', error);
         }
     };
+
+
+
     async function handleVideoGuidanceDownload() {
         const fileName = 'Presentation_Guidelines_101.pdf';
         await handleFileDownload(fileName)
@@ -541,9 +566,9 @@ const AbstractSubmission = () => {
                                 {errors.presentationType && <p className="text-red-500 text-sm">{errors.presentationType}</p>}
                                 {formData.presentationType === 'Oral presentation' || formData.presentationType === 'Poster' ? (
                                     <>
-                                        {formData.presentationType === 'Oral presentation' ? <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Presentation Guidelines Here</button> : 
+                                        {formData.presentationType === 'Oral presentation' ? <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Presentation Guidelines Here</button> :
                                             <button type='button' className='border-2 rounded-lg border-blue-500 p-2 hover:bg-blue-500 hover:text-white transition-all' onClick={() => handleVideoGuidanceDownload()}>Download Poster Guidelines Here</button>}
-                                       
+
                                         <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white">Select Research Type *</label>
                                         <div className="flex space-x-4">
                                             <label className="flex items-center">

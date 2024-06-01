@@ -17,7 +17,7 @@ const ReserveYourSpace = () => {
                     In order to ensure that your company can achieve its objectives by taking part in the MEACO 2023 conference, a wide range of sponsorship opportunities is available. In addition to packages, sponsors can also consider taking out individual items.
                 </CommonParagraph>
                 <div className='mt-7'>
-                    <PrimaryButtonBlue text={'Request Sposership Prospectus'} link={'/reserve-your-space'} />
+                    <PrimaryButtonBlue text={'Request Sposership Prospectus'} link={'/submit-sponser-request'} />
                 </div>
             </ContentContainer>
         </div>

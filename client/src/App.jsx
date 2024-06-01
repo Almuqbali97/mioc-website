@@ -38,6 +38,7 @@ import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 import EmailVerification from './components/website/EmailVerification.jsx';
 import ReviewAbstract from './pages/admin-pages/ReviewAbstract.jsx';
 import AuthorAgreement from './pages/website-pages/abstract/AuthorAgreement.jsx';
+import SubmitSponserRequest from './pages/website-pages/sponsers-exhibit/SubmitSponserRequest.jsx';
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
           <Route element={<RequireAuth />}>
             {/* abstract */}
             <Route path='/submit-abstract' element={<AbstractSubmission />} />
+            <Route path='/submit-sponser-request' element={<SubmitSponserRequest />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/user/profile' element={<UserProfile />} />
 

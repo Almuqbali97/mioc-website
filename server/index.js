@@ -10,6 +10,7 @@ import ticketRoutes from './routes/ticketPaymentRoutes.js'
 import registrants from './routes/registrantsRoutes.js'
 const app = express();
 const port = process.env.PORT || 3000;
+import sponserRoute from './routes/sponserRoutes.js'
 
 
 //middlewares
@@ -42,6 +43,7 @@ app.use('/user', userRoutes);
 app.use('/abstract', abstractRoutes)
 app.use('/', ticketRoutes)
 app.use('/', registrants)
+app.use('/', sponserRoute)
 
 // testing admin auth
 app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
