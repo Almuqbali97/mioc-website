@@ -1,5 +1,4 @@
 import React from 'react';
-import SocialIcons from './SocialIcons';
 import comoingSoonImg from '../../assets/images/comingSoon.avif'
 
 const ComingSoon = () => {

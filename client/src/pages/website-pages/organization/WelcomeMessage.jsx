@@ -1,14 +1,11 @@
-import React from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import drRashidImg from '../../../assets/images/drRashid-original.png'
-import welcomMsgImg from '../../../assets/images/welcomImage.avif'
 const WelcomeMessage = () => {
     return (
         <section>
             <SectionHeadingTitleAndImage
-                image={welcomMsgImg}
                 title={'Welcome Message'} />
 
             <ContentContainer>

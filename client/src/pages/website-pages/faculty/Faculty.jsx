@@ -7,7 +7,7 @@ const Faculty = () => {
     const [comingSoon, setComingSoon] = useState(true);
     return (
         <div>
-            {comingSoon ? <ComingSoon /> : <><SectionHeadingTitleAndImage title='FACULTY' image={'https://img.freepik.com/free-photo/person-holding-speech-official-event_23-2151054195.jpg?t=st=1716214789~exp=1716218389~hmac=473c838bebfaf401f3edfc47d2d0e7d90b37cd137d4a4ca68855bb8b6d15a526&w=996'} />
+            {comingSoon ? <ComingSoon /> : <><SectionHeadingTitleAndImage title='FACULTY' />
                 <ContentContainer>
                     <p>coming soon page</p>
                     <div className='flex gap-20'>

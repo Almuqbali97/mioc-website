@@ -1,13 +1,10 @@
-import React from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import PrimaryButtonBlue from '../../../components/website/PrimaryButtonBlue';
 import { CalendarDaysIcon, } from '@heroicons/react/24/outline'
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import PrimaryButtonBrown from '../../../components/website/PrimaryButtonBrown';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
-import checklistImg from '../../../assets/images/checklistImg.avif'
 import { Link } from 'react-router-dom';
 import { handleFileDownload } from '../../../helper/handleFilesDownload';
 let abstractDates = [
@@ -29,7 +26,7 @@ const AbstractInfo = () => {
     return (
         <div>
 
-            <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} image={checklistImg} />
+            <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} />
             <ContentContainer>
                 <CommonParagraph>
                     The scientific program of MIOC 2024 will include a wide range of Free Paper Presentation, Case Presentation, Poster Presentation and Videos, as well as lectures by world renowned and eminent guest speakers during plenary and special sessions.

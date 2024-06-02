@@ -1,15 +1,13 @@
-import React from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ContentContainer from '../../../components/common/ContentContainer';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
-import checklistImg from '../../../assets/images/checklistImg.avif'
 import { Link } from 'react-router-dom';
 
 const RegistrationChecklist = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'REGISTRATION CHECKLIST'} image={checklistImg} />
+            <SectionHeadingTitleAndImage title={'REGISTRATION CHECKLIST'} />
             <ContentContainer>
                 <ParagraphTitle title={'Getting Started'} />
                 <CommonParagraph>

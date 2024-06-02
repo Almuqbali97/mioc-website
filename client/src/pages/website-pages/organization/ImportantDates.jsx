@@ -1,8 +1,6 @@
-import React from 'react';
 import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 import ContentContainer from '../../../components/common/ContentContainer';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
-import impDatesImg from '../../../assets/images/impDatesImg.avif'
 
 let importantDates = [
     {
@@ -65,7 +63,7 @@ let importantDates = [
 const ImportantDates = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title='important dates ' image={impDatesImg} />
+            <SectionHeadingTitleAndImage title='important dates '/>
             <ContentContainer>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {importantDates.map((date, index) => {

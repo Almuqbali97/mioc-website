@@ -1,17 +1,14 @@
-import React from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
-import ContentContainer from '../../../components/common/ContentContainer';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import PricingTable from '../../../components/website/PricingTable';
 import Accordian from '../../../components/website/Accordian';
-import onlineRegImg from '../../../assets/images/onlinRegImg.avif'
 
 
 const OnlineRegistration = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'ONLINE REGISTRATION'} image={onlineRegImg} />
+            <SectionHeadingTitleAndImage title={'ONLINE REGISTRATION'}/>
             <div className='max-w-[90%] mx-auto my-20'>
                 <ParagraphTitle title={'Register for MIOC 2024'} />
                 <CommonParagraph>

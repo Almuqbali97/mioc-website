@@ -16,9 +16,16 @@ const sesClient = new SESClient({
 });
 
 export async function abstractNotificationEmail(topic) {
+    const emailMappings = {
+        miscellaneous: "ashokabandara75@gmail.com",
+        // Add more mappings as needed
+    };
+
+    // Determine the recipient based on the topic
+    const recipientEmail = emailMappings[topic.toLowerCase()] || "astamahota@gmail.com"; // Set a default email if topic doesn't match
     const params = {
         Destination: {
-            ToAddresses: ['almuqbalimusab@gmail.com'], // Replace with your recipient's email address
+            ToAddresses: [recipientEmail], // Replace with your recipient's email address
         },
         Message: {
             Body: {
@@ -598,7 +605,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                                                                 <td align="center" style="padding:0;Margin:0">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:23px;color:#ffffff;font-size:15px">
-                                                                        <strong>MIOC 28-30 Nov, 2024</strong></p>
+                                                                        <strong>28-30 Nov, 2024 Muscat, Oman</strong></p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -634,7 +641,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                                                                     style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:20px;padding-right:20px">
                                                                     <h3
                                                                         style="Margin:0;line-height:38px;mso-line-height-rule:exactly;font-family:'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:28px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        Dear Mr/Ms ${firstName} ${lastName},</h3>
+                                                                        Dear ${firstName} ${lastName},</h3>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -845,7 +852,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                                                                     style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#999999">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:14px;color:#999999;font-size:12px">
-                                                                        ©2024 Mico . 112 Oman Muscat, AlKhoud</p>
+                                                                        ©2024 MIOC . 112 Oman Muscat, AlKhoud</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -891,7 +898,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                 },
                 // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
             },
-            Subject: { Data: "Abstract Submission Notificatoin" }, // Replace with your email subject
+            Subject: { Data: "Abstract Submission Confirmation" }, // Replace with your email subject
         },
         Source: "MIOC Abstract Submission <no-replay@mioc.org.om>", // Replace with your verified sender's email address
         ReplyToAddresses: ["no-replay@mioc.org.om"],
