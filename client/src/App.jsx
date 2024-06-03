@@ -58,7 +58,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/privacy-terms' element={<PrivacyTerms />} />
           {/* organizaion */}
-          <Route path='/welcom-message' element={<WelcomeMessage />} />
+          <Route path='/welcome-message' element={<WelcomeMessage />} />
           <Route path='/important-dates' element={<ImportantDates />} />
           <Route path='/organising-committee' element={<OrganizingCommittee />} />
           <Route path='/sientific-committee' element={<SientificComittee />} />

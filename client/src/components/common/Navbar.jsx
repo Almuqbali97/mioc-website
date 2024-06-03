@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import ProfileDropdown from '../website/ProfileDropdown.jsx';
 
 const organization = [
-    { name: 'Welcom message', description: 'Warm greetings for all of you', to: '/welcom-message' },
+    { name: 'Welcome message', description: 'Warm greetings for all of you', to: '/welcome-message' },
     { name: 'Important dates', description: 'Important dates regards the conference', to: '/important-dates' },
     { name: 'Organizing committee', description: 'Get to know our people!', to: '/organising-committee' },
     { name: 'Sientific committee', description: 'Get to know our sientific committee', to: '/sientific-committee' },

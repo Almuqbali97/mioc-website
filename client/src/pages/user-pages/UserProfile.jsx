@@ -2,35 +2,35 @@ import { useEffect, useState, useContext } from 'react';
 import AuthContext from '../../context/AuthProvider';
 
 const UserProfile = ({ onClose }) => {
-    const { isLogin } = useContext(AuthContext);
+    const { isLogin,user } = useContext(AuthContext);
     const [userProfileData, setUserProfileData] = useState({});
     const [errFetchMsg, setErrFetchMsg] = useState(null);
 
-    useEffect(() => {
-        async function fetchUserData() {
-            try {
-                const response = await fetch(import.meta.env.VITE_API_URL + '/user/profile', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                });
+    // useEffect(() => {
+    //     async function fetchUserData() {
+    //         try {
+    //             const response = await fetch(import.meta.env.VITE_API_URL + '/user/profile', {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 credentials: 'include',
+    //             });
 
-                if (response.ok) {
-                    const successRes = await response.json();
-                    const userData = successRes.user;
-                    setUserProfileData(userData);
-                } else {
-                    const errRes = await response.json();
-                    setErrFetchMsg(errRes.message);
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        }
-        fetchUserData();
-    }, []);
+    //             if (response.ok) {
+    //                 const successRes = await response.json();
+    //                 const userData = successRes.user;
+    //                 setUserProfileData(userData);
+    //             } else {
+    //                 const errRes = await response.json();
+    //                 setErrFetchMsg(errRes.message);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching user data:', error);
+    //         }
+    //     }
+    //     fetchUserData();
+    // }, []);
 
     return (
         <div className='relative w-full'>
@@ -44,11 +44,11 @@ const UserProfile = ({ onClose }) => {
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 font-medium">Name:</label>
-                        <p className="text-gray-900">{userProfileData.firstName} {userProfileData.lastName}</p>
+                        <p className="text-gray-900">{user.firstName} {user.lastName}</p>
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 font-medium">Email:</label>
-                        <p className="text-gray-900">{userProfileData.email}</p>
+                        <p className="text-gray-900">{user.email}</p>
                     </div>
                     {/* Add more profile information here */}
                 </div>
