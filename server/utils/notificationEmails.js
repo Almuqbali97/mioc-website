@@ -58,7 +58,7 @@ export async function abstractNotificationEmail(topic) {
 
 
 
-export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName,title,id) {
+export async function abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id) {
     const params = {
         Destination: {
             ToAddresses: [email], // Replace with your recipient's email address
@@ -651,7 +651,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                                                                     <p
                                                                         style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
                                                                         Thank you for your interest in participating in
-                                                                        the upcoming 21st Muscat International
+                                                                        the upcoming 20th Muscat International
                                                                         Ophthalmology Conference, jointly held with the
                                                                         4th Eastern Mediterranean Council of Optometry
                                                                         Conference and the International Keratoconus
@@ -703,7 +703,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
                                                                     <p
                                                                         style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
                                                                         Sincerely,<br />
-                                                                        MIOC Team</p>
+                                                                        MIOC Abstract Management Team</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -901,7 +901,7 @@ export async function abstractSuccssfullSubmissionEmail(email,firstName,lastName
             },
             Subject: { Data: "Abstract Submission Confirmation" }, // Replace with your email subject
         },
-        Source: "MIOC Abstract Submission <no-replay@mioc.org.om>", // Replace with your verified sender's email address
+        Source: "MIOC2024 Abstract Submission <no-replay@mioc.org.om>", // Replace with your verified sender's email address
         ReplyToAddresses: ["no-replay@mioc.org.om"],
         // ConfigurationSetName: 'EventsLogs',
     };

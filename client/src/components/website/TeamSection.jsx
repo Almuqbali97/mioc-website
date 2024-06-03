@@ -80,7 +80,7 @@ const TeamSection = () => {
                                 </h2>
                                 <p className='mb-4 -mt- hidden sm:block'><span className='font-semibold text-primary_brown'>Dr Rashid Al Saidi,MD,FEBO.</span>
                                     <br /><span className='text-primary_blue'>Chairman of the Joint Organizing Committee</span></p>
-                                <PrimaryButtonBlue text='Program at a glance' link={'/program-at-a-glance'} />
+                                <PrimaryButtonBlue text='Welcome Message' link={'/welcome-message'} />
 
                             </div>
                         </main>

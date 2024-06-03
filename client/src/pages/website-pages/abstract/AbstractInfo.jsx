@@ -1,35 +1,41 @@
+import React, { useState } from 'react';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import PrimaryButtonBlue from '../../../components/website/PrimaryButtonBlue';
-import { CalendarDaysIcon, } from '@heroicons/react/24/outline'
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
+import { CalendarDaysIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import { Link } from 'react-router-dom';
-import { handleFileDownload } from '../../../helper/handleFilesDownload';
+import FileDownloadModal from './FileDownloadModal';
+
 let abstractDates = [
     { text: 'Abstract Submission Open', date: '01 June 2024' },
     { text: 'Abstract submission deadline', date: '01 September 2024' },
     { text: 'Abstract notification of acceptance', date: '01 October 2024' },
-]
+];
+
 import { topics } from '../../../constants';
 
 let abstractStrcuture = ['Background and Purpose', 'Methods', 'Results', 'Conclusions'];
 
 const AbstractInfo = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    async function handleGuidanceDownload() {
-        const fileName = 'Presentation_Guidelines_101.pdf';
-        await handleFileDownload(fileName)
-    };
-    async function handlePptTemplateDownload() {
-        const fileName = 'powerpoint templates mioc2024.zip';
-        await handleFileDownload(fileName)
+    const files = [
+        'background image dark 1.jpeg',
+        'background image dark 2.jpeg',
+        'background image light 1.jpeg',
+        'background image light 2.jpeg',
+        'MIOC Dark theme.pptx',
+        'MIOC Light theme.pptx',
+    ];
+
+    const handlePptTemplateDownload = () => {
+        setIsModalOpen(true);
     };
 
     return (
         <div>
-
             <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} />
             <ContentContainer>
                 <CommonParagraph>
@@ -39,46 +45,44 @@ const AbstractInfo = () => {
                     We encourage our colleagues from around the world to take part and join our list of speakers by contributing an abstract to either conduct Free Paper Presentation, Case Presentation, Poster Presentation and Videos or participate.
                 </CommonParagraph>
                 <CommonParagraph>
-                    Submissions are only accepted online. Find more info here: <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentaion guidelines (Download)</button></span>.
+                    Submissions are only accepted online. Find more info here: <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentation guidelines (Download)</button></span>.
+                </CommonParagraph>
+                <CommonParagraph>
+                    <span className='text-red-500'>*</span>NOTE: you can edit your abstract after submission. click on your profile icon then go to submitted abstracts.
                 </CommonParagraph>
 
-
-                <div className='w-full mt-11 flex flex-col lg:flex-row font-custom justify-center' >
+                <div className='w-full mt-11 flex flex-col lg:flex-row font-custom justify-center'>
                     <div className='flex flex-col w-full'>
-                        {abstractDates.map((date, index) => {
-                            return <div key={index} className='flex items-start space-x-3'>
+                        {abstractDates.map((date, index) => (
+                            <div key={index} className='flex items-start space-x-3'>
                                 <CalendarDaysIcon className='text-primary_brown h-7' />
                                 <div>
                                     <h1 className='font-bold text-blue-950 font-custom'>{date.text}</h1>
                                     <CommonParagraph>{date.date}</CommonParagraph>
                                 </div>
                             </div>
-                        })}
-
+                        ))}
                     </div>
                     <div className='w-full'>
                         <div className=' h-full flex items-start justify-start space-y-7 flex-col mt-6 sm:mt-0'>
                             <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
-                            <button className='inline-block sm:text-md font-semibold w-auto text-center min-w-[180px] px-1 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-yellow-600 to-primary_brown hover:bg-gradient-to-b dark:shadow-blue-900 shadow-amber-300 hover:shadow-xl hover:shadow-primary_brown hover:-tranneutral-y-px ' onClick={() => handlePptTemplateDownload()}> Download PPT Template</button>
+                            <button
+                                className='inline-block sm:text-md font-semibold w-auto text-center min-w-[180px] px-1 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-yellow-600 to-primary_brown hover:bg-gradient-to-b dark:shadow-blue-900 shadow-amber-300 hover:shadow-xl hover:shadow-primary_brown hover:-tranneutral-y-px'
+                                onClick={handlePptTemplateDownload}
+                            >
+                                Download PPT Template
+                            </button>
                         </div>
-                        {/* <div className=''>
-                            <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
-                        </div> */}
-                        {/* <div className='mt-3'>
-                            <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
-                        </div> */}
                     </div>
                 </div>
 
-
                 <div className='w-full h-[1.5px] bg-gradient-to-r from-transparent via-blue-900 to-transparent my-11'></div>
                 <ParagraphTitle title={'Categories'} />
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 pl-0  font-custom font-light">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 pl-0 font-custom font-light">
                     {topics.map((topic, index) => (
                         <div key={index} className="flex h-full justify-start items-center space-x-2 border-b">
                             <ArrowRightIcon className='h-5 text-primary_blue rounded-full' />
                             <span>{topic}</span>
-
                         </div>
                     ))}
                 </div>
@@ -89,21 +93,30 @@ const AbstractInfo = () => {
 
                 <div className='font-light font-custom'>
                     {abstractStrcuture.map((topic, index) => (
-                        <div key={index} className="flex  items-center space-x-2 space-y-2">
+                        <div key={index} className="flex items-center space-x-2 space-y-2">
                             <ArrowRightIcon className='h-5 text-primary_blue rounded-full mt-2' />
                             <span>{topic}</span>
-
                         </div>
                     ))}
                 </div>
 
                 <div className='w-full h-[1.5px] bg-gradient-to-r from-transparent via-blue-900 to-transparent my-11'></div>
                 <ParagraphTitle title={'Abstract Delivery Notification'} />
-                <CommonParagraph>Submissions are only accepted online. Helpful information is available under the <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentaion guidelines (Download)</button></span></CommonParagraph>
-                <CommonParagraph>Authors will be notified about the delivery of their abstract by e-mail immediately. In case you do not receive confirmation within 24 hours, please check your spam folder. In case of no confirmation e-mail, please contact: <span className='text-primary_brown'>info@mioc.org.om</span></CommonParagraph>
+                <CommonParagraph>
+                    Submissions are only accepted online. Helpful information is available under the <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentation guidelines (Download)</button></span>
+                </CommonParagraph>
+                <CommonParagraph>
+                    Authors will be notified about the delivery of their abstract by e-mail immediately. In case you do not receive confirmation within 24 hours, please check your spam folder. In case of no confirmation e-mail, please contact: <span className='text-primary_brown'>info@mioc.org.om</span>
+                </CommonParagraph>
             </ContentContainer>
+
+            <FileDownloadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                files={files}
+            />
         </div>
     );
-}
+};
 
 export default AbstractInfo;

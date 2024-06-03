@@ -84,6 +84,9 @@ html {
     /* Border settings */
 }
 
+:focus {
+    outline: none;
+}
 
 /* Create the animation... */
 @keyframes slide-in-right {
