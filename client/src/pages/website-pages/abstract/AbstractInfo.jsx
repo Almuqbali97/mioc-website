@@ -28,7 +28,7 @@ const AbstractInfo = () => {
     return (
         <div>
 
-            <SectionHeadingTitleAndImage title={'ABSTRACT INFO'} />
+            <SectionHeadingTitleAndImage title={'ABSTRACT SUBMISSION'} />
             <ContentContainer>
                 <CommonParagraph>
                     The scientific program of MIOC 2024 will include a wide range of Free Paper Presentation, Case Presentation, Poster Presentation and Videos, as well as lectures by world renowned and eminent guest speakers during plenary and special sessions.

@@ -83,7 +83,7 @@ function App() {
           <Route path='/transportation' element={<Transportation />} />
           <Route path='/visa-information' element={<VisaInformation />} />
           <Route path='/accommodation' element={<Accommodation />} />
-          <Route path='/abstract-info' element={<AbstractInfo />} />
+          <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>

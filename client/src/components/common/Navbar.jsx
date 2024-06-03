@@ -17,7 +17,7 @@ const registration = [
     { name: 'Registration checklist', description: 'Get to know what you need for the registration', to: '/registration-checklist' },
 ];
 const abstract = [
-    { name: 'Info', description: 'Get more info before sumitting an abstract!', to: '/abstract-info' },
+    { name: 'Info', description: 'Get more info before sumitting an abstract!', to: '/abstract-submission' },
 ];
 const program = [
     { name: 'CME', description: 'Info about conference certificates', to: '/cme' },
