@@ -200,7 +200,13 @@ const PricingTable = () => {
                 className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
                 overlayClassName="fixed inset-0 bg-black bg-opacity-50"
             >
-                <div className="bg-white p-6 rounded-lg text-center shadow-lg w-full max-w-md mx-auto">
+                <div className="bg-white p-6 rounded-lg text-center shadow-lg w-full max-w-md mx-auto relative">
+                    <button
+                        className="absolute top-2 text-lg right-2 text-gray-500 hover:text-gray-700"
+                        onClick={closeModal}
+                    >
+                        &times;
+                    </button>
                     <h2 className="text-2xl font-bold mb-4">Registration will be available soon</h2>
                     <h2 className="text-2xl font-bold mb-4 text-primary_blue">Be Ready!</h2>
                 </div>

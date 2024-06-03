@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import HeroImg1 from '../../assets/images/hero1.jpg';
-import HeroImg2 from '../../assets/images/hero2.jpg';
-import HeroImg3 from '../../assets/images/hero3.jpg';
-import HeroImg4 from '../../assets/images/hero4.jpg';
+// import HeroImg2 from '../../assets/images/hero2.jpg';
+// import HeroImg3 from '../../assets/images/hero3.jpg';
+// import HeroImg4 from '../../assets/images/hero4.jpg';
 import omanVisionWhite from '../../assets/images/omanVisionWhite.png';
 import TopLogos from './TopLogos';
 import { Link } from 'react-router-dom';
 
 
 
-const heroImages = [HeroImg1, HeroImg2, HeroImg3, HeroImg4];
+const heroImages = [HeroImg1,];
 const Hero = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0);

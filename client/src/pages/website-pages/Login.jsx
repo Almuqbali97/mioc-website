@@ -128,9 +128,9 @@ const Login = () => {
                             <input type='password' name='password' value={loginForm.password} onChange={handleChange} placeholder="Enter Password" minLength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary_blue focus:bg-white focus:outline-none" required />
                         </div>
 
-                        <div className="text-right mt-2">
+                        {/* <div className="text-right mt-2">
                             <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
-                        </div>
+                        </div> */}
 
                         <button type="submit" className="w-full block bg-primary_blue hover:bg-blue-900 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Log In</button>
                     </form>
