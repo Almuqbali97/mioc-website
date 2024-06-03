@@ -1,42 +1,31 @@
-export const handleFileDownload = async (fileName) => {
+export const handleFileDownload = async (fileKey) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/download/${fileName}`, {
-            method: 'GET',
-            credentials: 'include'
-        });
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/download/${fileKey}`);
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Failed to get presigned URL');
         }
-        const blob = await response.blob();
-        const downloadUrl = window.URL.createObjectURL(blob);
+
+        const data = await response.json();
+        const presignedURL = data.presignedURL;
+
+        const fileResponse = await fetch(presignedURL);
+        if (!fileResponse.ok) {
+            throw new Error('Failed to download file');
+        }
+
+        const blob = await fileResponse.blob();
+        const url = window.URL.createObjectURL(blob);
+
         const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.setAttribute('download', fileName);
+        link.href = url;
+        link.setAttribute('download', fileKey);
         document.body.appendChild(link);
         link.click();
-        link.parentNode.removeChild(link);
-        window.URL.revokeObjectURL(downloadUrl);
+        document.body.removeChild(link);
+
+        // Cleanup
+        window.URL.revokeObjectURL(url);
     } catch (error) {
-        console.error('Failed to download the file:', error);
-    }
-};
-
-export const hanldeZipFileDownload = async (fileName) => {
-    try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/download/${fileName}`, {
-            method: 'GET',
-            credentials: 'include'
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const { presignedURL } = await response.json();
-
-        // Redirect to the presigned URL
-        window.location.href = presignedURL;
-    } catch (error) {
-        console.error('Failed to download the file:', error);
+        setError(error.message);
     }
 };
