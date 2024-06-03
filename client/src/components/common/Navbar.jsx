@@ -16,9 +16,7 @@ const registration = [
     { name: 'Online registration', description: 'Book your place for the conference!', to: '/online-registration' },
     { name: 'Registration checklist', description: 'Get to know what you need for the registration', to: '/registration-checklist' },
 ];
-const abstract = [
-    { name: 'Info', description: 'Get more info before sumitting an abstract!', to: '/abstract-submission' },
-];
+
 const program = [
     { name: 'CME', description: 'Info about conference certificates', to: '/cme' },
     { name: 'Program at a glance', description: 'get a quick look into our program', to: '/program-at-a-glance' },
@@ -140,7 +138,7 @@ export default function Navbar() {
                     </Popover>
 
 
-                    <Link to="/abstract-info" className="text-sm font-semibold hover:text-blue-500 leading-6 uppercase" onClick={handleLinkClick}>
+                    <Link to="/abstract-submission" className="text-sm font-semibold hover:text-blue-500 leading-6 uppercase" onClick={handleLinkClick}>
                         Abstract
                     </Link>
 
@@ -280,7 +278,7 @@ export default function Navbar() {
                                         </>
                                     )}
                                 </Disclosure>
-                                <Link to="/abstract-info" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                <Link to="/abstract-submission" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                     Abstract
                                 </Link>
                                 <Disclosure as="div" className="-mx-3">
