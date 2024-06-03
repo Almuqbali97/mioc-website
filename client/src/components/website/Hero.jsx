@@ -52,7 +52,7 @@ const Hero = () => {
                                 to="/online-registration">Register Now!
                             </Link>
                             <Link className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
-                                to="/abstract-info">Submit Abstract
+                                to="/abstract-submission">Submit Abstract
                             </Link>
 
                         </div>
