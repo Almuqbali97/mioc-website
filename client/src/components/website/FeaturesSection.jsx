@@ -35,7 +35,7 @@ const FeaturesSection = () => {
                         linkText='View Faculty' />
                     <FeatureCard
                         title='Courses & Workshops'
-                        text='Discover a new horizon in ophthalmology only at the MIOC 2024 Congress with our unparalleled educational offerings, including for the first time groundbreaking experiences like the hyperbaric chamber and the cutting-edge Visumax 800 Mach'
+                        text='Discover a new horizon in ophthalmology only at the MIOC 2024 Congress with our unparalleled educational offerings, including for the first time groundbreaking experiences.'
                         link='/courses-and-workshops'
                         linkText='View More' />
                     <FeatureCard

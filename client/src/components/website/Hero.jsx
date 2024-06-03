@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import HeroImg1 from '../../assets/images/hero1.jpg';
 import HeroImg2 from '../../assets/images/hero2.jpg';
 import HeroImg3 from '../../assets/images/hero3.jpg';
 import HeroImg4 from '../../assets/images/hero4.jpg';
-import omanVision from '../../assets/images/oman-vision.svg';
 import omanVisionWhite from '../../assets/images/omanVisionWhite.png';
 import TopLogos from './TopLogos';
 import { Link } from 'react-router-dom';

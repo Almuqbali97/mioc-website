@@ -1,5 +1,4 @@
 export const handleFileDownload = async (fileName) => {
-    // setDownloadingAbstracts(prevState => ({ ...prevState, [id]: true }));
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/abstract/download/${fileName}`, {
             method: 'GET',
@@ -19,7 +18,5 @@ export const handleFileDownload = async (fileName) => {
         window.URL.revokeObjectURL(downloadUrl);
     } catch (error) {
         console.error('Failed to download the file:', error);
-    } finally {
-        // setDownloadingAbstracts(prevState => ({ ...prevState, [id]: false }));
     }
 };

@@ -4,45 +4,50 @@ import mainLogo from '../../assets/images/mainLogoBigger1.png';
 import { Dialog, Disclosure, Popover, PopoverGroup, PopoverPanel, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import ProfileDropdown from '../website/ProfileDropdown.jsx';
 
 const organization = [
-    { name: 'Welcom message', description: 'Warm greetings for all of you', href: '/welcom-message' },
-    { name: 'Important dates', description: 'Important dates regards the conference', href: '/important-dates' },
-    { name: 'Organizing committee', description: 'Get to know our people!', href: '/organising-committee' },
-    { name: 'Sientific committee', description: 'Get to know our sientific committee', href: '/sientific-committee' },
+    { name: 'Welcom message', description: 'Warm greetings for all of you', to: '/welcom-message' },
+    { name: 'Important dates', description: 'Important dates regards the conference', to: '/important-dates' },
+    { name: 'Organizing committee', description: 'Get to know our people!', to: '/organising-committee' },
+    { name: 'Sientific committee', description: 'Get to know our sientific committee', to: '/sientific-committee' },
 ];
 const registration = [
-    { name: 'Online registration', description: 'Book your place for the conference!', href: '/online-registration' },
-    { name: 'Registration checklist', description: 'Get to know what you need for the registration', href: '/registration-checklist' },
+    { name: 'Online registration', description: 'Book your place for the conference!', to: '/online-registration' },
+    { name: 'Registration checklist', description: 'Get to know what you need for the registration', to: '/registration-checklist' },
 ];
 const abstract = [
-    { name: 'Info', description: 'Get more info before sumitting an abstract!', href: '/abstract-info' },
+    { name: 'Info', description: 'Get more info before sumitting an abstract!', to: '/abstract-info' },
 ];
 const program = [
-    { name: 'CME', description: 'Info about conference certificates', href: '/cme' },
-    { name: 'Program at a glance', description: 'get a quick look into our program', href: '/program-at-a-glance' },
-    { name: 'Sientific program', description: 'Here you can sumbit your abstract', href: '/sientific-program' },
-    { name: 'Courses & Workshops', description: 'Get to know our work shops', href: '/courses-and-workshops' },
+    { name: 'CME', description: 'Info about conference certificates', to: '/cme' },
+    { name: 'Program at a glance', description: 'get a quick look into our program', to: '/program-at-a-glance' },
+    { name: 'Sientific program', description: 'Here you can sumbit your abstract', to: '/sientific-program' },
+    { name: 'Courses & Workshops', description: 'Get to know our work shops', to: '/courses-and-workshops' },
 ];
 const travel = [
-    { name: 'Muscat-your host city', description: 'Get to know more about Muscat!', href: '/muscat-city' },
-    { name: 'Transportation', description: 'Get a look at transportation options', href: '/transportation' },
-    { name: 'Visa information', description: 'Get more information about applying for visa!', href: '/visa-information' },
-    { name: 'Accommodation', description: 'Check our recommendation for accommodation`', href: '/accommodation' },
+    { name: 'Muscat-your host city', description: 'Get to know more about Muscat!', to: '/muscat-city' },
+    { name: 'Transportation', description: 'Get a look at transportation options', to: '/transportation' },
+    { name: 'Visa information', description: 'Get more information about applying for visa!', to: '/visa-information' },
+    { name: 'Accommodation', description: 'Check our recommendation for accommodation`', to: '/accommodation' },
 ];
 const sponsersAndExhibitors = [
-    { name: 'Reserve your place', description: 'Be part of our event!', href: '/reserve-your-space' },
+    { name: 'Reserve your place', description: 'Be part of our event!', to: '/reserve-your-space' },
 ];
 const download = [
-    { name: 'Download ppt template', href: '/#' },
+    { name: 'Download ppt template', to: '/#' },
 ];
 
+const userProfileMenu = [
+    { name: 'Submitted Abstracts', to: '/user/abstract' },
+    { name: 'Conference Registration', to: '/user/conference/registration' },
+]
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
-    const { isLogin } = useContext(AuthContext);
+    const { isLogin, user } = useContext(AuthContext);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openPopover, setOpenPopover] = useState(null);
     const navbarRef = useRef(null);
@@ -97,7 +102,7 @@ export default function Navbar() {
                                     {organization.map((item) => (
                                         <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
-                                                <Link to={item.href} className="block font-semibold" onClick={handleLinkClick} >
+                                                <Link to={item.to} className="block font-semibold" onClick={handleLinkClick} >
                                                     {item.name}
                                                     <span className="absolute inset-0" />
                                                 </Link>
@@ -121,7 +126,7 @@ export default function Navbar() {
                                     {registration.map((item) => (
                                         <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
-                                                <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
+                                                <Link to={item.to} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
                                                     <span className="absolute inset-0" />
                                                 </Link>
@@ -150,7 +155,7 @@ export default function Navbar() {
                                     {program.map((item) => (
                                         <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
-                                                <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
+                                                <Link to={item.to} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
                                                     <span className="absolute inset-0" />
                                                 </Link>
@@ -178,7 +183,7 @@ export default function Navbar() {
                                     {sponsersAndExhibitors.map((item) => (
                                         <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
-                                                <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
+                                                <Link to={item.to} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
                                                     <span className="absolute inset-0" />
                                                 </Link>
@@ -202,7 +207,7 @@ export default function Navbar() {
                                     {travel.map((item) => (
                                         <div key={item.name} className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-blue-100 hover:bg-opacity-80">
                                             <div className="flex-auto">
-                                                <Link to={item.href} className="block font-semibold" onClick={handleLinkClick}>
+                                                <Link to={item.to} className="block font-semibold" onClick={handleLinkClick}>
                                                     {item.name}
                                                     <span className="absolute inset-0" />
                                                 </Link>
@@ -216,11 +221,12 @@ export default function Navbar() {
                     </Popover>
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    {isLogin ? <Link to={'/logout'} className="text-sm font-semibold leading-6 hover:text-red-500" onClick={handleLinkClick}>
-                        Logout <span aria-hidden="true">&rarr;</span>
-                    </Link> : <Link to={'/login'} className="text-sm font-semibold leading-6 hover:text-green-500" onClick={handleLinkClick}>
-                        Signin / Signup <span aria-hidden="true">&rarr;</span>
-                    </Link>}
+                    {isLogin ?
+                        <ProfileDropdown />
+
+                        : <Link to={'/login'} className="text-sm font-semibold leading-6 hover:text-green-500" onClick={handleLinkClick}>
+                            Signin / Signup <span aria-hidden="true">&rarr;</span>
+                        </Link>}
                 </div>
             </nav>
 
@@ -249,7 +255,7 @@ export default function Navbar() {
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {organization.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -266,7 +272,7 @@ export default function Navbar() {
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {registration.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -286,7 +292,7 @@ export default function Navbar() {
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {program.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -306,7 +312,7 @@ export default function Navbar() {
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {sponsersAndExhibitors.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -323,7 +329,7 @@ export default function Navbar() {
                                             </Disclosure.Button>
                                             <Disclosure.Panel className="mt-2 space-y-2">
                                                 {travel.map((item) => (
-                                                    <Disclosure.Button key={item.name} as={Link} to={item.href} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                    <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         {item.name}
                                                     </Disclosure.Button>
                                                 ))}
@@ -333,11 +339,30 @@ export default function Navbar() {
                                 </Disclosure>
                             </div>
                             <div className="py-6">
-                                {isLogin ? <Link to={'/logout'} className="text-sm font-semibold leading-6 hover:text-red-500" onClick={handleLinkClick}>
-                                    Logout <span aria-hidden="true">&rarr;</span>
-                                </Link> : <Link to={'/login'} className="text-sm font-semibold leading-6 hover:text-green-500" onClick={handleLinkClick}>
-                                    Signin / Signup <span aria-hidden="true">&rarr;</span>
-                                </Link>}
+                                {isLogin ?
+                                    <Disclosure as="div" className="-mx-3">
+                                        {({ open }) => (
+                                            <>
+                                                <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-blue-100 hover:bg-opacity-80">
+                                                    {user.firstName} {user.lastName}
+                                                    <ChevronDownIcon className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')} aria-hidden="true" />
+                                                </Disclosure.Button>
+                                                <Disclosure.Panel className="mt-2 space-y-2">
+                                                    {userProfileMenu.map((item) => (
+                                                        <Disclosure.Button key={item.name} as={Link} to={item.to} className="block bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                            {item.name}
+                                                        </Disclosure.Button>
+                                                    ))}
+                                                </Disclosure.Panel>
+                                                <Link to={'/logout'} className="text-sm font-semibold leading-6 px-3 text-red-500 hover:text-red-600" onClick={handleLinkClick}>
+                                                    Logout <span aria-hidden="true">&rarr;</span>
+                                                </Link>
+                                            </>
+                                        )}
+                                    </Disclosure>
+                                    : <Link to={'/login'} className="text-sm font-semibold leading-6 hover:text-green-500" onClick={handleLinkClick}>
+                                        Signin / Signup <span aria-hidden="true">&rarr;</span>
+                                    </Link>}
                             </div>
                         </div>
                     </div>

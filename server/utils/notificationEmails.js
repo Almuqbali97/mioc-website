@@ -15,6 +15,7 @@ const sesClient = new SESClient({
     },
 });
 
+// this wipp bes seint 1st septemper to all reviewers
 export async function abstractNotificationEmail(topic) {
     const emailMappings = {
         miscellaneous: "ashokabandara75@gmail.com",

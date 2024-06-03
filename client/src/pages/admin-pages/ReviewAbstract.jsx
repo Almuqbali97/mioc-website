@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-
+import HandleDownloadFiles from '../../components/common/HandleDownloadFiles.jsx';
 const ReviewAbstract = () => {
     const { id } = useParams();
     const [abstract, setAbstract] = useState(null);
@@ -197,12 +197,13 @@ const ReviewAbstract = () => {
                             />
                         </div>
                         <div className="mt-4">
-                            <a
+                            <HandleDownloadFiles fileKey={abstract.fileName} />
+                            {/* <a
                                 href={`${import.meta.env.VITE_API_URL}/abstract/download/${abstract.fileName}`}
                                 className="text-blue-600 hover:text-blue-900"
                             >
                                 Download Video
-                            </a>
+                            </a> */}
                         </div>
                     </div>
                 ) : null}

@@ -5,7 +5,6 @@ import qs from 'qs';
 configDotenv();
 import { v4 as uuidv4 } from 'uuid';
 import { registrationListCollection } from '../models/registrationListModel.js';
-import nodemailer from 'nodemailer';
 import QRCode from 'qrcode'
 
 const router = Router();
@@ -101,7 +100,7 @@ router.post('/payment/success', async (req, res) => {
         const qrCodeDataUrl = await QRCode.toDataURL(qrCodeUrl);
         const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
 
-        await sendTicketEmail(decreptedDataToObject.billing_email, qrCodeBuffer, id);
+// add send invoice and confirmation email here
     } catch (error) {
         console.error('Error storing user info in MongoDB', error);
     }
@@ -161,40 +160,5 @@ function resHandler(encResp, workingKey) {
     return html;
 }
 
-
-async function sendTicketEmail(email, qrCodeBuffer, id) {
-    const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'musaab.dev@gmail.com',
-            pass: 'pdpg ugdz dgtz qcxt'
-        }
-    });
-
-    const mailOptions = {
-        from: 'musaab.dev@gmail.com',
-        to: email,
-        subject: 'Registration Confirmation',
-        html: `
-            <h3>Registration Confirmation</h3>
-            <p>Thank you for registering. Please find your QR code below:</p>
-            <p>Use this QR code for entry: <a href="http://localhost:5000/registrar/${id}">http://localhost:5000/registrar/${id}</a></p>
-        `,
-        attachments: [
-            {
-                filename: 'qrcode.png',
-                content: qrCodeBuffer,
-                cid: 'qrcode' // same cid value as in the html img src
-            }
-        ]
-    };
-
-    try {
-        await transporter.sendMail(mailOptions);
-        console.log('Confirmation email sent');
-    } catch (error) {
-        console.error('Error sending confirmation email:', error);
-    }
-}
 
 export default router;

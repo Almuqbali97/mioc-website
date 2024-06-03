@@ -13,18 +13,6 @@ const port = process.env.PORT || 3000;
 import sponserRoute from './routes/sponserRoutes.js'
 
 
-//middlewares
-// cors handiling
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // allow all domains
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT,POST,DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-//     next();
-// });
-
-
-
 app.use(cors({
     origin: ['http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om'], // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
@@ -45,10 +33,12 @@ app.use('/', ticketRoutes)
 app.use('/', registrants)
 app.use('/', sponserRoute)
 
-// testing admin auth
-app.get('/admin', isAuthenticated, isAdmin, (req, res) => {
-    res.json({ user: req.user });
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
+
+
 
 (async () => {
     await connectDB();

@@ -25,7 +25,7 @@ const AbstractSubmission = () => {
     const [formData, setFormData] = useState({
         firstName: user.firstName || '',
         lastName: user.lastName || '',
-        email: user.email || '',
+        email: user.email,
         mobile: user.mobile || '',
         title: '',
         mainAuthorFirstName: '',
@@ -62,29 +62,38 @@ const AbstractSubmission = () => {
             const file = files[0];
             let newErrors = { ...errors };
 
-            if (file && file.type !== 'video/mp4') {
-                newErrors.file = 'Only MP4 videos are allowed';
-                setFormData({
-                    ...formData,
-                    file: null,
-                    fileName: ''
-                });
-            } else {
-                const videoDuration = await getVideoDuration(file);
-                if (videoDuration > 330) { // 5 minutes and 30 seconds
-                    newErrors.file = 'Video duration cannot exceed 5 minutes and 30 seconds';
+            if (file) {
+                if (file.type !== 'video/mp4') {
+                    newErrors.file = 'Only MP4 videos are allowed';
+                    setFormData({
+                        ...formData,
+                        file: null,
+                        fileName: ''
+                    });
+                } else if (file.size > 500 * 1024 * 1024) { // 500 MB
+                    newErrors.file = 'Video file size cannot exceed 500 MB';
                     setFormData({
                         ...formData,
                         file: null,
                         fileName: ''
                     });
                 } else {
-                    newErrors.file = '';
-                    setFormData({
-                        ...formData,
-                        file,
-                        fileName: file.name
-                    });
+                    const videoDuration = await getVideoDuration(file);
+                    if (videoDuration > 330) { // 5 minutes and 30 seconds
+                        newErrors.file = 'Video duration cannot exceed 5 minutes and 30 seconds';
+                        setFormData({
+                            ...formData,
+                            file: null,
+                            fileName: ''
+                        });
+                    } else {
+                        newErrors.file = '';
+                        setFormData({
+                            ...formData,
+                            file,
+                            fileName: file.name
+                        });
+                    }
                 }
             }
 
@@ -99,6 +108,7 @@ const AbstractSubmission = () => {
             }
         }
     };
+
 
     const getVideoDuration = (file) => {
         return new Promise((resolve) => {
@@ -371,7 +381,7 @@ const AbstractSubmission = () => {
                                 <div className="mt-2">
                                     <label htmlFor="email" className="block text-gray-700 dark:text-white my-2">Email *</label>
                                     <input onChange={handleChange} value={formData.email}
-                                        type="text" id="email" name='email' className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" required />
+                                        type="text" id="email" name='email' className="w-full rounded-lg border py-2 px-3 bg-gray-300 dark:text-white dark:border-none" disabled />
                                     {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                                 </div>
                                 <div className="mt-2">
@@ -711,20 +721,22 @@ const AbstractSubmission = () => {
                                     <button
                                         type="button"
                                         onClick={handlePreviousStep}
-                                        className="px-6 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                                        disabled={loading} // Disable when loading
+                                        className={`px-6 py-2 text-white rounded-md focus:outline-none ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-700 focus:bg-gray-700'}`}
                                     >
                                         Previous
                                     </button>
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                                        className={`px-6 py-2 text-white rounded-md focus:outline-none ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:bg-blue-700'}`}
                                     >
                                         Submit
                                     </button>
                                 </div>
                                 <div className='flex justify-center'>
-                                    {loading && <Loading2 loadingMsg={'Submitting ...'} />}
+                                    {loading && (!formData.presentationType === 'Video') && <Loading2 loadingMsg={'Submitting ...'} />}
+                                    {loading && (formData.presentationType === 'Video') && <Loading2 loadingMsg={'Submitting, uploading video might take time, be patient ...'} />}
 
                                 </div>
                                 {!loading && successMessage && <div className="text-center text-green-500 text-lg font-semibold">{successMessage} <span className='text-black'><br /><Link to={'/'} className='border-b-2'>Go Back Home</Link></span></div>}

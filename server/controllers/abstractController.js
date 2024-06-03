@@ -1,16 +1,11 @@
 import { abstractsCollection } from "../models/abstractModel.js";
 import { validateEmail } from "../helpers/validateEmail.js";
-import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
-// import AWS from 'aws-sdk';
 import { GetObjectCommand, S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import fs from 'fs';
-import util from 'util';
-// import { title } from "process";
 import { abstractNotificationEmail, abstractSuccssfullSubmissionEmail } from '../utils/notificationEmails.js'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 dotenv.config();
-const unlinkFile = util.promisify(fs.unlink); // Promisify the unlink function
 
 
 const s3Client = new S3Client({
@@ -84,7 +79,7 @@ export const submitAbstract = async (req, res) => {
 
     await abstractsCollection.insertOne(newAbstract);
     await abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id);
-    await abstractNotificationEmail(topic);
+    // await abstractNotificationEmail(topic);
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
   } catch (error) {
@@ -149,7 +144,7 @@ export const submitVideoAbstract = async (req, res) => {
 
     await abstractsCollection.insertOne(newAbstract);
     await abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id);
-    await abstractNotificationEmail(topic);
+    // await abstractNotificationEmail(topic);
     return res.status(201).json({ message: 'Abstract submitted successfully' });
 
   } catch (error) {
@@ -177,34 +172,20 @@ export const getAbstractById = async (req, res) => {
 
 
 export const downloadSpesificAbstract = async (req, res) => {
-
-
-  const key = req.params.key;
-  console.log(key);
-  const downloadParams = {
-    Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: key
-  };
-
   try {
-    const command = new GetObjectCommand(downloadParams);
-    const { ContentType, ContentLength, Body } = await s3Client.send(command);
-
-    res.set({
-      'Content-Type': ContentType,
-      'Content-Length': ContentLength,
-      'Content-Disposition': `attachment; filename="${key}"`
+    const key = req.params.key;
+    const command = new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: key,
     });
-    Body.pipe(res);
-  } catch (err) {
-    console.error('Error downloading file:', err);
-    if (err.name === 'NoSuchKey') {
-      return res.status(404).send('File not found');
-    }
-    return res.status(500).send('Internal Server Error');
+
+    const presignedURL = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+    res.status(200).json({ presignedURL });
+  } catch (error) {
+    console.error('Error generating presigned URL:', error);
+    res.status(500).json({ message: 'Could not generate presigned URL' });
   }
 };
-
 
 export const getAllAbstracts = async (req, res) => {
   try {
@@ -251,6 +232,98 @@ export const reviewAbstract = async (req, res) => {
   }
 };
 
+export const getAbstractsByEmail = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const abstracts = await abstractsCollection.find({ email }).toArray();
+
+    if (abstracts.length === 0) {
+      return res.status(404).json({ message: 'No abstracts found for this email' });
+    }
+
+    return res.status(200).json(abstracts);
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Something went wrong, please try again' });
+  }
+};
 
 
+export const updateAbstract = async (req, res) => {
+  const { id } = req.params;
+  const {
+    firstName,
+    lastName,
+    email,
+    phoneNo,
+    topic,
+    title,
+    mainAuthorFirstName,
+    mainAuthorLastName,
+    mainAuthorEmail,
+    mainAuthorOrganization,
+    mainAuthorCountry,
+    presentationType,
+    researchType,
+    objective,
+    methods,
+    description,
+    results,
+    conclusions,
+    additionalAuthors,
+    fileName,
+  } = req.body;
 
+  if (!email || !phoneNo || !topic || !title || !presentationType) {
+    return res.status(401).json({ message: 'Please enter all required fields' });
+  }
+
+  if (!validateEmail(email)) {
+    return res.status(401).json({ message: 'Invalid email address' });
+  }
+
+  let parsedAdditionalAuthors;
+  try {
+    parsedAdditionalAuthors = additionalAuthors ? JSON.parse(additionalAuthors) : [];
+  } catch (error) {
+    return res.status(400).json({ message: 'Invalid additional authors format' });
+  }
+
+  try {
+    const updatedAbstract = {
+      firstName,
+      lastName,
+      email: email.toLowerCase(),
+      phoneNo,
+      title,
+      mainAuthorFirstName,
+      mainAuthorLastName,
+      mainAuthorEmail,
+      mainAuthorOrganization,
+      mainAuthorCountry,
+      topic,
+      presentationType,
+      researchType,
+      description,
+      objective,
+      methods,
+      results,
+      conclusions,
+      additionalAuthors: parsedAdditionalAuthors,
+      fileName,
+      updated_at: new Date(),
+    };
+
+    const result = await abstractsCollection.updateOne({ id }, { $set: updatedAbstract });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'Abstract not found' });
+    }
+
+    return res.status(200).json({ message: 'Abstract updated successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Something went wrong, please try again' });
+  }
+};

@@ -11,49 +11,70 @@ dotenv.config();
 
 // registration functionality
 export const register = async (req, res) => {
-    // NOTE that in the userModel.js there are more fields can be added here, address,phone number ... etc.
     const { firstName, lastName, email, password } = req.body;
     const verificationCode = crypto.randomBytes(32).toString('hex');
     const id = uuidv4();
 
-    const existingEmail = await usersCollection.findOne({ email: email.toLowerCase() });
-    // we check if user already registred with google accounts
-    if (existingEmail && existingEmail.googleId) {
-        return res.status(401).json({ message: "This account already registred with google singin, login using google button" })
+    // Input validation
+    if (!email || !password || !firstName || !lastName) {
+        return res.status(400).json({ message: 'All fields are required' });
     }
-    // make sure all reuqired inputs are in
-    if (!email || !password) return res.status(401).json({ message: 'Enter Email and Password' });
-    // verifying the validity of the email domian
-    if (!validateEmail(email)) return res.status(401).json({ message: 'Invalid email address' });
-    // password length check
-    if (password.length < 7) return res.status(401).json({ message: 'Password length sould be 7 charcters or more ' })
+
+    if (!validateEmail(email)) {
+        return res.status(400).json({ message: 'Invalid email address' });
+    }
+
+    if (password.length < 7) {
+        return res.status(400).json({ message: 'Password must be at least 7 characters long' });
+    }
 
     try {
-        // Hash the password asynchronously
+        // Check for existing email
+        const existingUser = await usersCollection.findOne({ email: email.toLowerCase() });
+
+        if (existingUser) {
+            if (existingUser.googleId) {
+                return res.status(409).json({ message: 'This account is already registered with Google. Please login using Google.' });
+            } else {
+                return res.status(409).json({ message: 'Email is already used' });
+            }
+        }
+
+        // Hash the password
         const hashedPassword = await bcryptjs.hash(password, 10);
-        // new user object
+
+        // Create new user object
         const newUser = {
             id: id,
             firstName: firstName,
             lastName: lastName,
             email: email.toLowerCase(),
-            isVerified: false, // new field
-            verificationToken: verificationCode, // new field
+            isVerified: false,
+            verificationToken: verificationCode,
             password: hashedPassword,
             admin_role: false,
             created_at: new Date()
-        }
+        };
 
+        // Save user to the database
         await usersCollection.insertOne(newUser);
-        await sendVerificationEmail(email, verificationCode)
-        return res.status(201).json({ message: 'User created successfully' });
 
+        // Send verification email
+        try {
+            await sendVerificationEmail(email, verificationCode);
+            return res.status(201).json({ message: 'User created successfully. Please check your email to verify your account.' });
+        } catch (emailError) {
+            console.error('Error sending verification email:', emailError);
+            // Optionally, you could remove the user from the database if email sending fails
+            // await usersCollection.deleteOne({ email: email.toLowerCase() });
+            return res.status(500).json({ message: 'User created, but failed to send verification email. Please contact support at support@mioc.org.om.' });
+        }
     } catch (error) {
         console.error('Error:', error);
         if (error.code === 11000) { // MongoDB duplicate key error
             return res.status(400).json({ message: 'Email already used' });
         }
-        return res.status(500).json({ message: 'Something went wrong' });
+        return res.status(500).json({ message: 'Something went wrong, please try again or contact support at support@mioc.org.om' });
     }
 };
 
@@ -151,8 +172,6 @@ export const logout = (req, res) => {
     res.status(200).json({ message: 'User logged out' });
 };
 
-
-
 // Email verification handler
 export const verifyEmail = async (req, res) => {
     const { token } = req.query;
@@ -169,7 +188,7 @@ export const verifyEmail = async (req, res) => {
 
         if (!user) {
             // console.log('Invalid token or token expired');
-            return res.status(400).json({ message: 'Invalid verification link or token has expired.' });
+            return res.status(400).json({ message: 'Invalid verification link or token has expired, please try to login to check if your account is verified, otherwise contact support at support@mioc.org.om' });
         }
 
         await usersCollection.updateOne(

@@ -39,6 +39,9 @@ import EmailVerification from './components/website/EmailVerification.jsx';
 import ReviewAbstract from './pages/admin-pages/ReviewAbstract.jsx';
 import AuthorAgreement from './pages/website-pages/abstract/AuthorAgreement.jsx';
 import SubmitSponserRequest from './pages/website-pages/sponsers-exhibit/SubmitSponserRequest.jsx';
+import ViewEditAbstract from './pages/user-pages/ViewEditAbstract.jsx';
+import RegistrationDetails from './pages/user-pages/RegistrationDetails.jsx';
+import UserSettings from './pages/user-pages/UserSettings.jsx';
 
 
 function App() {
@@ -88,7 +91,9 @@ function App() {
             <Route path='/submit-abstract' element={<AbstractSubmission />} />
             <Route path='/submit-sponser-request' element={<SubmitSponserRequest />} />
             <Route path='/logout' element={<Logout />} />
-            <Route path='/user/profile' element={<UserProfile />} />
+            <Route path='/user/abstract' element={<ViewEditAbstract />} />
+            <Route path='/user/conference/registration' element={<RegistrationDetails />} />
+            <Route path='/user/settings' element={<UserSettings />} />
 
           </Route>
         </Route>

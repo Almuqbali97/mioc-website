@@ -96,11 +96,26 @@ const PricingTable = () => {
         setStep(step - 1);
     };
 
+    const prices = {
+        earlyBird: {
+            ophthalmologists: { OOS: 15, nonOOS: 55 },
+            nonOphthalmologists: { OOS: 10, nonOOS: 35 }
+        },
+        standard: {
+            ophthalmologists: { OOS: 20, nonOOS: 65 },
+            nonOphthalmologists: { OOS: 15, nonOOS: 40 }
+        },
+        spot: {
+            ophthalmologists: { OOS: 30, nonOOS: 70 },
+            nonOphthalmologists: { OOS: 20, nonOOS: 45 }
+        }
+    };
+
     return (
-        <div className="container mx-auto my-16 p-4 flex">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="container mx-auto my-16 p-4 flex flex-col">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 flex-grow">
                 <div className="col-span-1">
-                    <div className="bg-white shadow-lg rounded-lg p-6 mt-3 h-full flex flex-col justify-between">
+                    <div className="bg-white shadow-lg rounded-lg p-6 mt-3 h-full flex flex-col justify-between flex-grow">
                         <div>
                             <h3 className="text-xl font-semibold text-gray-700">Standard Fee</h3>
                             <p className="mt-2 text-gray-500">From 1st November 2024</p>
@@ -124,32 +139,41 @@ const PricingTable = () => {
                 </div>
                 {[
                     {
-                        title: 'OPHTHALMOLOGIST/ PHYSICIAN',
-                        price: 65,
+                        title: 'Ophthalmologists',
                         earlyBirdPrice: 55,
-                        onsitePrice: 70,
+                        earlyBirdOOS: 15,
+                        standardPrice: 65,
+                        standardOOS: 20,
+                        spotPrice: 70,
+                        spotOOS: 30,
                         key: 1
                     },
                     {
-                        title: 'NON-OPHTHALMOLOGIST',
-                        price: 40,
+                        title: 'Non-Ophthalmologists',
                         earlyBirdPrice: 35,
-                        onsitePrice: 45,
+                        earlyBirdOOS: 10,
+                        standardPrice: 40,
+                        standardOOS: 15,
+                        spotPrice: 45,
+                        spotOOS: 20,
                         key: 2
                     },
                 ].map(card => (
-                    <div key={card.key} className="col-span-1 transform transition-transform hover:scale-105">
-                        <div className="bg-white shadow-lg rounded-lg p-6 h-full flex flex-col justify-between text-center">
+                    <div key={card.key} className="col-span-1 transform transition-transform hover:scale-105 flex-grow">
+                        <div className="bg-white shadow-lg rounded-lg p-6 h-full flex flex-col justify-between text-center flex-grow">
                             <div>
                                 <h3 className="text-2xl font-semibold text-gray-700">{card.title}</h3>
                                 <div className="my-4">
-                                    <div className="text-4xl font-bold text-primary_blue">{card.price} OMR</div>
+                                    <div className="text-gray-500">Standard {card.standardPrice} OMR</div>
+                                    <div className="text-sm text-gray-500">({card.standardOOS} OMR for OOS)</div>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-gray-500">Early Bird {card.earlyBirdPrice} OMR</p>
+                                    <p className="text-3xl font-bold text-primary_blue">Early Bird {card.earlyBirdPrice} OMR</p>
+                                    <p className="text-lg font-semibold text-primary_blue">({card.earlyBirdOOS} OMR for OOS)</p>
                                 </div>
                                 <div className="mt-4">
-                                    <p className="text-gray-500">Onsite Fee {card.onsitePrice} OMR</p>
+                                    <p className="text-gray-500">Onsite Fee {card.spotPrice} OMR</p>
+                                    <p className="text-sm text-gray-500">({card.spotOOS} OMR for OOS)</p>
                                 </div>
                                 <div className="mt-4 space-y-2">
                                     <p className="text-primary_brown border-b border-gray-300 pb-2">&#10003; Access to Session Halls</p>
@@ -161,7 +185,7 @@ const PricingTable = () => {
                             </div>
                             <button
                                 className="mt-6 bg-primary_blue text-white py-2 px-4 rounded-lg hover:bg-blue-800"
-                                onClick={() => openModal(card.price)}
+                                onClick={() => openModal(card.standardPrice)}
                             >
                                 Register Now
                             </button>
@@ -176,150 +200,9 @@ const PricingTable = () => {
                 className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
                 overlayClassName="fixed inset-0 bg-black bg-opacity-50"
             >
-                {/* <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto"> */}
                 <div className="bg-white p-6 rounded-lg text-center shadow-lg w-full max-w-md mx-auto">
                     <h2 className="text-2xl font-bold mb-4">Registration will be available soon</h2>
                     <h2 className="text-2xl font-bold mb-4 text-primary_blue">Be Ready!</h2>
-                    {/* <h2 className="text-2xl font-bold mb-4">Register</h2>
-                    <form onSubmit={handleSubmit}>
-                        {step === 1 && (
-                            <div className="mb-4">
-                                <label htmlFor="country" className="block text-gray-700 mb-2">Country <span className="text-red-500">*</span></label>
-                                <select
-                                    id="country"
-                                    name="country"
-                                    value={selectedCountry}
-                                    onChange={handleCountryChange}
-                                    className="w-full p-2 border rounded"
-                                    required
-                                >
-                                    <option value="">Select your country</option>
-                                    {countries.map(country => (
-                                        <option key={country} value={country}>{country}</option>
-                                    ))}
-                                </select>
-                                <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
-                            </div>
-                        )}
-                        {step === 2 && selectedCountry === 'Oman' && (
-                            <>
-                                <div className="mb-4">
-                                    <label htmlFor="redeemCode" className="block text-gray-700 mb-2">Are you OOS Member? <span className="text-red-500">*</span></label>
-                                    <select
-                                        id="redeemCode"
-                                        name="redeemCode"
-                                        value={hasRedeemCode ? 'yes' : 'no'}
-                                        onChange={handleRedeemCodeChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    >
-                                        <option value="">Select option</option>
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                </div>
-                                {hasRedeemCode && (
-                                    <div className="mb-4">
-                                        <label htmlFor="redeemCodeInput" className="block text-gray-700 mb-2">Enter OOS Member Code</label>
-                                        <input
-                                            id="redeemCodeInput"
-                                            name="redeemCodeInput"
-                                            type="text"
-                                            value={redeemCode}
-                                            onChange={(e) => setRedeemCode(e.target.value)}
-                                            className="w-full p-2 border rounded"
-                                        />
-                                    </div>
-                                )}
-                                <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
-                            </>
-                        )}
-                        {step === 3 && (
-                            <>
-                                <div className="mb-4">
-                                    <label htmlFor="firstName" className="block text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="firstName"
-                                        name="firstName"
-                                        type="text"
-                                        value={personalInfo.firstName}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="lastName" className="block text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="lastName"
-                                        name="lastName"
-                                        type="text"
-                                        value={personalInfo.lastName}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="email" className="block text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        value={personalInfo.email}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="mobile" className="block text-gray-700 mb-2">Mobile <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="mobile"
-                                        name="mobile"
-                                        type="text"
-                                        value={personalInfo.mobile}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <button type="button" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700" onClick={nextStep}>Next</button>
-                            </>
-                        )}
-                        {step === 4 && (
-                            <>
-                                <div className="mb-4">
-                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="address"
-                                        name="address"
-                                        type="text"
-                                        value={addressInfo.address}
-                                        onChange={handleAddressChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">Billing Address <span className="text-red-500">*</span></label>
-                                    <input
-                                        id="billingAddress"
-                                        name="billingAddress"
-                                        type="text"
-                                        value={addressInfo.billingAddress}
-                                        onChange={handleAddressChange}
-                                        className="w-full p-2 border rounded"
-                                        required
-                                    />
-                                </div>
-                                <button type="submit" className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">Submit</button>
-                            </>
-                        )}
-                        {step > 1 && (
-                            <button type="button" className="mt-4 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Previous</button>
-                        )}
-                    </form> */}
                 </div>
             </Modal>
         </div>

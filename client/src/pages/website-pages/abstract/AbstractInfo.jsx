@@ -22,6 +22,10 @@ const AbstractInfo = () => {
         const fileName = 'Presentation_Guidelines_101.pdf';
         await handleFileDownload(fileName)
     };
+    async function handlePptTemplateDownload() {
+        const fileName = 'powerpoint templates mioc2024.zip';
+        await handleFileDownload(fileName)
+    };
 
     return (
         <div>
@@ -52,9 +56,10 @@ const AbstractInfo = () => {
                         })}
 
                     </div>
-                    <div className='w-full space-y-5'>
-                        <div className=' h-full flex items-center'>
+                    <div className='w-full'>
+                        <div className=' h-full flex items-start justify-start space-y-7 flex-col mt-6 sm:mt-0'>
                             <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
+                            <button className='inline-block sm:text-md font-semibold w-auto text-center min-w-[180px] px-1 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-yellow-600 to-primary_brown hover:bg-gradient-to-b dark:shadow-blue-900 shadow-amber-300 hover:shadow-xl hover:shadow-primary_brown hover:-tranneutral-y-px ' onClick={() => handlePptTemplateDownload()}> Download PPT Template</button>
                         </div>
                         {/* <div className=''>
                             <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
