@@ -735,7 +735,7 @@ const AbstractSubmission = () => {
                                     </button>
                                 </div>
                                 <div className='flex justify-center'>
-                                    {loading && (!formData.presentationType === 'Video') && <Loading2 loadingMsg={'Submitting ...'} />}
+                                    {loading && (formData.presentationType != 'Video') && <Loading2 loadingMsg={'Submitting ...'} />}
                                     {loading && (formData.presentationType === 'Video') && <Loading2 loadingMsg={'Submitting, uploading video might take time, be patient ...'} />}
 
                                 </div>

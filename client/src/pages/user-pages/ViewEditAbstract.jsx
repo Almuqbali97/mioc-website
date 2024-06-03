@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
 import AuthContext from '../../context/AuthProvider';
-import HandleDownloadFiles from '../../components/common/HandleDownloadFiles.jsx'
+import HandleDownloadFiles from '../../components/common/HandleDownloadFiles.jsx';
 import Loading2 from '../../components/common/Loading2.jsx';
-import { ArrowRightIcon, ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/outline';
 
 const ViewEditAbstract = () => {
     const [abstracts, setAbstracts] = useState([]);
@@ -280,32 +280,57 @@ const ViewEditAbstract = () => {
                                 <div className="mb-4 border-b-2 border-gray-300 pb-4">
                                     <h2 className="text-xl font-semibold text-blue-700 dark:text-white mb-2">Research Details</h2>
                                     <p><strong>Research Type:</strong> {abstract.researchType}</p>
-                                    {['objective', 'methods', 'results', 'conclusions'].map((field) => (
-                                        abstract[field] !== undefined && (
-                                            <div key={field} className="mb-2">
-                                                <p><strong>{field.charAt(0).toUpperCase() + field.slice(1)}:</strong> {editMode[`${index}-${field}`] ? (
-                                                    <textarea
-                                                        name={field}
-                                                        value={abstract[field]}
-                                                        onChange={(e) => handleInputChange(index, e)}
-                                                        className="block w-full mt-1 p-2 border rounded-md dark:bg-blue-700 dark:text-white"
-                                                    />
-                                                ) : (
-                                                    abstract[field]
-                                                )}
-                                                </p>
-                                                {!editMode[`${index}-${field}`] && (
-                                                    <button onClick={() => toggleEditMode(index, field)} className="text-yellow-400 hover:text-blue-900">Edit {field.charAt(0).toUpperCase() + field.slice(1)}</button>
-                                                )}
-                                                {editMode[`${index}-${field}`] && (
-                                                    <>
-                                                        <button onClick={() => handleSubmitEdit(abstract.id, index)} className="text-green-600 hover:text-green-800 ml-2">Accept Changes</button>
-                                                        <button onClick={() => handleCancelChanges(index, field)} className="text-red-600 hover:text-red-800 ml-2">Cancel Changes</button>
-                                                    </>
-                                                )}
-                                            </div>
-                                        )
-                                    ))}
+                                    {abstract.researchType === 'Case Presentation' ? (
+                                        <div className="mb-2">
+                                            <p><strong>Description:</strong> {editMode[`${index}-description`] ? (
+                                                <textarea
+                                                    name="description"
+                                                    value={abstract.description}
+                                                    onChange={(e) => handleInputChange(index, e)}
+                                                    className="block w-full mt-1 p-2 border rounded-md dark:bg-blue-700 dark:text-white"
+                                                />
+                                            ) : (
+                                                abstract.description
+                                            )}
+                                            </p>
+                                            {!editMode[`${index}-description`] && (
+                                                <button onClick={() => toggleEditMode(index, 'description')} className="text-yellow-400 hover:text-blue-900">Edit Description</button>
+                                            )}
+                                            {editMode[`${index}-description`] && (
+                                                <>
+                                                    <button onClick={() => handleSubmitEdit(abstract.id, index)} className="text-green-600 hover:text-green-800 ml-2">Accept Changes</button>
+                                                    <button onClick={() => handleCancelChanges(index, 'description')} className="text-red-600 hover:text-red-800 ml-2">Cancel Changes</button>
+                                                </>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        ['objective', 'methods', 'results', 'conclusions'].map((field) => (
+                                            abstract[field] !== undefined && (
+                                                <div key={field} className="mb-2">
+                                                    <p><strong>{field.charAt(0).toUpperCase() + field.slice(1)}:</strong> {editMode[`${index}-${field}`] ? (
+                                                        <textarea
+                                                            name={field}
+                                                            value={abstract[field]}
+                                                            onChange={(e) => handleInputChange(index, e)}
+                                                            className="block w-full mt-1 p-2 border rounded-md dark:bg-blue-700 dark:text-white"
+                                                        />
+                                                    ) : (
+                                                        abstract[field]
+                                                    )}
+                                                    </p>
+                                                    {!editMode[`${index}-${field}`] && (
+                                                        <button onClick={() => toggleEditMode(index, field)} className="text-yellow-400 hover:text-blue-900">Edit {field.charAt(0).toUpperCase() + field.slice(1)}</button>
+                                                    )}
+                                                    {editMode[`${index}-${field}`] && (
+                                                        <>
+                                                            <button onClick={() => handleSubmitEdit(abstract.id, index)} className="text-green-600 hover:text-green-800 ml-2">Accept Changes</button>
+                                                            <button onClick={() => handleCancelChanges(index, field)} className="text-red-600 hover:text-red-800 ml-2">Cancel Changes</button>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            )
+                                        ))
+                                    )}
                                 </div>
                             ) : abstract.presentationType === 'Video' ? (
                                 <div className="mb-4 border-b-2 border-gray-300 pb-4">
