@@ -59,7 +59,7 @@ const MuscatPreviewSection = () => {
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">CONFERENCE VENUE</h2>
                         <h3 className="text-2xl font-semibold text-blue-700 mb-2">Convention & Exhibition Center Muscat</h3>
                         <p className="text-gray-700 leading-tight mb-4">
-                            Oman Convention and Exhibition centre is one of largest event venue in the region and its strategically located in the business district, within a 15 minute drive from Muscat International Airpor.
+                            Oman Convention and Exhibition centre is one of largest event venue in the region and its strategically located in the business district, within a 15 minute drive from Muscat International Airport.
                         </p>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
