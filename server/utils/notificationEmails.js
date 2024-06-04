@@ -901,8 +901,8 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
             },
             Subject: { Data: "Abstract Submission Confirmation" }, // Replace with your email subject
         },
-        Source: "MIOC2024 Abstract Submission <no-replay@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["no-replay@mioc.org.om"],
+        Source: "MIOC2024 Abstract Submission <info@mioc.org.om>", // Replace with your verified sender's email address
+        ReplyToAddresses: ["info@mioc.org.om"],
         // ConfigurationSetName: 'EventsLogs',
     };
 

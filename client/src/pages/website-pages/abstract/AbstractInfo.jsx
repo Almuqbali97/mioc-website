@@ -23,7 +23,7 @@ const AbstractInfo = () => {
         const fileName = 'Presentation_Guidelines_101.pdf';
         await handleFileDownload(fileName)
     };
- 
+
 
     return (
         <div>
@@ -39,6 +39,11 @@ const AbstractInfo = () => {
                 <CommonParagraph>
                     Submissions are only accepted online. Find more info here: <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentaion guidelines (Download)</button></span>.
                 </CommonParagraph>
+                <CommonParagraph>
+                    <strong>NOTE:<span className='text-red-500'>*</span></strong> you can edit your submitted abstracts until 1st of September.
+                    In order to edit, press on your profile and go to submitted <br />abstracts menu.
+                </CommonParagraph>
+
 
 
                 <div className='w-full mt-11 flex flex-col lg:flex-row font-custom justify-center' >
@@ -57,7 +62,7 @@ const AbstractInfo = () => {
                     <div className='w-full'>
                         <div className=' h-full flex items-start justify-start space-y-7 flex-col mt-6 sm:mt-0'>
                             <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />
-                            <DirectFileDownload fileKey={'pptTemplateMioc2024.zip'} btnText={'Download PPT Templates'}/>
+                            <DirectFileDownload fileKey={'pptTemplateMioc2024.zip'} btnText={'Download PPT Templates'} />
                         </div>
                         {/* <div className=''>
                             <PrimaryButtonBlue text={'Submit Your Abstract'} link={'/submit-abstract'} />

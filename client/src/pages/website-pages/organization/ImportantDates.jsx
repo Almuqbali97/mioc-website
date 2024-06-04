@@ -9,7 +9,7 @@ let importantDates = [
     },
     {
         event: "Early Bird Registration Opens",
-        date: "01 June 2024"
+        date: "15 June 2024"
     },
     {
         event: "Program Schedule & Topics",
