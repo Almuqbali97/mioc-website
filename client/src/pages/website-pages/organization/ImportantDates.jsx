@@ -13,7 +13,7 @@ let importantDates = [
     },
     {
         event: "Program Schedule & Topics",
-        date: "01 June 2024"
+        date: "15 June 2024"
     },
     {
         event: "Accommodation Booking Opens",
