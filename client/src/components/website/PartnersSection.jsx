@@ -65,8 +65,7 @@ const PartnersSection = () => {
                         <h2 className="uppercase mt-6 text-[#922ABA] font-medium mb-3">
                             International Keratoconus Society
                         </h2>
-                        <p className="font-light text-sm text-gray-500 mb-3">
-                            The IKS is an independent non-profit society registered in Muscat, Oman...
+                        <p className="font-light text-sm text-gray-500 mb-3">The IKS is an independent non-profit society registered in Muscat, Oman...
                         </p>
                         <a className="text-[#922ABA] flex items-center hover:translate-x-5 transition-all" href="https://www.ikc-society.org/">
                             Visit IKC Website
@@ -130,10 +129,10 @@ const PartnersSection = () => {
                             <img src={oocLogo} />
                         </div>
                         <h2 className="uppercase mt-6 text-[#623CEA] font-medium mb-3">
-                            Oman Optics Club
+                            Oman Optometry Club
                         </h2>
                         <p className="font-light text-sm text-gray-500 mb-3">
-                            The Oman Optics Club is a non-profit organization founded in 2023 by a group of optometry graduates in the Sultanate of Oman...
+                            The Oman Optometry Club is a non-profit organization founded in 2023 by a group of optometry graduates in the Sultanate of Oman...
                         </p>
                         <a className="text-[#623CEA] flex items-center hover:translate-x-5 transition-all" href="https://omanoptometryclub.com/">
                             Visit OOC Website
