@@ -11,13 +11,13 @@ const ReserveYourSpace = () => {
             <SectionHeadingTitleAndImage title={'Reserve Your Space'} image={resYourPlace} />
             <ContentContainer>
                 <CommonParagraph>
-                    MIOC 2024 will provide sponsors with exposure and access to delegates who have the capacity to influence the selection of products and services with their organizations. The conference also provides you with the opportunity to demonstrate your support and commitment to the field of internal medicine while our sponsorship/Exhibition program will extend your visibility beyond the exhibition hall to achieve maximum exposure at the conference.
+                    MIOC-EMCO-IKS 2024 will provide sponsors with exposure and access to delegates who have the capacity to influence the selection of products and services with their organizations. The conference also provides you with the opportunity to demonstrate your support and commitment to the field of ophthalmology while our sponsorship/Exhibition program will extend your visibility beyond the exhibition hall to achieve maximum exposure at the conference.
                 </CommonParagraph>
                 <CommonParagraph>
-                    In order to ensure that your company can achieve its objectives by taking part in the MEACO 2023 conference, a wide range of sponsorship opportunities is available. In addition to packages, sponsors can also consider taking out individual items.
+                    In order to ensure that your company can achieve its objectives by taking part in the MIOC-EMCO-IKS 2024 conference, a wide range of sponsorship opportunities is available. In addition to packages, sponsors can also consider taking out individual items.
                 </CommonParagraph>
                 <div className='mt-7'>
-                    <PrimaryButtonBlue text={'Request Sposership Prospectus'} link={'/submit-sponser-request'} />
+                    <PrimaryButtonBlue text={'Request Sponsorship Prospectus'} link={'/submit-sponser-request'} />
                 </div>
             </ContentContainer>
         </div>

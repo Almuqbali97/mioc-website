@@ -40,8 +40,8 @@ html {
     animation: fadeIn 1500ms ease-in-out;
 }
 
-.myTextShadoe {
-    text-shadow: 0px 15px 20px #052443;
+.myTextShadow {
+    text-shadow: 0px 17px 17px #052443;
 }
 
 .myBoxShadow {

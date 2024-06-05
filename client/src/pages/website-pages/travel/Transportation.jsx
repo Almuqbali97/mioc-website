@@ -3,20 +3,36 @@ import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
-import transportImg from '../../../assets/images/transport.jpg'
 
 const Transportation = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'TRANSPORTATION'} image={transportImg} />
+            <SectionHeadingTitleAndImage title={'TRANSPORTATION'}/>
             <ContentContainer>
                 <ParagraphTitle title={'Local Transportation'} />
                 <CommonParagraph>
                     It is hard to imagine that in 1970 Oman only had 3 Km of asphalted road. Today, the roads in Oman are compared to the best anywhere in the world. Motorways link Muscat with all major cities and towns in the Sultanate. There are also excellent roads leading to other cities of Oman. For visitors, an international drivers licence is valid in Oman.</CommonParagraph>
                 <ParagraphTitle title={'Taxis'} />
-                <CommonParagraph>
-                    Three companies are available for hire: City Taxi, Bid Bid Taxi and Al Dar Taxi. Omani law states that all taxi drivers are Omani. Taxis are mainly orange and white, they are not metered so it is advisable to negotiate the fare before the start of any journey. As of 21 December 2014, taxis from Muscat International Airport (which are blue & white) to downtown Muscat hotels are capped at OMR 8.00 (Euros 19), and a small additional fee for extra kms. There will be a drop off/pick up point by the Convention Centre’s main entrance with a separate taxi holding area in front of the car park.
-                </CommonParagraph>
+                <div class="p-4 font-custom font-light">
+                    <ol class="list-decimal">
+                        <li class="mb-2">
+                            <span class="font-bold">Mandatory Fare Meters:</span> As of June 1, 2023, all orange and white taxis in Oman must use the Aber digital fare meter. The fare starts at 300 baisa, with 130 baisa per kilometer and a 50 baisa per minute waiting charge after the first five minutes.
+                        </li>
+                        <li class="mb-2">
+                            <span class="font-bold">Negotiated Fares:</span> Drivers and passengers can agree on a fare beforehand, but the meter must be used. If the driver refuses to use the meter, the ride is free.
+                        </li>
+                        <li class="mb-2">
+                            <span class="font-bold">Taxi Apps and Licensing:</span> By January 1, 2024, all taxis in public places must join licensed applications such as OmanTaxi, OTaxi, Marhaba, Hala, and Tasleem.
+                        </li>
+                        <li class="mb-2">
+                            <span class="font-bold">Airport Taxis:</span> Taxis from Muscat International Airport have a regulated fare, with a base fare of OMR 8.00 to downtown Muscat hotels. These taxis are blue and white.
+                        </li>
+                        <li class="mb-2">
+                            <span class="font-bold">Drop-off/Pick-up Points:</span> There are designated drop-off and pick-up points by the main entrance of the Convention Centre, with a separate holding area for taxis in front of the car park.
+                        </li>
+                    </ol>
+                </div>
+
                 <ParagraphTitle title={'Buses'} />
                 <CommonParagraph>
                     The city public transport services – Mwasalat – connect to the most relevant areas of Muscat. Routes include Wadi Adei, Wadi Kabir, Mabelah, Muttrah and Al Almerat. These routes connect the main transport areas of Muscat, such as the Muscat International Airport, Port Sultan Qaboos or Buruj Sahawa; a great number of commercial and business areas; and the main residential areas of Muscat such as Al Khuwair, Gubrah, Al Azaiba, Mawalih or Seeb. Shuttle buses around the OCEC precinct can be arranged. A 48 seater bus costs OMR 160 (Euros 380) and a 16 seater bus costs OMR 80 (Euros 190) for 8 hours. Prices as of May 2015.

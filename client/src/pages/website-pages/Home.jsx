@@ -7,6 +7,7 @@ import InstagramGallery from "../../components/website/instagramWall/InstagramGa
 import SposersAndOrganizersSection from "../../components/website/SposersAndOrganizersSection";
 import { ArrowUpCircleIcon } from '@heroicons/react/20/solid'
 import MuscatPreviewSection from "../../components/website/MuscatPreviewSection";
+import PartnersSection from "../../components/website/PartnersSection";
 const Home = () => {
 
     return (
@@ -18,8 +19,7 @@ const Home = () => {
             <FeaturesSection />
             <InstagramGallery />
             <MuscatPreviewSection />
-            {/* <SposersAndOrganizersSection /> */}
-            {/* <MapSection /> */}
+            
 
         </section>
     );

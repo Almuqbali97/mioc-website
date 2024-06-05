@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import ProfileDropdown from '../website/ProfileDropdown.jsx';
 
 const organization = [
-    { name: 'Welcome message', description: 'Warm greetings for all of you', to: '/welcome-message' },
-    { name: 'Important dates', description: 'Important dates regards the conference', to: '/important-dates' },
+    { name: 'Welcome message', description: 'Warm greetings to all of you', to: '/welcome-message' },
+    { name: 'Important dates', description: 'Important dates of the conference', to: '/important-dates' },
     { name: 'Organizing committee', description: 'Get to know our people!', to: '/organising-committee' },
-    { name: 'Sientific committee', description: 'Get to know our sientific committee', to: '/sientific-committee' },
+    { name: 'Scientific committee', description: 'Get to know our scientific committee', to: '/sientific-committee' },
 ];
 const registration = [
     { name: 'Online registration', description: 'Book your place for the conference!', to: '/online-registration' },
@@ -19,8 +19,8 @@ const registration = [
 
 const program = [
     { name: 'CME', description: 'Info about conference certificates', to: '/cme' },
-    { name: 'Program at a glance', description: 'get a quick look into our program', to: '/program-at-a-glance' },
-    { name: 'Sientific program', description: 'Here you can sumbit your abstract', to: '/sientific-program' },
+    { name: 'Program at a glance', description: 'Get a quick look into our program', to: '/program-at-a-glance' },
+    { name: 'Scientific program', description: 'Here you can sumbit your abstract', to: '/sientific-program' },
     { name: 'Courses & Workshops', description: 'Get to know our work shops', to: '/courses-and-workshops' },
 ];
 const travel = [
@@ -70,7 +70,7 @@ export default function Navbar() {
 
     return (
         <header id='navBar' className="bg-white shadow-md relative top-0 z-10 transition-all text-black hover:text-gray-700" ref={navbarRef}>
-            <nav className="mx-auto flex max-w-8xl items-center justify-between p-4 sm:p-6 lg:px-6" aria-label="Global">
+            <nav className="mx-auto flex max-w-8xl items-center justify-between p-4 sm:p-[1.2rem] lg:px-6" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <Link to="/" className="-m-1.5">
                         <span className="sr-only">Your Company</span>
@@ -172,7 +172,7 @@ export default function Navbar() {
 
                     <Popover className="relative">
                         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 hover:text-blue-500 uppercase" onClick={() => setOpenPopover('sponsersAndExhibitors')}>
-                            Sponsers/Exhibitors
+                            Sponsors/Exhibitors
                             <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                         </Popover.Button>
                         <Transition as={Fragment} show={openPopover === 'sponsersAndExhibitors'} enter="transition ease-out duration-200" enterFrom="opacity-0 translate-y-1" enterTo="opacity-100 translate-y-0" leave="transition ease-in duration-150" leaveFrom="opacity-100 translate-y-0" leaveTo="opacity-0 translate-y-1">

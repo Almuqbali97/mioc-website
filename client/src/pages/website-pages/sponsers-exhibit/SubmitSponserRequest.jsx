@@ -69,7 +69,7 @@ const SubmitSponserRequest = () => {
 
     return (
         <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-8 mt-10 mb-10">
-            <h1 className="text-2xl font-bold mb-4">Sponsor Request</h1>
+            <h1 className="text-2xl font-bold mb-4">Sponsorship Request</h1>
             {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
             {errors.server && <p className="text-red-500 mb-4">{errors.server}</p>}
             <form onSubmit={handleSubmit}>

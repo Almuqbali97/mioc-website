@@ -10,7 +10,7 @@ const FeatureCard = ({ title, text, link, linkText }) => {
                     <ChevronDoubleRightIcon className="h-6 w-6 text-primary_blue " />
                 </span>
 
-                <h1 className="text-2xl font-semibold text-gray-700 my-3 capitalize dark:text-white">{title}</h1>
+                <h1 className="text-2xl font-semibold text-primary_brown my-3 capitalize dark:text-white">{title}</h1>
 
                 <p className="text-gray-500 dark:text-gray-300">
                     {text}

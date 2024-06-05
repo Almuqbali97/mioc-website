@@ -31,17 +31,17 @@ const AbstractInfo = () => {
             <SectionHeadingTitleAndImage title={'ABSTRACT SUBMISSION'} />
             <ContentContainer>
                 <CommonParagraph>
-                    The scientific program of MIOC 2024 will include a wide range of Free Paper Presentation, Case Presentation, Poster Presentation and Videos, as well as lectures by world renowned and eminent guest speakers during plenary and special sessions.
+                    The scientific program of MIOC-EMCO-IKS 2024 will include a wide range of Free Paper Presentation, Case Presentation, Poster Presentation and Videos, as well as lectures by world renowned and eminent guest speakers during plenary and special sessions.
                 </CommonParagraph>
                 <CommonParagraph>
                     We encourage our colleagues from around the world to take part and join our list of speakers by contributing an abstract to either conduct Free Paper Presentation, Case Presentation, Poster Presentation and Videos or participate.
                 </CommonParagraph>
                 <CommonParagraph>
-                    Submissions are only accepted online. Find more info here: <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentaion guidelines (Download)</button></span>.
+                    Submissions are only accepted online. Find more info here: <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentation guidelines (Download)</button></span>.
                 </CommonParagraph>
                 <CommonParagraph>
-                    <strong>NOTE:<span className='text-red-500'>*</span></strong> you can edit your submitted abstracts until 1st of September.
-                    In order to edit, press on your profile and go to submitted <br />abstracts menu.
+                    <strong>NOTE:<span className='text-red-500'>*</span></strong> you can edit your submitted abstracts and submit more abstracts until 1st of September.
+                    In order to edit, press on your profile and go to submitted abstracts menu.
                 </CommonParagraph>
 
 
@@ -102,7 +102,7 @@ const AbstractInfo = () => {
 
                 <div className='w-full h-[1.5px] bg-gradient-to-r from-transparent via-blue-900 to-transparent my-11'></div>
                 <ParagraphTitle title={'Abstract Delivery Notification'} />
-                <CommonParagraph>Submissions are only accepted online. Helpful information is available under the <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentaion guidelines (Download)</button></span></CommonParagraph>
+                <CommonParagraph>Submissions are only accepted online. Helpful information is available under the <span className='text-primary_brown font-bold'><Link to='/author-agreement'>author agreement</Link></span>, <span className='text-primary_brown font-bold'><button onClick={() => handleGuidanceDownload()}>Presentation guidelines (Download)</button></span></CommonParagraph>
                 <CommonParagraph>Authors will be notified about the delivery of their abstract by e-mail immediately. In case you do not receive confirmation within 24 hours, please check your spam folder. In case of no confirmation e-mail, please contact: <span className='text-primary_brown'>info@mioc.org.om</span></CommonParagraph>
             </ContentContainer>
         </div>
