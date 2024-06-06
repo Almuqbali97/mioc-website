@@ -13,7 +13,7 @@ const MuscatCity = () => {
             <ContentContainer>
                 <div className='flex justify-center items-center w-full mb-10'>
                     <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-md w-[30rem] mx-auto">
-                        <img src={muscatCorniche} alt="University of Southern California" className="absolute inset-0 h-full w-full object-cover" />
+                        <img src={muscatCorniche} alt="Image of Muscat City" className="absolute inset-0 h-full w-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                         <h3 className="z-10 mt-3 text-3xl font-bold text-white">Muscat</h3>
                         <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">Your New Destination!</div>

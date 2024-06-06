@@ -68,10 +68,10 @@ const SposersAndOrganizersSection = () => {
                     </span>
                     </h2>
                     <div className="flex justify-center space-x-5 sm:space-x-9 content-end h-11 sm:h-16 lg:h-24">
+                        <img src={emcoWhite} alt={'coOrganizer'} className="-mb-[0.06rem] object-contain" />
+                        <img src={IKSwhite} alt={'coOrganizer'} className="-mb-[0.1rem] object-contain" />
                         <img src={logo2} alt={'coOrganizer'} className=" object-contain" />
                         <img src={logo4} alt={'coOrganizer'} className=" object-contain" />
-                        <img src={emcoWhite} alt={'coOrganizer'} className="-mb-[0.13rem] object-contain" />
-                        <img src={IKSwhite} alt={'coOrganizer'} className="-mb-[0.2rem] object-contain" />
                     </div>
                 </div>
 

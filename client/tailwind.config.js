@@ -35,8 +35,12 @@ export default {
             width: "0%",
             visibility: "hidden"
           },
-          "100%": {
+          "60%": {
             width: "100%"
+          },
+          "100%": {
+            width: "100%",
+            visibility: "visible"
           }
         },
         blink: {
@@ -49,7 +53,8 @@ export default {
         }
       },
       animation: {
-        typing: "typing 2s steps(20) infinite alternate, blink .7s infinite"
+        typing: "typing 3.5s steps(30) 1s infinite alternate",
+        blink: "blink .7s infinite"
       }
     },
   },

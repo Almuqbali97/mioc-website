@@ -33,7 +33,7 @@ const Hero = () => {
                 <div className="flex justify-center items-center text-white dark:bg-gray-800">
                     <div className="text-center max-w-7xl md:max-w-6xl mx-7 md:mx-10">
                         <h1 className="mb-2 -mt-2 md:mb-3 text-lg sm:text-xl font-semibold tracking-tight myTextShadow md:text-2xl dark:text-gray-100 ">
-                            28-30 NOV 2024
+                            <span className="underline underline-offset-4">28-30 NOV </span> 2024 MUSCAT, OMAN
                         </h1>
                         <h1 className="mb-2 md:mb-3 text-xl sm:text-2xl font-semibold tracking-tight myTextShadow  md:text-4xl dark:text-gray-100 ">
                             20<sup>th</sup> Muscat International Ophthalmology<br />Conference (MIOC)

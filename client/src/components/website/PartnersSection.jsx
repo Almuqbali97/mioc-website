@@ -68,7 +68,7 @@ const PartnersSection = () => {
                         <p className="font-light text-sm text-gray-500 mb-3">The IKS is an independent non-profit society registered in Muscat, Oman...
                         </p>
                         <a className="text-[#922ABA] flex items-center hover:translate-x-5 transition-all" href="https://www.ikc-society.org/">
-                            Visit IKC Website
+                            Visit IKS Website
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
