@@ -2,14 +2,13 @@ import React from 'react';
 import ContentContainer from '../../../components/common/ContentContainer';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
-import muscat from '../../../assets/images/muscat.avif'
-import muscatCorniche from '../../../assets/images/muscat-corniche.avif'
+import muscatCorniche from '../../../assets/images/muscat-corniche.png'
 import InfoCards from './InfoCards';
 
 const MuscatCity = () => {
     return (
         <div>
-            <SectionHeadingTitleAndImage title={'MUSCAT CITY'} image={muscat} />
+            <SectionHeadingTitleAndImage title={'MUSCAT CITY'} />
             <ContentContainer>
                 <div className='flex justify-center items-center w-full mb-10'>
                     <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-md w-[30rem] mx-auto">

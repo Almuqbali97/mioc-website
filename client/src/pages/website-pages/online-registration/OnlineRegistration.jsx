@@ -17,6 +17,7 @@ const OnlineRegistration = () => {
                 <CommonParagraph>
                     Please register as per your relevant category. The conference organizers reserve the right to request proof of profession or ID at the time of check-in.
                 </CommonParagraph>
+                <PricingTable />
                     <div className="bg-red-50 p-4 rounded-lg shadow-md mb-8">
                         <h3 className="text-xl font-semibold mb-2">Important Information</h3>
                         <ul className="list-disc list-inside text-gray-700">
@@ -27,7 +28,6 @@ const OnlineRegistration = () => {
                             <li>Please contact us on <a href="mailto:info@mioc.org.om" className="text-blue-600 underline">info@mioc.org.om</a> for discounted group registration rates.</li>
                         </ul>
                     </div>
-                <PricingTable />
                 <Accordian />
             </div>
         </div>
