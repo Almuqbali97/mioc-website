@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PricingTable = () => {
-    
+
     const [isOOS, setIsOOS] = useState(false);
     const [isOphthalmologist, setIsOphthalmologist] = useState(false);
 
@@ -35,59 +35,29 @@ const PricingTable = () => {
                 return '';
         }
     };
-console.log('got re rendered');
+
     return (
         <section className="flex flex-col justify-center antialiased text-gray-600 min-h-screen p-4">
 
             <div className="h-full">
                 <div className="max-w-5xl mx-auto">
-                    <h2 className="text-3xl text-gray-800 font-bold text-center mb-4">Registration Fees</h2>
-                    {/* <div className="flex flex-col items-center justify-center space-y-8 mb-8">
-                        <div className="flex items-center space-x-3">
-                            <div className="text-sm text-gray-500 font-medium">Non-OOS</div>
-                            <label className='relative inline-flex cursor-pointer select-none items-center'>
-                                <input
-                                    type='checkbox'
-                                    className='sr-only'
-                                    checked={isOOS}
-                                    onChange={() => setIsOOS(!isOOS)}
-                                />
-                                <span
-                                    className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${isOOS ? 'bg-primary_blue' : 'bg-gray-400'
-                                        }`}
-                                >
-                                    <span
-                                        className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${isOOS ? 'translate-x-6' : ''
-                                            }`}
-                                    ></span>
-                                </span>
-                                <span className='text-sm font-medium text-gray-500'>OOS</span>
-                            </label>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                            <div className="text-sm text-gray-500 font-medium">Non-Ophthalmologists</div>
-                            <label className='relative inline-flex cursor-pointer select-none items-center'>
-                                <input
-                                    type='checkbox'
-                                    className='sr-only'
-                                    checked={isOphthalmologist}
-                                    onChange={() => setIsOphthalmologist(!isOphthalmologist)}
-                                />
-                                <span
-                                    className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${isOphthalmologist ? 'bg-primary_blue' : 'bg-gray-400'
-                                        }`}
-                                >
-                                    <span
-                                        className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${isOphthalmologist ? 'translate-x-6' : ''
-                                            }`}
-                                    ></span>
-                                </span>
-                                <span className='text-sm font-medium text-gray-500'>Ophthalmologists</span>
-                            </label>
-                        </div>
-                    </div> */}
+
                     {/*  */}
-                    <div className='flex justify-center m-5'>
+                    <div className='flex justify-center'>
+                        <div className="flex text  items-center border-l-8 border-primary_brown bg-[#d8a75736] p-4 text-emerald-900 shadow-lg relative">
+                            <div className="min-w-0">
+                                <h2 className="text-ellipsis whitespace-nowrap">Select your appropriate category
+                                    <span className='ml-3'>
+                                        <div class="tooltip">
+                                            <div class="icon">i</div>
+                                            <div class="tooltiptext">The conference organizers <br /> reserve the right to request <br /> proof of profession or ID at  <br />the time of check-in.</div>
+                                        </div>
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex justify-center m-5 ml-0'>
                         <div className="radio-inputs space-x-5">
                             <label className='flex flex-col items-center space-y-2'>
                                 <input
@@ -199,7 +169,21 @@ console.log('got re rendered');
                     {/*  */}
 
                     {/*  */}
-                    <div className='flex justify-center m-5'>
+                    <div className='flex justify-center'>
+                        <div className="flex text  items-center border-l-8 border-primary_brown bg-[#d8a75736] p-4 text-emerald-900 shadow-lg">
+                            <div className="min-w-0">
+                                <h2 className=" text-ellipsis whitespace-nowrap">Are you an OOS Member?
+                                    <span className='ml-3'>
+                                        <div class="tooltip">
+                                            <div class="icon">i</div>
+                                            <div class="tooltiptext">You must have a valid <br /> OOS-Membership as of <br />Registration date.</div>
+                                        </div>
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex justify-center m-5 ml-0'>
                         <div className="radio-inputs space-x-9">
                             <label className='flex flex-col items-center space-y-2'>
                                 <input
@@ -211,13 +195,16 @@ console.log('got re rendered');
                                 />
                                 <span className="radio-tile">
                                     <span className="radio-icon relative">
+                                        <span className="absolute scale-110 inset-0">
+                                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 23.5l15-15M23.5 23.5l-15-15"></path> </g></svg>
+                                        </span>
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M485.22,80.604H26.78C12.013,80.604,0,92.615,0,107.382v297.229c0,14.767,12.013,26.786,26.78,26.786h458.44 c14.767,0,26.78-12.019,26.78-26.786V107.382C512,92.615,499.987,80.604,485.22,80.604z M132.17,283.787v-4.472 c0-2.298-0.38-4.566-1.359-7.174c-0.188-0.248-18.793-25.357-18.793-48.059c0-27.05,16.988-46.685,40.394-46.685 s40.394,19.635,40.394,46.685c0,22.702-18.604,47.811-19.022,48.494c-0.751,2.166-1.132,4.433-1.132,6.739v4.472 c0,6.18,3.628,11.84,9.307,14.449l30.316,12.384c6.584,3.028,11.285,9.084,12.558,16.048l1.431,18.416H78.56l1.407-18.253 c1.294-7.128,5.998-13.184,12.518-16.18l30.442-12.446C128.542,295.627,132.17,289.967,132.17,283.787z M429.318,306.396v29.557 H266.745v-29.557H429.318z M429.318,242.793v29.558H266.745v-29.558H429.318z M231.481,208.748v-29.557h197.836v29.557H231.481z"></path> </g> </g></svg>
                                     </span>
                                 </span>
                                 <span className="radio-label">Non OOS-Member</span>
                             </label>
 
-                            <label className='flex flex-col items-center space-y-2'>
+                            <label className='flex flex-col items-center space-y-2 ml-0'>
                                 <input
                                     className="radio-input"
                                     type="radio"
@@ -225,7 +212,7 @@ console.log('got re rendered');
                                     checked={isOOS}
                                     onChange={() => setIsOOS(!isOOS)}
                                 />
-                                <span className="radio-tile">
+                                <span className="radio-tile ">
                                     <span className="radio-icon">
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M485.22,80.604H26.78C12.013,80.604,0,92.615,0,107.382v297.229c0,14.767,12.013,26.786,26.78,26.786h458.44 c14.767,0,26.78-12.019,26.78-26.786V107.382C512,92.615,499.987,80.604,485.22,80.604z M132.17,283.787v-4.472 c0-2.298-0.38-4.566-1.359-7.174c-0.188-0.248-18.793-25.357-18.793-48.059c0-27.05,16.988-46.685,40.394-46.685 s40.394,19.635,40.394,46.685c0,22.702-18.604,47.811-19.022,48.494c-0.751,2.166-1.132,4.433-1.132,6.739v4.472 c0,6.18,3.628,11.84,9.307,14.449l30.316,12.384c6.584,3.028,11.285,9.084,12.558,16.048l1.431,18.416H78.56l1.407-18.253 c1.294-7.128,5.998-13.184,12.518-16.18l30.442-12.446C128.542,295.627,132.17,289.967,132.17,283.787z M429.318,306.396v29.557 H266.745v-29.557H429.318z M429.318,242.793v29.558H266.745v-29.558H429.318z M231.481,208.748v-29.557h197.836v29.557H231.481z"></path> </g> </g></svg>
                                     </span>
@@ -235,7 +222,8 @@ console.log('got re rendered');
                         </div>
                     </div>
                     {/*  */}
-                    <div className="grid grid-cols-12 gap-6 ">
+                    <h2 className="text-3xl text-gray-800 font-bold text-center m-9">Registration Fees</h2>
+                    <div className="grid grid-cols-12 gap-6">
                         {['early', 'standard', 'spot'].map((rate) => (
                             <div key={rate} className="relative col-span-full md:col-span-4 bg-white shadow-2xl rounded-sm border border-gray-200 ">
                                 <span class="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
