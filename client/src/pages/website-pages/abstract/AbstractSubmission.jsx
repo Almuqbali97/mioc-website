@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../../context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import Loading2 from '../../../components/common/Loading2';
 import { countries } from '../../../constants';
 import { topics } from '../../../constants';

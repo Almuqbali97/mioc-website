@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+import { countries } from '../../constants';
+import PhoneInput from 'react-phone-input-2';
+import MemebershipValidationCard from './MemebershipValidationCard';
 
 const PricingTable = () => {
-
+    const [membershipNumber, setMembershipNumber] = useState('');
+    const [membershipValid, setMembershipValid] = useState(null);
+    console.log(membershipValid);
     const [isOOS, setIsOOS] = useState(false);
     const [isOphthalmologist, setIsOphthalmologist] = useState(false);
 
@@ -23,6 +30,125 @@ const PricingTable = () => {
         return isOOS ? prices[rate].OOS : prices[rate].nonOOS;
     };
 
+    // handle modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [step, setStep] = useState(1);
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [hasoosMembership, setHasoosMembership] = useState(false);
+    const [oosMembership, setoosMembership] = useState('');
+    const [personalInfo, setPersonalInfo] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        mobile: ''
+    });
+    const [addressInfo, setAddressInfo] = useState({
+        address: '',
+        billingAddress: ''
+    });
+    const [selectedPrice, setSelectedPrice] = useState(0);
+
+    const navigate = useNavigate();
+
+    const openModal = (price) => {
+        setSelectedPrice(price);
+        setMembershipNumber('');
+        setMembershipValid(null);
+        setIsModalOpen(true);
+    };
+
+    const validateMembershipNumber = (number) => {
+        // Mock valid membership number for demonstration
+        const validMembershipNumber = 'OOS112';
+        return membershipNumber === validMembershipNumber;
+    };
+    const handleMembershipNumberChange = (e) => {
+        const number = e.target.value;
+        setMembershipNumber(number);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setStep(1);
+        // Reset form state
+        setSelectedCountry('');
+        setHasoosMembership(false);
+        setoosMembership('');
+        setPersonalInfo({
+            firstName: '',
+            lastName: '',
+            email: '',
+        });
+        setAddressInfo({
+            address: '',
+            billingAddress: ''
+        });
+    };
+    const handlePhoneChange = (value) => {
+        setPersonalInfo({ ...personalInfo, mobile: value });
+    };
+    const handleCountryChange = (e) => {
+        setSelectedCountry(e.target.value);
+    };
+
+    const handleoosMembershipChange = (e) => {
+        setHasoosMembership(e.target.value === 'yes');
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setPersonalInfo({ ...personalInfo, [name]: value });
+    };
+
+    const handleAddressChange = (e) => {
+        const { name, value } = e.target;
+        setAddressInfo({ ...addressInfo, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Navigate to checkout page with the form data
+        navigate('/checkout', {
+            state: {
+                selectedCountry,
+                hasoosMembership,
+                oosMembership,
+                personalInfo,
+                addressInfo,
+                selectedPrice,
+            }
+        });
+        closeModal();
+    };
+
+    const validateStep = () => {
+        switch (step) {
+            case 1:
+                return selectedCountry !== '';
+            case 2:
+                if (hasoosMembership) {
+                    return oosMembership !== '';
+                }
+                return true;
+            case 3:
+                return personalInfo.firstName !== '' && personalInfo.lastName !== '' && personalInfo.email !== '' && personalInfo.mobile !== '';
+            case 4:
+                return addressInfo.address !== '' && addressInfo.billingAddress !== '';
+            default:
+                return false;
+        }
+    };
+
+    const nextStep = () => {
+        if (validateStep()) {
+            setStep(step + 1);
+        }
+    };
+
+    const prevStep = () => {
+        setStep(step - 1);
+    };
+
     const getTooltipMessage = (rate) => {
         switch (rate) {
             case 'early':
@@ -35,7 +161,6 @@ const PricingTable = () => {
                 return '';
         }
     };
-
     return (
         <section className="flex flex-col justify-center antialiased text-gray-600 min-h-screen p-4">
 
@@ -222,6 +347,25 @@ const PricingTable = () => {
                         </div>
                     </div>
                     {/*  */}
+                    {!membershipValid &&
+                        <div className='flex justify-center flex-col items-center space-y-7'>
+                            <input
+                                className="validateInput"
+                                value={membershipNumber}
+                                placeholder="Enter your OOS-Membership"
+                                onChange={handleMembershipNumberChange}
+                            />
+                            <button className="validateBtn"
+                                onClick={() => setMembershipValid(validateMembershipNumber())}>
+                                Validate Membership
+                                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                                    <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>}
+                    {/*  */}
+                    {membershipValid && <MemebershipValidationCard />}
+                    {/*  */}
                     <h2 className="text-3xl text-gray-800 font-bold text-center m-9">Registration Fees</h2>
                     <div className="grid grid-cols-12 gap-6">
                         {['early', 'standard', 'spot'].map((rate) => (
@@ -230,7 +374,7 @@ const PricingTable = () => {
                                 <span class="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
                                 <div className="px-5 pt-5 pb-6 border-b border-gray-200">
                                     <header className="flex items-center mb-2">
-                                        <div className={`w-6 h-6 rounded-full flex-shrink-0 ${rate === 'early' ? 'bg-gradient-to-tr from-green-700 to-green-300' : rate === 'standard' ? 'bg-gradient-to-tr from-blue-700 to-blue-300' : 'bg-gradient-to-tr from-red-500 to-indigo-300'} mr-3`}>
+                                        <div className={`w-6 h-6 rounded-full flex-shrink-0 ${rate === 'early' ? 'bg-gradient-to-tr from-green-700 to-green-300' : rate === 'standard' ? 'bg-gradient-to-tr from-blue-700 to-blue-300' : 'bg-gradient-to-tr from-red-500 to-blue-300'} mr-3`}>
                                             <svg className="w-6 h-6 fill-ccurrentColortext-white" viewBox="0 0 24 24">
                                                 <path d="M12 17a.833.833 0 01-.833-.833 3.333 3.333 0 00-3.334-3.334.833.833 0 110-1.666 3.333 3.333 0 003.334-3.334.833.833 0 111.666 0 3.333 3.333 0 003.334 3.334.833.833 0 110 1.666 3.333 3.333 0 00-3.334 3.334c0 .46-.373.833-.833.833z" />
                                             </svg>
@@ -253,6 +397,7 @@ const PricingTable = () => {
                                         <button
                                             className={`font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out ${rate === 'early' ? 'bg-primary_blue focus:outline-none focus-visible:ring-2 hover:bg-blue-700 text-white' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
                                             disabled={rate !== 'early'}
+                                            onClick={() => openModal(getPrice(rate))}
                                         >
                                             Register Now
                                         </button>
@@ -304,6 +449,201 @@ const PricingTable = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Register Now"
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+                overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+            >
+                <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+                    <h2 className="text-2xl font-bold mb-4">Register</h2>
+                    <form onSubmit={handleSubmit}>
+                        {step === 1 && (
+                            <div className="mb-4">
+                                <label htmlFor="country" className="block text-gray-700 mb-2">Country</label>
+                                <select
+                                    id="country"
+                                    name="country"
+                                    value={selectedCountry}
+                                    onChange={handleCountryChange}
+                                    className="w-full p-2 border rounded"
+                                    required
+                                >
+                                    <option value="">Select your country</option>
+                                    {countries.map(country => (
+                                        <option key={country} value={country}>{country}</option>
+                                    ))}
+                                </select>
+                                <button
+                                    type="button"
+                                    className={`mt-4 py-2 px-4 rounded-lg ${validateStep() ? 'bg-primary_blue text-white hover:bg-blue-700' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
+                                    onClick={nextStep}
+                                    disabled={!validateStep()}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
+                        {step === 2 && (
+                            <>
+                                <div className="mb-4">
+                                    <label htmlFor="oosMembership" className="block text-gray-700 mb-2">Are you OOS Member?</label>
+                                    <select
+                                        id="oosMembership"
+                                        name="oosMembership"
+                                        value={hasoosMembership ? 'yes' : 'no'}
+                                        onChange={handleoosMembershipChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    >
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                                {hasoosMembership && (
+                                    <div className="mb-4">
+                                        <label htmlFor="oosMembershipInput" className="block text-gray-700 mb-2">Enter Redeem Code</label>
+                                        <input
+                                            type="text"
+                                            id="oosMembershipInput"
+                                            name="oosMembershipInput"
+                                            value={oosMembership}
+                                            onChange={(e) => setoosMembership(e.target.value)}
+                                            className="w-full p-2 border rounded"
+                                            required
+                                        />
+                                    </div>
+                                )}
+                                <div className="flex justify-between">
+                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
+                                    <button
+                                        type="button"
+                                        className={`py-2 px-4 rounded-lg ${validateStep() ? 'bg-primary_blue text-white hover:bg-blue-700' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
+                                        onClick={nextStep}
+                                        disabled={!validateStep()}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                        {step === 3 && (
+                            <>
+                                <div className="mb-4">
+                                    <label htmlFor="firstName" className="block text-gray-700 mb-2">First Name</label>
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        value={personalInfo.firstName}
+                                        onChange={handleInputChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="lastName" className="block text-gray-700 mb-2">Last Name</label>
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        value={personalInfo.lastName}
+                                        onChange={handleInputChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={personalInfo.email}
+                                        onChange={handleInputChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="mobile" className="block text-gray-700 mb-2">Mobile</label>
+                                    {/* <input
+                                        type="text"
+                                        id="mobile"
+                                        name="mobile"
+                                        value={personalInfo.mobile}
+                                        onChange={handleInputChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    /> */}
+                                    <PhoneInput
+                                        country={'om'}
+                                        id='mobile'
+                                        name='mobile'
+                                        value={personalInfo.mobile}
+                                        onChange={handlePhoneChange}
+                                        inputProps={{
+                                            name: 'mobile',
+                                            required: true,
+                                            className: 'w-full rounded-lg border py-2 pl-14 dark:bg-gray-700 dark:text-white dark:border-none',
+                                        }}
+                                    />
+                                </div>
+                                <div className="flex justify-between">
+                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
+                                    <button
+                                        type="button"
+                                        className={`py-2 px-4 rounded-lg ${validateStep() ? 'bg-primary_blue text-white hover:bg-blue-700' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
+                                        onClick={nextStep}
+                                        disabled={!validateStep()}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                        {step === 4 && (
+                            <>
+                                <div className="mb-4">
+                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address</label>
+                                    <input
+                                        type="text"
+                                        id="address"
+                                        name="address"
+                                        value={addressInfo.address}
+                                        onChange={handleAddressChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">Billing Address</label>
+                                    <input
+                                        type="text"
+                                        id="billingAddress"
+                                        name="billingAddress"
+                                        value={addressInfo.billingAddress}
+                                        onChange={handleAddressChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex justify-between">
+                                    <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700" onClick={prevStep}>Back</button>
+                                    <button type="submit" className="bg-primary_blue text-white py-2 px-4 rounded-lg hover:bg-blue-700">Continue to Checkout</button>
+                                </div>
+                            </>
+                        )}
+                    </form>
+                    <button
+                        onClick={closeModal}
+                        className="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
+                    >
+                        Close
+                    </button>
+                </div>
+            </Modal>
         </section>
     );
 };

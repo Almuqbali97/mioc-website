@@ -89,7 +89,7 @@ const RegistrantsManagement = () => {
                             Ticket Type
                         </th>
                         <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Paid Amount
+                            Amount
                         </th>
                         <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Payment Status
@@ -114,7 +114,7 @@ const RegistrantsManagement = () => {
                                 <div className="text-sm text-gray-900">{registrant.ticketType}</div>
                             </td>
                             <td className="px-3 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">US$ {registrant.amount}</div>
+                                <div className="text-sm text-gray-900">{registrant.amount} OMR</div>
                             </td>
                             <td className="px-3 py-4 whitespace-nowrap">
                                 {registrant.paymentStatus === 'Success' ? (

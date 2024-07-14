@@ -7,7 +7,7 @@ const generateOrderId = () => {
 
 const CheckoutPage = () => {
     const location = useLocation();
-    const { selectedCountry, hasRedeemCode, redeemCode, personalInfo, addressInfo, selectedPrice } = location.state || {};
+    const { selectedCountry, hasRedeemCode, redeemCode, personalInfo, addressInfo, selectedPrice, isOphthalmologist, isOOS, } = location.state || {};
 
     // Scroll to the top when the component mounts
     useEffect(() => {
@@ -40,8 +40,8 @@ const CheckoutPage = () => {
         delivery_zip: '511',
         delivery_country: addressInfo.address,
         delivery_tel: personalInfo.mobile,
-        merchant_param1: '',
-        merchant_param2: '',
+        merchant_param1: isOphthalmologist ? 'ophthalmologist' : 'non-ophthalmologist',
+        merchant_param2: isOOS ? 'oos-memeber' : 'non oos-member',
         merchant_param3: '',
         merchant_param4: '',
         merchant_param5: '',
@@ -66,6 +66,7 @@ const CheckoutPage = () => {
 
             const data = await response.json();
             const { encRequest, accessCode } = data;
+            console.log(accessCode);
             const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
 
             // Redirect to the payment URL
@@ -98,7 +99,7 @@ const CheckoutPage = () => {
                 </div>
                 <h2 className="text-xl font-semibold mb-4">Price</h2>
                 <div className="mb-4">
-                    <p><strong>Total Price:</strong> US$ {selectedPrice}</p>
+                    <p><strong>Total Price:</strong> OMR {selectedPrice}</p>
                 </div>
                 {/* Add more checkout details and payment information as needed */}
                 <button onClick={handleSubmit} className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">
