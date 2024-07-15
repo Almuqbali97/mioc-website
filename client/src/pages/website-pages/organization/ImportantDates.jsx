@@ -9,15 +9,15 @@ let importantDates = [
     },
     {
         event: "Early Bird Registration Opens",
-        date: "15 June 2024"
+        date: "15 July 2024"
     },
     {
         event: "Program Schedule & Topics",
-        date: "15 June 2024"
+        date: "15 July 2024"
     },
     {
         event: "Accommodation Booking Opens",
-        date: "15 June 2024"
+        date: "25 July 2024"
     },
     {
         event: "Invited Speakers Announcement",
