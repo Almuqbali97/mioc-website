@@ -9,11 +9,11 @@ let importantDates = [
     },
     {
         event: "Early Bird Registration Opens",
-        date: "15 July 2024"
+        date: "20 July 2024"
     },
     {
         event: "Program Schedule & Topics",
-        date: "15 July 2024"
+        date: "20 July 2024"
     },
     {
         event: "Accommodation Booking Opens",
