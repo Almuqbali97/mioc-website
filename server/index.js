@@ -6,8 +6,9 @@ import userRoutes from './routes/userRoutes.js';
 import abstractRoutes from './routes/abstractRoutes.js';
 import { isAuthenticated } from './middlewares/isAuenticatedMiddleware.js';
 import { isAdmin } from './middlewares/isAuthorizedAdmin.js';
-import ticketRoutes from './routes/ticketPaymentRoutes.js'
-import registrants from './routes/registrantsRoutes.js'
+import oosMembershipRoutes from './routes/oosMembershipRouts.js'
+import ticketRoutes from './routes/PaymentRoutes.js'
+import registrants from './routes/registrationRoutes.js'
 const app = express();
 const port = process.env.PORT || 3000;
 import sponserRoute from './routes/sponserRoutes.js'
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 //routes
 app.use('/user', userRoutes);
 app.use('/abstract', abstractRoutes)
+app.use('/', oosMembershipRoutes)
 app.use('/', ticketRoutes)
 app.use('/', registrants)
 app.use('/', sponserRoute)

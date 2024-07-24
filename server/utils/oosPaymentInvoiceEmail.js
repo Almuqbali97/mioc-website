@@ -4,7 +4,7 @@ import { invoiceEmail } from '../emailTemplates/invoiceEmailTemplate.js';
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-export async function successfullConferenceRegistrationEmail(email, userData, qrCodeBuffer) {
+export async function oosMembershipInvoiceEmail(email, userData) {
     try {
         const pdfBuffer = await generateInvoice(userData);
         const msg = {
@@ -13,9 +13,9 @@ export async function successfullConferenceRegistrationEmail(email, userData, qr
                 email: 'info@mioc.org.om',
                 name: 'MIOC2024'
             },
-            subject: 'Conference Registration Invoice',
-            text: 'Conference Registration Invoice',
-            html: invoiceEmail(userData.amount, userData.paymentDate, userData.orderId, userData.paymentMethod, userData.ticketType),
+            subject: 'OOS Membership Invoice',
+            text: 'OOS Membership Invoice',
+            html: invoiceEmail(userData.amount, userData.paymentDate, userData.orderId, userData.paymentMethod, userData.membershipType),
             headers: {
                 'X-Sender': 'info@mioc.org.om',
                 'X-Mailer': 'SendGrid-Mail-Node',
@@ -28,13 +28,6 @@ export async function successfullConferenceRegistrationEmail(email, userData, qr
                     type: 'application/pdf',
                     disposition: 'attachment'
                 },
-                {
-                    content: qrCodeBuffer.toString('base64'),
-                    filename: 'qrcode.png',
-                    type: 'image/png',
-                    disposition: 'attachment',
-                    content_id: 'qrcode'
-                }
             ]
         };
 
@@ -97,7 +90,7 @@ function generateCustomerInformation(doc, invoice) {
         .text('info@mioc.org.om', 50, 220)
 
         .text('Bill to', 300, 160)
-        .text(invoice.firstName + ' ' + invoice.lastName, 300, 175)
+        .text(invoice.fullName)
         .text(invoice.city, 300, 190)
         .text(invoice.zip, 300, 205)
         .text(invoice.country, 300, 220)
@@ -107,7 +100,7 @@ function generateCustomerInformation(doc, invoice) {
         .fillColor('#000000')
         .fontSize(12)
         .text(`${invoice.amount} OMR issued on ${invoice.paymentDate}`, 50, 260)
-        .text(`Price for ${invoice.oosMembershipNumber ? `OOS Member: ${invoice.oosMembershipNumber}` : 'NON-OOS Member'}`, 50, 280);
+        .text(`Price for OOS Member: ${invoice.membership_id}`, 50, 280);
 }
 
 function generateInvoiceTable(doc, invoice) {
@@ -137,7 +130,7 @@ function generateInvoiceTable(doc, invoice) {
     generateTableRow(
         doc,
         invoiceTableTop + 30,
-        (invoice.ticketType).toUpperCase() + ' ' + 'REGISTRATION',
+        (invoice.membershipType).toUpperCase() + ' ' + 'OOS MEMBERSHIP',
         `${(invoice.amount)} OMR`,
         `${invoice.amount} OMR`
     );

@@ -3,6 +3,8 @@ import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
 import PricingTable from '../../../components/website/PricingTable';
 import Accordian from '../../../components/website/Accordian';
+import PricingTableSample2 from '../../../components/website/PricingTableSample2';
+import PricingTableSample3 from '../../../components/website/PricingTableSample3';
 
 
 const OnlineRegistration = () => {
@@ -27,7 +29,7 @@ const OnlineRegistration = () => {
                         <li>Please contact us on <a href="mailto:info@mioc.org.om" className="text-blue-600 underline">info@mioc.org.om</a> for discounted group registration rates.</li>
                     </ul>
                 </div>
-                <PricingTable />
+                <PricingTableSample2 />
                 <Accordian />
             </div>
         </div>

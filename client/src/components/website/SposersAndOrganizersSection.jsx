@@ -53,9 +53,10 @@ const SposersAndOrganizersSection = () => {
                             <span className="relative ">Organizers</span></span>
                     </span>
                     </h2>
-                    <div className="flex justify-center space-x-9 content-end h-14 sm:h-20 lg:h-[6.8rem] bottom-0 p-0 md:border-r-[1px] md:pr-11">
+                    <div className="flex justify-center space-x-7 content-end h-14 sm:h-20 lg:h-[6.8rem] bottom-0 p-0 md:border-r-[1px] md:pr-11">
+                        <div className='text-white md:mt-2 '><span className='text-xs md:text-base'>مـــــــــــــركز طــــــــــب العيــــــــــــــون<br/>مستشفى المدينة الطبية للأجهزة<br/>الـــعسكرية والأمـــــنية - مــــسقط</span></div>
                         <img src={logo3} alt={'organizer.name'} className="object-contain" />
-                        <img src={logo1} alt={'organizer.name'} className="object-contain" />
+                        {/* <img src={logo1} alt={'organizer.name'} className="object-contain" /> */}
                     </div>
                 </div>
 

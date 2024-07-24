@@ -4,8 +4,14 @@ import qs from 'qs';
 configDotenv();
 import { v4 as uuidv4 } from 'uuid';
 import { registrationListCollection } from '../models/registrationListModel.js';
-import { successfullConferenceRegistrationEmail,generateInvoice } from '../utils/paymentInvoiceEmail.js'
+import { registrationPaymentsCollection } from '../models/registrationPaymentsModel.js';
+import { successfullConferenceRegistrationEmail } from '../utils/paymentInvoiceEmail.js'
+import { registrationNotification } from '../utils/notificationEmails.js'
 import QRCode from 'qrcode'
+import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
+import { oosMembershipInvoiceEmail } from '../utils/oosPaymentInvoiceEmail.js';
+import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
+import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
 const workingKey = process.env.WORKING_KEY;
 const accessCode = process.env.ACCESS_CODE;
 
@@ -54,62 +60,192 @@ export const paymentRequest = (req, res) => {
 
 }
 
-export const successfullPayment = async (req, res) => {
-    const encResp = req.body.encResp;
-    const decResp = decrypt(encResp, workingKey);
-    const decreptedDataToObject = qs.parse(decResp);
-    // Log the decrypted data
-    const id = uuidv4();
-    // Store user info in MongoDB
-    const date = new Date();
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
+export const registrationPaymentRes = async (req, res) => {
+    const encRes = req.body.encResp;
+    const decRes = decrypt(encRes, process.env.WORKING_KEY);
+    const decryptedResToObject = qs.parse(decRes);
+    console.log(decryptedResToObject); // Log the decrypted data
 
-    console.log(formattedDate); // Outputs something like "13 July 2024"
+    const id = uuidv4();
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const paymentRequest = {
+        ...decryptedResToObject
+    };
+
+    const userData = {
+        id: id,
+        orderId: decryptedResToObject.order_id,
+        firstName: decryptedResToObject.billing_name.split(' ')[0],
+        lastName: decryptedResToObject.billing_name.split(' ')[1],
+        email: decryptedResToObject.billing_email,
+        mobile: decryptedResToObject.billing_tel,
+        country: decryptedResToObject.billing_country,
+        state: decryptedResToObject.billing_state,
+        city: decryptedResToObject.billing_city,
+        zip: decryptedResToObject.billing_zip,
+        amount: decryptedResToObject.amount,
+        ticketType: decryptedResToObject.merchant_param1,
+        oosMembership: decryptedResToObject.merchant_param2,
+        paymentDate: formattedDate,
+        paymentStatus: decryptedResToObject.order_status,
+        paymentMethod: decryptedResToObject.payment_mode,
+        oosMembershipNumber: decryptedResToObject.merchant_param3
+    };
 
     try {
-        const userData = {
-            id: id,
-            firstName: decreptedDataToObject.billing_name.split(' ')[0],
-            lastName: decreptedDataToObject.billing_name.split(' ')[1],
-            email: decreptedDataToObject.billing_email,
-            mobile: decreptedDataToObject.billing_tel,
-            address: decreptedDataToObject.billing_address,
-            city: decreptedDataToObject.billing_city,
-            state: decreptedDataToObject.billing_state,
-            zip: decreptedDataToObject.billing_zip,
-            country: decreptedDataToObject.billing_country,
-            amount: decreptedDataToObject.amount,
-            ticketType: decreptedDataToObject.merchant_param1,
-            oosMembership: decreptedDataToObject.merchant_param2,
-            orderId: decreptedDataToObject.order_id,
-            paymentDate: formattedDate,
-            paymentStatus: decreptedDataToObject.order_status,
-        };
-        console.log('User info stored in MongoDB');
-        // Generate QR code
-        const qrCodeUrl = `http://localhost:5000/registrar/${id}`;
-        const qrCodeDataUrl = await QRCode.toDataURL(qrCodeUrl);
-        const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
-
-        // add send invoice and confirmation email here
-        if (decreptedDataToObject.order_status === 'Success') {
-            await registrationListCollection.insertOne(userData);
-            const pdfPath = 'invoice.pdf';
-            await generateInvoice(userData, pdfPath);
-            await successfullConferenceRegistrationEmail(decreptedDataToObject.billing_email, pdfPath,userData);
-        }
+        // Insert the payment request details into the database
+        await registrationPaymentsCollection.insertOne(paymentRequest);
     } catch (error) {
-        console.error('Error storing user info in MongoDB', error);
+        console.error("Failed to insert payment request:", error);
+        // Continue execution as payment details are already determined by third party
     }
-    if (decreptedDataToObject.order_status === 'Failure') {
-        res.redirect('http://localhost:5000/payment/failed');
-        // res.redirect('https://mioc.org.om/payment/failed');
+
+    try {
+        // Insert user data for registration
+        await registrationListCollection.insertOne(userData);
+    } catch (error) {
+        console.error("Failed to insert user data:", error);
+        // Continue execution as payment details are already determined by third party
     }
-    res.redirect('http://localhost:5000/payment/success');
-    // res.redirect('https://mioc.org.om/payment/success');
+
+    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Approved') {
+
+        try {
+            // Send notification email
+            await registrationNotification(userData);
+        } catch (error) {
+            console.error("Failed to send registration notification email:", error);
+            // Continue execution as payment details are already determined by third party
+        }
+
+        try {
+            // Generate QR code and send invoice email
+            const qrCodeUrl = userData.id;
+            const qrCodeDataUrl = await QRCode.toDataURL(qrCodeUrl);
+            const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
+            // const pdfPath = 'invoice.pdf';
+            // await generateInvoice(userData, pdfPath);
+            await successfullConferenceRegistrationEmail(decryptedResToObject.billing_email, userData, qrCodeBuffer);
+        } catch (error) {
+            console.error("Failed to generate invoice and send email:", error);
+            // Continue execution as payment details are already determined by third party
+        }
+    }
+
+    // Redirect to React with parameters
+    const queryParams = new URLSearchParams({
+        orderStatus: decryptedResToObject.order_status,
+        orderId: decryptedResToObject.order_id
+    }).toString();
+    return res.redirect(`http://localhost:5000/registration/payment/response?${queryParams}`);
+};
+
+
+export const getInvoiceByOrderID = async (req, res) => {
+    const { order_id } = req.params;
+
+    try {
+        const invoice = await registrationPaymentsCollection.findOne({ order_id: order_id });
+
+        if (!invoice) {
+            return res.status(404).json({ message: 'invoice not found' });
+        }
+
+        return res.status(200).json(invoice);
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Something went wrong, please try again' });
+    }
 }
 
+export const oosMembershipPaymentRes = async (req, res) => {
+    const encRes = req.body.encResp;
+    const decRes = decrypt(encRes, process.env.WORKING_KEY);
+    const decryptedResToObject = qs.parse(decRes);
+    console.log(decryptedResToObject); // Log the decrypted data
+
+    const id = uuidv4();
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const paymentRequest = {
+        ...decryptedResToObject
+    };
+
+    const oosMemberData = {
+        id: id,
+        membership_id: "OOS00498",
+        orderId: decryptedResToObject.order_id,
+        fullName: decryptedResToObject.billing_name.split(' ')[0] + ' ' + decryptedResToObject.billing_name.split(' ')[1],
+        email: decryptedResToObject.billing_email,
+        contactNumber: decryptedResToObject.billing_tel,
+        country: decryptedResToObject.billing_country,
+        state: decryptedResToObject.billing_state,
+        city: decryptedResToObject.billing_city,
+        zip: decryptedResToObject.billing_zip,
+        amount: decryptedResToObject.amount,
+        nationality: decryptedResToObject.merchant_param1,
+        workingPlace: decryptedResToObject.merchant_param2,
+        designation: decryptedResToObject.merchant_param3,
+        membershipType: decryptedResToObject.merchant_param4,
+        paymentDate: formattedDate,
+        paymentStatus: decryptedResToObject.order_status,
+        paymentMethod: decryptedResToObject.payment_mode,
+        expirationDate: "2024-12-31",
+    };
+
+    try {
+        // Insert the payment request details into the database
+        await oosPaymentsCollection.insertOne(paymentRequest);
+    } catch (error) {
+        console.error("Failed to insert oos payment request:", error);
+        // Continue execution as payment details are already determined by third party
+    }
+
+    try {
+        // Insert user data for registration
+        await oosMembershipCollection.insertOne(oosMemberData);
+    } catch (error) {
+        console.error("Failed to insert oos data:", error);
+        // Continue execution as payment details are already determined by third party
+    }
+
+    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Approved') {
+
+        try {
+            // Send notification email
+            await oosMembershipCertificateEmail(decryptedResToObject.billing_email,oosMemberData);
+        } catch (error) {
+            console.error("Failed to send registration notification email:", error);
+            // Continue execution as payment details are already determined by third party
+        }
+
+        try {
+
+            await oosMembershipInvoiceEmail(decryptedResToObject.billing_email, oosMemberData);
+        } catch (error) {
+            console.error("Failed to generate invoice and send email:", error);
+            // Continue execution as payment details are already determined by third party
+        }
+    }
+
+    // Redirect to React with parameters
+    const queryParams = new URLSearchParams({
+        orderStatus: decryptedResToObject.order_status,
+        orderId: decryptedResToObject.order_id
+    }).toString();
+    return res.redirect(`http://localhost:5000/registration/payment/response?${queryParams}`);
+};
 
 function encrypt(raw, key) {
     const iv = crypto.randomBytes(16);
@@ -136,10 +272,10 @@ function decrypt(encryptedData, key) {
     return decryptedText;
 }
 
-function resHandler(encResp, workingKey) {
-    const decResp = decrypt(encResp, workingKey);
+function resHandler(encRes, workingKey) {
+    const decRes = decrypt(encRes, workingKey);
     let data = '<table border=1 cellspacing=2 cellpadding=2><tr><td>';
-    data += decResp.replace(/=/g, '</td><td>'); // Replace '=' with '</td><td>'
+    data += decRes.replace(/=/g, '</td><td>'); // Replace '=' with '</td><td>'
     data = data.replace(/&/g, '</td></tr><tr><td>'); // Replace '&' with '</td></tr><tr><td>'
     data += '</td></tr></table>';
 

@@ -8,9 +8,19 @@ const generateCustomerIdentifier = () => {
     return Math.floor(Math.random() * 1000);
 };
 
-const CheckoutPage = () => {
+const OosCheckout = () => {
     const location = useLocation();
-    const { selectedCountry, hasRedeemCode, redeemCode, personalInfo, addressInfo, selectedPrice, isOphthalmologist, isOOS, oosMembership } = location.state || {};
+    const {
+        selectedCountry,
+        nationality,
+        personalInfo,
+        addressInfo,
+        workInfo,
+        otherWorkPlace,
+        otherProfession,
+        selectedPrice,
+        membershipType,
+    } = location.state || {};
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -21,7 +31,7 @@ const CheckoutPage = () => {
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: selectedPrice,
-        redirect_url: import.meta.env.VITE_API_URL + '/registration/payment/response',
+        redirect_url: import.meta.env.VITE_API_URL + '/oos/membership/payment/response',
         cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
         billing_name: personalInfo.firstName + ' ' + personalInfo.lastName,
@@ -39,10 +49,10 @@ const CheckoutPage = () => {
         delivery_zip: addressInfo.postal,
         delivery_country: selectedCountry,
         delivery_tel: personalInfo.mobile,
-        merchant_param1: isOphthalmologist ? 'ophthalmologist' : 'non-ophthalmologist',
-        merchant_param2: isOOS ? 'oos-member' : 'non oos-member',
-        merchant_param3: isOOS ? oosMembership : '',
-        merchant_param4: '',
+        merchant_param1: nationality,
+        merchant_param2: workInfo.workingPlace === 'Other' ? otherWorkPlace : workInfo.workingPlace,
+        merchant_param3: workInfo.profession === 'Other' ? otherProfession : workInfo.profession,
+        merchant_param4: membershipType,
         merchant_param5: '',
         promo_code: '',
         customer_identifier: personalInfo.firstName + '.' + personalInfo.lastName + generateCustomerIdentifier(),
@@ -109,12 +119,10 @@ const CheckoutPage = () => {
                             <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{selectedCountry}</p>
                         </div>
 
-                        {hasRedeemCode && (
-                            <div className="mt-4">
-                                <label className="block text-gray-700 dark:text-white mb-1">Redeem Code</label>
-                                <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{redeemCode}</p>
-                            </div>
-                        )}
+                        <div className="mt-4">
+                            <label className="block text-gray-700 dark:text-white mb-1">Nationality</label>
+                            <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{nationality}</p>
+                        </div>
                     </div>
 
                     <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2">Billing Address Information</h2>
@@ -132,6 +140,19 @@ const CheckoutPage = () => {
                         <div className="mt-4">
                             <label className="block text-gray-700 dark:text-white mb-1">City</label>
                             <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{addressInfo.city}</p>
+                        </div>
+                    </div>
+
+                    <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2">Work Information</h2>
+                    <div className="mb-6">
+                        <div className="mt-4">
+                            <label className="block text-gray-700 dark:text-white mb-1">Working Place</label>
+                            <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{workInfo.workingPlace === 'Other' ? otherWorkPlace : workInfo.workingPlace}</p>
+                        </div>
+
+                        <div className="mt-4">
+                            <label className="block text-gray-700 dark:text-white mb-1">Profession</label>
+                            <p className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none">{workInfo.profession === 'Other' ? otherProfession : workInfo.profession}</p>
                         </div>
                     </div>
 
@@ -167,4 +188,4 @@ const CheckoutPage = () => {
     );
 };
 
-export default CheckoutPage;
+export default OosCheckout;

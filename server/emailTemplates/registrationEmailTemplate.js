@@ -1,73 +1,6 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import dotenv from "dotenv";
-import { registrationEmail } from "../emailTemplates/registrationEmailTemplate.js";
-dotenv.config();
-const sesAcessKey = process.env.AMAZON_SES_ACCESS_KEY;
-const sesSecretKey = process.env.AMAZON_SES_SECRET_KEY;
-const awsRegion = process.env.AMAZON_SES_REGION;
-
-
-const sesClient = new SESClient({
-    region: awsRegion,
-    credentials: {
-        accessKeyId: sesAcessKey,
-        secretAccessKey: sesSecretKey,
-    },
-});
-
-// this wipp bes seint 1st septemper to all reviewers
-export async function abstractNotificationEmail(topic) {
-    const emailMappings = {
-        miscellaneous: "ashokabandara75@gmail.com",
-        // Add more mappings as needed
-    };
-
-    // Determine the recipient based on the topic
-    const recipientEmail = emailMappings[topic.toLowerCase()] || "astamahota@gmail.com"; // Set a default email if topic doesn't match
-    const params = {
-        Destination: {
-            ToAddresses: [recipientEmail], // Replace with your recipient's email address
-        },
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: `
-                        <html>
-                            <body>
-                                <h3>There is a new abstract submission of ${topic}</h3>
-                            </body>
-                        </html>`
-                },
-                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
-            },
-            Subject: { Data: "Abstract Submission Notificatoin" }, // Replace with your email subject
-        },
-        Source: "MIOC Notification <no-replay@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["no-replay@mioc.org.om"],
-        // ConfigurationSetName: 'EventsLogs',
-    };
-
-    try {
-        const data = await sesClient.send(new SendEmailCommand(params));
-        console.log("Email sent successfully:", data);
-    } catch (err) {
-        console.error("Error sending email:", err);
-    }
-}
-
-
-
-export async function abstractSuccssfullSubmissionEmail(email, firstName, lastName, title, id) {
-    const params = {
-        Destination: {
-            ToAddresses: [email], // Replace with your recipient's email address
-        },
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: `<!DOCTYPE html
+export function registrationEmail(firstName, lastName, amount, paymentDate, registrationType, orderId, paymentStatus) {
+    return `
+<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en"
     style="padding:0;Margin:0">
@@ -548,6 +481,51 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                 width: 414px !important
             }
         }
+
+        .email-container {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .header {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .date {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .details {
+            margin-top: 16px;
+        }
+
+        .details p {
+            margin: 0;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .details span {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .right-aligned {
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -606,7 +584,8 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                                 <td align="center" style="padding:0;Margin:0">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:23px;color:#ffffff;font-size:15px">
-                                                                        <strong>28-30 Nov, 2024 Muscat, Oman</strong></p>
+                                                                        <strong>28-30 Nov, 2024 Muscat, Oman</strong>
+                                                                    </p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -637,73 +616,71 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                         <table width="100%" cellspacing="0" cellpadding="0"
                                                             role="presentation"
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="center"
-                                                                    style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:20px;padding-right:20px">
-                                                                    <h3
-                                                                        style="Margin:0;line-height:38px;mso-line-height-rule:exactly;font-family:'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:28px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        Dear ${firstName} ${lastName},</h3>
+
+
+
+                                                            <tr>
+                                                                <td
+                                                                    style="border-collapse:collapse;padding-right:10px;padding-left:10px">
+                                                                    <div
+                                                                        style="color:#444;font-family:Calibri,Candara,Segoe,'Segoe UI',Optima,Arial,sans-serif;font-size:11pt;line-height:120%;text-align:left">
+                                                                        <br><br>Dear ${firstName}
+                                                                        ${lastName},<br><br>Thank you
+                                                                        for your registration to attend the <b>20th
+                                                                            Muscat International Ophthalmology
+                                                                            Conference (<span
+                                                                                class="il">MIOC</span>)</b> jointly
+                                                                        with <b>4th Eastern Mediterranean Council of
+                                                                            Optometry Conference (EMCO)</b> and the
+                                                                        <b>International Keratoconus Society (IKS)</b>
+                                                                        which will be held
+                                                                        on 28 - 30 November 2024
+                                                                        at Muscat, Oman.<br><br>Your registration request has
+                                                                        been allocated a unique ID number.
+                                                                        Please take note of your ID number
+                                                                        below as you may will require it on all future
+                                                                        communications with the registration
+                                                                        team.<b></b> Please
+                                                                        see below
+                                                                        your registration details:<br><br>
+                                                                    </div>
+                                                                    <div class="email-container">
+                                                                        <div class="header">
+                                                                            Receipt from Oman Ophthalmic Society.
+                                                                        </div>
+                                                                        <div class="amount">
+                                                                            Fees: ${amount} OMR
+                                                                        </div>
+                                                                        <div class="date">
+                                                                            Issued on ${paymentDate}
+                                                                        </div>
+                                                                        <hr>
+
+                                                                        <div class="details">
+                                                                            <p>
+                                                                                <span>Registration type: ${registrationType}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span>Order ID:</span>
+                                                                                <span
+                                                                                    class="right-aligned">${orderId}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span>Payment Status:</span>
+                                                                                <span
+                                                                                    class="right-aligned">${paymentStatus}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
+                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:10px;padding-right:0px">
                                                                     <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        Thank you for your interest in participating in
-                                                                        the upcoming 20th Muscat International
-                                                                        Ophthalmology Conference, jointly held with the
-                                                                        4th Eastern Mediterranean Council of Optometry
-                                                                        Conference and the International Keratoconus
-                                                                        Society on November 28–30, 2024.</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
-                                                                    <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        We received your abstract titled: ${title} and it is being forwarded to
-                                                                        the relevant abstract reviewers. Your abstract
-                                                                        reference number is: ${id}</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
-                                                                    <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        You can edit the submitted abstract and submit
-                                                                        more abstracts until the deadline on September
-                                                                        01, 2024.</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
-                                                                    <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        The acceptance notification email will be sent
-                                                                        to you by October 01, 2024.</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
-                                                                    <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        If you have any questions or need additional
-                                                                        support, please do not hesitate to reach out to
-                                                                        us at info@mioc.org.om.</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-collapse:collapse">
-                                                                <td align="left"
-                                                                    style="padding:0;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
-                                                                    <p
-                                                                        style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
+                                                                        style="margin-top:20px;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
                                                                         Sincerely,<br />
-                                                                        MIOC Abstract Management Team</p>
+                                                                        MIOC Team</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -761,7 +738,8 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
                         <tr style="border-collapse:collapse">
                             <td align="center" style="padding:0;Margin:0">
-                                <table bgcolor="#ffffff" class="es-header-body" align="center" cellpadding="0" cellspacing="0" role="none"
+                                <table bgcolor="#ffffff" class="es-header-body" align="center" cellpadding="0"
+                                    cellspacing="0" role="none"
                                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
                                     <tr style="border-collapse:collapse">
                                         <td style="Margin:0;padding-top:10px;padding-bottom:10px;padding-left:20px;padding-right:20px;background-color:#095c9f"
@@ -772,17 +750,20 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                     <td style="width:270px" valign="top">
                                             <![endif]-->
                                             <!--[if mso]></td><td style="width:20px"></td><td style="width:270px" valign="top"><![endif]-->
-                                            <table class="es-right" cellspacing="0" cellpadding="0" align="center" role="none"
+                                            <table class="es-right" cellspacing="0" cellpadding="0" align="center"
+                                                role="none"
                                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;margin:0 auto">
                                                 <tr style="border-collapse:collapse">
                                                     <td align="center" style="padding:0;Margin:0;width:270px">
-                                                        <table width="100%" cellspacing="0" cellpadding="0" role="presentation"
+                                                        <table width="100%" cellspacing="0" cellpadding="0"
+                                                            role="presentation"
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                             <tr style="border-collapse:collapse">
                                                                 <td class="es-m-txt-c" align="center"
                                                                     style="padding:0;Margin:0;font-size:0px">
-                                                                    <table class="es-table-not-adapt es-social" cellspacing="0"
-                                                                        cellpadding="0" role="presentation"
+                                                                    <table class="es-table-not-adapt es-social"
+                                                                        cellspacing="0" cellpadding="0"
+                                                                        role="presentation"
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;margin:0 auto">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td valign="top" align="center"
@@ -805,7 +786,8 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                                                         alt="Inst" width="32"
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>
-                                                                            <td valign="top" align="center" style="padding:0;Margin:0">
+                                                                            <td valign="top" align="center"
+                                                                                style="padding:0;Margin:0">
                                                                                 <a target="_blank"
                                                                                     href="https://x.com/mioc_oman?s=21&t=g3Pqb7NMI7Y9YyKlI08wzw"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#B0883F;font-size:14px"><img
@@ -853,7 +835,7 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                                     style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#999999">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:14px;color:#999999;font-size:12px">
-                                                                        ©2024 MIOC . 112 Oman Muscat, AlKhoud</p>
+                                                                        ©2024 MIOC 112 Oman Muscat, AL-Khoud</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -876,7 +858,8 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:14px;color:#999999;font-size:12px">
                                                                         <b>Visit website</b> | <strong>Terms &amp;
-                                                                            Conditions</strong> | <b>Copyright</b></p>
+                                                                            Conditions</strong> | <b>Copyright</b>
+                                                                    </p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -895,57 +878,7 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
     </div>
 </body>
 
-</html>`
-                },
-                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
-            },
-            Subject: { Data: "Abstract Submission Confirmation" }, // Replace with your email subject
-        },
-        Source: "MIOC2024 <info@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["info@mioc.org.om"],
-    };
-
-    try {
-        const data = await sesClient.send(new SendEmailCommand(params));
-        console.log("Email sent successfully:", data);
-    } catch (err) {
-        console.error("Error sending email:", err);
-    }
+</html>
+}`;
+    return registrationEmail;
 }
-
-
-// this email will be sent on registration with payment attempt
-export async function registrationNotification(userData) {
-    const params = {
-        Destination: {
-            ToAddresses: [userData.email], // Replace with your recipient's email address
-        },
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: registrationEmail(userData.firstName, userData.lastName, userData.amount, userData.paymentDate, userData.ticketType, userData.orderId, userData.paymentStatus)
-                },
-                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
-            },
-            Subject: { Data: "Conference Registration" }, // Replace with your email subject
-        },
-        Source: "MIOC2024 <info@mioc.org.om>", // Replace with your verified sender's email address
-        ReplyToAddresses: ["info@mioc.org.om"],
-    };
-
-    try {
-        const data = await sesClient.send(new SendEmailCommand(params));
-        console.log("Email sent successfully:", data);
-    } catch (err) {
-        console.error("Error sending email:", err);
-    }
-}
-
-
-
-
-
-
-
-

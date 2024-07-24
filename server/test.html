@@ -479,40 +479,48 @@
                 width: 414px !important
             }
         }
-           .email-container {
+
+        .email-container {
             border: 1px solid #eaeaea;
             border-radius: 8px;
             padding: 16px;
             max-width: 600px;
             margin: auto;
         }
+
         .header {
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 8px;
         }
+
         .amount {
             font-size: 24px;
             font-weight: bold;
             color: #000;
             margin-bottom: 4px;
         }
+
         .date {
             color: #666;
             margin-bottom: 16px;
         }
+
         .details {
             margin-top: 16px;
         }
+
         .details p {
             margin: 0;
             color: #666;
             margin-bottom: 8px;
         }
+
         .details span {
             font-weight: bold;
             color: #000;
         }
+
         .right-aligned {
             text-align: right;
         }
@@ -574,7 +582,7 @@
                                                                 <td align="center" style="padding:0;Margin:0">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:23px;color:#ffffff;font-size:15px">
-                                                                        <strong>MIOC 28-30 Nov, 2024</strong>
+                                                                        <strong>28-30 Nov, 2024 Muscat, Oman</strong>
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -606,54 +614,58 @@
                                                         <table width="100%" cellspacing="0" cellpadding="0"
                                                             role="presentation"
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                     
-                                                     
-                                                      
-                                                             <tr>
-                                                                    <td
-                                                                        style="border-collapse:collapse;padding-right:10px;padding-left:10px">
-                                                                        <div
-                                                                            style="color:#444;font-family:Calibri,Candara,Segoe,'Segoe UI',Optima,Arial,sans-serif;font-size:11pt;line-height:120%;text-align:left">
-                                                                            <br><br>Dear ${firstName} ${lastName},<br><br>Thank you
-                                                                            for your registration to attend the <b>20th Muscat International Ophthalmology Conference (<span
-                                                                                    class="il">MIOC</span>)</b> jointly
-                                                                            with <b>4th Eastern Mediterranean Council of
-                                                                            Optometry Conference (EMCO)</b> and the <b>International Keratoconus Society (IKS)</b> which will be held
-                                                                            on 28 - 30 November 2024
-                                                                            at Oman Convention &amp; Exhibition Centre,
-                                                                            Muscat.<br><br>Your registration request has
-                                                                            been allocated a unique ID number.
-                                                                            Please take note of your ID number
-                                                                            below as you may will require it on all future
-                                                                            communications with the registration
-                                                                            team.<br><br><b>Your unique registration ID
-                                                                                number is ${uniqueNumber}</b><br><br>Please see below
-                                                                            your registration details:<br><br>
+
+
+
+                                                            <tr>
+                                                                <td
+                                                                    style="border-collapse:collapse;padding-right:10px;padding-left:10px">
+                                                                    <div
+                                                                        style="color:#444;font-family:Calibri,Candara,Segoe,'Segoe UI',Optima,Arial,sans-serif;font-size:11pt;line-height:120%;text-align:left">
+                                                                        <br><br>Dear ${fullName},<br><br>Greetings from
+                                                                        <b> Oman Ophthalmic Society (OOS).</b>
+
+                                                                        This is to acknowledge your payment of ${amount}
+                                                                        OMR for the annual membership fee of the OOS.
+                                                                        Your OOS membership number is :<b>${oosId}</b><br/><br />
+                                                                        Please use this number to register for the
+                                                                        upcoming MIOC2024 conference congress and get the
+                                                                        discounted rate specially given
+                                                                        for OOS members.
+
+                                                                        your registration details:<br><br>
+                                                                    </div>
+                                                                    <div class="email-container">
+                                                                        <div class="header">
+                                                                            Receipt from Oman Ophthalmic Society.
                                                                         </div>
-                                                                        <div class="email-container">
-                                                                            <div class="header">
-                                                                                Receipt from Oman Opthalmology Society.
-                                                                            </div>
-                                                                            <div class="amount">
-                                                                                ${amount} OMR
-                                                                            </div>
-                                                                            <div class="date">
-                                                                                Paied on ${paymentDate}
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="details">
-                                                                                <p>
-                                                                                    <span>Receipt number:</span>
-                                                                                    <span class="right-aligned">2848-7984</span>
-                                                                                </p>
-                                                                                <p>
-                                                                                    <span>Invoice number:</span>
-                                                                                    <span class="right-aligned">346484A6B-0002</span>
-                                                                                </p>
-                                                                            </div>
+                                                                        <div class="amount">
+                                                                            Fees: ${amount} OMR
                                                                         </div>
-                                                                    </td>
-                                                                </tr>
+                                                                        <div class="date">
+                                                                            Issued on ${paymentDate}
+                                                                        </div>
+                                                                        <hr>
+
+                                                                        <div class="details">
+                                                                            <p>
+                                                                                <span>Registration type:
+                                                                                    ${registrationType} OOS Membership</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span>Order ID:</span>
+                                                                                <span
+                                                                                    class="right-aligned">${orderId}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span>Payment Status:</span>
+                                                                                <span
+                                                                                    class="right-aligned">${paymentStatus}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="left"
                                                                     style="padding:0;Margin:0;padding-bottom:5px;padding-left:10px;padding-right:0px">
@@ -815,7 +827,7 @@
                                                                     style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#999999">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:14px;color:#999999;font-size:12px">
-                                                                        ©2024 Mico . 112 Oman Muscat, AlKhoud</p>
+                                                                        ©2024 MIOC 112 Oman Muscat, AL-Khoud</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">

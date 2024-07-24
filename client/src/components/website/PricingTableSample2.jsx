@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import { countries } from '../../constants';
 import PhoneInput from 'react-phone-input-2';
 import MemebershipValidationCard from './MemebershipValidationCard';
 import WifiLoader from './WifiLoader';
 
-const PricingTable = () => {
+
+const PricingTableSample2 = () => {
     const [membershipNumber, setMembershipNumber] = useState('');
     const [membershipBeingValidated, setMembershipNumberBeingValidated] = useState(false);
     const [membershipValid, setMembershipValid] = useState(null);
-    const [isOOS, setIsOOS] = useState(false);
-    const [isOphthalmologist, setIsOphthalmologist] = useState(false);
+    const [isOOS, setIsOOS] = useState(null);
+    const [isOphthalmologist, setIsOphthalmologist] = useState(null);
+    const [memebershipValidationErrMsg, SetMemebershipValidationErrMsg] = useState(null);
 
     const getPrice = (rate) => {
         const prices = {
@@ -45,11 +47,11 @@ const PricingTable = () => {
     });
     const [addressInfo, setAddressInfo] = useState({
         address: '',
-        billingAddress: '',
-        zipCode:'',
+        postal: '',
+        city: '',
     });
     const [selectedPrice, setSelectedPrice] = useState(0);
-
+    const [memebershipDetails, setMembershipDetails] = useState('');
     const navigate = useNavigate();
 
     const openModal = (price) => {
@@ -59,15 +61,44 @@ const PricingTable = () => {
         setIsModalOpen(true);
     };
 
-    const validateMembershipNumber = (number) => {
-        // Mock valid membership number for demonstration
+    // const validateMembershipNumber = (number) => {
+    //     // Mock valid membership number for demonstration
+    //     setMembershipNumberBeingValidated(true);
+    //     const validMembershipNumber = 'OOS112';
+    //     setTimeout(() => {
+    //         setMembershipNumberBeingValidated(false)
+    //         setMembershipValid(number.toUpperCase() === validMembershipNumber)
+    //     }, 5000);
+    // };
+
+    const validateMembershipNumber = async (number) => {
         setMembershipNumberBeingValidated(true);
-        const validMembershipNumber = 'OOS112';
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/get/membership/${number}`);
+            const membership = await response.json();
+
+            if (response.ok && membership) {
+                setTimeout(() => {
+                    SetMemebershipValidationErrMsg(null);
+                    setMembershipDetails(membership);
+                    const expirationDate = new Date(membership.expirationDate);
+                    const isValid = expirationDate.getFullYear() === 2024;
+                    setMembershipValid(isValid);
+                }, 2800);
+            } else {
+                SetMemebershipValidationErrMsg(membership.message);
+                setMembershipValid(false);
+            }
+        } catch (error) {
+            console.error('Error validating membership:', error);
+            setMembershipValid(false);
+        }
         setTimeout(() => {
-            setMembershipNumberBeingValidated(false)
-            setMembershipValid(number.toUpperCase() === validMembershipNumber)
-        }, 5000);
+            setMembershipNumberBeingValidated(false);
+        }, 2800);
     };
+
 
     const handleMembershipNumberChange = (e) => {
         const number = e.target.value;
@@ -124,7 +155,7 @@ const PricingTable = () => {
                 addressInfo,
                 selectedPrice,
                 isOphthalmologist,
-                isOOS,
+                isOOS
             }
         });
         closeModal();
@@ -170,6 +201,9 @@ const PricingTable = () => {
                 return '';
         }
     };
+
+
+
     return (
         <section className="flex flex-col justify-center antialiased text-gray-600 min-h-screen p-4">
 
@@ -180,40 +214,41 @@ const PricingTable = () => {
                     <div className='flex justify-center'>
                         <div className="flex text  items-center border-l-8 border-primary_brown bg-[#d8a75736] p-4 text-emerald-900 shadow-lg relative">
                             <div className="min-w-0">
-                                <h2 className="text-ellipsis whitespace-nowrap">Select your appropriate category
+                                <h2 className="text-ellipsis whitespace-nowrap">Select your category to get the right price
                                     <span className='ml-3'>
-                                        <div class="tooltip">
-                                            <div class="icon">i</div>
-                                            <div class="tooltiptext">The conference organizers <br /> reserve the right to request <br /> proof of profession or ID at  <br />the time of check-in.</div>
+                                        <div className="tooltip">
+                                            <div className="icon">i</div>
+                                            <div className="tooltiptext">The conference organizers <br /> reserve the right to request <br /> proof of profession or ID at  <br />the time of check-in.</div>
                                         </div>
                                     </span>
                                 </h2>
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-center m-5 ml-0'>
-                        <div className="radio-inputs space-x-5">
-                            <label className='flex flex-col items-center space-y-2'>
+                    {/* <div className='flex justify-center m-5 ml-0'> */}
+                    <div className='flex flex-col md:flex-row justify-center items-center md:m-0 m-7'>
+                        <div className="radio-inputs space-y-[1.1rem]">
+                            <label className='flex w-32 flex-col items-center space-y-2'>
                                 <input
                                     className="radio-input"
                                     type="radio"
                                     name="opthalmologist"
-                                    checked={!isOphthalmologist}
+                                    checked={isOphthalmologist === false}
                                     onChange={() => setIsOphthalmologist(false)}
                                 />
                                 <span className="radio-tile">
                                     <span className="radio-icon">
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M364.032,355.035c-3.862-1.446-8.072-3.436-12.35-5.794l-71.57,98.935l-5.09-64.814h-38.033l-5.091,64.814 l-71.569-98.935c-4.408,2.466-8.656,4.487-12.361,5.794c-37.478,13.193-129.549,51.136-123.607,122.21 C25.787,494.301,119.582,512,256.006,512c136.413,0,230.208-17.699,231.634-34.755 C493.583,406.102,401.273,368.961,364.032,355.035z"></path> <path class="st0" d="M171.501,208.271c5.21,29.516,13.966,55.554,25.494,68.38c0,15.382,0,26.604,0,35.587 c0,0.902-0.158,1.852-0.416,2.833l40.41,19.462v28.545h38.033v-28.545l40.39-19.452c-0.258-0.981-0.416-1.932-0.416-2.843 c0-8.983,0-20.205,0-35.587c11.548-12.826,20.304-38.864,25.514-68.38c12.143-4.338,19.096-11.281,27.762-41.658 c9.231-32.358-13.876-31.258-13.876-31.258c18.69-61.873-5.922-120.022-47.124-115.753c-28.426-49.73-123.627,11.36-153.48,7.102 c0,17.055,7.112,29.842,7.112,29.842c-10.379,19.69-6.378,58.951-3.446,78.809c-1.704-0.03-22.602,0.188-13.728,31.258 C152.405,196.99,159.338,203.934,171.501,208.271z"></path> </g> </g></svg>                                    </span>
                                 </span>
-                                <span className="radio-label">Non-Ophthalmologist</span>
+                                <span className="radio-label" title='Optometrists, Residents, Nurses, Technicians, Assistants, Students'>Non-Ophthalmologist</span>
                             </label>
 
-                            <label className='flex flex-col items-center space-y-2'>
+                            <label className='flex w-32 flex-col items-center space-y-2'>
                                 <input
                                     className="radio-input"
                                     type="radio"
                                     name="opthalmologist"
-                                    checked={isOphthalmologist}
+                                    checked={isOphthalmologist === true}
                                     onChange={() => setIsOphthalmologist(true)}
                                 />
                                 <span className="radio-tile">
@@ -296,36 +331,23 @@ const PricingTable = () => {
                                         </svg>
                                     </span>
                                 </span>
-                                <span className="radio-label">Ophthalmologist</span>
+                                <span className="radio-label">Ophthalmologist/<br />Physician</span>
                             </label>
                         </div>
-                    </div>
-                    {/*  */}
+                        {/*  */}
 
-                    {/*  */}
-                    <div className='flex justify-center'>
-                        <div className="flex text  items-center border-l-8 border-primary_brown bg-[#d8a75736] p-4 text-emerald-900 shadow-lg">
-                            <div className="min-w-0">
-                                <h2 className=" text-ellipsis whitespace-nowrap">Are you an OOS Member?
-                                    <span className='ml-3'>
-                                        <div class="tooltip">
-                                            <div class="icon">i</div>
-                                            <div class="tooltiptext">You must have a valid <br /> OOS-Membership as of <br />Registration date.</div>
-                                        </div>
-                                    </span>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex justify-center m-5 ml-0'>
-                        <div className="radio-inputs space-x-9">
-                            <label className='flex flex-col items-center space-y-2'>
+                        {/*  */}
+
+                        <div className='m-11 w-[2px] h-[80px] bg-gray-400 hidden md:block'></div>
+                        {/* <div className='flex justify-center m-5 ml-0'> */}
+                        <div className="radio-inputs">
+                            <label className='flex w-32 flex-col items-center space-y-2'>
                                 <input
                                     className="radio-input"
                                     type="radio"
                                     name="oos-member"
-                                    checked={!isOOS}
-                                    onChange={() => setIsOOS(!isOOS)}
+                                    checked={isOOS === false}
+                                    onChange={() => setIsOOS(false)}
                                 />
                                 <span className="radio-tile">
                                     <span className="radio-icon relative">
@@ -335,26 +357,27 @@ const PricingTable = () => {
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M485.22,80.604H26.78C12.013,80.604,0,92.615,0,107.382v297.229c0,14.767,12.013,26.786,26.78,26.786h458.44 c14.767,0,26.78-12.019,26.78-26.786V107.382C512,92.615,499.987,80.604,485.22,80.604z M132.17,283.787v-4.472 c0-2.298-0.38-4.566-1.359-7.174c-0.188-0.248-18.793-25.357-18.793-48.059c0-27.05,16.988-46.685,40.394-46.685 s40.394,19.635,40.394,46.685c0,22.702-18.604,47.811-19.022,48.494c-0.751,2.166-1.132,4.433-1.132,6.739v4.472 c0,6.18,3.628,11.84,9.307,14.449l30.316,12.384c6.584,3.028,11.285,9.084,12.558,16.048l1.431,18.416H78.56l1.407-18.253 c1.294-7.128,5.998-13.184,12.518-16.18l30.442-12.446C128.542,295.627,132.17,289.967,132.17,283.787z M429.318,306.396v29.557 H266.745v-29.557H429.318z M429.318,242.793v29.558H266.745v-29.558H429.318z M231.481,208.748v-29.557h197.836v29.557H231.481z"></path> </g> </g></svg>
                                     </span>
                                 </span>
-                                <span className="radio-label">Non OOS-Member</span>
+                                <span className="radio-label">Non <span title='Oman Ophthalmic Society'>OOS</span>-Member</span>
                             </label>
 
-                            <label className='flex flex-col items-center space-y-2 ml-0'>
+                            <label className='flex w-32 flex-col items-center space-y-2 ml-0'>
                                 <input
                                     className="radio-input"
                                     type="radio"
                                     name="oos-member"
-                                    checked={isOOS}
-                                    onChange={() => setIsOOS(!isOOS)}
+                                    checked={isOOS === true}
+                                    onChange={() => setIsOOS(true)}
                                 />
                                 <span className="radio-tile ">
                                     <span className="radio-icon">
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M485.22,80.604H26.78C12.013,80.604,0,92.615,0,107.382v297.229c0,14.767,12.013,26.786,26.78,26.786h458.44 c14.767,0,26.78-12.019,26.78-26.786V107.382C512,92.615,499.987,80.604,485.22,80.604z M132.17,283.787v-4.472 c0-2.298-0.38-4.566-1.359-7.174c-0.188-0.248-18.793-25.357-18.793-48.059c0-27.05,16.988-46.685,40.394-46.685 s40.394,19.635,40.394,46.685c0,22.702-18.604,47.811-19.022,48.494c-0.751,2.166-1.132,4.433-1.132,6.739v4.472 c0,6.18,3.628,11.84,9.307,14.449l30.316,12.384c6.584,3.028,11.285,9.084,12.558,16.048l1.431,18.416H78.56l1.407-18.253 c1.294-7.128,5.998-13.184,12.518-16.18l30.442-12.446C128.542,295.627,132.17,289.967,132.17,283.787z M429.318,306.396v29.557 H266.745v-29.557H429.318z M429.318,242.793v29.558H266.745v-29.558H429.318z M231.481,208.748v-29.557h197.836v29.557H231.481z"></path> </g> </g></svg>
                                     </span>
                                 </span>
-                                <span className="radio-label">OOS-Member</span>
+                                <span className="radio-label"><span title='Oman Ophthalmic Society'>OOS</span>-Member</span>
                             </label>
                         </div>
                     </div>
+                    {/* </div> */}
                     {/*  */}
                     {isOOS ? (
                         <>
@@ -385,25 +408,30 @@ const PricingTable = () => {
                                 </div>
                             )}
                             {membershipValid !== null && !membershipBeingValidated && (
-                                <MemebershipValidationCard membershipIsValid={membershipValid} />
+                                <MemebershipValidationCard
+                                    memerbrshipNotFound={memebershipValidationErrMsg}
+                                    membershipIsValid={membershipValid}
+                                    name={memebershipDetails.fullName}
+                                    expirationDate={memebershipDetails.expirationDate} />
                             )}
                         </>
                     ) : (
                         <div>
                             <p>
-                                <div className='flex justify-center flex-col items-center space-y-7'>
-                                    <button className="validateBtn" onClick={''}>
-                                        Become an OOS-Member?
+                                <div className='flex justify-center flex-col items-center'>
+                                    <Link to={'/get-oos-memebership'}> <button className="validateBtn mt-4" onClick={''}>
+                                        Get / Renew OOS-Membership
                                         <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
                                             <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
                                         </svg>
-                                    </button>
+                                    </button></Link>
+
                                 </div>
                             </p>
                         </div>
                     )}
                     {/*  */}
-                    <h2 className="text-3xl text-gray-800 font-bold text-center m-9">Registration Fees</h2>
+                    <h2 className="text-3xl text-gray-800 font-bold text-center m-7">Registration Fees</h2>
                     <div className="grid grid-cols-12 gap-6">
                         {['early', 'standard', 'spot'].map((rate) => (
                             <div key={rate} className="relative col-span-full md:col-span-4 bg-white shadow-2xl rounded-sm border border-gray-200 ">
@@ -430,22 +458,45 @@ const PricingTable = () => {
                                         <span className="text-3xl">{getPrice(rate)}</span>
                                         <span className="text-gray-500 font-medium text-sm">/OMR</span>
                                     </div>
-                                    <div className="relative group">
-                                        <button
-                                            className={`font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out ${(rate === 'early') && (isOOS && membershipValid || !isOOS) ? 'bg-primary_blue focus:outline-none focus-visible:ring-2 hover:bg-blue-700 text-white' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
-                                            disabled={rate !== 'early' || (isOOS && !membershipValid)}
-                                            onClick={() => openModal(getPrice(rate))}
-                                        >
-                                            {(isOOS && !membershipValid) ? 'Validate your membership' : " Register Now"}
+                                    {rate === 'early' ? (
+                                        <div className="relative group">
+                                            <button
+                                                className={`font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out ${(isOphthalmologist !== null && isOOS !== null && (!isOOS || membershipValid))
+                                                    ? 'bg-primary_blue text-white hover:bg-blue-700'
+                                                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                                    }`}
+                                                disabled={isOphthalmologist === null || isOOS === null || (isOOS && !membershipValid)}
+                                                onClick={() => openModal(getPrice(rate))}
+                                            >
+                                                {(isOOS && !membershipValid) ? 'Validate your membership' : 'Register Now'}
+                                            </button>
+                                            {(isOphthalmologist === null || isOOS === null || (isOOS && !membershipValid)) && (
+                                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                                    {isOOS && !membershipValid ? 'Please validate your membership' : 'Select category above to get your price'}
+                                                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <div className="relative group">
+                                            <button
+                                                className={`font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out ${(rate === 'early') && (isOOS && membershipValid || !isOOS) ? 'bg-primary_blue focus:outline-none focus-visible:ring-2 hover:bg-blue-700 text-white' : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                                    }`}
+                                                disabled={rate !== 'early' || (isOOS && !membershipValid)}
+                                                onClick={() => openModal(getPrice(rate))}
+                                            >
+                                                {(isOOS && !membershipValid) ? 'Validate your membership' : 'Register Now'}
+                                            </button>
+                                            {rate !== 'early' && (
+                                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                                    {getTooltipMessage(rate)}
+                                                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
 
-                                        </button>
-                                        {rate !== 'early' && (
-                                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
-                                                {getTooltipMessage(rate)}
-                                                <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
-                                            </div>
-                                        )}
-                                    </div>
+
                                 </div>
                                 <div className="px-5 pt-4 pb-5">
                                     <div className="text-xs text-gray-800 font-semibold uppercase mb-4">What's included</div>
@@ -499,7 +550,7 @@ const PricingTable = () => {
                     <form onSubmit={handleSubmit}>
                         {step === 1 && (
                             <div className="mb-4">
-                                <label htmlFor="country" className="block text-gray-700 mb-2">Country</label>
+                                <label htmlFor="country" className="block text-gray-700 mb-2">Country of residence</label>
                                 <select
                                     id="country"
                                     name="country"
@@ -541,7 +592,7 @@ const PricingTable = () => {
                                 </div>
                                 {hasoosMembership && (
                                     <div className="mb-4">
-                                        <label htmlFor="oosMembershipInput" className="block text-gray-700 mb-2">Enter Redeem Code</label>
+                                        <label htmlFor="oosMembershipInput" className="block text-gray-700 mb-2">Enter OOS number</label>
                                         <input
                                             type="text"
                                             id="oosMembershipInput"
@@ -643,8 +694,9 @@ const PricingTable = () => {
                         )}
                         {step === 4 && (
                             <>
+                                <label><strong>Billing Address</strong></label>
                                 <div className="mb-4">
-                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address</label>
+                                    <label htmlFor="address" className="block text-gray-700 mb-2">Address Line 1</label>
                                     <input
                                         type="text"
                                         id="address"
@@ -656,12 +708,24 @@ const PricingTable = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">Billing Address</label>
+                                    <label htmlFor="postal" className="block text-gray-700 mb-2">Postal code</label>
                                     <input
                                         type="text"
-                                        id="billingAddress"
-                                        name="billingAddress"
-                                        value={addressInfo.billingAddress}
+                                        id="postal"
+                                        name="postal"
+                                        value={addressInfo.postal}
+                                        onChange={handleAddressChange}
+                                        className="w-full p-2 border rounded"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="billingAddress" className="block text-gray-700 mb-2">City</label>
+                                    <input
+                                        type="text"
+                                        id="city"
+                                        name="city"
+                                        value={addressInfo.city}
                                         onChange={handleAddressChange}
                                         className="w-full p-2 border rounded"
                                         required
@@ -686,4 +750,4 @@ const PricingTable = () => {
     );
 };
 
-export default PricingTable;
+export default PricingTableSample2;

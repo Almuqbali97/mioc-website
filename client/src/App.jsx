@@ -33,7 +33,7 @@ import AbstractInfo from './pages/website-pages/abstract/AbstractInfo.jsx';
 import CheckoutPage from './pages/website-pages/online-registration/CheckoutPage.jsx';
 import CancelPayment from './pages/website-pages/online-registration/CancelPayment.jsx';
 import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
-import RegistrersManagement from './pages/admin-pages/RegistrersManagement.jsx';
+import RegistrationManagement from './pages/admin-pages/RegistrationManagement.jsx';
 import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 import EmailVerification from './components/website/EmailVerification.jsx';
 import ReviewAbstract from './pages/admin-pages/ReviewAbstract.jsx';
@@ -42,6 +42,13 @@ import SubmitSponserRequest from './pages/website-pages/sponsers-exhibit/SubmitS
 import ViewEditAbstract from './pages/user-pages/ViewEditAbstract.jsx';
 import RegistrationDetails from './pages/user-pages/RegistrationDetails.jsx';
 import UserSettings from './pages/user-pages/UserSettings.jsx';
+import RegistrationCard from './components/website/RegistrationCard.jsx';
+import PaymentResponse from './components/website/PaymentResponse.jsx';
+import ViewRegistrationDetails from './pages/admin-pages/ViewRegistrationDetails.jsx';
+import ViewInvoiceDetails from './pages/admin-pages/ViewInvoiceDetails.jsx';
+import RegistrationDesk from './pages/admin-pages/RegistrationDesk.jsx';
+import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
+import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 
 
 function App() {
@@ -64,10 +71,13 @@ function App() {
           <Route path='/sientific-committee' element={<SientificComittee />} />
           {/* registration */}
           <Route path='/online-registration' element={<OnlineRegistration />} />
+          <Route path='/get-oos-memebership' element={<GetOOSMembership />} />
+          <Route path='/registrar/:id' element={<RegistrationCard />} />
           <Route path='/registration-checklist' element={<RegistrationChecklist />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/oos-membership/checkout" element={<OosCheckout />} />
           <Route path='/payment/cancel' element={<CancelPayment />} />
-          <Route path='/payment/success' element={<SuccessPayment />} />
+          <Route path='/registration/payment/response' element={<PaymentResponse />} />
           {/* program */}
           <Route path='/cme' element={<Cme />} />
           <Route path='/program-at-a-glance' element={<ProgramAtGlance />} />
@@ -102,7 +112,10 @@ function App() {
           <Route element={<AdminPanel />}>
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/abstracts' element={<AbstractsManagement />} />
-            <Route path='/admin/registrers' element={<RegistrersManagement />} />
+            <Route path='/admin/registrers' element={<RegistrationManagement />} />
+            <Route path='/admin/registration/:id' element={<ViewRegistrationDetails />} />
+            <Route path='/admin/invoice/:order_id' element={<ViewInvoiceDetails />} />
+            <Route path='/admin/registration-desk' element={<RegistrationDesk />} />
             <Route path="/review-abstract/:id" element={<ReviewAbstract />} /> {/* New route */}
           </Route>
         </Route>
