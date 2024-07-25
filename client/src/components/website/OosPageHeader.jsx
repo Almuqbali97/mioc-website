@@ -41,7 +41,7 @@ const OosPageHeader = () => {
                         Oman<span className="text-red-700"> Ophthalmic </span>Society
                     </h1>
                     <h2 className="mt-6 text-lg leading-8 text-gray-600">
-                        You Vision Is Our Mission
+                        Your Vision Is Our Mission
                     </h2>
 
                 </div>
