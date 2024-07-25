@@ -82,4 +82,3 @@ async function generateCertificateDesign(doc, userData) {
         .text(userData.fullName, 0, pageHeight / 2, { align: 'center' });
 }
 
-module.exports = generateCertificateDesign;
