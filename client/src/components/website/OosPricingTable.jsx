@@ -287,7 +287,7 @@ const OosPricingTable = () => {
                         <div className="flex justify-center">
                             <div className="flex flex-col md:flex-row items-center justify-center space-x-0 space-y-7 md:space-y-0 md:space-x-7">
                                 {[
-                                    { title: 'Ophthalmologist   / Physician', price: 26.25, type: 'Ophthalmologist' },
+                                    { title: 'Ophthalmologist/Physician', price: 26.25, type: 'Ophthalmologist' },
                                     { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist', descrition: 'Residents, optometrist, ophthalmic technician, orthoptist, Students' },
                                 ].map((card) => (
                                     <div key={card.title} className="relative max-w-[350px] bg-white shadow-2xl rounded-sm border border-gray-200">
@@ -303,7 +303,7 @@ const OosPricingTable = () => {
                                                 <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
                                             </header>
                                             <div className="text-gray-800 font-bold mb-4">
-                                                <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist' ? '35/OMR' : '20 /OMR'}</span>
+                                                <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist/Physician' ? '35/OMR' : '20 /OMR'}</span>
                                                 <br />
                                                 <span className="text-3xl">{card.price}</span>
                                                 <span className="text-gray-500 font-medium text-sm">/OMR</span>

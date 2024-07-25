@@ -1,6 +1,6 @@
 import PDFDocument from 'pdfkit';
 import sgMail from '@sendgrid/mail';
-import fs from 'fs';
+import path from 'path';
 import { oosCertificateEmailTemplate } from '../emailTemplates/oosCertificateEmail.js';
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
@@ -59,15 +59,20 @@ async function generateCertificate(userData) {
     });
 }
 
+
 async function generateCertificateDesign(doc, userData) {
     const pageWidth = doc.page.width;
     const pageHeight = doc.page.height;
 
+    // Define absolute paths for the font and image files
+    const fontPath = path.resolve(__dirname, 'GreatVibes-Regular.ttf');
+    const imagePath = path.resolve(__dirname, 'certificate-design.png');
+
     // Register the Great Vibes font
-    doc.registerFont('GreatVibes', 'GreatVibes-Regular.ttf');
+    doc.registerFont('GreatVibes', fontPath);
 
     // Use the uploaded image for the certificate design
-    doc.image('certificate-design.png', 0, 0, { width: pageWidth, height: pageHeight });
+    doc.image(imagePath, 0, 0, { width: pageWidth, height: pageHeight });
 
     // Add the name to the certificate
     doc
@@ -76,3 +81,5 @@ async function generateCertificateDesign(doc, userData) {
         .fillColor('#FF0000')
         .text(userData.fullName, 0, pageHeight / 2, { align: 'center' });
 }
+
+module.exports = generateCertificateDesign;
