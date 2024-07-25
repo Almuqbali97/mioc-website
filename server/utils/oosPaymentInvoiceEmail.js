@@ -1,6 +1,12 @@
 import PDFDocument from 'pdfkit';
 import sgMail from '@sendgrid/mail';
 import { invoiceEmail } from '../emailTemplates/invoiceEmailTemplate.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const logoPath = join(__dirname, '../logo.png');
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
@@ -66,7 +72,7 @@ function generateHeader(doc, invoice) {
     const imageX = pageWidth - imageWidth - 50;
 
     doc
-        .image('logo.png', imageX, 45, { width: imageWidth })
+        .image(logoPath, imageX, 45, { width: imageWidth })
         .fillColor('#444444')
         .fontSize(20)
         .text('Invoice', 50, 45)
