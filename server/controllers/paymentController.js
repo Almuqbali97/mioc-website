@@ -143,7 +143,7 @@ export const registrationPaymentRes = async (req, res) => {
         orderStatus: decryptedResToObject.order_status,
         orderId: decryptedResToObject.order_id
     }).toString();
-    return res.redirect(`http://localhost:5000/registration/payment/response?${queryParams}`);
+    return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
 };
 
 
@@ -281,7 +281,7 @@ export const oosMembershipPaymentRes = async (req, res) => {
         orderStatus: decryptedResToObject.order_status,
         orderId: decryptedResToObject.order_id
     }).toString();
-    return res.redirect(`http://localhost:5000/registration/payment/response?${queryParams}`);
+    return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
 };
 
 
