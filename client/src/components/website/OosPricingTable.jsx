@@ -6,26 +6,10 @@ import PhoneInput from 'react-phone-input-2';
 import WifiLoader from './WifiLoader';
 
 const hospitals = [
-    "Al Buraimi Hospital",
-    "Al Masarra Hospital",
-    "Al Nahdha Hospital",
-    "Directorate General of Khoula Hospital",
-    "Ibra Hospital",
-    "Ibri Hospital",
-    "Nizwa Hospital",
-    "Royal Hospital",
-    "Rustaq Hospital",
-    "Sohar Hospital",
-    "Sultan Qaboos Hospital",
-    "Arab Specialized Hospital",
-    "International Eye Center",
-    "Gulf Specialized Hospital",
-    "Muscat Laser Eye Treatment Center",
-    "Noor Iranian Medical Complex",
-    "Finnish Eye Center",
-    "German Eye Center",
-    "Apex Eye Centre",
-    "Sanaa Center"
+    "Al Buraimi Hospital", "Al Masarra Hospital", "Al Nahdha Hospital", "Directorate General of Khoula Hospital", "Ibra Hospital", "Ibri Hospital",
+    "Nizwa Hospital", "Royal Hospital", "Rustaq Hospital", "Sohar Hospital", "Sultan Qaboos Hospital", "Arab Specialized Hospital",
+    "International Eye Center", "Gulf Specialized Hospital", "Muscat Laser Eye Treatment Center", "Noor Iranian Medical Complex",
+    "Finnish Eye Center", "German Eye Center", "Apex Eye Centre", "Sanaa Center"
 ];
 
 const OosPricingTable = () => {
@@ -38,21 +22,9 @@ const OosPricingTable = () => {
     const [memebershipDetails, setMembershipDetails] = useState('');
     const [membershipBeingValidated, setMembershipNumberBeingValidated] = useState(false);
     const [membershipValid, setMembershipValid] = useState(null);
-    const [personalInfo, setPersonalInfo] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        mobile: '',
-    });
-    const [addressInfo, setAddressInfo] = useState({
-        address: '',
-        postal: '',
-        city: '',
-    });
-    const [workInfo, setWorkInfo] = useState({
-        workingPlace: '',
-        profession: '',
-    });
+    const [personalInfo, setPersonalInfo] = useState({ firstName: '', lastName: '', email: '', mobile: '' });
+    const [addressInfo, setAddressInfo] = useState({ address: '', postal: '', city: '' });
+    const [workInfo, setWorkInfo] = useState({ workingPlace: '', profession: '' });
     const [otherWorkPlace, setOtherWorkPlace] = useState('');
     const [otherProfession, setOtherProfession] = useState('');
     const [selectedPrice, setSelectedPrice] = useState(0);
@@ -71,21 +43,9 @@ const OosPricingTable = () => {
         setStep(1);
         setSelectedCountry('');
         setNationality('');
-        setPersonalInfo({
-            firstName: '',
-            lastName: '',
-            email: '',
-            mobile: '',
-        });
-        setAddressInfo({
-            address: '',
-            postal: '',
-            city: ''
-        });
-        setWorkInfo({
-            workingPlace: '',
-            profession: ''
-        });
+        setPersonalInfo({ firstName: '', lastName: '', email: '', mobile: '' });
+        setAddressInfo({ address: '', postal: '', city: '' });
+        setWorkInfo({ workingPlace: '', profession: '' });
         setOtherWorkPlace('');
         setOtherProfession('');
         setMembershipType('');
@@ -161,7 +121,6 @@ const OosPricingTable = () => {
         setStep(step - 1);
     };
 
-
     const validateMembershipNumber = async (number) => {
         setMembershipNumberBeingValidated(true);
 
@@ -187,22 +146,71 @@ const OosPricingTable = () => {
             setMembershipNumberBeingValidated(false);
         }, 2800);
     };
+
     const [membershipNumber, setMembershipNumber] = useState('');
     const handleMembershipNumberChange = (e) => {
         const number = e.target.value;
         setMembershipNumber(number);
     };
+
+    const handleConfirmRenewal = (editableDetails) => {
+        const {
+            fullName,
+            email,
+            contactNumber,
+            profession,
+            residence,
+            nationality,
+            workingPlace,
+            membershipType,
+            price,
+            address,
+            postal,
+            city,
+        } = editableDetails;
+
+        navigate('/oos-membership/checkout', {
+            state: {
+                selectedCountry: residence,
+                nationality,
+                personalInfo: {
+                    firstName: fullName.split(' ')[0],
+                    lastName: fullName.split(' ')[1] || '',
+                    email,
+                    mobile: contactNumber
+                },
+                addressInfo: {
+                    address: address || '',
+                    postal: postal || '',
+                    city: city || ''
+                },
+                workInfo: {
+                    workingPlace,
+                    profession
+                },
+                otherWorkPlace: workingPlace === 'Other' ? '' : '',
+                otherProfession: profession === 'Other' ? '' : '',
+                selectedPrice: price,
+                membershipType: membershipType,
+                isRenewal: true,
+                membership_id: memebershipDetails.membership_id
+            }
+        });
+    };
+
+
+
     return (
         <section className="flex flex-col justify-center antialiased text-gray-600 p-4 mb-20">
             <div className="h-full">
-                <div className='flex justify-center'>
-                    <div className="flex text  items-center border-l-8 border-primary_brown bg-[#d8a75736] p-2 text-emerald-900 shadow-lg relative">
+                <div className='flex justify-center mb-5'>
+                    <div className="flex text items-center border-l-8 border-gray-500 bg-green-100 p-2 font-semibold text-emerald-900 shadow-lg relative">
                         <div className="min-w-0">
                             <h2 className="text-ellipsis whitespace-nowrap">Are you a new or an existing member?
                                 <span className='ml-3'>
                                     <div className="tooltip">
                                         <div className="icon">i</div>
-                                        <div className="tooltiptext">If have OOS Membership<br /> You should renew it.</div>
+                                        <div className="tooltiptext">If you have OOS<br /> Membership You can <br />  renew it.</div>
                                     </div>
                                 </span>
                             </h2>
@@ -210,7 +218,6 @@ const OosPricingTable = () => {
                     </div>
                 </div>
                 <div className='flex justify-center'>
-
                     <div className="radio-inputs">
                         <label className='flex w-32 flex-col items-center space-y-2'>
                             <input
@@ -222,7 +229,8 @@ const OosPricingTable = () => {
                             />
                             <span className="radio-tile">
                                 <span className="radio-icon relative">
-                                    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="#c20000" d="M22,29c-1.657,0-3,1.343-3,3v2c0,1.657,1.343,3,3,3s3-1.343,3-3v-2C25,30.343,23.657,29,22,29z"></path> <path fill="#c20000" d="M22,23c-6.627,0-12,5.373-12,12c0,3.072,1.165,5.867,3.064,7.989C14.343,41.326,17.014,39,22,39 c-2.762,0-5-2.238-5-5v-2c0-2.762,2.238-5,5-5s5,2.238,5,5v2c0,2.762-2.238,5-5,5c4.986,0,7.657,2.326,8.936,3.989 C32.835,40.867,34,38.072,34,35C34,28.373,28.627,23,22,23z"></path> <path fill="#c20000" d="M22,41c-4.361,0-6.543,2.08-7.479,3.374C16.572,46.014,19.169,47,22,47s5.428-0.986,7.48-2.626 C28.545,43.082,26.363,41,22,41z"></path> <path fill="#c20000" d="M60,11h-8V6c0-0.553-0.447-1-1-1h-6c-0.553,0-1,0.447-1,1v5H20V6c0-0.553-0.447-1-1-1h-6 c-0.553,0-1,0.447-1,1v5H4c-2.211,0-4,1.789-4,4v40c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4V15C64,12.789,62.211,11,60,11z M46,7h4v8h-4V7z M41,25h6c0.553,0,1,0.447,1,1s-0.447,1-1,1h-6c-0.553,0-1-0.447-1-1S40.447,25,41,25z M14,7h4v8h-4V7z M22,49 c-7.731,0-14-6.269-14-14s6.269-14,14-14s14,6.269,14,14S29.731,49,22,49z M55,45H41c-0.553,0-1-0.447-1-1s0.447-1,1-1h14 c0.553,0,1,0.447,1,1S55.553,45,55,45z M40,38c0-0.553,0.447-1,1-1h10c0.553,0,1,0.447,1,1s-0.447,1-1,1H41 C40.447,39,40,38.553,40,38z M55,33H41c-0.553,0-1-0.447-1-1s0.447-1,1-1h14c0.553,0,1,0.447,1,1S55.553,33,55,33z"></path> </g> </g></svg>                            </span>
+                                    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="#c20000" d="M22,29c-1.657,0-3,1.343-3,3v2c0,1.657,1.343,3,3,3s3-1.343,3-3v-2C25,30.343,23.657,29,22,29z"></path> <path fill="#c20000" d="M22,23c-6.627,0-12,5.373-12,12c0,3.072,1.165,5.867,3.064,7.989C14.343,41.326,17.014,39,22,39 c-2.762,0-5-2.238-5-5v-2c0-2.762,2.238-5,5-5s5,2.238,5,5v2c0,2.762-2.238,5-5,5c4.986,0,7.657,2.326,8.936,3.989 C32.835,40.867,34,38.072,34,35C34,28.373,28.627,23,22,23z"></path> <path fill="#c20000" d="M22,41c-4.361,0-6.543,2.08-7.479,3.374C16.572,46.014,19.169,47,22,47s5.428-0.986,7.48-2.626 C28.545,43.082,26.363,41,22,41z"></path> <path fill="#c20000" d="M60,11h-8V6c0-0.553-0.447-1-1-1h-6c-0.553,0-1,0.447-1,1v5H20V6c0-0.553-0.447-1-1-1h-6 c-0.553,0-1,0.447-1,1v5H4c-2.211,0-4,1.789-4,4v40c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4V15C64,12.789,62.211,11,60,11z M46,7h4v8h-4V7z M41,25h6c0.553,0,1,0.447,1,1s-0.447,1-1,1h-6c-0.553,0-1-0.447-1-1S40.447,25,41,25z M14,7h4v8h-4V7z M22,49 c-7.731,0-14-6.269-14-14s6.269-14,14-14s14,6.269,14,14S29.731,49,22,49z M55,45H41c-0.553,0-1-0.447-1-1s0.447-1,1-1h14 c0.553,0,1,0.447,1,1S55.553,45,55,45z M40,38c0-0.553,0.447-1,1-1h10c0.553,0,1,0.447,1,1s-0.447,1-1,1H41 C40.447,39,40,38.553,40,38z M55,33H41c-0.553,0-1-0.447-1-1s0.447-1,1-1h14c0.553,0,1,0.447,1,1S55.553,33,55,33z"></path> </g> </g></svg>
+                                </span>
                             </span>
                             <span className="radio-label font-bold">Get A new Membership</span>
                         </label>
@@ -235,16 +243,17 @@ const OosPricingTable = () => {
                                 checked={isNewMember === true}
                                 onChange={() => setIsNewMember(true)}
                             />
-                            <span className="radio-tile ">
+                            <span className="radio-tile">
                                 <span className="radio-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.18182 12.0909C8.18182 9.98455 9.89364 8.27273 12 8.27273C12.6427 8.27273 13.2536 8.43182 13.7818 8.71818L14.7109 7.78909C13.9282 7.29273 12.9991 7 12 7C9.18727 7 6.90909 9.27818 6.90909 12.0909H5L7.54545 14.6364L10.0909 12.0909H8.18182ZM16.4545 9.54545L13.9091 12.0909H15.8182C15.8182 14.1973 14.1064 15.9091 12 15.9091C11.3573 15.9091 10.7464 15.75 10.2182 15.4636L9.28909 16.3927C10.0718 16.8891 11.0009 17.1818 12 17.1818C14.8127 17.1818 17.0909 14.9036 17.0909 12.0909H19L16.4545 9.54545Z" fill="#00d103"></path> </g></svg>                            </span>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.18182 12.0909C8.18182 9.98455 9.89364 8.27273 12 8.27273C12.6427 8.27273 13.2536 8.43182 13.7818 8.71818L14.7109 7.78909C13.9282 7.29273 12.9991 7 12 7C9.18727 7 6.90909 9.27818 6.90909 12.0909H5L7.54545 14.6364L10.0909 12.0909H8.18182ZM16.4545 9.54545L13.9091 12.0909H15.8182C15.8182 14.1973 14.1064 15.9091 12 15.9091C11.3573 15.9091 10.7464 15.75 10.2182 15.4636L9.28909 16.3927C10.0718 16.8891 11.0009 17.1818 12 17.1818C14.8127 17.1818 17.0909 14.9036 17.0909 12.0909H19L16.4545 9.54545Z" fill="#0B9100"></path> </g></svg>
+                                </span>
                             </span>
                             <span className="radio-label font-bold">Renew existing memebership</span>
                         </label>
                     </div>
                 </div>
 
-                {isNewMember && (
+                {isNewMember && !membershipValid ?
                     <div className='flex justify-center flex-col items-center space-y-7'>
                         {!membershipBeingValidated ? (
                             <>
@@ -264,25 +273,26 @@ const OosPricingTable = () => {
                                         <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
                                     </svg>
                                 </button>
+                                <p className='text-red-400'>{memebershipValidationErrMsg}</p>
                             </>
                         ) : (
                             <WifiLoader />
                         )}
-                    </div>
-                )}
-                {membershipValid && <MemberProfile membershipDetails={memebershipDetails} />}
+                    </div> : ''
+                }
+                {(membershipValid && isNewMember) && <MemberProfile membershipDetails={memebershipDetails} onConfirm={handleConfirmRenewal} />}
                 {!isNewMember &&
                     <div className="max-w-5xl mx-auto">
                         <h2 className="text-3xl text-gray-800 font-bold text-center m-7">OOS Membership Fees</h2>
                         <div className="flex justify-center">
                             <div className="flex flex-col md:flex-row items-center justify-center space-x-0 space-y-7 md:space-y-0 md:space-x-7">
                                 {[
-                                    { title: 'Ophthalmologist', price: 26.25, type: 'Ophthalmologist' },
-                                    { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist' },
+                                    { title: 'Ophthalmologist   / Physician', price: 26.25, type: 'Ophthalmologist' },
+                                    { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist', descrition: 'Residents, optometrist, ophthalmic technician, orthoptist, Students' },
                                 ].map((card) => (
                                     <div key={card.title} className="relative max-w-[350px] bg-white shadow-2xl rounded-sm border border-gray-200">
-                                        <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-red-600 to-black"></span>
-                                        <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r  from-red-600 to-black"></span>
+                                        <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-[#D32A18] to-black"></span>
+                                        <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r  from-[#D32A18] to-black"></span>
                                         <div className="px-5 pt-5 pb-6 border-b border-gray-200">
                                             <header className="flex items-center mb-2">
                                                 <div className="w-6 h-6 rounded-full flex-shrink-0 bg-gradient-to-tr from-green-700 to-green-300 mr-3">
@@ -290,7 +300,7 @@ const OosPricingTable = () => {
                                                         <path d="M12 17a.833.833 0 01-.833-.833 3.333 3.333 0 00-3.334-3.334.833.833 0 110-1.666 3.333 3.333 0 003.334-3.334.833.833 0 111.666 0 3.333 3.333 0 003.334 3.334.833.833 0 110 1.666 3.333 3.333 0 00-3.334 3.334c0 .46-.373.833-.833.833z" />
                                                     </svg>
                                                 </div>
-                                                <h3 className="text-lg text-gray-800 font-semibold">{card.title}</h3>
+                                                <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
                                             </header>
                                             <div className="text-gray-800 font-bold mb-4">
                                                 <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist' ? '35/OMR' : '20 /OMR'}</span>
@@ -301,7 +311,7 @@ const OosPricingTable = () => {
                                             </div>
                                             <div className="relative group">
                                                 <button
-                                                    className="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-600 text-white hover:bg-red-700"
+                                                    className="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-[#D32A18] text-white hover:bg-red-700"
                                                     onClick={() => openModal(card.price, card.type)}
                                                 >
                                                     Register Now
@@ -583,95 +593,232 @@ const OosPricingTable = () => {
                     </button>
                 </div>
             </Modal>
-        </section >
+        </section>
     );
 };
 
 
-function MemberProfile({ membershipDetails }) {
+
+
+function MemberProfile({ membershipDetails, onConfirm }) {
+    const [step, setStep] = useState(1);
+    const [editableDetails, setEditableDetails] = useState({
+        fullName: membershipDetails.fullName,
+        email: membershipDetails.email,
+        contactNumber: membershipDetails.contactNumber,
+        profession: membershipDetails.designation,
+        residence: membershipDetails.country,
+        nationality: membershipDetails.nationality,
+        workingPlace: membershipDetails.workingPlace,
+        // membershipType: '',
+        // price: 0,
+        // address: '',
+        // postal: '',
+        // city: ''
+    });
+
+    const [editableFields, setEditableFields] = useState({
+        fullName: false,
+        email: false,
+        contactNumber: false,
+        profession: false,
+        residence: false,
+        nationality: false,
+        workingPlace: false,
+    });
+
+    const handleChange = (field, value) => {
+        setEditableDetails(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleEdit = (field) => {
+        setEditableFields(prev => ({ ...prev, [field]: !prev[field] }));
+    };
+
+    const nextStep = () => {
+        setStep(step + 1);
+    };
+
+    const prevStep = () => {
+        setStep(step - 1);
+    };
+
+    const handleMembershipTypeChange = (e) => {
+        const { value } = e.target;
+        const price = value === 'Ophthalmologist' ? 26.25 : 15;
+        setEditableDetails(prev => ({ ...prev, membershipType: value, price }));
+    };
+
     return (
-        <div className='flex justify-center'>
-            <div className='w-[30rem]'>
+        <div className='flex justify-center mt-5'>
+            <div className='w-[30rem] border rounded-lg shadow-lg'>
                 <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Membership Details
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                        This section contains detailed information about the user.
+                        Edit the fields and confirm to renew your membership.
                     </p>
                 </div>
-                <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-                    <dl className="sm:divide-y sm:divide-gray-200">
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Membership ID
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.membership_id}
-                            </dd>
+                {step === 1 && (
+                    <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
+                        <dl className="sm:divide-y sm:divide-gray-200">
+                            <div className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">
+                                    Membership ID
+                                </dt>
+                                <dd className="sm:ml-5 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {membershipDetails.membership_id}
+                                </dd>
+                            </div>
+                            {Object.entries(editableDetails).map(([key, value]) => (
+                                <div key={key} className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    {/* {(key !=''|| ||) <></>} */}
+                                    <dt className="text-sm font-medium text-gray-500 flex items-center">
+                                        {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                                    </dt>
+                                    <dd className="sm:ml-5 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {editableFields[key] ? (
+                                            <input
+                                                type="text"
+                                                value={value}
+                                                onChange={(e) => handleChange(key, e.target.value)}
+                                                className="w-[83%] p-2 border rounded"
+                                            />
+                                        ) : (
+                                            value
+                                        )}
+                                        <button
+                                            onClick={() => handleEdit(key)}
+                                            className="ml-5 text-blue-500 hover:text-blue-700"
+                                        >
+                                            Edit
+                                        </button>
+                                    </dd>
+                                </div>
+                            ))}
+                            <div className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">
+                                    Expiration Date
+                                </dt>
+                                <dd className="sm:ml-5 mt-1 text-sm text-red-500 sm:mt-0 sm:col-span-2">
+                                    {membershipDetails.expirationDate}
+                                </dd>
+                            </div>
+                            <div className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">
+                                    Paid Price
+                                </dt>
+                                <dd className="sm:ml-5 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {membershipDetails.amount} OMR <span className='font-thin'>will be <strong>25% off</strong></span>
+                                </dd>
+                            </div>
+                        </dl>
+                        <button
+                            onClick={nextStep}
+                            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700"
+                        >
+                            Confirm Renewal
+                        </button>
+                    </div>
+                )}
+                {step === 2 && (
+                    <div className="px-4 py-5 sm:px-6">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Select Membership Type
+                        </h3>
+                        <div className="mt-4">
+                            <label className="block text-gray-700">Membership Type</label>
+                            <select
+                                value={editableDetails.membershipType}
+                                onChange={handleMembershipTypeChange}
+                                className="w-full p-2 border rounded"
+                                required
+                            >
+                                <option value="">Select type</option>
+                                <option value="Ophthalmologist">Ophthalmologist</option>
+                                <option value="Non-Ophthalmologist">Non-Ophthalmologist</option>
+                            </select>
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Full Name
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.fullName}
-                            </dd>
+                        <div className="flex justify-between mt-4">
+                            <button
+                                onClick={prevStep}
+                                className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700"
+                            >
+                                Back
+                            </button>
+                            <button
+                                onClick={nextStep}
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                            >
+                                Next
+                            </button>
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Email Address
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.email}
-                            </dd>
+                    </div>
+                )}
+                {step === 3 && (
+                    <div className="px-4 py-5 sm:px-6">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Billing Address
+                        </h3>
+                        <div className="mb-4">
+                            <label htmlFor="address" className="block text-gray-700 mb-2">Address Line 1</label>
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                value={editableDetails.address}
+                                onChange={(e) => handleChange('address', e.target.value)}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Contact Number
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.contactNumber}
-                            </dd>
+                        <div className="mb-4">
+                            <label htmlFor="postal" className="block text-gray-700 mb-2">Postal code</label>
+                            <input
+                                type="text"
+                                id="postal"
+                                name="postal"
+                                value={editableDetails.postal}
+                                onChange={(e) => handleChange('postal', e.target.value)}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Designation
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.designation}
-                            </dd>
+                        <div className="mb-4">
+                            <label htmlFor="city" className="block text-gray-700 mb-2">City</label>
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                value={editableDetails.city}
+                                onChange={(e) => handleChange('city', e.target.value)}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Nationality
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.nationality}
-                            </dd>
+                        <div className="flex justify-between">
+                            <button
+                                onClick={prevStep}
+                                className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700"
+                            >
+                                Back
+                            </button>
+                            <button
+                                onClick={() => onConfirm(editableDetails)}
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                            >
+                                Continue to Checkout
+                            </button>
                         </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Working Place
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.workingPlace}
-                            </dd>
-                        </div>
-                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Expiration Date
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {membershipDetails.expirationDate}
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     );
 }
+
+
 
 
 

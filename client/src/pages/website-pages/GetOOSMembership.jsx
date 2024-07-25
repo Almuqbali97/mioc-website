@@ -1,16 +1,24 @@
 import React from 'react';
 import OosPricingTable from '../../components/website/OosPricingTable';
 import OOSLOGO from '../../assets/images/OOslogoMain.png'
+import OosBenefits from '../../components/website/OosBenefits';
+import OosPageHeader from '../../components/website/OosPageHeader';
+import OosPageFooter from '../../components/website/OosPageFooter';
 const GetOOSMembership = () => {
     return (
-        <div>
-            <div className='flex'>
-                <div className='w-26 mx-auto'>
+        <div className=''>
+            <OosPageHeader />
+            <div className='-mt-96'>
+                <div className='flex justify-center'>
+                    {/* <div className='w-26 mx-auto'> */}
                     {/* <img src={OOSLOGO} /> */}
+                    {/* </div> */}
+                    <OosBenefits />
                 </div>
+                <OosPricingTable />
             </div>
+            <OosPageFooter />
 
-            <OosPricingTable />
         </div>
     );
 }

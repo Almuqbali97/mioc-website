@@ -20,8 +20,9 @@ const OosCheckout = () => {
         otherProfession,
         selectedPrice,
         membershipType,
+        membership_id,
     } = location.state || {};
-
+    console.log(membership_id);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -53,7 +54,7 @@ const OosCheckout = () => {
         merchant_param2: workInfo.workingPlace === 'Other' ? otherWorkPlace : workInfo.workingPlace,
         merchant_param3: workInfo.profession === 'Other' ? otherProfession : workInfo.profession,
         merchant_param4: membershipType,
-        merchant_param5: '',
+        merchant_param5: membership_id ? membership_id : "",
         promo_code: '',
         customer_identifier: personalInfo.firstName + '.' + personalInfo.lastName + generateCustomerIdentifier(),
     });

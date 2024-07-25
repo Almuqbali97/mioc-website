@@ -182,15 +182,29 @@ export const oosMembershipPaymentRes = async (req, res) => {
         ...decryptedResToObject
     };
 
+    let membership_id = decryptedResToObject.merchant_param5;
+
+    if (!membership_id) {
+        // Find the highest existing membership ID
+        const highestMembership = await oosMembershipCollection.findOne({}, { sort: { membership_id: -1 } });
+
+        if (highestMembership) {
+            const highestId = highestMembership.membership_id;
+            const nextIdNum = parseInt(highestId.replace('OOS', '')) + 1;
+            membership_id = `OOS${String(nextIdNum).padStart(5, '0')}`;
+        } else {
+            membership_id = 'OOS00001'; // Default starting ID if no memberships exist
+        }
+    }
+
     const oosMemberData = {
         id: id,
-        membership_id: "OOS00498",
+        membership_id: membership_id,
         orderId: decryptedResToObject.order_id,
         fullName: decryptedResToObject.billing_name.split(' ')[0] + ' ' + decryptedResToObject.billing_name.split(' ')[1],
         email: decryptedResToObject.billing_email,
         contactNumber: decryptedResToObject.billing_tel,
         country: decryptedResToObject.billing_country,
-        state: decryptedResToObject.billing_state,
         city: decryptedResToObject.billing_city,
         zip: decryptedResToObject.billing_zip,
         amount: decryptedResToObject.amount,
@@ -213,25 +227,48 @@ export const oosMembershipPaymentRes = async (req, res) => {
     }
 
     try {
-        // Insert user data for registration
-        await oosMembershipCollection.insertOne(oosMemberData);
+        if (!decryptedResToObject.merchant_param5) {
+            // Create new membership
+            await oosMembershipCollection.insertOne(oosMemberData);
+        } else {
+            // Update existing membership
+            const filter = { membership_id: decryptedResToObject.merchant_param5 };
+            const updateDoc = {
+                $set: {
+                    fullName: oosMemberData.fullName,
+                    email: oosMemberData.email,
+                    contactNumber: oosMemberData.contactNumber,
+                    country: oosMemberData.country,
+                    city: oosMemberData.city,
+                    zip: oosMemberData.zip,
+                    amount: oosMemberData.amount,
+                    nationality: oosMemberData.nationality,
+                    workingPlace: oosMemberData.workingPlace,
+                    designation: oosMemberData.designation,
+                    membershipType: oosMemberData.membershipType,
+                    paymentDate: oosMemberData.paymentDate,
+                    paymentStatus: oosMemberData.paymentStatus,
+                    paymentMethod: oosMemberData.paymentMethod,
+                    expirationDate: "2024-12-31",
+                },
+            };
+            await oosMembershipCollection.updateOne(filter, updateDoc);
+        }
     } catch (error) {
-        console.error("Failed to insert oos data:", error);
+        console.error("Failed to insert or update oos data:", error);
         // Continue execution as payment details are already determined by third party
     }
 
     if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Approved') {
-
         try {
             // Send notification email
-            await oosMembershipCertificateEmail(decryptedResToObject.billing_email,oosMemberData);
+            await oosMembershipCertificateEmail(decryptedResToObject.billing_email, oosMemberData);
         } catch (error) {
             console.error("Failed to send registration notification email:", error);
             // Continue execution as payment details are already determined by third party
         }
 
         try {
-
             await oosMembershipInvoiceEmail(decryptedResToObject.billing_email, oosMemberData);
         } catch (error) {
             console.error("Failed to generate invoice and send email:", error);
@@ -246,6 +283,8 @@ export const oosMembershipPaymentRes = async (req, res) => {
     }).toString();
     return res.redirect(`http://localhost:5000/registration/payment/response?${queryParams}`);
 };
+
+
 
 function encrypt(raw, key) {
     const iv = crypto.randomBytes(16);
