@@ -49,6 +49,7 @@ import ViewInvoiceDetails from './pages/admin-pages/ViewInvoiceDetails.jsx';
 import RegistrationDesk from './pages/admin-pages/RegistrationDesk.jsx';
 import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
 import OosCheckout from './pages/website-pages/OosCheckout.jsx';
+import PaymentTestPage from './components/website/PaymentTestPage.jsx';
 
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
           <Route path='/accommodation' element={<Accommodation />} />
           <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
+          <Route path='/payment-test' element={<PaymentTestPage />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
