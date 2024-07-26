@@ -9,7 +9,7 @@ const PaymentTestPage = () => {
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: '0.1',
-        redirect_url: 'https://mioc.org.om/oos/membership/payment/response',
+        redirect_url: import.meta.env.VITE_API_URL + '/oos/membership/payment/response',
         cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
         billing_name: 'Musaab Almuqbali',
