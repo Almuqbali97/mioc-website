@@ -50,6 +50,7 @@ import RegistrationDesk from './pages/admin-pages/RegistrationDesk.jsx';
 import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
 import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 import PaymentTestPage from './components/website/PaymentTestPage.jsx';
+import OosBankRedirect from './components/website/OosBankRedirect.jsx';
 
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
           <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
           <Route path='/payment-test' element={<PaymentTestPage />} />
+          <Route path='/oos/bank/redirect' element={<OosBankRedirect />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
