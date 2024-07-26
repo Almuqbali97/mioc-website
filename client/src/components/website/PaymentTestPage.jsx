@@ -54,8 +54,8 @@ const PaymentTestPage = () => {
             const data = await response.json();
             const { encRequest, accessCode } = data;
             //testing url
-            const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
-            // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
             // Redirect to the payment URL
             window.location.href = url;
 
