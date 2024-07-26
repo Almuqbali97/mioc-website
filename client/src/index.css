@@ -747,14 +747,15 @@ html {}
 
 .chatCard {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     background: lightgrey;
     border-radius: 100%;
     overflow: hidden;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    box-shadow: #25D366 0px 0px 10px 2px;
     transition: all 1s ease-in-out;
-    border: 2px solid rgb(255, 255, 255);
+    border: 3px solid rgb(255, 255, 255);
 }
 
 .chatCard:hover {
@@ -766,10 +767,15 @@ html {}
 .chatCardbackground {
     position: absolute;
     inset: 0;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    /* background-color: #4158D0; */
+    background-color: #25D366;
+    /* background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
+    background-image: linear-gradient(43deg, #d8a757 20%, #25D366 85%);
 }
+/* .chatCardbackground:hover{
+    background-image: linear-gradient(43deg, #d8a757 5%, #095C9F 80%);
 
+} */
 .chatCardlogo {
     position: absolute;
     right: 50%;
@@ -782,7 +788,7 @@ html {}
     letter-spacing: 3px;
 }
 
-.chatCardlogo svg {
+.chatCardlogo .chatCardsvg {
     fill: white;
     width: 30px;
     height: 30px;
@@ -822,7 +828,7 @@ html {}
     transition: all 0.5s ease-in-out;
 }
 
-.chatCardbox:hover .svg {
+.chatCardbox:hover .svg:hover {
     fill: white;
 }
 
@@ -834,14 +840,14 @@ html {}
 }
 
 .chatCardbox1::before {
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #ff53d4 60%, #62c2fe 90%);
+    background: radial-gradient(circle at 30% 107%, #25D366 0%, #ffff 5%, #25D366 60%, #25D366 90%);
 }
 
 .chatCardbox1:hover::before {
     opacity: 1;
 }
 
-.chatCardbox1:hover .chatCardicon .svg {
+.chatCardbox1:hover .chatCardicon .chatCardsvg {
     filter: drop-shadow(0 0 5px white);
 }
 
@@ -854,14 +860,15 @@ html {}
 }
 
 .chatCardbox2::before {
-    background: radial-gradient(circle at 30% 107%, #91e9ff 0%, #00ACEE 90%);
+    
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #ff53d4 60%, #62c2fe 90%);
 }
 
 .chatCardbox2:hover::before {
     opacity: 1;
 }
 
-.chatCardbox2:hover .icon .svg {
+.chatCardbox2:hover .chatCardicon .chatCardsvg {
     filter: drop-shadow(0 0 5px white);
 }
 
@@ -874,14 +881,14 @@ html {}
 }
 
 .chatCardbox3::before {
-    background: radial-gradient(circle at 30% 107%, #969fff 0%, #b349ff 90%);
+    background: radial-gradient(circle at 30% 107%, #91e9ff 0%, #00ACEE 90%);
 }
 
 .chatCardbox3:hover::before {
     opacity: 1;
 }
 
-.chatCardbox3:hover .icon .svg {
+.chatCardbox3:hover .chatCardicon .chatCardsvg {
     filter: drop-shadow(0 0 5px white);
 }
 

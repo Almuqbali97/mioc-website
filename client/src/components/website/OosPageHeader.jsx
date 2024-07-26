@@ -25,7 +25,7 @@ const OosPageHeader = () => {
             </div>
             <div className="relative z-20 mx-auto">
                 <div className=" absolute mx-auto  -top-[10.5rem] z-10 right-[50%] translate-x-[50%]">
-                    <div className="flex flex-col md:flex-row items-center justify-center">
+                    <div className="flex flex-col md:flex-row relative z-50 items-center justify-center">
                         <div className="flex">
                             <div className="bg-white hover:bg-red-700 border-red-500 border hover:text-white transition-all duration-500 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-3 shadow-2xl">
                                 <Link to={'/online-registration'} className='flex justify-center items-center space-x-1'>

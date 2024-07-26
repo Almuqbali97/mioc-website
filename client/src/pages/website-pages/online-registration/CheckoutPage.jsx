@@ -17,11 +17,10 @@ const CheckoutPage = () => {
     }, []);
 
     const [formData, setFormData] = useState({
-        merchant_id: '304',
+        merchant_id: '277',
         order_id: generateOrderId(),
         currency: 'OMR',
-        // amount: selectedPrice,
-        amount: '0.1',
+        amount: selectedPrice,
         redirect_url: import.meta.env.VITE_API_URL + '/registration/payment/response',
         cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
@@ -67,8 +66,8 @@ const CheckoutPage = () => {
             const data = await response.json();
             const { encRequest, accessCode } = data;
             //testing url
-            // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
-            const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
 
             // Redirect to the payment URL
             window.location.href = url;

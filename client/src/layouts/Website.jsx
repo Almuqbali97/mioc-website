@@ -13,9 +13,9 @@ const Website = () => {
             <TopBar />
             <Navbar />
             <Outlet />
-            {/* <div className='fixed text-primary_brown z-50 bottom-5 left-5'>
+            <div className='fixed text-primary_brown z-50 bottom-5 left-5'>
                 <ChatWithUsCard />
-            </div> */}
+            </div>
             <SposersAndOrganizersSection />
             <PartnersSection />
             <MapSection />
