@@ -32,7 +32,7 @@ const OosCheckout = () => {
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: selectedPrice,
-        // redirect_url: 'http://mioc.org.om/',
+        redirect_url: 'http://mioc.org.om/',
         cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
         billing_name: personalInfo.firstName + ' ' + personalInfo.lastName,
