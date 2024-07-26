@@ -158,7 +158,7 @@ const CheckoutPage = () => {
                     <hr className="my-2" />
                     <div className="flex justify-between mb-2">
                         <span className="font-semibold">Total</span>
-                        <span className="font-semibold">OMR {selectedPrice}</span>
+                        <span className="font-semibold">OMR {formData.amount}</span>
                     </div>
                     <button onClick={handleSubmit}
                         className="bg-primary_blue text-white py-2 px-4 rounded-lg mt-4 w-full">
