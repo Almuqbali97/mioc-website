@@ -8,7 +8,7 @@ const PaymentTestPage = () => {
         merchant_id: '304',
         order_id: generateOrderId(),
         currency: 'OMR',
-        amount: '1',
+        amount: '0.1',
         redirect_url: 'https://mioc.org.om/oos/membership/payment/response',
         cancel_url: 'https://mioc.org.om/payment/cancel',
         language: 'EN',
