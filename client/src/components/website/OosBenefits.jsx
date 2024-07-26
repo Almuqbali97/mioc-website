@@ -6,11 +6,11 @@ const OosBenefits = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-9">
                     <h2 class="text-4xl text-[#D32A18] font-semibold tracking-wide uppercase ">OOS</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <p class="mt-2 text-2   xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                         Membership Benefits:
                     </p>
                     
-                    <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto relative z-50">
                         Boos Your Professional Career With Visit Oman Ophthalmic Society 
                         <a href="https://www.omanophthalmicsociety.org/membership" className="flex flex-row items-center mt-3 justify-center gap-2 text-base font-semibold text-[#D32A18]  hover:text-red-700 ">Learn More <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.5 15L11.0858 11.4142C11.7525 10.7475 12.0858 10.4142 12.0858 10C12.0858 9.58579 11.7525 9.25245 11.0858 8.58579L7.5 5" stroke="#D32A18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

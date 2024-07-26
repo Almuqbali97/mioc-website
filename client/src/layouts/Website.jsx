@@ -6,12 +6,16 @@ import BottomBar from '../components/website/Bottombar';
 import MapSection from '../components/website/MapSection';
 import SposersAndOrganizersSection from '../components/website/SposersAndOrganizersSection';
 import PartnersSection from '../components/website/PartnersSection';
+import ChatWithUsCard from '../components/website/ChatWithUsCard';
 const Website = () => {
     return (
-        <div>
+        <div className='relative'>
             <TopBar />
             <Navbar />
             <Outlet />
+            {/* <div className='fixed text-primary_brown z-50 bottom-5 left-5'>
+                <ChatWithUsCard />
+            </div> */}
             <SposersAndOrganizersSection />
             <PartnersSection />
             <MapSection />
