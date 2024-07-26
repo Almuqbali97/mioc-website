@@ -49,8 +49,7 @@ const mongoDBURL = process.env.MONGODB_URL;
 
 // creating new client
 const mongoClient = new MongoClient(mongoDBURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    family: 4,
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
