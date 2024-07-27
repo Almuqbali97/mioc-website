@@ -5,11 +5,11 @@ const generateOrderId = () => {
 };
 const PaymentTestPage = () => {
     const [formData, setFormData] = useState({
-        merchant_id: '304',
+        merchant_id: '277',
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: '0.1',
-        redirect_url: 'https://mioc-website-api.vercel.app/oos/membership/payment/response',
+        redirect_url: import.meta.env.VITE_API_URL + '/oos/membership/payment/response',
         cancel_url: import.meta.env.VITE_API_URL + '/payment/cancel',
         language: 'EN',
         billing_name: 'Musaab Almuqbali',
@@ -53,9 +53,9 @@ const PaymentTestPage = () => {
 
             const data = await response.json();
             const { encRequest, accessCode } = data;
-            //testing url
-            // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
-            const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            // testing url
+            const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
             // Redirect to the payment URL
             window.location.href = url;
 
@@ -63,6 +63,24 @@ const PaymentTestPage = () => {
             console.error('Error initiating transaction:', error);
         }
     };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault(); // Prevent the default form submission behavior
+    //     try {
+    //         const response = await fetch(import.meta.env.VITE_API_URL + '/payment/request', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(formData)
+    //         });
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    //         // No need to handle redirection here, the backend will handle it
+    //     } catch (error) {
+    //         console.error('Error initiating transaction:', error);
+    //     }
+    // };
 
     return (
         <div className="bg-gray-100 dark:bg-gray-900 flex justify-center space-x-5">
@@ -122,7 +140,7 @@ const PaymentTestPage = () => {
                         </div>
                     </div>
 
-                  
+
 
                 </div>
             </div>

@@ -49,10 +49,12 @@ export const paymentRequest = (req, res) => {
         promo_code,
         customer_identifier
     } = req.body;
-
+    // console.log(req.body);
     const merchant_data = `merchant_id=${merchant_id}&order_id=${order_id}&currency=${currency}&amount=${amount}&redirect_url=${redirect_url}&cancel_url=${cancel_url}&language=${language}&billing_name=${billing_name}&billing_address=${billing_address}&billing_city=${billing_city}&billing_state=${billing_state}&billing_zip=${billing_zip}&billing_country=${billing_country}&billing_tel=${billing_tel}&billing_email=${billing_email}&delivery_name=${delivery_name}&delivery_address=${delivery_address}&delivery_city=${delivery_city}&delivery_state=${delivery_state}&delivery_zip=${delivery_zip}&delivery_country=${delivery_country}&delivery_tel=${delivery_tel}&merchant_param1=${merchant_param1}&merchant_param2=${merchant_param2}&merchant_param3=${merchant_param3}&merchant_param4=${merchant_param4}&merchant_param5=${merchant_param5}&promo_code=${promo_code}&customer_identifier=${customer_identifier}&`;
 
     const encryptedText = encrypt(merchant_data, workingKey);
+    // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
+    // res.status(302).redirect(redirectUrl);
     res.json({
         encRequest: encryptedText,
         accessCode: accessCode
