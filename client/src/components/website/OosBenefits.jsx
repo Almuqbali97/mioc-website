@@ -32,7 +32,7 @@ const OosBenefits = () => {
                     </div>
                     <div className="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#D32A18]">
                         <div className="bg-white rounded-full flex justify-center items-center mb-5 w-12 h-12 ">
-                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 14.7875L13.0959 17.8834C13.3399 18.1274 13.7353 18.1275 13.9794 17.8838L20.625 11.25M15 27.5C8.09644 27.5 2.5 21.9036 2.5 15C2.5 8.09644 8.09644 2.5 15 2.5C21.9036 2.5 27.5 8.09644 27.5 15C27.5 21.9036 21.9036 27.5 15 27.5Z" stroke="#D32A18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                             </svg>
 
@@ -44,9 +44,182 @@ const OosBenefits = () => {
                         </p>
                     </div>
                     <div className="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#D32A18]">
-                        <div className="bg-white rounded-full flex justify-center items-center mb-5 w-12 h-12 ">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21.6601 10.44L20.6801 14.62C19.8401 18.23 18.1801 19.69 15.0601 19.39C14.5601 19.35 14.0201 19.26 13.4401 19.12L11.7601 18.72C7.59006 17.73 6.30006 15.67 7.28006 11.49L8.26006 7.30001C8.46006 6.45001 8.70006 5.71001 9.00006 5.10001C10.1701 2.68001 12.1601 2.03001 15.5001 2.82001L17.1701 3.21001C21.3601 4.19001 22.6401 6.26001 21.6601 10.44Z" stroke="#D32A18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M15.06 19.39C14.44 19.81 13.66 20.16 12.71 20.47L11.13 20.99C7.15998 22.27 5.06997 21.2 3.77997 17.23L2.49997 13.28C1.21997 9.30998 2.27997 7.20998 6.24997 5.92998L7.82997 5.40998C8.23997 5.27998 8.62997 5.16998 8.99997 5.09998C8.69997 5.70998 8.45997 6.44998 8.25997 7.29998L7.27997 11.49C6.29997 15.67 7.58998 17.73 11.76 18.72L13.44 19.12C14.02 19.26 14.56 19.35 15.06 19.39Z" stroke="#D32A18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M12.64 8.53003L17.49 9.76003" stroke="#D32A18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M11.66 12.4L14.56 13.14" stroke="#D32A18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
-
+                        <div className="bg-white rounded-full flex justify-center items-center mb-5 w-12 h-12 overflow-hidden">
+                            <svg
+                                className='w-9 ml-1'
+                                version="1.1"
+                                id="svg2247"
+                                xmlSpace="preserve"
+                                width="300"
+                                height="300"
+                                viewBox="0 0 682.66669 682.66669"
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                            >
+                                <g transform="matrix(1,0,0,1,0,0)">
+                                    <defs id="defs2251">
+                                        <clipPath clipPathUnits="userSpaceOnUse" id="clipPath2281">
+                                            <path d="M 0,512 H 512 V 0 H 0 Z" id="path2279" fill="#d32a18ff" stroke="none" />
+                                        </clipPath>
+                                    </defs>
+                                    <g transform="matrix(1.3333333,0,0,-1.3333333,0,682.66667)">
+                                        <g transform="translate(66.7734,322.9736)">
+                                            <path
+                                                d="M 0,0 H 191.983"
+                                                style={{
+                                                    strokeLinecap: 'round',
+                                                    strokeLinejoin: 'round',
+                                                    strokeMiterlimit: 10,
+                                                    strokeDasharray: 'none',
+                                                    strokeOpacity: 1
+                                                }}
+                                                fill="none"
+                                                stroke="#d32a18ff"
+                                                strokeWidth="25"
+                                            />
+                                        </g>
+                                        <g transform="translate(66.7734,270.2778)">
+                                            <path
+                                                d="M 0,0 H 191.983"
+                                                style={{
+                                                    strokeLinecap: 'round',
+                                                    strokeLinejoin: 'round',
+                                                    strokeMiterlimit: 10,
+                                                    strokeDasharray: 'none',
+                                                    strokeOpacity: 1
+                                                }}
+                                                fill="none"
+                                                stroke="#d32a18ff"
+                                                strokeWidth="25"
+                                            />
+                                        </g>
+                                        <g transform="translate(66.7734,217.5825)">
+                                            <path
+                                                d="M 0,0 H 191.983"
+                                                style={{
+                                                    strokeLinecap: 'round',
+                                                    strokeLinejoin: 'round',
+                                                    strokeMiterlimit: 10,
+                                                    strokeDasharray: 'none',
+                                                    strokeOpacity: 1
+                                                }}
+                                                fill="none"
+                                                stroke="#d32a18ff"
+                                                strokeWidth="25"
+                                            />
+                                        </g>
+                                        <g transform="translate(66.7734,164.8867)">
+                                            <path
+                                                d="M 0,0 H 191.983"
+                                                style={{
+                                                    strokeLinecap: 'round',
+                                                    strokeLinejoin: 'round',
+                                                    strokeMiterlimit: 10,
+                                                    strokeDasharray: 'none',
+                                                    strokeOpacity: 1
+                                                }}
+                                                fill="none"
+                                                stroke="#d32a18ff"
+                                                strokeWidth="25"
+                                            />
+                                        </g>
+                                        <g transform="translate(66.7734,87.6597)">
+                                            <path
+                                                d="M 0,0 H 96.238"
+                                                style={{
+                                                    strokeLinecap: 'round',
+                                                    strokeLinejoin: 'round',
+                                                    strokeMiterlimit: 10,
+                                                    strokeDasharray: 'none',
+                                                    strokeOpacity: 1
+                                                }}
+                                                fill="none"
+                                                stroke="#d32a18ff"
+                                                strokeWidth="25"
+                                            />
+                                        </g>
+                                        <g>
+                                            <g clipPath="url(#clipPath2281)">
+                                                <g transform="translate(187.4014,409.8135)">
+                                                    <path
+                                                        d="m 0,0 h -13.002 c -5.143,0 -9.312,4.169 -9.312,9.312 v 24.334 c 0,5.143 4.169,9.312 9.312,9.312 h 153.967 c 5.143,0 9.312,-4.169 9.312,-9.312 V 9.312 C 150.277,4.169 146.108,0 140.965,0 H 35.06 M 213.85,-34.782 V 65.06 c 0,16.351 -13.255,29.606 -29.607,29.606 H -70.194 c -7.852,0 -15.383,-3.12 -20.935,-8.672 L -168.452,8.671 c -5.552,-5.552 -8.671,-13.082 -8.671,-20.934 v -360.465 c 0,-16.351 13.255,-29.606 29.605,-29.606 h 331.761 c 16.352,0 29.607,13.255 29.607,29.606 v 10.099"
+                                                        style={{
+                                                            strokeLinecap: 'round',
+                                                            strokeLinejoin: 'round',
+                                                            strokeMiterlimit: 10,
+                                                            strokeDasharray: 'none',
+                                                            strokeOpacity: 1
+                                                        }}
+                                                        fill="none"
+                                                        stroke="#d32a18ff"
+                                                        strokeWidth="25"
+                                                    />
+                                                </g>
+                                                <g transform="translate(356.5049,147.0181)">
+                                                    <path
+                                                        d="m 0,0 v -75.754 c 0,-6.586 7.222,-10.621 12.831,-7.168 l 27.503,16.931 c 1.353,0.833 2.883,1.249 4.412,1.249 1.53,0 3.061,-0.416 4.413,-1.249 l 27.503,-16.931 c 5.609,-3.453 12.83,0.582 12.83,7.168 V 0"
+                                                        style={{
+                                                            strokeLinecap: 'round',
+                                                            strokeLinejoin: 'round',
+                                                            strokeMiterlimit: 10,
+                                                            strokeDasharray: 'none',
+                                                            strokeOpacity: 1
+                                                        }}
+                                                        fill="none"
+                                                        stroke="#d32a18ff"
+                                                        strokeWidth="25"
+                                                    />
+                                                </g>
+                                                <g transform="translate(401.251,180.1875)">
+                                                    <path
+                                                        d="m 0,0 c -30.571,0 -55.354,24.783 -55.354,55.354 0,30.571 24.783,55.354 55.354,55.354 30.571,0 55.354,-24.783 55.354,-55.354 C 55.354,24.783 30.571,0 0,0 Z m 96.517,42.693 c -5.204,7.639 -5.204,17.683 0,25.322 8.283,12.157 2.855,28.86 -10.992,33.827 -8.7,3.121 -14.604,11.247 -14.883,20.486 -0.445,14.703 -14.655,25.027 -28.775,20.906 -8.873,-2.588 -18.427,0.516 -24.083,7.826 -4.501,5.816 -11.142,8.725 -17.784,8.725 -6.642,0 -13.282,-2.909 -17.783,-8.725 -5.657,-7.31 -15.21,-10.414 -24.083,-7.826 -14.121,4.121 -28.33,-6.203 -28.776,-20.906 -0.279,-9.239 -6.183,-17.365 -14.883,-20.486 -13.846,-4.967 -19.274,-21.67 -10.992,-33.827 5.204,-7.639 5.204,-17.683 0,-25.322 -8.282,-12.156 -2.854,-28.86 10.992,-33.827 8.7,-3.12 14.604,-11.247 14.883,-20.486 v 0 c 0.415,-13.702 12.785,-23.601 25.896,-21.549 0.958,0.149 1.919,0.362 2.88,0.643 8.873,2.589 18.426,-0.515 24.083,-7.825 9.002,-11.634 26.565,-11.634 35.567,0 5.656,7.31 15.21,10.414 24.083,7.825 0.961,-0.281 1.922,-0.494 2.879,-0.643 13.112,-2.052 25.482,7.847 25.896,21.549 v 0 c 0.279,9.239 6.183,17.366 14.883,20.486 13.847,4.967 19.275,21.671 10.992,33.827 z"
+                                                        style={{
+                                                            strokeLinecap: 'round',
+                                                            strokeLinejoin: 'round',
+                                                            strokeMiterlimit: 10,
+                                                            strokeDasharray: 'none',
+                                                            strokeOpacity: 1
+                                                        }}
+                                                        fill="none"
+                                                        stroke="#d32a18ff"
+                                                        strokeWidth="25"
+                                                    />
+                                                </g>
+                                                <g transform="translate(401.251,290.896)">
+                                                    <path
+                                                        d="m 0,0 c -30.571,0 -55.354,-24.783 -55.354,-55.354 0,-30.572 24.783,-55.354 55.354,-55.354 30.571,0 55.354,24.782 55.354,55.354 C 55.354,-24.783 30.571,0 0,0 Z"
+                                                        style={{
+                                                            strokeLinecap: 'round',
+                                                            strokeLinejoin: 'round',
+                                                            strokeMiterlimit: 10,
+                                                            strokeDasharray: 'none',
+                                                            strokeOpacity: 1
+                                                        }}
+                                                        fill="none"
+                                                        stroke="#d32a18ff"
+                                                        strokeWidth="25"
+                                                    />
+                                                </g>
+                                                <g transform="translate(104.9434,501.8198)">
+                                                    <path
+                                                        d="M 0,0 V -73.651 C 0,-83.789 -8.218,-92.006 -18.354,-92.006 H -92.006"
+                                                        style={{
+                                                            strokeLinecap: 'round',
+                                                            strokeLinejoin: 'round',
+                                                            strokeMiterlimit: 10,
+                                                            strokeDasharray: 'none',
+                                                            strokeOpacity: 1
+                                                        }}
+                                                        fill="none"
+                                                        stroke="#d32a18ff"
+                                                        strokeWidth="25"
+                                                    />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
                         <h4 className="text-xl font-semibold text-gray-900 mb-3 capitalize transition-all duration-500 group-hover:text-white">Get Certificate</h4>
                         <p className="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 group-hover:text-white">
@@ -55,8 +228,83 @@ const OosBenefits = () => {
                     </div>
                     <div className="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#D32A18]">
                         <div className="bg-white rounded-full flex justify-center items-center mb-5 w-12 h-12 overflow-hidden ">
-                            <svg fill="#D32A18" viewBox="0 0 128 128" id="Layer_1" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <polygon points="91,45 83,45 83,73 73,73 73,119 61,119 61,73 51,73 51,45 43,45 43,81 53,81 53,127 81,127 81,81 91,81 "></polygon> <path d="M53,15c0,7.7,6.3,14,14,14s14-6.3,14-14S74.7,1,67,1S53,7.3,53,15z M73,15c0,3.3-2.7,6-6,6s-6-2.7-6-6s2.7-6,6-6 S73,11.7,73,15z"></path> <path d="M19,25c0,7.7,6.3,14,14,14s14-6.3,14-14s-6.3-14-14-14S19,17.3,19,25z M39,25c0,3.3-2.7,6-6,6s-6-2.7-6-6s2.7-6,6-6 S39,21.7,39,25z"></path> <polygon points="113,83 103,83 103,119 87,119 87,127 111,127 111,91 121,91 121,51 113,51 "></polygon> <path d="M87,25c0,7.7,6.3,14,14,14s14-6.3,14-14s-6.3-14-14-14S87,17.3,87,25z M101,19c3.3,0,6,2.7,6,6s-2.7,6-6,6s-6-2.7-6-6 S97.7,19,101,19z"></path> <polygon points="31,83 21,83 21,51 13,51 13,91 23,91 23,127 47,127 47,119 31,119 "></polygon> </g> </g></svg>
-
+                            <svg
+                                className='w-11'
+                                id="Layer_1"
+                                viewBox="0 0 64 64"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="300"
+                                height="300"
+                                version="1.1"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                            >
+                                <g transform="matrix(1,0,0,1,0,0)">
+                                    <path
+                                        d="m34 21c-5.51 0-10 4.49-10 10s4.49 10 10 10 10-4.49 10-10-4.49-10-10-10zm-3 17.41v-4.41c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v4.41c-.93.38-1.94.59-3 .59s-2.07-.21-3-.59zm1.5-9.91c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm6.5 8.74v-3.24c0-1.52-1.14-2.77-2.61-2.96.68-.64 1.11-1.54 1.11-2.54 0-1.93-1.57-3.5-3.5-3.5s-3.5 1.57-3.5 3.5c0 1 .43 1.9 1.11 2.54-1.47.2-2.61 1.44-2.61 2.96v3.24c-1.83-1.47-3-3.72-3-6.24 0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.52-1.17 4.77-3 6.24z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m14.34 26.55 4.1-8.21c-.63-.23-1.22-.53-1.78-.89l-4.1 8.21c.63.23 1.22.53 1.78.89z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m31.68 11.48 13.44 2.03c.09-.67.26-1.33.49-1.95l-13.62-2.06c-.04.68-.14 1.34-.31 1.98z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m56 35.05v-10.1c-.33.03-.66.05-1 .05s-.67-.02-1-.05v10.1c.33-.03.66-.05 1-.05s.67.02 1 .05z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m45.32 47.52-8.34 3.09c.3.59.53 1.21.7 1.87l8.34-3.09c-.3-.59-.53-1.21-.7-1.87z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m15.12 42.9 5.3 5.58c.44-.51.93-.97 1.46-1.38l-5.3-5.58c-.44.51-.93.97-1.46 1.38z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m18.66 32.44c.18.64.28 1.3.32 1.98l3.37-.54c-.16-.64-.27-1.31-.31-1.98z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m29.15 20.02-1.51-2.77c-.55.38-1.14.71-1.76.96l1.52 2.78c.55-.37 1.14-.7 1.75-.97z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m44.5 36.8c-.32.58-.69 1.14-1.11 1.66l2.78 1.85c.31-.59.68-1.15 1.1-1.66z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m30.13 42.36-.69 2.75c.67.09 1.32.25 1.94.48l.69-2.75c-.66-.1-1.31-.26-1.94-.48z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m46.23 19.81-3.58 2.89c.47.48.89 1 1.27 1.56l3.45-2.79c-.43-.51-.81-1.07-1.14-1.66z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m22 1c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm-2.5 13.45v-1.88c0-.41.34-.75.75-.75h3.5c.41 0 .75.34.75.75v1.88c-.76.35-1.61.55-2.5.55s-1.74-.2-2.5-.55zm1.31-6.69c0-.65.53-1.19 1.19-1.19s1.19.53 1.19 1.19-.53 1.19-1.19 1.19-1.19-.53-1.19-1.19zm5.69 5.2v-.39c0-1.31-.92-2.4-2.15-2.68.51-.57.83-1.31.83-2.13 0-1.76-1.43-3.19-3.19-3.19s-3.19 1.43-3.19 3.19c0 .82.32 1.57.83 2.13-1.23.28-2.15 1.37-2.15 2.68v.39c-.93-1.06-1.5-2.44-1.5-3.96 0-3.31 2.69-6 6-6s6 2.69 6 6c0 1.52-.57 2.9-1.5 3.96z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m55 7c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm-2.5 13.45v-1.88c0-.41.34-.75.75-.75h3.5c.41 0 .75.34.75.75v1.88c-.76.35-1.61.55-2.5.55s-1.74-.2-2.5-.55zm1.31-6.69c0-.65.53-1.19 1.19-1.19s1.19.53 1.19 1.19-.53 1.19-1.19 1.19-1.19-.53-1.19-1.19zm5.69 5.2v-.39c0-1.31-.92-2.4-2.15-2.68.51-.57.83-1.31.83-2.13 0-1.76-1.43-3.19-3.19-3.19s-3.19 1.43-3.19 3.19c0 .82.32 1.57.83 2.13-1.23.28-2.15 1.37-2.15 2.68v.39c-.93-1.06-1.5-2.44-1.5-3.96 0-3.31 2.69-6 6-6s6 2.69 6 6c0 1.52-.57 2.9-1.5 3.96z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m55 37c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm-2.5 13.45v-1.88c0-.41.34-.75.75-.75h3.5c.41 0 .75.34.75.75v1.88c-.76.35-1.61.55-2.5.55s-1.74-.2-2.5-.55zm1.31-6.69c0-.65.53-1.19 1.19-1.19s1.19.53 1.19 1.19-.53 1.19-1.19 1.19-1.19-.53-1.19-1.19zm5.69 5.2v-.39c0-1.31-.92-2.4-2.15-2.68.51-.57.83-1.31.83-2.13 0-1.76-1.43-3.19-3.19-3.19s-3.19 1.43-3.19 3.19c0 .82.32 1.57.83 2.13-1.23.28-2.15 1.37-2.15 2.68v.39c-.93-1.06-1.5-2.44-1.5-3.96 0-3.31 2.69-6 6-6s6 2.69 6 6c0 1.52-.57 2.9-1.5 3.96z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m9 43c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8zm-2.5-2.55v-1.88c0-.41.34-.75.75-.75h3.5c.41 0 .75.34.75.75v1.88c-.76.35-1.61.55-2.5.55s-1.74-.2-2.5-.55zm1.31-6.69c0-.65.53-1.19 1.19-1.19s1.19.53 1.19 1.19-.53 1.19-1.19 1.19-1.19-.53-1.19-1.19zm1.19-4.76c3.31 0 6 2.69 6 6 0 1.52-.57 2.9-1.5 3.96v-.39c0-1.31-.92-2.4-2.15-2.68.51-.57.83-1.31.83-2.13 0-1.76-1.43-3.19-3.19-3.19s-3.19 1.43-3.19 3.19c0 .82.32 1.57.83 2.13-1.23.28-2.15 1.37-2.15 2.68v.39c-.93-1.06-1.5-2.44-1.5-3.96 0-3.31 2.69-6 6-6z"
+                                        fill="#d32a18ff"
+                                    />
+                                    <path
+                                        d="m28 63c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8zm-2.5-2.55v-1.88c0-.41.34-.75.75-.75h3.5c.41 0 .75.34.75.75v1.88c-.76.35-1.61.55-2.5.55s-1.74-.2-2.5-.55zm1.31-6.69c0-.65.53-1.19 1.19-1.19s1.19.53 1.19 1.19-.53 1.19-1.19 1.19-1.19-.53-1.19-1.19zm1.19-4.76c3.31 0 6 2.69 6 6 0 1.52-.57 2.9-1.5 3.96v-.39c0-1.31-.92-2.4-2.15-2.68.51-.57.83-1.31.83-2.13 0-1.76-1.43-3.19-3.19-3.19s-3.19 1.43-3.19 3.19c0 .82.32 1.57.83 2.13-1.23.28-2.15 1.37-2.15 2.68v.39c-.93-1.06-1.5-2.44-1.5-3.96 0-3.31 2.69-6 6-6z"
+                                        fill="#d32a18ff"
+                                    />
+                                </g>
+                            </svg>
                         </div>
                         <h4 className="text-xl font-semibold text-gray-900 mb-3 capitalize transition-all duration-500 group-hover:text-white">Join our Community</h4>
                         <p className="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 group-hover:text-white">

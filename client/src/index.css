@@ -772,6 +772,7 @@ html {}
     /* background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%); */
     background-image: linear-gradient(43deg, #d8a757 20%, #25D366 85%);
 }
+
 /* .chatCardbackground:hover{
     background-image: linear-gradient(43deg, #d8a757 5%, #095C9F 80%);
 
@@ -828,7 +829,7 @@ html {}
     transition: all 0.5s ease-in-out;
 }
 
-.chatCardbox:hover .svg:hover {
+.chatCardbox:hover .schatCardsvg:hover {
     fill: white;
 }
 
@@ -860,7 +861,7 @@ html {}
 }
 
 .chatCardbox2::before {
-    
+
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #ff53d4 60%, #62c2fe 90%);
 }
 
@@ -912,4 +913,37 @@ html {}
 .chatCard:hover .chatCardlogo {
     transform: translate(70px, -52px);
     letter-spacing: 0px;
+}
+
+
+@media (max-width: 600px) {
+    .chatCardbox .schatCardsvg {
+        fill: white;
+    }
+
+    .chatCardbox1 .chatCardicon .chatCardsvg {
+        filter: drop-shadow(0 0 5px white);
+    }
+    .chatCardbox2 .chatCardicon .chatCardsvg {
+        filter: drop-shadow(0 0 5px white);
+    }
+    .chatCardbox3 .chatCardicon .chatCardsvg {
+        filter: drop-shadow(0 0 5px white);
+    }
+
+    .chatCardbox1::before {
+        background: radial-gradient(circle at 30% 107%, #25D366 0%, #ffff 5%, #25D366 60%, #25D366 90%);
+        opacity: 1;
+    }
+
+    .chatCardbox2::before {
+
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #ff53d4 60%, #62c2fe 90%);
+        opacity: 1;
+    }
+
+    .chatCardbox3::before {
+        background: radial-gradient(circle at 30% 107%, #91e9ff 0%, #00ACEE 90%);
+        opacity: 1;
+    }
 }
