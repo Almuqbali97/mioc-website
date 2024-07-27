@@ -15,7 +15,10 @@ import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
 const workingKey = process.env.WORKING_KEY;
 const accessCode = process.env.ACCESS_CODE;
 
+export const paymentRequestCheckout = (req, res) => {
 
+    res.render('paymentForm', { data: req.query });
+}
 
 export const paymentRequest = (req, res) => {
     const {
@@ -55,11 +58,63 @@ export const paymentRequest = (req, res) => {
     const encryptedText = encrypt(merchant_data, workingKey);
     // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
     // res.status(302).redirect(redirectUrl);
-    res.json({
+    const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
+    return res.json({
         encRequest: encryptedText,
-        accessCode: accessCode
+        accessCode: accessCode,
+        redirectUrl: redirectUrl,
     });
 
+
+}
+
+export const paymentRequestHandler = (req, res) => {
+
+    const {
+        merchant_id,
+        order_id,
+        currency,
+        amount,
+        redirect_url,
+        cancel_url,
+        language,
+        billing_name,
+        billing_address,
+        billing_city,
+        billing_state,
+        billing_zip,
+        billing_country,
+        billing_tel,
+        billing_email,
+        delivery_name,
+        delivery_address,
+        delivery_city,
+        delivery_state,
+        delivery_zip,
+        delivery_country,
+        delivery_tel,
+        merchant_param1,
+        merchant_param2,
+        merchant_param3,
+        merchant_param4,
+        merchant_param5,
+        promo_code,
+        customer_identifier
+    } = req.body;
+
+    const merchant_data = `merchant_id=${merchant_id}&order_id=${order_id}&currency=${currency}&amount=${amount}&redirect_url=${redirect_url}&cancel_url=${cancel_url}&language=${language}&billing_name=${billing_name}&billing_address=${billing_address}&billing_city=${billing_city}&billing_state=${billing_state}&billing_zip=${billing_zip}&billing_country=${billing_country}&billing_tel=${billing_tel}&billing_email=${billing_email}&delivery_name=${delivery_name}&delivery_address=${delivery_address}&delivery_city=${delivery_city}&delivery_state=${delivery_state}&delivery_zip=${delivery_zip}&delivery_country=${delivery_country}&delivery_tel=${delivery_tel}&merchant_param1=${merchant_param1}&merchant_param2=${merchant_param2}&merchant_param3=${merchant_param3}&merchant_param4=${merchant_param4}&merchant_param5=${merchant_param5}&promo_code=${promo_code}&customer_identifier=${customer_identifier}&`;
+
+    const encryptedText = encrypt(merchant_data, workingKey);
+
+    const html = `
+    <form id="nonseamless" method="post" name="redirect" action="https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction">
+      <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">
+      <input type="hidden" name="access_code" id="access_code" value="${accessCode}">
+      <script language="javascript">document.redirect.submit();</script>
+    </form>
+  `;
+
+    res.send(html);
 }
 
 export const registrationPaymentRes = async (req, res) => {
@@ -147,24 +202,6 @@ export const registrationPaymentRes = async (req, res) => {
     }).toString();
     return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
 };
-
-
-export const getInvoiceByOrderID = async (req, res) => {
-    const { order_id } = req.params;
-
-    try {
-        const invoice = await registrationPaymentsCollection.findOne({ order_id: order_id });
-
-        if (!invoice) {
-            return res.status(404).json({ message: 'invoice not found' });
-        }
-
-        return res.status(200).json(invoice);
-    } catch (error) {
-        console.error('Error:', error);
-        return res.status(500).json({ message: 'Something went wrong, please try again' });
-    }
-}
 
 export const oosMembershipPaymentRes = async (req, res) => {
     const encRes = req.body.encResp;
@@ -285,6 +322,23 @@ export const oosMembershipPaymentRes = async (req, res) => {
     }).toString();
     return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
 };
+
+export const getInvoiceByOrderID = async (req, res) => {
+    const { order_id } = req.params;
+
+    try {
+        const invoice = await registrationPaymentsCollection.findOne({ order_id: order_id });
+
+        if (!invoice) {
+            return res.status(404).json({ message: 'invoice not found' });
+        }
+
+        return res.status(200).json(invoice);
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Something went wrong, please try again' });
+    }
+}
 
 
 

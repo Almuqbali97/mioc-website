@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { getInvoiceByOrderID, oosMembershipPaymentRes, paymentRequest, registrationPaymentRes } from '../controllers/paymentController.js';
+import { getInvoiceByOrderID, oosMembershipPaymentRes, paymentRequest, registrationPaymentRes, paymentRequestCheckout, paymentRequestHandler } from '../controllers/paymentController.js';
 
 
 const router = Router();
+
+router.get('/payment/request/checkout', paymentRequestCheckout);
+
+router.post('/ccavRequestHandler', paymentRequestHandler)
 
 router.post('/payment/request', paymentRequest);
 

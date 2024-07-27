@@ -665,8 +665,7 @@ export function oosCertificateEmailTemplate(fullName, oosId, amount, paymentDate
                                                                                             Please use this number to
                                                                                             register for the
                                                                                             upcoming MIOC-EMCO-IKS
-                                                                                            Cngress 2024 conference
-                                                                                            congress and get the
+                                                                                            Congress 2024 and get the
                                                                                             discounted rate specially
                                                                                             given
                                                                                             for OOS members.

@@ -1,6 +1,5 @@
 import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
 
-// import { memberships } from './consts.js';
 
 export const getSpecificMembership = async (req, res) => {
     const { id } = req.params;
@@ -17,7 +16,7 @@ export const getSpecificMembership = async (req, res) => {
 };
 
 
-// await oosMembershipCollection.insertMany(memberships)
+// await oosMembershipCollection.insertMany(moreContacts)
 
 
 

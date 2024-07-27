@@ -51,6 +51,8 @@ import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
 import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 import PaymentTestPage from './components/website/PaymentTestPage.jsx';
 import OosBankRedirect from './components/website/OosBankRedirect.jsx';
+import PaymentResponsePage from './components/website/PaymentResponsePage.jsx';
+import UnderMaintinance from './components/website/UnderMaintinance.jsx';
 
 
 function App() {
@@ -72,7 +74,8 @@ function App() {
           <Route path='/organising-committee' element={<OrganizingCommittee />} />
           <Route path='/sientific-committee' element={<SientificComittee />} />
           {/* registration */}
-          <Route path='/online-registration' element={<OnlineRegistration />} />
+          {/* <Route path='/online-registration' element={<OnlineRegistration />} /> */}
+          <Route path='/online-registration' element={<UnderMaintinance />} />
           {/* <Route path='/get-oos-memebership' element={<GetOOSMembership />} /> */}
           <Route path='/registrar/:id' element={<RegistrationCard />} />
           <Route path='/registration-checklist' element={<RegistrationChecklist />} />
@@ -98,7 +101,7 @@ function App() {
           <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
           <Route path='/payment-test' element={<PaymentTestPage />} />
-          <Route path='/oos/bank/redirect' element={<OosBankRedirect />} />
+          <Route path='/payment/response' element={<PaymentResponsePage />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
@@ -111,7 +114,8 @@ function App() {
 
           </Route>
         </Route>
-        <Route path='/get-oos-memebership' element={<GetOOSMembership />} />
+        {/* <Route path='/get-oos-memebership' element={<GetOOSMembership />} /> */}
+        <Route path='/get-oos-memebership' element={<UnderMaintinance />} />
         <Route element={<RequireAuth />}>
           <Route element={<AdminPanel />}>
             <Route path='/admin' element={<AdminPage />} />

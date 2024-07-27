@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+</head>
+
+<style>
+    .hideFromScreet {
+        display: none;
+    }
+
+    .centerForm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .readonly-input {
+        background-color: #f0f0f0;
+        /* Light gray background */
+        border: 1px solid #ccc;
+        /* Gray border */
+        color: #333;
+        /* Darker text color */
+    }
+</style>
+
+<body>
+    <form class="centerForm" method="POST" name="customerData" action="/ccavRequestHandler">
+        <table width="40%" height="100">
+            <tr class="hideFromScreet">
+                <td colspan=" 2">Compulsory information</td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Id</td>
+                <td><input type="" name="merchant_id" value="<%= data.merchant_id %>" /></td>
+            </tr>
+            <tr>
+                <td>Order Id</td>
+                <td><input type="text" readonly class="readonly-input" name="order_id" value="<%= data.order_id %>" />
+                </td>
+            </tr>
+
+
+            <tr class="hideFromScreet">
+                <td>Redirect URL</td>
+                <td><input type="" name="redirect_url" value="<%= data.redirect_url %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Cancel URL</td>
+                <td><input type="" name="cancel_url" value="<%= data.cancel_url %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Language</td>
+                <td><input type="" name="language" value="<%= data.language %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>Full Name</td>
+                <td><input type="text" name="billing_name" value="<%= data.billing_name %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Billing Address:</td>
+                <td><input type="" name="billing_address" value="<%= data.billing_address %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Billing City:</td>
+                <td><input type="" name="billing_city" value="<%= data.billing_city %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Billing State:</td>
+                <td><input type="" name="billing_state" value="<%= data.billing_state %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Billing Zip:</td>
+                <td><input type="" name="billing_zip" value="<%= data.billing_zip %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Billing Country:</td>
+                <td><input type="" name="billing_country" value="<%= data.billing_country %>" /> </td>
+            </tr>
+            <tr>
+                <td>Mobile No:</td>
+                <td><input type="" name="billing_tel" value="<%= data.billing_tel %>" /> </td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" name="billing_email" value="<%= data.billing_email %>" /></td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td>
+                    <input class="readonly-input" type="" name="amount" readonly value="<%= data.amount %>" />
+                </td>
+            </tr>
+            <tr>
+                <td>Currency</td>
+                <td><input type="" class="readonly-input" readonly name="currency" value="<%= data.currency %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td colspan="2">Shipping information(optional):</td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping Name</td>
+                <td><input type="" name="delivery_name" value="<%= data.delivery_name %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping Address:</td>
+                <td><input type="" name="delivery_address" value="<%= data.delivery_address %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping City:</td>
+                <td><input type="" name="delivery_city" value="<%= data.delivery_city %>" /> </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping State:</td>
+                <td><input type="" name="delivery_state" value="<%= data.delivery_state %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping Zip:</td>
+                <td><input type="" name="delivery_zip" value="<%= data.delivery_zip %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping Country:</td>
+                <td><input type="" name="delivery_country" value="<%= data.delivery_country %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Shipping Tel:</td>
+                <td><input type="" name="delivery_tel" value="<%= data.delivery_tel %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Param1</td>
+                <td><input type="" name="merchant_param1" value="<%= data.merchant_param1 %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Param2</td>
+                <td><input type="" name="merchant_param2" value="<%= data.merchant_param2 %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Param3</td>
+                <td><input type="" name="merchant_param3" value="<%= data.merchant_param3 %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Param4</td>
+                <td><input type="" name="merchant_param4" value="<%= data.merchant_param4 %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Merchant Param5</td>
+                <td><input type="" name="merchant_param5" value="<%= data.merchant_param5 %>" />
+                </td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Promo Code:</td>
+                <td><input type="" name="promo_code" value="<%= data.promo_code %>" /></td>
+            </tr>
+            <tr class="hideFromScreet">
+                <td>Customer Id:</td>
+                <td><input type="text" name="customer_identifier" value="<%= data.customer_identifier %>" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Confirm & Pay" placeholder=""></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
