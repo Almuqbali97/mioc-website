@@ -58,7 +58,9 @@ export const paymentRequest = (req, res) => {
     // const encryptedText = encrypt(merchant_data, workingKey);
     // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
     // res.status(302).redirect(redirectUrl);
-    const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
+    //for testing only
+    // const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
+    const redirectUrl = `https://mioc-website-api.vercel.app/payment/request/checkout?${merchant_data}`;
     return res.json({
         redirectUrl: redirectUrl,
     });
