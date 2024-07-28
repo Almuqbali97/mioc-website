@@ -305,8 +305,8 @@ const OosPricingTable = () => {
                                                 </div>
                                                 <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
                                             </header>
-                                                <p className=' font-light'>{card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, technician, orthoptist'}</p>
-                                            <p className=' font-light my-2'>{card.title === 'Ophthalmologist' && 'Ophthalmologist, Physician'}</p>
+                                                <p className=' font-light'>{card.title === 'Non-Ophthalmologist' && 'Residents, Optometrist, Ophthalmic technician, Orthoptist'}</p>
+                                            <p className={` font-light my-2 ${card.title === 'Ophthalmologist' && 'my-5'}`}>{card.title === 'Ophthalmologist' && 'Ophthalmologist, Physician'}</p>
                                             <div className="text-gray-800 font-bold mb-4">
                                                 <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist/Physician' ? '35/OMR' : '20 /OMR'}</span>
                                                 <br />

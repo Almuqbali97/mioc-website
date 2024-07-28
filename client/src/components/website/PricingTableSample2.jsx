@@ -85,7 +85,11 @@ const PricingTableSample2 = () => {
                     const expirationDate = new Date(membership.expirationDate);
                     const isValid = expirationDate.getFullYear() === 2024;
                     setMembershipValid(isValid);
-                }, 2800);
+                    if (isValid) {
+                        setHasoosMembership('yes');
+                        setoosMembership(number);
+                    }
+                }, 2500);
             } else {
                 SetMemebershipValidationErrMsg(membership.message);
                 setMembershipValid(false);
