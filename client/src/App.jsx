@@ -76,7 +76,6 @@ function App() {
           {/* registration */}
           {/* <Route path='/online-registration' element={<OnlineRegistration />} /> */}
           <Route path='/online-registration' element={<UnderMaintinance />} />
-          {/* <Route path='/get-oos-memebership' element={<GetOOSMembership />} /> */}
           <Route path='/registrar/:id' element={<RegistrationCard />} />
           <Route path='/registration-checklist' element={<RegistrationChecklist />} />
           <Route path="/checkout" element={<CheckoutPage />} />

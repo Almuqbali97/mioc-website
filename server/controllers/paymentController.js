@@ -9,7 +9,7 @@ import { successfullConferenceRegistrationEmail } from '../utils/paymentInvoiceE
 import { registrationNotification } from '../utils/notificationEmails.js'
 import QRCode from 'qrcode'
 import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
-import { oosMembershipInvoiceEmail } from '../utils/oosPaymentInvoiceEmail.js';
+// import { oosMembershipInvoiceEmail } from '../utils/oosPaymentInvoiceEmail.js';
 import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
 const workingKey = process.env.WORKING_KEY;
@@ -55,13 +55,11 @@ export const paymentRequest = (req, res) => {
     // console.log(req.body);
     const merchant_data = `merchant_id=${merchant_id}&order_id=${order_id}&currency=${currency}&amount=${amount}&redirect_url=${redirect_url}&cancel_url=${cancel_url}&language=${language}&billing_name=${billing_name}&billing_address=${billing_address}&billing_city=${billing_city}&billing_state=${billing_state}&billing_zip=${billing_zip}&billing_country=${billing_country}&billing_tel=${billing_tel}&billing_email=${billing_email}&delivery_name=${delivery_name}&delivery_address=${delivery_address}&delivery_city=${delivery_city}&delivery_state=${delivery_state}&delivery_zip=${delivery_zip}&delivery_country=${delivery_country}&delivery_tel=${delivery_tel}&merchant_param1=${merchant_param1}&merchant_param2=${merchant_param2}&merchant_param3=${merchant_param3}&merchant_param4=${merchant_param4}&merchant_param5=${merchant_param5}&promo_code=${promo_code}&customer_identifier=${customer_identifier}&`;
 
-    const encryptedText = encrypt(merchant_data, workingKey);
+    // const encryptedText = encrypt(merchant_data, workingKey);
     // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
     // res.status(302).redirect(redirectUrl);
     const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
     return res.json({
-        encRequest: encryptedText,
-        accessCode: accessCode,
         redirectUrl: redirectUrl,
     });
 
@@ -307,12 +305,12 @@ export const oosMembershipPaymentRes = async (req, res) => {
             // Continue execution as payment details are already determined by third party
         }
 
-        try {
-            await oosMembershipInvoiceEmail(decryptedResToObject.billing_email, oosMemberData);
-        } catch (error) {
-            console.error("Failed to generate invoice and send email:", error);
-            // Continue execution as payment details are already determined by third party
-        }
+        // try {
+        //     await oosMembershipInvoiceEmail(decryptedResToObject.billing_email, oosMemberData);
+        // } catch (error) {
+        //     console.error("Failed to generate invoice and send email:", error);
+        //     // Continue execution as payment details are already determined by third party
+        // }
     }
 
     // Redirect to React with parameters

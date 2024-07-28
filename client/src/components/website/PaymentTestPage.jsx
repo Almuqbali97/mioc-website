@@ -5,7 +5,7 @@ const generateOrderId = () => {
 };
 const PaymentTestPage = () => {
     const [formData, setFormData] = useState({
-        merchant_id: '277',
+        merchant_id: '304',
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: '0.1',
@@ -19,7 +19,7 @@ const PaymentTestPage = () => {
         billing_zip: '511',
         billing_country: 'oman',
         billing_tel: '0096896067878',
-        billing_email: 'almuqbalimusab@gmail.com',
+        billing_email: 'mqbali97@gmail.com',
         delivery_name: 'Musaab Almuqbali',
         delivery_address: 'oman',
         delivery_city: 'oman',
@@ -27,10 +27,10 @@ const PaymentTestPage = () => {
         delivery_zip: '511',
         delivery_country: 'oman',
         delivery_tel: '0096896067878',
-        merchant_param1: '',
-        merchant_param2: '',
-        merchant_param3: '',
-        merchant_param4: '',
+        merchant_param1: 'oos',
+        merchant_param2: 'oos',
+        merchant_param3: 'oos',
+        merchant_param4: 'oos',
         merchant_param5: '',
         promo_code: '',
         customer_identifier: generateOrderId(),
@@ -52,9 +52,9 @@ const PaymentTestPage = () => {
             }
 
             const data = await response.json();
-            const { encRequest, accessCode, redirectUrl } = data;
+            const {  redirectUrl } = data;
             // testing url
-            const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
+            // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
             // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
             // Redirect to the payment URL
             // window.location.href = url;

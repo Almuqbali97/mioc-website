@@ -12,7 +12,7 @@ sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
 export async function oosMembershipInvoiceEmail(email, userData) {
     try {
-        const pdfBuffer = await generateInvoice(userData);
+        const pdfBuffer = await generateOOSInvoice(userData);
         const msg = {
             to: email,
             from: {
@@ -47,13 +47,13 @@ export async function oosMembershipInvoiceEmail(email, userData) {
     }
 };
 
-async function generateInvoice(invoice) {
+async function generateOOSInvoice(invoice) {
     return new Promise((resolve, reject) => {
         const doc = new PDFDocument({ size: 'A4', margin: 50 });
 
         generateHeader(doc, invoice);
         generateCustomerInformation(doc, invoice);
-        generateInvoiceTable(doc, invoice);
+        generateOOSInvoiceTable(doc, invoice);
 
         const buffers = [];
         doc.on('data', buffers.push.bind(buffers));
@@ -109,7 +109,7 @@ function generateCustomerInformation(doc, invoice) {
         .text(`Price for OOS Member: ${invoice.membership_id}`, 50, 280);
 }
 
-function generateInvoiceTable(doc, invoice) {
+function generateOOSInvoiceTable(doc, invoice) {
     const invoiceTableTop = 310;
 
     doc.font('Helvetica-Bold');
