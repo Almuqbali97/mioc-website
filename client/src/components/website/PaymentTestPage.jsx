@@ -52,7 +52,7 @@ const PaymentTestPage = () => {
             }
 
             const data = await response.json();
-            const {  redirectUrl } = data;
+            const { redirectUrl } = data;
             // testing url
             // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
             // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
