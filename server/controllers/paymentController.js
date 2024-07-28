@@ -59,8 +59,8 @@ export const paymentRequest = (req, res) => {
     // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
     // res.status(302).redirect(redirectUrl);
     //for testing only
-    // const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
-    const redirectUrl = `https://mioc-website-api.vercel.app/payment/request/checkout?${merchant_data}`;
+    const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
+    // const redirectUrl = `https://mioc-website-api.vercel.app/payment/request/checkout?${merchant_data}`;
     // const redirectUrl = `https://mioc.org.om/payment/request/checkout?${merchant_data}`;
     return res.json({
         redirectUrl: redirectUrl,
@@ -107,13 +107,13 @@ export const paymentRequestHandler = (req, res) => {
 
     const encryptedText = encrypt(merchant_data, workingKey);
 
-//     const html = `
-//     <form id="nonseamless" method="post" name="redirect" action="https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction">
-//       <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">
-//       <input type="hidden" name="access_code" id="access_code" value="${accessCode}">
-//       <script language="javascript">document.redirect.submit();</script>
-//     </form>
-//   `;
+    //     const html = `
+    //     <form id="nonseamless" method="post" name="redirect" action="https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction">
+    //       <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">
+    //       <input type="hidden" name="access_code" id="access_code" value="${accessCode}">
+    //       <script language="javascript">document.redirect.submit();</script>
+    //     </form>
+    //   `;
     const html = `
     <form id="nonseamless" method="post" name="redirect" action="https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction">
       <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">

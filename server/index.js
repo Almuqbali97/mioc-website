@@ -12,11 +12,12 @@ import registrants from './routes/registrationRoutes.js'
 const app = express();
 const port = process.env.PORT || 3000;
 import sponserRoute from './routes/sponserRoutes.js'
+import path from 'path'
+import { fileURLToPath } from 'url';
 
-
-app.set('view engine', 'ejs');
-// Set the views directory
-app.set('views', './views'); // Adjust the path as needed
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.set('view engine', 'ejs'); // Replace 'ejs' with whatever engine you're using
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors({
     origin: ['http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om','https://mti.bankmuscat.com:6443/'], // Replace with your client URL
