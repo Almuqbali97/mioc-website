@@ -123,9 +123,9 @@ const OosPricingTable = () => {
 
     const validateMembershipNumber = async (number) => {
         setMembershipNumberBeingValidated(true);
-
+        const oosNumber = (number).toUpperCase();
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/get/membership/${number}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/get/membership/${oosNumber}`);
             const membership = await response.json();
 
             if (response.ok && membership) {
@@ -168,14 +168,17 @@ const OosPricingTable = () => {
             postal,
             city,
         } = editableDetails;
+        const nameParts = fullName.trim().split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(' ');
 
         navigate('/oos-membership/checkout', {
             state: {
                 selectedCountry: residence,
                 nationality,
                 personalInfo: {
-                    firstName: fullName.split(' ')[0],
-                    lastName: fullName.split(' ')[1] || '',
+                    firstName,
+                    lastName,
                     email,
                     mobile: contactNumber
                 },
@@ -287,7 +290,7 @@ const OosPricingTable = () => {
                         <div className="flex justify-center">
                             <div className="flex flex-col md:flex-row items-center justify-center space-x-0 space-y-7 md:space-y-0 md:space-x-7">
                                 {[
-                                    { title: 'Ophthalmologist/Physician', price: 26.25, type: 'Ophthalmologist' },
+                                    { title: 'Ophthalmologist', price: 26.25, type: 'Ophthalmologist' },
                                     { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist', descrition: 'Residents, optometrist, ophthalmic technician, orthoptist, Students' },
                                 ].map((card) => (
                                     <div key={card.title} className="relative max-w-[350px] bg-white shadow-2xl rounded-sm border border-gray-200">
@@ -302,6 +305,8 @@ const OosPricingTable = () => {
                                                 </div>
                                                 <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
                                             </header>
+                                                <p className=' font-light'>{card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, technician, orthoptist'}</p>
+                                            <p className=' font-light my-2'>{card.title === 'Ophthalmologist' && 'Ophthalmologist, Physician'}</p>
                                             <div className="text-gray-800 font-bold mb-4">
                                                 <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist/Physician' ? '35/OMR' : '20 /OMR'}</span>
                                                 <br />

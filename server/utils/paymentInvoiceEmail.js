@@ -104,7 +104,7 @@ function generateCustomerInformation(doc, invoice) {
         .text('info@mioc.org.om', 50, 220)
 
         .text('Bill to', 300, 160)
-        .text(invoice.firstName + ' ' + invoice.lastName, 300, 175)
+        .text(invoice.fullName, 300, 175)
         .text(invoice.city, 300, 190)
         .text(invoice.zip, 300, 205)
         .text(invoice.country, 300, 220)

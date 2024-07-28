@@ -10,7 +10,7 @@ const ViewInvoiceDetails = () => {
     useEffect(() => {
         const fetchInvoiceDetails = async () => {
             try {
-                const response = await fetch(import.meta.env.VITE_API_URL + `/invoice/${order_id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/invoice/${order_id}`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include'

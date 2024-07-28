@@ -1,4 +1,4 @@
-export function registrationEmail(firstName, lastName, amount, paymentDate, registrationType, orderId, paymentStatus) {
+export function registrationEmail(fullName, amount, paymentDate, registrationType, orderId, paymentStatus) {
     return `
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -624,8 +624,7 @@ export function registrationEmail(firstName, lastName, amount, paymentDate, regi
                                                                     style="border-collapse:collapse;padding-right:10px;padding-left:10px">
                                                                     <div
                                                                         style="color:#444;font-family:Calibri,Candara,Segoe,'Segoe UI',Optima,Arial,sans-serif;font-size:11pt;line-height:120%;text-align:left">
-                                                                        <br><br>Dear ${firstName}
-                                                                        ${lastName},<br><br>Thank you
+                                                                        <br><br>Dear ${fullName},<br><br>Thank you
                                                                         for your registration to attend the <b>20th
                                                                             Muscat International Ophthalmology
                                                                             Conference (<span

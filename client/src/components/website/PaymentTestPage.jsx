@@ -5,7 +5,7 @@ const generateOrderId = () => {
 };
 const PaymentTestPage = () => {
     const [formData, setFormData] = useState({
-        merchant_id: '304',
+        merchant_id: '277',
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: '0.1',
@@ -50,14 +50,11 @@ const PaymentTestPage = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
+;
 
             const data = await response.json();
             const { redirectUrl } = data;
-            // testing url
-            // const url = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
-            // const url = `https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction&encRequest=${encRequest}&access_code=${accessCode}`;
-            // Redirect to the payment URL
-            // window.location.href = url;
+            console.log(redirectUrl);
             window.location.href = redirectUrl;
 
         } catch (error) {

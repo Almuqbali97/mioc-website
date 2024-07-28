@@ -74,7 +74,7 @@ function App() {
           <Route path='/organising-committee' element={<OrganizingCommittee />} />
           <Route path='/sientific-committee' element={<SientificComittee />} />
           {/* registration */}
-          {/* <Route path='/online-registration' element={<OnlineRegistration />} /> */}
+          <Route path='/online-registration-test' element={<OnlineRegistration />} />
           <Route path='/online-registration' element={<UnderMaintinance />} />
           <Route path='/registrar/:id' element={<RegistrationCard />} />
           <Route path='/registration-checklist' element={<RegistrationChecklist />} />
@@ -113,7 +113,7 @@ function App() {
 
           </Route>
         </Route>
-        {/* <Route path='/get-oos-memebership' element={<GetOOSMembership />} /> */}
+        <Route path='/get-oos-memebership-test' element={<GetOOSMembership />} />
         <Route path='/get-oos-memebership' element={<UnderMaintinance />} />
         <Route element={<RequireAuth />}>
           <Route element={<AdminPanel />}>

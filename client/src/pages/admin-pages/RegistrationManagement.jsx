@@ -44,7 +44,7 @@ const RegistrationManagement = () => {
         badgeWindow.document.write('<html><head><title>Print Badge</title>');
         badgeWindow.document.write('</head><body>');
         badgeWindow.document.write(`<div style="text-align: center;">
-                                        <h1>${registrant.firstName} ${registrant.lastName}</h1>
+                                        <h1>${registrant.fullName}</h1>
                                         <p>${registrant.email}</p>
                                         <div>
                                             <img src="${qrCodeDataUrl}" alt="QR Code" />
@@ -60,8 +60,8 @@ const RegistrationManagement = () => {
     };
 
     const filteredRegistrants = registrants.filter(registrant =>
-        registrant.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        registrant.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        registrant.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        // registrant.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         registrant.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -112,7 +112,7 @@ const RegistrationManagement = () => {
                             <tr key={index}>
                                 <td className="px-3 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
-                                        {registrant.firstName} {registrant.lastName}
+                                        {registrant.fullName}
                                     </div>
                                 </td>
                                 <td className="px-3 py-4 whitespace-nowrap">
@@ -138,7 +138,7 @@ const RegistrationManagement = () => {
                                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium">
                                     <QRCode
                                         id={`qr-${registrant.id}`}
-                                        value={`http://localhost:5000/registrar/${registrant.id}`}
+                                        value={`${registrant.id}`}
                                         size={128}
                                         level={"H"}
                                         includeMargin={true}

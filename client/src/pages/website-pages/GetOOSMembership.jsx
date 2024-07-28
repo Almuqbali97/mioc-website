@@ -10,9 +10,7 @@ const GetOOSMembership = () => {
             <OosPageHeader />
             <div className='-mt-64 xl:-mt-80'>
                 <div className='flex justify-center'>
-                    {/* <div className='w-26 mx-auto'> */}
-                    {/* <img src={OOSLOGO} /> */}
-                    {/* </div> */}
+
                     <OosBenefits />
                 </div>
                 <OosPricingTable />

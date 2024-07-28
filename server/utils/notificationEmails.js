@@ -924,7 +924,7 @@ export async function registrationNotification(userData) {
             Body: {
                 Html: {
                     Charset: "UTF-8",
-                    Data: registrationEmail(userData.firstName, userData.lastName, userData.amount, userData.paymentDate, userData.ticketType, userData.orderId, userData.paymentStatus)
+                    Data: registrationEmail(userData.fullName, userData.amount, userData.paymentDate, userData.ticketType, userData.orderId, userData.paymentStatus)
                 },
                 // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
             },

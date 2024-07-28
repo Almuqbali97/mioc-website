@@ -9,7 +9,6 @@ import { successfullConferenceRegistrationEmail } from '../utils/paymentInvoiceE
 import { registrationNotification } from '../utils/notificationEmails.js'
 import QRCode from 'qrcode'
 import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
-// import { oosMembershipInvoiceEmail } from '../utils/oosPaymentInvoiceEmail.js';
 import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
 const workingKey = process.env.WORKING_KEY;
@@ -55,12 +54,8 @@ export const paymentRequest = (req, res) => {
     // console.log(req.body);
     const merchant_data = `merchant_id=${merchant_id}&order_id=${order_id}&currency=${currency}&amount=${amount}&redirect_url=${redirect_url}&cancel_url=${cancel_url}&language=${language}&billing_name=${billing_name}&billing_address=${billing_address}&billing_city=${billing_city}&billing_state=${billing_state}&billing_zip=${billing_zip}&billing_country=${billing_country}&billing_tel=${billing_tel}&billing_email=${billing_email}&delivery_name=${delivery_name}&delivery_address=${delivery_address}&delivery_city=${delivery_city}&delivery_state=${delivery_state}&delivery_zip=${delivery_zip}&delivery_country=${delivery_country}&delivery_tel=${delivery_tel}&merchant_param1=${merchant_param1}&merchant_param2=${merchant_param2}&merchant_param3=${merchant_param3}&merchant_param4=${merchant_param4}&merchant_param5=${merchant_param5}&promo_code=${promo_code}&customer_identifier=${customer_identifier}&`;
 
-    // const encryptedText = encrypt(merchant_data, workingKey);
-    // const redirectUrl = `https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction&encRequest=${encryptedText}&access_code=${accessCode}`;
-    // res.status(302).redirect(redirectUrl);
-    //for testing only
-    // const redirectUrl = `http://localhost:5000/payment/request/checkout?${merchant_data}`;
-    const redirectUrl = `https://mioc-website-api.vercel.app/payment/request/checkout?${merchant_data}`;
+
+    const redirectUrl = `${process.env.API_URL}/payment/request/checkout?${merchant_data}`;
     return res.json({
         redirectUrl: redirectUrl,
     });
@@ -106,15 +101,8 @@ export const paymentRequestHandler = (req, res) => {
 
     const encryptedText = encrypt(merchant_data, workingKey);
 
-    //     const html = `
-    //     <form id="nonseamless" method="post" name="redirect" action="https://mti.bankmuscat.com:6443/transaction.do?command=initiateTransaction">
-    //       <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">
-    //       <input type="hidden" name="access_code" id="access_code" value="${accessCode}">
-    //       <script language="javascript">document.redirect.submit();</script>
-    //     </form>
-    //   `;
     const html = `
-    <form id="nonseamless" method="post" name="redirect" action="https://smartpaytrns.bankmuscat.com/transaction.do?command=initiateTransaction">
+    <form id="nonseamless" method="post" name="redirect" action="${process.env.BANK_PAYMENT_URL}">
       <input type="hidden" id="encRequest" name="encRequest" value="${encryptedText}">
       <input type="hidden" name="access_code" id="access_code" value="${accessCode}">
       <script language="javascript">document.redirect.submit();</script>
@@ -145,8 +133,7 @@ export const registrationPaymentRes = async (req, res) => {
     const userData = {
         id: id,
         orderId: decryptedResToObject.order_id,
-        firstName: decryptedResToObject.billing_name.split(' ')[0],
-        lastName: decryptedResToObject.billing_name.split(' ')[1],
+        fullName: capitalizeWords(decryptedResToObject.billing_name),
         email: decryptedResToObject.billing_email,
         mobile: decryptedResToObject.billing_tel,
         country: decryptedResToObject.billing_country,
@@ -193,8 +180,7 @@ export const registrationPaymentRes = async (req, res) => {
             const qrCodeUrl = userData.id;
             const qrCodeDataUrl = await QRCode.toDataURL(qrCodeUrl);
             const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
-            // const pdfPath = 'invoice.pdf';
-            // await generateInvoice(userData, pdfPath);
+
             await successfullConferenceRegistrationEmail(decryptedResToObject.billing_email, userData, qrCodeBuffer);
         } catch (error) {
             console.error("Failed to generate invoice and send email:", error);
@@ -247,14 +233,14 @@ export const oosMembershipPaymentRes = async (req, res) => {
         id: id,
         membership_id: membership_id,
         orderId: decryptedResToObject.order_id,
-        fullName: decryptedResToObject.billing_name.split(' ')[0] + ' ' + decryptedResToObject.billing_name.split(' ')[1],
+        fullName: capitalizeWords(decryptedResToObject.billing_name),
         email: decryptedResToObject.billing_email,
         contactNumber: decryptedResToObject.billing_tel,
-        country: decryptedResToObject.billing_country,
+        country: capitalizeWords(decryptedResToObject.billing_country),
         city: decryptedResToObject.billing_city,
         zip: decryptedResToObject.billing_zip,
         amount: decryptedResToObject.amount,
-        nationality: decryptedResToObject.merchant_param1,
+        nationality: capitalizeWords(decryptedResToObject.merchant_param1),
         workingPlace: decryptedResToObject.merchant_param2,
         designation: decryptedResToObject.merchant_param3,
         membershipType: decryptedResToObject.merchant_param4,
@@ -281,14 +267,14 @@ export const oosMembershipPaymentRes = async (req, res) => {
             const filter = { membership_id: decryptedResToObject.merchant_param5 };
             const updateDoc = {
                 $set: {
-                    fullName: oosMemberData.fullName,
+                    fullName: capitalizeWords(oosMemberData.fullName),
                     email: oosMemberData.email,
                     contactNumber: oosMemberData.contactNumber,
                     country: oosMemberData.country,
                     city: oosMemberData.city,
                     zip: oosMemberData.zip,
                     amount: oosMemberData.amount,
-                    nationality: oosMemberData.nationality,
+                    nationality: capitalizeWords(oosMemberData.nationality),
                     workingPlace: oosMemberData.workingPlace,
                     designation: oosMemberData.designation,
                     membershipType: oosMemberData.membershipType,
@@ -313,13 +299,6 @@ export const oosMembershipPaymentRes = async (req, res) => {
             console.error("Failed to send registration notification email:", error);
             // Continue execution as payment details are already determined by third party
         }
-
-        // try {
-        //     await oosMembershipInvoiceEmail(decryptedResToObject.billing_email, oosMemberData);
-        // } catch (error) {
-        //     console.error("Failed to generate invoice and send email:", error);
-        //     // Continue execution as payment details are already determined by third party
-        // }
     }
 
     // Redirect to React with parameters
@@ -332,7 +311,6 @@ export const oosMembershipPaymentRes = async (req, res) => {
 
 export const getInvoiceByOrderID = async (req, res) => {
     const { order_id } = req.params;
-
     try {
         const invoice = await registrationPaymentsCollection.findOne({ order_id: order_id });
 
@@ -346,8 +324,6 @@ export const getInvoiceByOrderID = async (req, res) => {
         return res.status(500).json({ message: 'Something went wrong, please try again' });
     }
 }
-
-
 
 function encrypt(raw, key) {
     const iv = crypto.randomBytes(16);
@@ -400,3 +376,13 @@ function resHandler(encRes, workingKey) {
 
     return html;
 }
+
+
+function capitalizeWords(str) {
+    return str
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+}
+
+
