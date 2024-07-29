@@ -165,7 +165,7 @@ export const registrationPaymentRes = async (req, res) => {
         // Continue execution as payment details are already determined by third party
     }
 
-    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Approved') {
+    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Shipped' || decryptedResToObject.order_status === 'Approved') {
 
         try {
             // Send notification email
@@ -193,7 +193,7 @@ export const registrationPaymentRes = async (req, res) => {
         orderStatus: decryptedResToObject.order_status,
         orderId: decryptedResToObject.order_id
     }).toString();
-    return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
+    return res.redirect(`https://mioc.org.om/payment/response?${queryParams}`);
 };
 
 export const oosMembershipPaymentRes = async (req, res) => {
@@ -291,7 +291,7 @@ export const oosMembershipPaymentRes = async (req, res) => {
         // Continue execution as payment details are already determined by third party
     }
 
-    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Approved') {
+    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Shipped' || decryptedResToObject.order_status === 'Approved') {
         try {
             // Send notification email
             await oosMembershipCertificateEmail(decryptedResToObject.billing_email, oosMemberData);
@@ -306,7 +306,7 @@ export const oosMembershipPaymentRes = async (req, res) => {
         orderStatus: decryptedResToObject.order_status,
         orderId: decryptedResToObject.order_id
     }).toString();
-    return res.redirect(`https://mioc.org.om/registration/payment/response?${queryParams}`);
+    return res.redirect(`https://mioc.org.om/payment/response?${queryParams}`);
 };
 
 export const getInvoiceByOrderID = async (req, res) => {

@@ -75,8 +75,8 @@ const OosCheckout = () => {
             }
 
             const data = await response.json();
-            const {  redirectUrl } = data;
-          
+            const { redirectUrl } = data;
+
             window.location.href = redirectUrl;
 
         } catch (error) {

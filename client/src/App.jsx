@@ -24,7 +24,6 @@ import MuscatCity from './pages/website-pages/travel/MuscatCity.jsx';
 import Transportation from './pages/website-pages/travel/Transportation.jsx';
 import VisaInformation from './pages/website-pages/travel/VisaInformation.jsx';
 import Accommodation from './pages/website-pages/travel/Accommodation.jsx';
-import TestComponantes from './components/TestComponantes.jsx';
 import ScrollToTop from './components/common/ScrollToTop.jsx';
 import Website from './layouts/Website.jsx';
 import AdminPanel from './layouts/AdminPanel.jsx';
@@ -32,7 +31,6 @@ import AbstractsManagement from './pages/admin-pages/AbstractsManagement.jsx';
 import AbstractInfo from './pages/website-pages/abstract/AbstractInfo.jsx';
 import CheckoutPage from './pages/website-pages/online-registration/CheckoutPage.jsx';
 import CancelPayment from './pages/website-pages/online-registration/CancelPayment.jsx';
-import SuccessPayment from './pages/website-pages/online-registration/SuccessPayment.jsx';
 import RegistrationManagement from './pages/admin-pages/RegistrationManagement.jsx';
 import PrivacyTerms from './pages/website-pages/PrivacyTerms.jsx';
 import EmailVerification from './components/website/EmailVerification.jsx';
@@ -50,8 +48,6 @@ import RegistrationDesk from './pages/admin-pages/RegistrationDesk.jsx';
 import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
 import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 import PaymentTestPage from './components/website/PaymentTestPage.jsx';
-import OosBankRedirect from './components/website/OosBankRedirect.jsx';
-import PaymentResponsePage from './components/website/PaymentResponsePage.jsx';
 import UnderMaintinance from './components/website/UnderMaintinance.jsx';
 
 
@@ -80,7 +76,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/oos-membership/checkout" element={<OosCheckout />} />
           <Route path='/payment/cancel' element={<CancelPayment />} />
-          <Route path='/registration/payment/response' element={<PaymentResponse />} />
+          <Route path='/payment/response' element={<PaymentResponse />} />
           {/* program */}
           <Route path='/cme' element={<Cme />} />
           <Route path='/program-at-a-glance' element={<ProgramAtGlance />} />
@@ -99,7 +95,6 @@ function App() {
           <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
           <Route path='/payment-test' element={<PaymentTestPage />} />
-          <Route path='/payment/response' element={<PaymentResponsePage />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}
