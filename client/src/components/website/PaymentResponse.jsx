@@ -6,7 +6,7 @@ const PaymentResponse = () => {
     const orderStatus = queryParams.get('orderStatus');
     const orderId = queryParams.get('orderId');
     const isSuccess = orderStatus === 'Success' || orderStatus === 'Confirmed' || orderStatus === 'Shipped';
-    const isAwaited = orderStatus === 'Awaited';
+    const isAwaited = orderStatus === 'Awaited' || orderStatus === 'Pending';
 
     return (
         <div className={`max-w-md mx-auto mt-48 mb-48 p-4 rounded-lg ${isSuccess ? 'bg-green-100' : 'bg-gray-100'} shadow-lg`}>
