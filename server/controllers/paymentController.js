@@ -6,11 +6,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { registrationListCollection } from '../models/registrationListModel.js';
 import { registrationPaymentsCollection } from '../models/registrationPaymentsModel.js';
 import { successfullConferenceRegistrationEmail } from '../utils/paymentInvoiceEmail.js'
-import { registrationNotification } from '../utils/notificationEmails.js'
+import { awaitedPaymentNotification, registrationNotification } from '../utils/notificationEmails.js'
 import QRCode from 'qrcode'
 import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
 import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
+import { type } from 'os';
 const workingKey = process.env.WORKING_KEY;
 const accessCode = process.env.ACCESS_CODE;
 
@@ -149,6 +150,16 @@ export const registrationPaymentRes = async (req, res) => {
         oosMembershipNumber: decryptedResToObject.merchant_param3
     };
 
+    if (!userData.orderStatus != 'Success') {
+        try {
+            await awaitedPaymentNotification(userData, 'registration')
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     try {
         // Insert the payment request details into the database
         await registrationPaymentsCollection.insertOne(paymentRequest);
@@ -250,6 +261,14 @@ export const oosMembershipPaymentRes = async (req, res) => {
         expirationDate: "2024-12-31",
     };
 
+    if (oosMemberData.orderStatus != 'Success') {
+        try {
+            await awaitedPaymentNotification(oosMemberData, 'OOS membership')
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     try {
         // Insert the payment request details into the database
         await oosPaymentsCollection.insertOne(paymentRequest);

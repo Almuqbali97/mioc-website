@@ -944,7 +944,32 @@ export async function registrationNotification(userData) {
 
 
 
+export async function awaitedPaymentNotification(userData, type) {
+    const params = {
+        Destination: {
+            ToAddresses: ['almuqbalimusab@gmail.com'], // Replace with your recipient's email address
+        },
+        Message: {
+            Body: {
+                Html: {
+                    Charset: "UTF-8",
+                    Data: `The follwoing order is ${userData.orderId}, statues: ${userData.paymentStatus}, type:${type} `
+                },
+                // Text: { Data: "Hello, this is a test email sent using Amazon SES." }, // Replace with your email content
+            },
+            Subject: { Data: "order" }, // Replace with your email subject
+        },
+        Source: "MIOC NOTIFICATION <info@mioc.org.om>", // Replace with your verified sender's email address
+        ReplyToAddresses: ["info@mioc.org.om"],
+    };
 
+    try {
+        const data = await sesClient.send(new SendEmailCommand(params));
+        console.log("Email sent successfully:", data);
+    } catch (err) {
+        console.error("Error sending email:", err);
+    }
+}
 
 
 
