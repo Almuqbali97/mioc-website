@@ -65,7 +65,7 @@ const CheckoutPage = () => {
 
             const data = await response.json();
             const { redirectUrl } = data;
-       
+
             // Redirect to the payment URL
             window.location.href = redirectUrl;
 

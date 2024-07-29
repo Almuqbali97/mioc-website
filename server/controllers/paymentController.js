@@ -150,7 +150,7 @@ export const registrationPaymentRes = async (req, res) => {
         oosMembershipNumber: decryptedResToObject.merchant_param3
     };
 
-    if (!userData.orderStatus != 'Success') {
+    if (decryptedResToObject.order_status != 'Success') {
         try {
             await awaitedPaymentNotification(userData, 'registration')
 
@@ -261,7 +261,7 @@ export const oosMembershipPaymentRes = async (req, res) => {
         expirationDate: "2024-12-31",
     };
 
-    if (oosMemberData.orderStatus != 'Success') {
+    if (decryptedResToObject.order_status != 'Success') {
         try {
             await awaitedPaymentNotification(oosMemberData, 'OOS membership')
 
