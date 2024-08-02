@@ -77,32 +77,32 @@ const CheckoutPage = () => {
         }
     };
 
-    async function handlePayLaterSubmit(e) {
-        e.preventDefault(); // Prevent the default form submission behavior4
-        setIsLoading(true);
-        try {
-            const response = await fetch(import.meta.env.VITE_API_URL + '/payment/paylater', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+    // async function handlePayLaterSubmit(e) {
+    //     e.preventDefault(); // Prevent the default form submission behavior4
+    //     setIsLoading(true);
+    //     try {
+    //         const response = await fetch(import.meta.env.VITE_API_URL + '/payment/paylater', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(formData)
+    //         });
 
-            if (!response.ok) {
-                setIsLoading(false);
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json()
-            const { redirectURL } = data;
-            setIsLoading(false);
-            window.location.href = redirectURL;
-        } catch (error) {
-            setIsLoading(false);
-            console.error('Error initiating transaction:', error);
-        }
+    //         if (!response.ok) {
+    //             setIsLoading(false);
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    //         const data = await response.json()
+    //         const { redirectURL } = data;
+    //         setIsLoading(false);
+    //         window.location.href = redirectURL;
+    //     } catch (error) {
+    //         setIsLoading(false);
+    //         console.error('Error initiating transaction:', error);
+    //     }
 
-    }
+    // }
 
 
     return (
@@ -193,12 +193,12 @@ const CheckoutPage = () => {
                                 className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-green-700">
                                 Checkout
                             </button>
-                            <p className='flex justify-center mt-1 -mb-2'>OR</p>
-                            <button onClick={() => setIsPaylater(true)}
+                            {/* <p className='flex justify-center mt-1 -mb-2'>OR</p> */}
+                            {/* <button onClick={() => setIsPaylater(true)}
                                 className="bg-primary_blue text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-700">
-                                Pay Later (Onsite)
-                            </button>
-                            {isPaylater &&
+                                Pay Later
+                            </button> */}
+                            {/* {isPaylater &&
 
                                 <>
 
@@ -211,7 +211,9 @@ const CheckoutPage = () => {
                                         Cancel and pay now
                                     </button>
                                 </>
-                            }</>}
+                            } */}
+                        </>
+                    }
 
                 </div>
             </div>

@@ -24,6 +24,7 @@ const OnlineRegistration = () => {
                         <li>OOS: Oman Ophthalmic Society.</li>
                         <li>OOS membership must be valid as of registration date.</li>
                         <li>The prices are in Omani Rials.</li>
+                        <li>If you have an issue paying using Visa/Credit card, you will have the option to pay later (onsite)</li>
                         <li>Please contact us on <a href="mailto:info@mioc.org.om" className="text-blue-600 underline">info@mioc.org.om</a> for discounted group registration rates.</li>
                     </ul>
                 </div>
