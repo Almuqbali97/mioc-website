@@ -618,6 +618,7 @@ const OosPricingTable = () => {
 
 function MemberProfile({ membershipDetails, onConfirm }) {
     const [step, setStep] = useState(1);
+    const [confirmed, setConfirmed] = useState(false); // Track confirmation status
     const [editableDetails, setEditableDetails] = useState({
         fullName: membershipDetails.fullName,
         email: membershipDetails.email,
@@ -626,11 +627,9 @@ function MemberProfile({ membershipDetails, onConfirm }) {
         residence: membershipDetails.country,
         nationality: membershipDetails.nationality,
         workingPlace: membershipDetails.workingPlace,
-        // membershipType: '',
-        // price: 0,
         // address: '',
         // postal: '',
-        // city: ''
+        // city: '',
     });
 
     const [editableFields, setEditableFields] = useState({
@@ -644,11 +643,13 @@ function MemberProfile({ membershipDetails, onConfirm }) {
     });
 
     const handleChange = (field, value) => {
-        setEditableDetails(prev => ({ ...prev, [field]: value }));
+        setEditableDetails((prev) => ({ ...prev, [field]: value }));
     };
 
     const handleEdit = (field) => {
-        setEditableFields(prev => ({ ...prev, [field]: !prev[field] }));
+        if (!confirmed) {
+            setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
+        }
     };
 
     const nextStep = () => {
@@ -662,16 +663,23 @@ function MemberProfile({ membershipDetails, onConfirm }) {
     const handleMembershipTypeChange = (e) => {
         const { value } = e.target;
         const price = value === 'Ophthalmologist' ? 26.25 : 15;
-        setEditableDetails(prev => ({ ...prev, membershipType: value, price }));
+        setEditableDetails((prev) => ({ ...prev, membershipType: value, price }));
+    };
+
+    const handleConfirmRenewal = () => {
+        setConfirmed(true);
+        nextStep();
     };
 
     return (
-        <div className='flex justify-center mt-5'>
-            <div className='w-[30rem] border rounded-lg shadow-lg'>
+        <div className="flex justify-center mt-5">
+            <div className="w-[30rem] border rounded-lg shadow-lg">
                 <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Membership Details
                     </h3>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-500">Price for Ophthalmologist/Physicians is <strong>26.25 OMR</strong> </p>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-500">Price for Non-Ophthalmologist <strong>15 OMR</strong> </p>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">
                         Edit the fields and confirm to renew your membership.
                     </p>
@@ -688,28 +696,35 @@ function MemberProfile({ membershipDetails, onConfirm }) {
                                 </dd>
                             </div>
                             {Object.entries(editableDetails).map(([key, value]) => (
-                                <div key={key} className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    {/* {(key !=''|| ||) <></>} */}
+                                <div
+                                    key={key}
+                                    className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                >
                                     <dt className="text-sm font-medium text-gray-500 flex items-center">
-                                        {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                                        {key.charAt(0).toUpperCase() +
+                                            key.slice(1).replace(/([A-Z])/g, ' $1').trim()}
                                     </dt>
                                     <dd className="sm:ml-5 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                         {editableFields[key] ? (
                                             <input
                                                 type="text"
                                                 value={value}
-                                                onChange={(e) => handleChange(key, e.target.value)}
+                                                onChange={(e) =>
+                                                    handleChange(key, e.target.value)
+                                                }
                                                 className="w-[83%] p-2 border rounded"
                                             />
                                         ) : (
                                             value
                                         )}
-                                        <button
-                                            onClick={() => handleEdit(key)}
-                                            className="ml-5 text-blue-500 hover:text-blue-700"
-                                        >
-                                            Edit
-                                        </button>
+                                        {!confirmed && (
+                                            <button
+                                                onClick={() => handleEdit(key)}
+                                                className="ml-5 text-blue-500 hover:text-blue-700"
+                                            >
+                                                Edit
+                                            </button>
+                                        )}
                                     </dd>
                                 </div>
                             ))}
@@ -721,17 +736,20 @@ function MemberProfile({ membershipDetails, onConfirm }) {
                                     {membershipDetails.expirationDate}
                                 </dd>
                             </div>
-                            <div className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            {/* <div className="py-[0.90rem] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-sm font-medium text-gray-500">
                                     Paid Price
                                 </dt>
                                 <dd className="sm:ml-5 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    {membershipDetails.amount} OMR <span className='font-thin'>will be <strong>25% off</strong></span>
+                                    {membershipDetails.amount} OMR{' '}
+                                    <span className="font-thin">
+                                        will be <strong>25% off</strong>
+                                    </span>
                                 </dd>
-                            </div>
+                            </div> */}
                         </dl>
                         <button
-                            onClick={nextStep}
+                            onClick={handleConfirmRenewal}
                             className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700"
                         >
                             Confirm Renewal
@@ -741,10 +759,10 @@ function MemberProfile({ membershipDetails, onConfirm }) {
                 {step === 2 && (
                     <div className="px-4 py-5 sm:px-6">
                         <h3 className="text-lg leading-6 font-medium text-gray-900">
-                            Select Membership Type
+                            Select Your Category
                         </h3>
+                        <p className="mt-1 max-w-2xl text-sm text-gray-500"><strong>Non-ophthalmologist:</strong> Residents, optometrist, ophthalmic technician, orthoptist, Students</p>
                         <div className="mt-4">
-                            <label className="block text-gray-700">Membership Type</label>
                             <select
                                 value={editableDetails.membershipType}
                                 onChange={handleMembershipTypeChange}
@@ -752,8 +770,12 @@ function MemberProfile({ membershipDetails, onConfirm }) {
                                 required
                             >
                                 <option value="">Select type</option>
-                                <option value="Ophthalmologist">Ophthalmologist</option>
-                                <option value="Non-Ophthalmologist">Non-Ophthalmologist</option>
+                                <option value="Ophthalmologist">
+                                    Ophthalmologist / Physician
+                                </option>
+                                <option value="Non-Ophthalmologist">
+                                    Non-Ophthalmologist
+                                </option>
                             </select>
                         </div>
                         <div className="flex justify-between mt-4">
@@ -778,31 +800,47 @@ function MemberProfile({ membershipDetails, onConfirm }) {
                             Billing Address
                         </h3>
                         <div className="mb-4">
-                            <label htmlFor="address" className="block text-gray-700 mb-2">Address Line 1</label>
+                            <label
+                                htmlFor="address"
+                                className="block text-gray-700 mb-2"
+                            >
+                                Address Line 1
+                            </label>
                             <input
                                 type="text"
                                 id="address"
                                 name="address"
                                 value={editableDetails.address}
-                                onChange={(e) => handleChange('address', e.target.value)}
+                                onChange={(e) =>
+                                    handleChange('address', e.target.value)
+                                }
                                 className="w-full p-2 border rounded"
                                 required
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="postal" className="block text-gray-700 mb-2">Postal code</label>
+                            <label
+                                htmlFor="postal"
+                                className="block text-gray-700 mb-2"
+                            >
+                                Postal code
+                            </label>
                             <input
                                 type="text"
                                 id="postal"
                                 name="postal"
                                 value={editableDetails.postal}
-                                onChange={(e) => handleChange('postal', e.target.value)}
+                                onChange={(e) =>
+                                    handleChange('postal', e.target.value)
+                                }
                                 className="w-full p-2 border rounded"
                                 required
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="city" className="block text-gray-700 mb-2">City</label>
+                            <label htmlFor="city" className="block text-gray-700 mb-2">
+                                City
+                            </label>
                             <input
                                 type="text"
                                 id="city"
@@ -833,7 +871,6 @@ function MemberProfile({ membershipDetails, onConfirm }) {
         </div>
     );
 }
-
 
 
 
