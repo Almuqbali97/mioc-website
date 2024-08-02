@@ -135,7 +135,7 @@ function generateInvoiceTable(doc, invoice) {
             invoiceTableTop,
             'Description',
             'Unit price',
-            'Amount remaining'
+            'Remaining amount'
         );
     }
 

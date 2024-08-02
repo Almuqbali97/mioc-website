@@ -127,11 +127,11 @@ const RegistrationManagement = () => {
                                 <td className="px-3 py-4 whitespace-nowrap">
                                     {registrant.paymentStatus === 'Success' ? (
                                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Paid
+                                            {registrant.paymentStatus}
                                         </span>
                                     ) : (
                                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Unpaid
+                                            {registrant.paymentStatus}
                                         </span>
                                     )}
                                 </td>

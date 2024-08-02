@@ -201,7 +201,18 @@ const OosPricingTable = () => {
         });
     };
 
-
+    const getTooltipMessage = (rate) => {
+        switch (rate) {
+            case 'early':
+                return 'This fee will be applied up to 1st November 2024';
+            case 'standard':
+                return 'This fee will be applied from 2nd to 21st November 2024';
+            case 'spot':
+                return 'This fee will be applied from 28th November (onsite only)';
+            default:
+                return '';
+        }
+    };
 
     return (
         <section className="flex flex-col justify-center antialiased text-gray-600 p-4 mb-20">
@@ -286,70 +297,70 @@ const OosPricingTable = () => {
                 {(membershipValid && isNewMember) && <MemberProfile membershipDetails={memebershipDetails} onConfirm={handleConfirmRenewal} />}
                 {!isNewMember &&
                     <div className="max-w-5xl mx-auto">
-                        <h2 className="text-3xl text-gray-800 font-bold text-center m-7">OOS Membership Fees</h2>
-                        <div className="flex justify-center">
-                            <div className="flex flex-col md:flex-row items-center justify-center space-x-0 space-y-7 md:space-y-0 md:space-x-7">
-                                {[
-                                    { title: 'Ophthalmologist', price: 26.25, type: 'Ophthalmologist' },
-                                    { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist', descrition: 'Residents, optometrist, ophthalmic technician, orthoptist, Students' },
-                                ].map((card) => (
-                                    <div key={card.title} className="relative max-w-[350px] bg-white shadow-2xl rounded-sm border border-gray-200">
-                                        <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-[#D32A18] to-black"></span>
-                                        <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r  from-[#D32A18] to-black"></span>
-                                        <div className="px-5 pt-5 pb-6 border-b border-gray-200">
-                                            <header className="flex items-center mb-2">
-                                                <div className="w-6 h-6 rounded-full flex-shrink-0 bg-gradient-to-tr from-green-700 to-green-300 mr-3">
-                                                    <svg className="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
-                                                        <path d="M12 17a.833.833 0 01-.833-.833 3.333 3.333 0 00-3.334-3.334.833.833 0 110-1.666 3.333 3.333 0 003.334-3.334.833.833 0 111.666 0 3.333 3.333 0 003.334 3.334.833.833 0 110 1.666 3.333 3.333 0 00-3.334 3.334c0 .46-.373.833-.833.833z" />
-                                                    </svg>
-                                                </div>
-                                                <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
-                                            </header>
+                        {(isNewMember === false) && <>     <h2 className="text-3xl text-gray-800 font-bold text-center m-7">OOS Membership Fees</h2>
+                            <div className="flex justify-center">
+                                <div className="flex flex-col md:flex-row items-center justify-center space-x-0 space-y-7 md:space-y-0 md:space-x-7">
+                                    {[
+                                        { title: 'Ophthalmologist', price: 26.25, type: 'Ophthalmologist' },
+                                        { title: 'Non-Ophthalmologist', price: 15, type: 'Non-Ophthalmologist', descrition: 'Residents, optometrist, ophthalmic technician, orthoptist, Students' },
+                                    ].map((card) => (
+                                        <div key={card.title} className="relative max-w-[350px] bg-white shadow-2xl rounded-sm border border-gray-200">
+                                            <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-[#D32A18] to-black"></span>
+                                            <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r  from-[#D32A18] to-black"></span>
+                                            <div className="px-5 pt-5 pb-6 border-b border-gray-200">
+                                                <header className="flex items-center mb-2">
+                                                    <div className="w-6 h-6 rounded-full flex-shrink-0 bg-gradient-to-tr from-green-700 to-green-300 mr-3">
+                                                        <svg className="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
+                                                            <path d="M12 17a.833.833 0 01-.833-.833 3.333 3.333 0 00-3.334-3.334.833.833 0 110-1.666 3.333 3.333 0 003.334-3.334.833.833 0 111.666 0 3.333 3.333 0 003.334 3.334.833.833 0 110 1.666 3.333 3.333 0 00-3.334 3.334c0 .46-.373.833-.833.833z" />
+                                                        </svg>
+                                                    </div>
+                                                    <h3 className="text-lg text-gray-800 font-semibold" title={card.title === 'Non-Ophthalmologist' && 'Residents, optometrist, ophthalmic technician, orthoptist'}>{card.title}</h3>
+                                                </header>
                                                 <p className=' font-light'>{card.title === 'Non-Ophthalmologist' && 'Residents, Optometrist, Ophthalmic technician, Orthoptist'}</p>
-                                            <p className={` font-light my-2 ${card.title === 'Ophthalmologist' && 'my-5'}`}>{card.title === 'Ophthalmologist' && 'Ophthalmologist, Physician'}</p>
-                                            <div className="text-gray-800 font-bold mb-4">
-                                                <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist' ? '35/OMR' : '20 /OMR'}</span>
-                                                <br />
-                                                <span className="text-3xl">{card.price}</span>
-                                                <span className="text-gray-500 font-medium text-sm">/OMR</span>
-                                                <span className="text-green-400  text-sm italic"> 25% off</span>
+                                                <p className={` font-light my-2 ${card.title === 'Ophthalmologist' && 'my-5'}`}>{card.title === 'Ophthalmologist' && 'Ophthalmologist, Physician'}</p>
+                                                <div className="text-gray-800 font-bold mb-4">
+                                                    <span class="text-red-400 text-2xl line-through font-semibold ">{card.title === 'Ophthalmologist' ? '35/OMR' : '20 /OMR'}</span>
+                                                    <br />
+                                                    <span className="text-3xl">{card.price}</span>
+                                                    <span className="text-gray-500 font-medium text-sm">/OMR</span>
+                                                    <span className="text-green-400  text-sm italic"> 25% off</span>
+                                                </div>
+                                                <div className="relative group">
+                                                    <button
+                                                        className="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-[#D32A18] text-white hover:bg-red-700"
+                                                        onClick={() => openModal(card.price, card.type)}
+                                                    >
+                                                        Register Now
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="relative group">
-                                                <button
-                                                    className="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-[#D32A18] text-white hover:bg-red-700"
-                                                    onClick={() => openModal(card.price, card.type)}
-                                                >
-                                                    Register Now
-                                                </button>
+                                            <div className="px-5 pt-4 pb-5">
+                                                <div className="text-xs text-gray-800 font-semibold uppercase mb-4">What's included</div>
+                                                <ul className='space-y-4'>
+                                                    <li className="flex items-center py-1">
+                                                        <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
+                                                            <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
+                                                        </svg>
+                                                        <div className="text-sm">Online access to Oman Journal of Ophthalmology</div>
+                                                    </li>
+                                                    <li className="flex items-center py-1">
+                                                        <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
+                                                            <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
+                                                        </svg>
+                                                        <div className="text-sm">The right to participate in OOS board elections</div>
+                                                    </li>
+                                                    <li className="flex items-center py-1">
+                                                        <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
+                                                            <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
+                                                        </svg>
+                                                        <div className="text-sm">Professional development through conferences, workshops and annual OOS meetings</div>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div className="px-5 pt-4 pb-5">
-                                            <div className="text-xs text-gray-800 font-semibold uppercase mb-4">What's included</div>
-                                            <ul className='space-y-4'>
-                                                <li className="flex items-center py-1">
-                                                    <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
-                                                        <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
-                                                    </svg>
-                                                    <div className="text-sm">Online access to Oman Journal of Ophthalmology</div>
-                                                </li>
-                                                <li className="flex items-center py-1">
-                                                    <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
-                                                        <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
-                                                    </svg>
-                                                    <div className="text-sm">The right to participate in OOS board elections</div>
-                                                </li>
-                                                <li className="flex items-center py-1">
-                                                    <svg className="w-3 h-3 flex-shrink-0 fill-current text-green-500 mr-2" viewBox="0 0 12 12">
-                                                        <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
-                                                    </svg>
-                                                    <div className="text-sm">Professional development through conferences, workshops and annual OOS meetings</div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                                    ))}
+                                </div>
+                            </div></>}
                     </div>}
             </div>
             <Modal

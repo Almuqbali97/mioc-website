@@ -1,10 +1,8 @@
 import SectionHeadingTitleAndImage from '../../../components/website/SectionHeadingTitleAndImage';
 import ParagraphTitle from '../../../components/website/ParagraphTitle';
 import CommonParagraph from '../../../components/common/CommonParagraph';
-import PricingTable from '../../../components/website/PricingTable';
 import Accordian from '../../../components/website/Accordian';
 import PricingTableSample2 from '../../../components/website/PricingTableSample2';
-import PricingTableSample3 from '../../../components/website/PricingTableSample3';
 
 
 const OnlineRegistration = () => {

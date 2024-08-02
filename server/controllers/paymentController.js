@@ -328,6 +328,77 @@ export const oosMembershipPaymentRes = async (req, res) => {
     return res.redirect(`https://mioc.org.om/payment/response?${queryParams}`);
 };
 
+export const regristrationPayLater = async (req, res) => {
+    const submittedData = req.body;
+
+    const id = uuidv4();
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+
+
+    const userData = {
+        id: id,
+        orderId: submittedData.order_id,
+        fullName: capitalizeWords(submittedData.billing_name),
+        email: submittedData.billing_email,
+        mobile: submittedData.billing_tel,
+        country: submittedData.billing_country,
+        state: submittedData.billing_state,
+        city: submittedData.billing_city,
+        zip: submittedData.billing_zip,
+        amount: submittedData.amount,
+        ticketType: submittedData.merchant_param1,
+        oosMembership: submittedData.merchant_param2,
+        paymentDate: formattedDate,
+        paymentStatus: 'pay later',
+        paymentMethod: submittedData.payment_mode,
+        oosMembershipNumber: submittedData.merchant_param3
+    };
+
+
+    try {
+        // Insert user data for registration
+        await registrationListCollection.insertOne(userData);
+    } catch (error) {
+        console.error("Failed to insert user data:", error);
+        // Continue execution as payment details are already determined by third party
+    }
+
+
+    try {
+        // Send notification email
+        await registrationNotification(userData);
+    } catch (error) {
+        console.error("Failed to send registration notification email:", error);
+        // Continue execution as payment details are already determined by third party
+    }
+
+    try {
+        // Generate QR code and send invoice email
+        const qrCodeUrl = userData.id;
+        const qrCodeDataUrl = await QRCode.toDataURL(qrCodeUrl);
+        const qrCodeBuffer = Buffer.from(qrCodeDataUrl.split(',')[1], 'base64');
+
+        await successfullConferenceRegistrationEmail(userData.email, userData, qrCodeBuffer);
+    } catch (error) {
+        console.error("Failed to generate invoice and send email:", error);
+        // Continue execution as payment details are already determined by third party
+    }
+
+    // Redirect to React with parameters
+    const queryParams = new URLSearchParams({
+        orderStatus: userData.paymentStatus,
+        orderId: userData.orderId
+    }).toString();
+    return res.json({ redirectURL: `https://mioc.org.om/payment/response?${queryParams}` });
+};
+
+
 export const getInvoiceByOrderID = async (req, res) => {
     const { order_id } = req.params;
     try {

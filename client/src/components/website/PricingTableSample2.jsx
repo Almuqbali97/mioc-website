@@ -61,15 +61,6 @@ const PricingTableSample2 = () => {
         setIsModalOpen(true);
     };
 
-    // const validateMembershipNumber = (number) => {
-    //     // Mock valid membership number for demonstration
-    //     setMembershipNumberBeingValidated(true);
-    //     const validMembershipNumber = 'OOS112';
-    //     setTimeout(() => {
-    //         setMembershipNumberBeingValidated(false)
-    //         setMembershipValid(number.toUpperCase() === validMembershipNumber)
-    //     }, 5000);
-    // };
 
     const validateMembershipNumber = async (number) => {
         setMembershipNumberBeingValidated(true);
@@ -240,8 +231,12 @@ const PricingTableSample2 = () => {
                                     checked={isOphthalmologist === false}
                                     onChange={() => setIsOphthalmologist(false)}
                                 />
-                                <span className="radio-tile">
+                                <span className="radio-tile group">
                                     <span className="radio-icon">
+                                        <div className="absolute min-w-[190px] bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                            Optometrists, Residents, Nurses, Technicians, Assistants, Students 
+                                            <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                        </div>
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M364.032,355.035c-3.862-1.446-8.072-3.436-12.35-5.794l-71.57,98.935l-5.09-64.814h-38.033l-5.091,64.814 l-71.569-98.935c-4.408,2.466-8.656,4.487-12.361,5.794c-37.478,13.193-129.549,51.136-123.607,122.21 C25.787,494.301,119.582,512,256.006,512c136.413,0,230.208-17.699,231.634-34.755 C493.583,406.102,401.273,368.961,364.032,355.035z"></path> <path class="st0" d="M171.501,208.271c5.21,29.516,13.966,55.554,25.494,68.38c0,15.382,0,26.604,0,35.587 c0,0.902-0.158,1.852-0.416,2.833l40.41,19.462v28.545h38.033v-28.545l40.39-19.452c-0.258-0.981-0.416-1.932-0.416-2.843 c0-8.983,0-20.205,0-35.587c11.548-12.826,20.304-38.864,25.514-68.38c12.143-4.338,19.096-11.281,27.762-41.658 c9.231-32.358-13.876-31.258-13.876-31.258c18.69-61.873-5.922-120.022-47.124-115.753c-28.426-49.73-123.627,11.36-153.48,7.102 c0,17.055,7.112,29.842,7.112,29.842c-10.379,19.69-6.378,58.951-3.446,78.809c-1.704-0.03-22.602,0.188-13.728,31.258 C152.405,196.99,159.338,203.934,171.501,208.271z"></path> </g> </g></svg>                                    </span>
                                 </span>
                                 <span className="radio-label" title='Optometrists, Residents, Nurses, Technicians, Assistants, Students'>Non-Ophthalmologist</span>
@@ -255,7 +250,12 @@ const PricingTableSample2 = () => {
                                     checked={isOphthalmologist === true}
                                     onChange={() => setIsOphthalmologist(true)}
                                 />
-                                <span className="radio-tile">
+                                
+                                <span className="radio-tile group">
+                                    <div className="absolute min-w-[177px]  bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                        Ophthalmologists & Physician
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                    </div>
                                     <span className="radio-icon">
                                         <svg version="1.1" viewBox="0 0 2048 2028" width="1280" height="1280" xmlns="http://www.w3.org/2000/svg">
                                             <path transform="translate(1510,1351)" d="m0 0h25l7 4v2l5-2h7l8 4h16l6 3 2 2 6-1h10l6 4v2l5-2 6-1 8 4v2l16-2 8 5h2l5 1v-2l7 1 5 3v2l7-1 5-1 9 5h5l5-1 5 2 4 3 8-1 8 5 6-1 8 1 5 3h7l7 3 10 3 21 7 16 8 11 7 10 6 8 8 9 7 8 6 8 8 6 9 9 10 12 19 11 22 10 29 2 11 6 17 1 9 3 7 7 21 1 7 7 21 1 7 5 16 3 9 3 7 1 10 3 6 3 10 1 7v5h2l3 11 3 7 3 9 1 4 1 8 3 8 6 18 2 5-1 2 6 18 3 7-1 3v5h2l2 5 2 7 2 5 2 8 2 6 1 8 3 6 2 8 2 5v4l1 4 2 5 2 7 2 5 3 9 2 5h-2l1 8h2l2 5 2 7 2 5 2 8 3 5-2 3 5 13 3 9v4l2 7 3 7 1 5 3 5v6l3 1v12h-2032l-1-11 1-16 8-21 6-19v-6l4-10v-6l3-5 2-10 3-6v-7l3-5 2-9 3-7 1-9 2-3 2-9 2-5v-6l4-10v-6l3-5 3-11 3-9 3-8v-6l3-6 2-9 3-9 1-7 3-9 1-6 2-3 2-9 2-6v-5l4-9 1-4 3-9v-6l3-5 1-11 3-5 2-8 2-4 2-9 3-8 1-8 2-3 2-9 2-5v-6l4-7v-5l4-10v-6l3-5 1-10 4-10 2-6 2-9 1-5 3-7 3-9 4-9 5-13 8-14 8-12 8-11 7-7 1-2h2l2-4h2l2-4h2l2-4 7-7 8-7 8-6 14-9 16-8 11-6 8-1 9-5 2-2 9 1 3-1 4-4 9 1h3l1-3 3-2 9 1 3-3 6-2 5 1h3l2-3h3v-2l12 2 3-1 1-3 7-1h4l1-3 8-1h9l2-3 7-1 5 1h3l2-4 6-1h4v2l6-1 5-5 11 1 5-5 8 1h6l5-5 11 1 2-3 9-1 5 5 10 19 4 6 4 7 14 27 9 17 5 8 15 29 9 15 9 17 7 7 17 9 9 6 17 8 2 4-18 18-6 13v12l7 8 38 38 9 6 10 9 41 41 2 1v2l6 2 12 11 41 41 10 6 46 46 5 4 7 4 46 46 6 3 7 6v2l4 2 41 41 8 5 11 11 2 1v2l4 2v2l4 2 7 8 24 24 10 6 8 8 5 1h9l5-3 387-387h2l2-5v-15l-16-16-6-10 2-4 6-5 11-7 10-7 6-4 5-3 8-8 5-11 13-40 7-19 3-7 2-10 5-11 12-36 6-16z" fill="currentColor" />
@@ -353,7 +353,11 @@ const PricingTableSample2 = () => {
                                     checked={isOOS === false}
                                     onChange={() => setIsOOS(false)}
                                 />
-                                <span className="radio-tile">
+                                <span className="radio-tile group">
+                                        <div className="absolute bottom-full min-w-[190px] left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:inline-block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                            OOS: Oman Ophthalmic Society
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                        </div>
                                     <span className="radio-icon relative">
                                         <span className="absolute scale-110 inset-0">
                                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.5 23.5l15-15M23.5 23.5l-15-15"></path> </g></svg>
@@ -372,7 +376,11 @@ const PricingTableSample2 = () => {
                                     checked={isOOS === true}
                                     onChange={() => setIsOOS(true)}
                                 />
-                                <span className="radio-tile ">
+                                <span className="radio-tile group ">
+                                    <div className="absolute bottom-full min-w-[190px] left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:inline-block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                                        OOS: Oman Ophthalmic Society
+                                        <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-800 border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                                    </div>
                                     <span className="radio-icon">
                                         <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> </style> <g> <path class="st0" d="M485.22,80.604H26.78C12.013,80.604,0,92.615,0,107.382v297.229c0,14.767,12.013,26.786,26.78,26.786h458.44 c14.767,0,26.78-12.019,26.78-26.786V107.382C512,92.615,499.987,80.604,485.22,80.604z M132.17,283.787v-4.472 c0-2.298-0.38-4.566-1.359-7.174c-0.188-0.248-18.793-25.357-18.793-48.059c0-27.05,16.988-46.685,40.394-46.685 s40.394,19.635,40.394,46.685c0,22.702-18.604,47.811-19.022,48.494c-0.751,2.166-1.132,4.433-1.132,6.739v4.472 c0,6.18,3.628,11.84,9.307,14.449l30.316,12.384c6.584,3.028,11.285,9.084,12.558,16.048l1.431,18.416H78.56l1.407-18.253 c1.294-7.128,5.998-13.184,12.518-16.18l30.442-12.446C128.542,295.627,132.17,289.967,132.17,283.787z M429.318,306.396v29.557 H266.745v-29.557H429.318z M429.318,242.793v29.558H266.745v-29.558H429.318z M231.481,208.748v-29.557h197.836v29.557H231.481z"></path> </g> </g></svg>
                                     </span>

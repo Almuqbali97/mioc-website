@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Loading from '../../../components/common/Loading';
 
 const generateOrderId = () => {
     return new Date().getTime() + '' + Math.floor(Math.random() * 1000);
@@ -15,6 +16,8 @@ const CheckoutPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    const [isPaylater, setIsPaylater] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
 
     const [formData, setFormData] = useState({
         merchant_id: '304',
@@ -73,6 +76,34 @@ const CheckoutPage = () => {
             console.error('Error initiating transaction:', error);
         }
     };
+
+    async function handlePayLaterSubmit(e) {
+        e.preventDefault(); // Prevent the default form submission behavior4
+        setIsLoading(true);
+        try {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/payment/paylater', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                setIsLoading(false);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json()
+            const { redirectURL } = data;
+            setIsLoading(false);
+            window.location.href = redirectURL;
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error initiating transaction:', error);
+        }
+
+    }
+
 
     return (
         <div className="bg-gray-100 dark:bg-gray-900 flex justify-center items-center xl:items-start xl:flex-row flex-col-reverse space-x-5">
@@ -156,10 +187,32 @@ const CheckoutPage = () => {
                         <span className="font-semibold">Total</span>
                         <span className="font-semibold">OMR {formData.amount}</span>
                     </div>
-                    <button onClick={handleSubmit}
-                        className="bg-primary_blue text-white py-2 px-4 rounded-lg mt-4 w-full">
-                        Checkout
-                    </button>
+                    {isLoading ? <div className='flex justify-center items-center'><div className='max-w-[100px]'> <Loading /> </div></div> :
+                        <>
+                            <button onClick={handleSubmit}
+                                className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-green-700">
+                                Checkout
+                            </button>
+                            <p className='flex justify-center mt-1 -mb-2'>OR</p>
+                            <button onClick={() => setIsPaylater(true)}
+                                className="bg-primary_blue text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-700">
+                                Pay Later (Onsite)
+                            </button>
+                            {isPaylater &&
+
+                                <>
+
+                                    <button onClick={handlePayLaterSubmit}
+                                        className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-green-700">
+                                        Confirm
+                                    </button>
+                                    <button onClick={() => setIsPaylater(false)}
+                                        className="bg-red-600 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-red-400">
+                                        Cancel and pay now
+                                    </button>
+                                </>
+                            }</>}
+
                 </div>
             </div>
         </div>
