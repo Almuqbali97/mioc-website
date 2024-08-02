@@ -398,7 +398,6 @@ export const regristrationPayLater = async (req, res) => {
     return res.json({ redirectURL: `https://mioc.org.om/payment/response?${queryParams}` });
 };
 
-
 export const getInvoiceByOrderID = async (req, res) => {
     const { order_id } = req.params;
     try {

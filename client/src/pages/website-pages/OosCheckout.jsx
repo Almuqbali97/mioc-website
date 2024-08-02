@@ -85,7 +85,7 @@ const OosCheckout = () => {
     };
 
     return (
-        <div className="bg-gray-100 dark:bg-gray-900 flex justify-center items-center xl:items-start xl:flex-row flex-col-reverse space-x-5">
+        <div className="bg-gray-100 dark:bg-gray-900 flex justify-center items-center xl:items-start xl:flex-row flex-col-reverse xl:space-x-5">
             <div className="w-full max-w-3xl mt-11 mb-11">
                 <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Checkout</h1>
