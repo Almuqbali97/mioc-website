@@ -196,7 +196,7 @@ const DayTwoEventTable = () => {
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall2)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
                                         {Array.isArray(session.hall2) ? (
                                             session.hall2.map((item, subIndex) => (
-                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[180px] ${item != 'Break' && 'md:h-[50px]'}`}>
+                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[185px] ${item != 'Break' && 'md:h-[50px]'}`}>
                                                     {item}
                                                 </div>
                                             ))
