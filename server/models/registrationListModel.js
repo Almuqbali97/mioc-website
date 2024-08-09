@@ -1,18 +1,6 @@
-// import { db } from "../config/connectMongodb.js";
-// // creating collection with schema
-// export const registrationListCollection = db.collection('registrationList');
-
-import { connectDB } from "../config/connectMongodb.js";
-
-let registrationListCollection;
-
-(async () => {
-    const db = await connectDB();
-    registrationListCollection = db.collection('registrationList');
-})();
-
-export { registrationListCollection };
-
+import { db } from "../config/connectMongodb.js";
+// creating collection with schema
+export const registrationListCollection = db.collection('registrationList');
 // making sure the emeil or username is unique
 // usersCollection.createIndex({ "email": 1 }, { unique: true });
 // defining validation schema, NOTE: we could modifiy the schema to allow more user address
