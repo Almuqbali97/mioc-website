@@ -33,6 +33,9 @@ app.get('/', (req, res) => {
     res.json("Hello from api")
 });
 
+app.get('/keep-alive', (req, res) => {
+    res.status(200).send('Server is alive');
+});
 
 //routes
 app.use('/user', userRoutes);
@@ -52,7 +55,7 @@ app.use((err, req, res, next) => {
     try {
         await connectDB();
         app.listen(port, () => {
-            console.log(`Server running on http://localhost:${port}`);
+            console.log(`Server running on ${port}`);
         });
     } catch (error) {
         console.error('Failed to start the server due to MongoDB connection issue', error);
