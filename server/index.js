@@ -28,6 +28,10 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+// Middleware to ensure MongoDB connection before hitting any route
+(async () => {
+    await connectDB();
+})();
 
 app.get('/', (req, res) => {
     res.json("Hello from api")
@@ -47,7 +51,6 @@ app.use((err, req, res, next) => {
 
 
 (async () => {
-    await connectDB();
     app.listen(port, () => {
         console.log(`Server running on http://localhost:${port}`);
     });

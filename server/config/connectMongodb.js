@@ -1,9 +1,10 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import dotenv from 'dotenv';
+
 dotenv.config();
-// // database setup
+
 const mongoDBURL = process.env.MONGODB_URL;
-// creating new client
+
 const mongoClient = new MongoClient(mongoDBURL, {
     family: 4,
     serverApi: {
@@ -15,32 +16,38 @@ const mongoClient = new MongoClient(mongoDBURL, {
     socketTimeoutMS: 10000, // 10 seconds
 });
 
-// creating db
+export let db;
 
 export async function connectDB() {
-    try {
-        await mongoClient.connect();
-        console.log('mongodb connected');
-    } catch (error) {
-        console.error('Failed to connect to MongoDB', error);
-        process.exit(1);
-    };
+    if (!db) {
+        try {
+            await mongoClient.connect();
+            db = mongoClient.db(process.env.DB_NAME);
+            console.log('mongodb connected');
+        } catch (error) {
+            console.error('Failed to connect to MongoDB', error);
+            process.exit(1);
+        }
+    }
+    return db;
 }
 
-export const db = mongoClient.db(process.env.DB_NAME);
-
-async function closeDB() {
+export async function closeDB() {
     try {
-        await mongoClient.close();
-        console.log('MongoDB connection closed');
+        if (mongoClient.isConnected()) {
+            await mongoClient.close();
+            console.log('MongoDB connection closed');
+            db = null; // Reset the db variable
+        }
     } catch (error) {
         console.error('Error closing MongoDB connection', error);
     }
 }
 
 // Close connection gracefully
-// process.on('SIGINT', closeDB);
-// process.on('SIGTERM', closeDB);
+process.on('SIGINT', closeDB);
+process.on('SIGTERM', closeDB);
+
 
 // import { MongoClient, ServerApiVersion } from 'mongodb';
 // import dotenv from 'dotenv';
