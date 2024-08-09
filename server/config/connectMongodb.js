@@ -13,6 +13,7 @@ const mongoClient = new MongoClient(mongoDBURL, {
     },
     connectTimeoutMS: 30000, // 30 seconds
     socketTimeoutMS: 10000, // 10 seconds
+    serverSelectionTimeoutMS:60000,
 });
 
 // creating db

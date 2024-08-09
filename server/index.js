@@ -28,19 +28,12 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-// Middleware to ensure MongoDB connection before hitting any route
-app.use(async (req, res, next) => {
-    try {
-        await connectDB();
-        next(); // Proceed to the next middleware or route handler
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to connect to the database' });
-    }
-});
 
 app.get('/', (req, res) => {
     res.json("Hello from api")
-})
+});
+
+
 //routes
 app.use('/user', userRoutes);
 app.use('/abstract', abstractRoutes)
@@ -56,7 +49,13 @@ app.use((err, req, res, next) => {
 
 
 (async () => {
-    app.listen(port, () => {
-        console.log(`Server running on http://localhost:${port}`);
-    });
+    try {
+        await connectDB();
+        app.listen(port, () => {
+            console.log(`Server running on http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start the server due to MongoDB connection issue', error);
+        process.exit(1);
+    }
 })();
