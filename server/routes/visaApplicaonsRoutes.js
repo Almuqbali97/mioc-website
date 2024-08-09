@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { sponsersCollection } from '../models/sponserModel.js';
+import { visaApplicationCollection } from '../models/visaApplicationModel.js';
 
 const router = Router();
 
-router.post('/submit/sponser-request', async (req, res) => {
-    const { firstName, lastName, mobile, email, company } = req.body;
+router.post('/submit/visa-request', async (req, res) => {
+    const { firstName, lastName, mobile, email, country } = req.body;
 
-    if (!firstName || !lastName || !mobile || !email || !company) {
+    if (!firstName || !lastName || !mobile || !email || !country) {
         return res.status(400).json({ message: 'Please enter all required fields' });
     }
 
@@ -16,17 +16,16 @@ router.post('/submit/sponser-request', async (req, res) => {
             lastName,
             mobile,
             email: email.toLowerCase(),
-            company,
+            country,
             createdAt: new Date()
         };
 
-        await sponsersCollection.insertOne(newRequest);
-        return res.status(201).json({ message: 'Sponsor request submitted successfully we will contact you soon' });
+        await visaApplicationCollection.insertOne(newRequest);
+        return res.status(201).json({ message: 'Visa request submitted successfully, we will contact you once your application is processed' });
     } catch (error) {
         console.error('Error:', error);
         return res.status(500).json({ message: 'Something went wrong, please try again' });
     }
 });
-
 
 export default router;

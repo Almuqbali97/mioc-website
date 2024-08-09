@@ -49,6 +49,7 @@ import GetOOSMembership from './pages/website-pages/GetOOSMembership.jsx';
 import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 import PaymentTestPage from './components/website/PaymentTestPage.jsx';
 import UnderMaintinance from './components/website/UnderMaintinance.jsx';
+import SubmitVisaApplication from './pages/website-pages/travel/SubmitVisaApplication.jsx';
 
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
           <Route path='/abstract-submission' element={<AbstractInfo />} />
           <Route path='/author-agreement' element={<AuthorAgreement />} />
           <Route path='/payment-test' element={<PaymentTestPage />} />
+          <Route path='/apply-for-visa' element={<SubmitVisaApplication />} />
           {/* Require auth */}
           <Route element={<RequireAuth />}>
             {/* abstract */}

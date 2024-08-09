@@ -12,6 +12,7 @@ import registrants from './routes/registrationRoutes.js'
 const app = express();
 const port = process.env.PORT || 3000;
 import sponserRoute from './routes/sponserRoutes.js'
+import visaApplicationRoute from './routes/visaApplicaonsRoutes.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 
@@ -44,6 +45,7 @@ app.use('/', oosMembershipRoutes)
 app.use('/', ticketRoutes)
 app.use('/', registrants)
 app.use('/', sponserRoute)
+app.use('/', visaApplicationRoute)
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
