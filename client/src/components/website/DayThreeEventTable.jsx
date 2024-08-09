@@ -108,24 +108,24 @@ const DayThreeEventTable = () => {
             case 'Certified Course: Paediatric Optometry':
                 return 'bg-[#FF95CA] text-black border-gray-300';
             case 'MEACOUS -Uveitis Session 2':
-                return 'bg-[#FF95CA] text-black border-gray-300';
+                return 'bg-[#FF85FF] text-black border-gray-300';
             case 'Strabismus Workshop: Dive Deeper into Strabismus: A Hands-On Simulation Workshop':
             case 'Strabismus Workshop Cont.':
                 return 'bg-[#FEAE00] text-black border-gray-300';
             case 'Emirates Society of Ophthalmology Session':
-                return 'bg-[#FF968D] text-black border-gray-300';
+                return 'bg-[#F36758] text-black border-gray-300';
             case 'Suturing Wet lab':
                 return 'bg-[#808CC9] text-black border-gray-300';
             case 'Optometry Free papers':
                 return 'bg-[#FF95CA] text-black border-gray-300';
             case 'Ocular Oncology':
-                return 'bg-[#009193] text-black border-gray-300';
+                return 'bg-[#0076BA] text-black border-gray-300';
             case 'Free Papers':
                 return 'bg-[#D4FB79] border-gray-300';
             case 'Phaco Wet lab':
                 return 'bg-[#CB9DFF] text-black border-gray-300';
             case 'Optometry: The Era of Myopic Management':
-                return 'bg-[#929000] text-black border-gray-300';
+                return 'bg-[#FF95CA] text-black border-gray-300';
             case 'Young Oph.':
                 return 'bg-[#808080] text-black border-gray-300';
             case 'Closing Remarks':

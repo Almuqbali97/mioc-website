@@ -117,42 +117,42 @@ const DayTwoEventTable = () => {
             case 'Glaucoma Session 3: Masquerade angle closure glaucoma attacks':
                 return 'bg-[#56C1FF] text-black border-gray-300';
             case 'Aesthetics':
-                return 'bg-[#FEAE00] text-black border-gray-300';
+                return 'bg-[#F27200] text-black border-gray-300';
             case 'Paediatric Oph 2: Solving the Strabismus Conundrum: Expert Strategies for Complex Cases':
                 return 'bg-[#FEAE00] text-black border-gray-300';
             case 'Ocular Imaging':
-                return 'bg-[#929000] text-black border-gray-300';
+                return 'bg-[#00AB8E] text-black border-gray-300';
             case 'Dry Eye & Ocular Surface Society (DEOSS) Session':
-                return 'bg-[#61D836] border-gray-300';
+                return 'bg-[#CB8FAB] border-gray-300';
             case 'Phaco Wet lab':
                 return 'bg-[#CB9DFF] text-black border-gray-300';
             case 'Refractive Surgery and Ocular Surface':
-                return 'bg-[#D4FB79] border-gray-300';
+                return 'bg-[#73FCD6] border-gray-300';
             case 'Optometry Certified Course: Anterior Ocular Health and Contact Lenses':
             case 'Optometry: Modern Approaches of Contact Lenses Practice':
                 return 'bg-[#FF95CA] text-black border-gray-300';
             case 'MEACOUS -Uveitis Course':
             case 'MEACOUS -Uveitis Session 1':
-                return 'bg-[#FF95CA] text-black border-gray-300';
+                return 'bg-[#FF85FF] text-black border-gray-300';
             case 'Oculoplasty : Dacryology: Nitty gritty of lacrimal apparatus':
                 return 'bg-[#929000] text-black border-gray-300';
             case 'Neuro Oph.':
             case 'Neuro Imaging Course':
-                return 'bg-[#009193] text-black border-gray-300';
+                return 'bg-[#FFFC79] text-black border-gray-300';
             case 'Retina 2: What’s new in Retina world-Are we there yet ?':
                 return 'bg-[#FF968D] text-black border-gray-300';
             case 'Comprehensive Keratoconus Management: The Optometrist’s Role (Instructional Course)':
                 return 'bg-[#61D836] border-gray-300';
             case 'Oph. Nursing Session: Let’s keep an eye on ocular emergencies':
             case 'Oph. Nursing (Hands-on workshop) Mastering Eye Safety: Expert Tips for Preparing Intraocular Lenses with Confidence!”':
-                return 'bg-[#929000] text-black border-gray-300';
+                return 'bg-[#FFD479] text-black border-gray-300';
             case 'Aesthetic Workshop':
-                return 'bg-[#FEAE00] text-black border-gray-300';
+                return 'bg-[#F27200] text-black border-gray-300';
             case 'Industry Session 3 (Aesthetics)':
             case 'Industry Session 4 (Ant.Seg.)':
             case 'Industry Session 5 (Retina)':
             case 'Industry Session 6 (Retina)':
-                return 'bg-[#929000] text-black border-gray-300';
+                return 'bg-[#009193] text-black border-gray-300';
             case 'Break':
                 return 'bg-white text-black border-gray-300';
             default:
@@ -196,7 +196,7 @@ const DayTwoEventTable = () => {
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall2)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
                                         {Array.isArray(session.hall2) ? (
                                             session.hall2.map((item, subIndex) => (
-                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[120px] ${item != 'Break' && 'md:h-[50px]'}`}>
+                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[130px] ${item != 'Break' && 'md:h-[50px]'}`}>
                                                     {item}
                                                 </div>
                                             ))
@@ -205,7 +205,15 @@ const DayTwoEventTable = () => {
                                         )}
                                     </td>
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall3)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
-                                        {session.hall3}
+                                        {Array.isArray(session.hall3) ? (
+                                            session.hall3.map((item, subIndex) => (
+                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[120px] ${item != 'Break' && 'md:h-[50px]'}`}>
+                                                    {item}
+                                                </div>
+                                            ))
+                                        ) : (
+                                            session.hall3
+                                        )}
                                     </td>
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall4)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
                                         {session.hall4}
