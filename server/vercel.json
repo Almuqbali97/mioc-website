@@ -15,7 +15,7 @@
     "crons": [
         {
             "path": "/keep-alive",
-            "schedule": "*/10 * * * *"
+            "schedule": "*/5 * * * *"
         }
     ]
 }
