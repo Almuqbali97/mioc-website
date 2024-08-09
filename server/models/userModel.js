@@ -1,5 +1,6 @@
-import { db } from "../config/connectMongodb.js";
+import { db, connectDB } from "../config/connectMongodb.js";
 // creating collection with schema
+// await connectDB();
 export const usersCollection = db.collection('users');
 // making sure the emeil or username is unique
 usersCollection.createIndex({ "email": 1 }, { unique: true });
