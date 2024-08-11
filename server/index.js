@@ -34,9 +34,9 @@ app.get('/', (req, res) => {
     res.json("Hello from api")
 });
 
-app.get('/keep-alive', (req, res) => {
-    res.status(200).send('Server is alive');
-});
+// app.get('/keep-alive', (req, res) => {
+//     res.status(200).send('Server is alive');
+// });
 
 //routes
 app.use('/user', userRoutes);
