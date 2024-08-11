@@ -10,6 +10,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import PrimaryButtonBlue from '../../../components/website/PrimaryButtonBlue';
 
 
 const ProgramAtGlance = () => {
@@ -17,7 +18,7 @@ const ProgramAtGlance = () => {
         <div>
             <SectionHeadingTitleAndImage title={'MIOC-EMCO-IKS 2024 Preliminary Program'} />
 
-           
+
 
             <div className='w-full max-w-[97%] lg:max-w-[84%] mx-auto'>
                 <div className='flex flex-col lg:flex-row justify-between my-20'>
@@ -25,12 +26,11 @@ const ProgramAtGlance = () => {
                         <CommonParagraph>The Scientific Organising Committee has crafted an exceptional program aimed at enhancing expertise in general ophthalmology and its subspecialties. The program includes symposia, specialized courses, and skills transfer workshops. It emphasizes groundbreaking research and the latest advancements in medical and surgical treatments.</CommonParagraph>
                         <CommonParagraph>Don't miss the opportunity to <strong>register for the conference</strong> and enjoy a discount by obtaining an <strong>OOS membership</strong>. For more information, please visit the following links.</CommonParagraph>
                         <div className="flex font-semibold text-xl flex-col items-center justify-center gap-5 mt-10 md:mt-14 md:flex-row">
-                            <Link
-                                className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all rounded-md sm:w-auto bg-gradient-to-r from-primary_blue to-blue-500 dark:shadow-blue-900 shadow-blue-300 hover:shadow-xl hover:shadow-blue-400 hover:-tranneutral-y-px "
-                                to="/online-registration">Register Now
-                            </Link>
-                            <Link className="inline-block w-auto text-center min-w-[180px] px-3 py-3 sm:px-6 sm:py-4 text-white transition-all bg-[#d3ab6b] dark:bg-white dark:text-gray-800 rounded-md sm:w-auto hover:bg-[#D0A45D]  hover:text-white shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-xl hover:shadow-[#D0A45D] hover:-tranneutral-y-px"
-                                to="/get-oos-memebership">OOS Membership
+
+                            <PrimaryButtonBlue text={'Register Now'} link={'/online-registration'} />
+
+
+                            <Link to="/get-oos-memebership" className='inline-block sm:text-md font-semibold w-auto text-center min-w-[180px] px-1 py-3 sm:px-[1.20rem] sm:py-4 text-white transition-all rounded-md shadow-lg sm:w-auto bg-gradient-to-r from-yellow-600 to-primary_brown hover:bg-gradient-to-b dark:shadow-blue-900 shadow-amber-300 hover:shadow-xl hover:shadow-primary_brown hover:-tranneutral-y-px '>OOS Membership
                             </Link>
 
                         </div>

@@ -784,7 +784,7 @@ export const textTemplate = `<!DOCTYPE html
                                                                     style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#999999">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:14px;color:#999999;font-size:12px">
-                                                                        ©2024 Mico . 112 Oman Muscat, AlKhoud</p>
+                                                                        ©2024 MIOC . 112 Oman Muscat, AlKhoud</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
