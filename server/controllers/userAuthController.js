@@ -178,6 +178,7 @@ export const logout = (req, res) => {
 
 // Email verification handler
 export const verifyEmail = async (req, res) => {
+    const usersCollection = getUsersCollection();
     const { token } = req.query;
     // console.log('Received token:', token);
 
