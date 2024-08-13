@@ -1,8 +1,10 @@
-import { registrationListCollection } from '../models/registrationListModel.js';
+// import { registrationListCollection } from '../models/registrationListModel.js';
+import { getRegistrationListCollection } from '../models/registrationListModel.js';
 
 
 
 export const getAllRegistrations = async (req, res) => {
+    const registrationListCollection = getRegistrationListCollection();
     try {
         const registrants = await registrationListCollection.find().toArray();
         res.status(200).json(registrants);
@@ -13,6 +15,7 @@ export const getAllRegistrations = async (req, res) => {
 }
 
 export const getSpesificRegistration = async (req, res) => {
+    const registrationListCollection = getRegistrationListCollection();
     const { id } = req.params;
 
     try {

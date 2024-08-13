@@ -1,7 +1,9 @@
-import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
+// import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
+import { getOosMembershipCollection } from '../models/oosMembershipsModel.js';
 
 
 export const getSpecificMembership = async (req, res) => {
+    const oosMembershipCollection = getOosMembershipCollection();
     const { id } = req.params;
     try {
         const membership = await oosMembershipCollection.findOne({ membership_id: id.toUpperCase() });

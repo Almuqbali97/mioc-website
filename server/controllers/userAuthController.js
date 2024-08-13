@@ -1,4 +1,5 @@
-import { usersCollection } from '../models/userModel.js';
+// import { usersCollection } from '../models/userModel.js';
+import { getUsersCollection } from '../models/userModel.js';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -11,6 +12,7 @@ dotenv.config();
 
 // registration functionality
 export const register = async (req, res) => {
+    const usersCollection = getUsersCollection();
     const { firstName, lastName, email, password } = req.body;
     const verificationCode = crypto.randomBytes(32).toString('hex');
     const id = uuidv4();
@@ -79,6 +81,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+    const usersCollection = getUsersCollection();
     const { email, password } = req.body;
     try {
         // Check for valid user
@@ -121,6 +124,7 @@ export const login = async (req, res) => {
 };
 
 export const googleOAuth = async (req, res) => {
+    const usersCollection = getUsersCollection();
     // sub is google id
     const { sub, given_name, family_name, email } = req.body;
     // in case family name does not exist, we make it an empty string so it doesnt conflict with db schema 

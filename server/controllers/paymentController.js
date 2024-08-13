@@ -3,13 +3,17 @@ import { configDotenv } from 'dotenv';
 import qs from 'qs';
 configDotenv();
 import { v4 as uuidv4 } from 'uuid';
-import { registrationListCollection } from '../models/registrationListModel.js';
-import { registrationPaymentsCollection } from '../models/registrationPaymentsModel.js';
+// import { registrationListCollection } from '../models/registrationListModel.js';
+import { getRegistrationListCollection } from '../models/registrationListModel.js';
+// import { registrationPaymentsCollection } from '../models/registrationPaymentsModel.js';
+import { getRegistrationPaymentsCollection } from '../models/registrationPaymentsModel.js';
 import { successfullConferenceRegistrationEmail } from '../utils/paymentInvoiceEmail.js'
 import { awaitedPaymentNotification, registrationNotification } from '../utils/notificationEmails.js'
 import QRCode from 'qrcode'
-import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
-import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
+// import { oosPaymentsCollection } from '../models/oosPaymentsModel.js';
+import { getOosPaymentsCollection } from '../models/oosPaymentsModel.js';
+// import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
+import { getOosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
 import { type } from 'os';
 const workingKey = process.env.WORKING_KEY;
@@ -114,6 +118,8 @@ export const paymentRequestHandler = (req, res) => {
 }
 
 export const registrationPaymentRes = async (req, res) => {
+    const registrationPaymentsCollection = getRegistrationPaymentsCollection();
+    const registrationListCollection = getRegistrationListCollection();
     const encRes = req.body.encResp;
     const decRes = decrypt(encRes, process.env.WORKING_KEY);
     const decryptedResToObject = qs.parse(decRes);
@@ -208,6 +214,8 @@ export const registrationPaymentRes = async (req, res) => {
 };
 
 export const oosMembershipPaymentRes = async (req, res) => {
+    const oosPaymentsCollection = getOosPaymentsCollection();
+    const oosMembershipCollection = getOosMembershipCollection();
     const encRes = req.body.encResp;
     const decRes = decrypt(encRes, process.env.WORKING_KEY);
     const decryptedResToObject = qs.parse(decRes);
@@ -329,6 +337,7 @@ export const oosMembershipPaymentRes = async (req, res) => {
 };
 
 export const regristrationPayLater = async (req, res) => {
+    const registrationListCollection = getRegistrationListCollection();
     const submittedData = req.body;
 
     const id = uuidv4();
@@ -399,6 +408,7 @@ export const regristrationPayLater = async (req, res) => {
 };
 
 export const getInvoiceByOrderID = async (req, res) => {
+    const registrationPaymentsCollection = getRegistrationPaymentsCollection();
     const { order_id } = req.params;
     try {
         const invoice = await registrationPaymentsCollection.findOne({ order_id: order_id });

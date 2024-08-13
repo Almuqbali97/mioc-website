@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { visaApplicationCollection } from '../models/visaApplicationModel.js';
+import { getVisaApplicationCollection } from '../models/visaApplicationModel.js';
 
 const router = Router();
 
 router.post('/submit/visa-request', async (req, res) => {
+    const visaApplicationCollection = getVisaApplicationCollection();
     const { firstName, lastName, mobile, email, country } = req.body;
 
     if (!firstName || !lastName || !mobile || !email || !country) {

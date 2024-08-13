@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import { sponsersCollection } from '../models/sponserModel.js';
+// import { sponsersCollection } from '../models/sponserModel.js';
+import { getSponsersCollection } from '../models/sponserModel.js';
 
 const router = Router();
 
 router.post('/submit/sponser-request', async (req, res) => {
+    const sponsersCollection = getSponsersCollection();
     const { firstName, lastName, mobile, email, company } = req.body;
 
     if (!firstName || !lastName || !mobile || !email || !company) {

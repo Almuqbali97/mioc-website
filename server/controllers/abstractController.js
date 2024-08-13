@@ -1,4 +1,5 @@
-import { abstractsCollection } from "../models/abstractModel.js";
+// import { abstractsCollection } from "../models/abstractModel.js";
+import { getAbstractsCollection } from "../models/abstractModel.js";
 import { validateEmail } from "../helpers/validateEmail.js";
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,6 +21,7 @@ const s3Client = new S3Client({
 //////////////
 
 export const submitAbstract = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const id = uuidv4();
   const {
     firstName,
@@ -90,6 +92,7 @@ export const submitAbstract = async (req, res) => {
 
 
 export const submitVideoAbstract = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const id = uuidv4();
   const {
     firstName,
@@ -154,6 +157,7 @@ export const submitVideoAbstract = async (req, res) => {
 };
 
 export const getAbstractById = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const { id } = req.params;
 
   try {
@@ -172,6 +176,7 @@ export const getAbstractById = async (req, res) => {
 
 
 export const downloadSpesificAbstract = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   try {
     const key = req.params.key;
     const command = new GetObjectCommand({
@@ -188,8 +193,8 @@ export const downloadSpesificAbstract = async (req, res) => {
 };
 
 
-
 export const getAllAbstracts = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   try {
     const abstracts = await abstractsCollection.find().toArray();
     res.status(200).json(abstracts);
@@ -201,6 +206,7 @@ export const getAllAbstracts = async (req, res) => {
 
 
 export const reviewAbstract = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const { id } = req.params;
   const { rating, comment } = req.body;
 
@@ -235,6 +241,7 @@ export const reviewAbstract = async (req, res) => {
 };
 
 export const getAbstractsByEmail = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const { email } = req.params;
 
   try {
@@ -253,6 +260,7 @@ export const getAbstractsByEmail = async (req, res) => {
 
 
 export const updateAbstract = async (req, res) => {
+  const abstractsCollection = getAbstractsCollection();
   const { id } = req.params;
   const {
     firstName,

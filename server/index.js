@@ -55,12 +55,12 @@ app.use((err, req, res, next) => {
 
 (async () => {
     try {
-        await connectDB();
+        await connectDB(); // Ensure DB connection before starting the server
         app.listen(port, () => {
-            console.log(`Server running on ${port}`);
+            console.log(`Server running on port ${port}`);
         });
     } catch (error) {
-        console.error('Failed to start the server due to MongoDB connection issue', error);
-        process.exit(1);
+        console.error('Failed to start the server due to MongoDB connection issue:', error);
+        process.exit(1); // Exit if the database connection fails
     }
 })();

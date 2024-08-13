@@ -1,8 +1,14 @@
-import { db } from "../config/connectMongodb.js";
-// creating collection with schema
-export const usersCollection = db.collection('users');
-// making sure the emeil or username is unique
-usersCollection.createIndex({ "email": 1 }, { unique: true });
+// import { db } from "../config/connectMongodb.js";
+// // creating collection with schema
+// export const usersCollection = db.collection('users');
+// // making sure the emeil or username is unique
+// usersCollection.createIndex({ "email": 1 }, { unique: true });
+import { getDb } from "../config/connectMongodb.js";
+
+export const getUsersCollection = () => {
+    return getDb().collection('users');
+};
+
 // defining validation schema, NOTE: we could modifiy the schema to allow more user address
 // db.createCollection("users", {
 //     validator: {
