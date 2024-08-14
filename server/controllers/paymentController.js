@@ -284,40 +284,41 @@ export const oosMembershipPaymentRes = async (req, res) => {
         console.error("Failed to insert oos payment request:", error);
         // Continue execution as payment details are already determined by third party
     }
+    if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Shipped' || decryptedResToObject.order_status === 'Approved') {
 
-    try {
-        if (!decryptedResToObject.merchant_param5) {
-            // Create new membership
-            await oosMembershipCollection.insertOne(oosMemberData);
-        } else {
-            // Update existing membership
-            const filter = { membership_id: decryptedResToObject.merchant_param5 };
-            const updateDoc = {
-                $set: {
-                    fullName: capitalizeWords(oosMemberData.fullName),
-                    email: oosMemberData.email,
-                    contactNumber: oosMemberData.contactNumber,
-                    country: oosMemberData.country,
-                    city: oosMemberData.city,
-                    zip: oosMemberData.zip,
-                    amount: oosMemberData.amount,
-                    nationality: capitalizeWords(oosMemberData.nationality),
-                    workingPlace: oosMemberData.workingPlace,
-                    designation: oosMemberData.designation,
-                    membershipType: oosMemberData.membershipType,
-                    paymentDate: oosMemberData.paymentDate,
-                    paymentStatus: oosMemberData.paymentStatus,
-                    paymentMethod: oosMemberData.paymentMethod,
-                    expirationDate: "2024-12-31",
-                },
-            };
-            await oosMembershipCollection.updateOne(filter, updateDoc);
+        try {
+            if (!decryptedResToObject.merchant_param5) {
+                // Create new membership
+                await oosMembershipCollection.insertOne(oosMemberData);
+            } else {
+                // Update existing membership
+                const filter = { membership_id: decryptedResToObject.merchant_param5 };
+                const updateDoc = {
+                    $set: {
+                        fullName: capitalizeWords(oosMemberData.fullName),
+                        email: oosMemberData.email,
+                        contactNumber: oosMemberData.contactNumber,
+                        country: oosMemberData.country,
+                        city: oosMemberData.city,
+                        zip: oosMemberData.zip,
+                        amount: oosMemberData.amount,
+                        nationality: capitalizeWords(oosMemberData.nationality),
+                        workingPlace: oosMemberData.workingPlace,
+                        designation: oosMemberData.designation,
+                        membershipType: oosMemberData.membershipType,
+                        paymentDate: oosMemberData.paymentDate,
+                        paymentStatus: oosMemberData.paymentStatus,
+                        paymentMethod: oosMemberData.paymentMethod,
+                        expirationDate: "2024-12-31",
+                    },
+                };
+                await oosMembershipCollection.updateOne(filter, updateDoc);
+            }
+        } catch (error) {
+            console.error("Failed to insert or update oos data:", error);
+            // Continue execution as payment details are already determined by third party
         }
-    } catch (error) {
-        console.error("Failed to insert or update oos data:", error);
-        // Continue execution as payment details are already determined by third party
     }
-
     if (decryptedResToObject.order_status === 'Success' || decryptedResToObject.order_status === 'Confirmed' || decryptedResToObject.order_status === 'Shipped' || decryptedResToObject.order_status === 'Approved') {
         try {
             // Send notification email
