@@ -15,7 +15,7 @@ import { getOosPaymentsCollection } from '../models/oosPaymentsModel.js';
 // import { oosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { getOosMembershipCollection } from '../models/oosMembershipsModel.js';
 import { oosMembershipCertificateEmail } from '../utils/oosMembershipEmail.js';
-import { type } from 'os';
+// import { type } from 'os';
 const workingKey = process.env.WORKING_KEY;
 const accessCode = process.env.ACCESS_CODE;
 
