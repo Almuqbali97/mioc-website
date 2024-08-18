@@ -50,6 +50,7 @@ import OosCheckout from './pages/website-pages/OosCheckout.jsx';
 import PaymentTestPage from './components/website/PaymentTestPage.jsx';
 import UnderMaintinance from './components/website/UnderMaintinance.jsx';
 import SubmitVisaApplication from './pages/website-pages/travel/SubmitVisaApplication.jsx';
+import MembershipsManagement from './pages/admin-pages/MembershipsManagement.jsx';
 
 
 function App() {
@@ -115,6 +116,7 @@ function App() {
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/abstracts' element={<AbstractsManagement />} />
             <Route path='/admin/registrers' element={<RegistrationManagement />} />
+            <Route path='/admin/oos-memberships' element={<MembershipsManagement />} />
             <Route path='/admin/registration/:id' element={<ViewRegistrationDetails />} />
             <Route path='/admin/invoice/:order_id' element={<ViewInvoiceDetails />} />
             <Route path='/admin/registration-desk' element={<RegistrationDesk />} />
