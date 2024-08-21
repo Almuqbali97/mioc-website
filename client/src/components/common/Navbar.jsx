@@ -110,7 +110,7 @@ export default function Navbar() {
                 <div className="flex lg:flex-1">
                     <Link to="/" className="-m-1.5">
                         <span className="sr-only">Your Company</span>
-                        <img className="h-16 w-auto rounded-md" src={mainLogo} alt="logo image" />
+                        <img className="h-16 w-auto sm:h-8 rounded-md" src={mainLogo} alt="logo image" />
                     </Link>
                 </div>
                 <div className="flex lg:hidden">
