@@ -753,7 +753,7 @@ html {}
     border-radius: 100%;
     overflow: hidden;
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-    box-shadow: #25D366 0px 0px 10px 2px;
+    /* box-shadow: #25D366 0px 0px 10px 2px; */
     transition: all 1s ease-in-out;
     border: 3px solid rgb(255, 255, 255);
 }

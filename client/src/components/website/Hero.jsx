@@ -23,7 +23,8 @@ const Hero = () => {
         return () => clearInterval(intervalId); // Clean up the interval on component unmount
     }, []);
     return (
-        <div className='bg-[#33689c] bg-opacity-40 h-screen w-full relative text-center'>
+        // <div className='bg-[#33689c] bg-opacity-40 h-screen w-full relative text-center'>
+        <div className='bg-[#0a1f33] bg-opacity-55 h-screen w-full relative text-center'>
             <img key={heroImages[0]} src={heroImages[0]} className='w-full h-full object-cover absolute -z-50 ' />
             {/* // className='w-full h-full object-cover absolute -z-50 fading' /> */}
             <TopLogos />
