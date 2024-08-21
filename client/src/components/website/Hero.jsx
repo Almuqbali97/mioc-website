@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import HeroImg1 from '../../assets/images/hero1.jpg';
+import Heroex1 from '../../assets/images/heroex1.jpg';
 // import HeroImg2 from '../../assets/images/hero2.jpg';
 // import HeroImg3 from '../../assets/images/hero3.jpg';
 // import HeroImg4 from '../../assets/images/hero4.jpg';
@@ -9,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const heroImages = [HeroImg1,];
+const heroImages = [Heroex1,];
 const Hero = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
