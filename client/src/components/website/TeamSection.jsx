@@ -9,7 +9,7 @@ const TeamSection = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    sectionRef.current.classList.add('RightlideAnimatoin');
+                    // sectionRef.current.classList.add('RightlideAnimatoin');
                     observer.disconnect();
                 }
             },
@@ -33,7 +33,7 @@ const TeamSection = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    secondSectionRef.current.classList.add('LeftlideAnimatoin');
+                    // secondSectionRef.current.classList.add('LeftlideAnimatoin');
                     observer.disconnect();
                 }
             },
@@ -54,6 +54,7 @@ const TeamSection = () => {
     return (
         <section className="">
             <div id="about" className="relative bg-white overflow-hidden">
+                {/* <div className="lg:absolute lg:inset-y-0 lg:-right-20 xl:right-0 lg:w-1/2 " ref={sectionRef}> */}
                 <div className="lg:absolute lg:inset-y-0 lg:-right-20 xl:right-0 lg:w-1/2 " ref={sectionRef}>
                     <img className="h-56 w-full object-cover object-top sm:h-72 md:h-96 lg:w-full lg:h-full" src={drRashid} alt="" />
                 </div>

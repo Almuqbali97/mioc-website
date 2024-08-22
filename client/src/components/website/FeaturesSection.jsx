@@ -7,7 +7,7 @@ const FeaturesSection = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    slideBottomAnimationRef.current.classList.add('slideFromBottom');
+                    // slideBottomAnimationRef.current.classList.add('slideFromBottom');
                     observer.disconnect();
                 }
             },
