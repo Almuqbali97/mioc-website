@@ -12,10 +12,12 @@ import {
     getAbstractById,
     reviewAbstract,
     getAbstractsByEmail,
-    updateAbstract
+    updateAbstract,
+    approveAbstract
 } from '../controllers/abstractController.js';
 import { isAdmin } from '../middlewares/isAuthorizedAdmin.js';
 import dotenv from 'dotenv';
+import { isRevewier } from '../middlewares/isReviwer.js';
 dotenv.config();
 
 
@@ -57,15 +59,23 @@ router.post('/submit', upload.none(), submitAbstract);
 router.post('/review/:id', isAuthenticated, isAdmin, reviewAbstract);
 
 router.get('/download/:key', downloadSpesificAbstract); // This function is used to download files on the website
-
+// for admin
 router.get('/get/all', isAuthenticated, isAdmin, getAllAbstracts);
 router.get('/get/spesific/:id', isAuthenticated, isAdmin, getAbstractById);
-// router.get('/get/:id', isAuthenticated, getAbstractById);
+// for reviwer
+router.get('/reviewer/get/all', isAuthenticated, isRevewier, getAllAbstracts);
+router.get('/reviewer/get/spesific/:id', isAuthenticated, isRevewier, getAbstractById);
+router.post('/reviewer/review/:id', isAuthenticated, isRevewier, reviewAbstract);
+
+router.post('/approve', approveAbstract);
+router.post('/reject');
+
 router.get('/get/:id', getAbstractById);
 // router.get('/get/by-email/:email', isAuthenticated, getAbstractsByEmail);
 router.get('/get/by-email/:email', getAbstractsByEmail);
 
 router.put('/update/:id', updateAbstract);
+
 
 
 export default router;

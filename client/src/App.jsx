@@ -51,6 +51,9 @@ import PaymentTestPage from './components/website/PaymentTestPage.jsx';
 import UnderMaintinance from './components/website/UnderMaintinance.jsx';
 import SubmitVisaApplication from './pages/website-pages/travel/SubmitVisaApplication.jsx';
 import MembershipsManagement from './pages/admin-pages/MembershipsManagement.jsx';
+import AbstractReview from './pages/reviewer-pages/AbstractReview.jsx';
+import AbstractReviewDetails from './pages/reviewer-pages/AbstractReviewDetails.jsx';
+import ReviewedAbstracts from './pages/admin-pages/ReviewedAbstracts.jsx';
 
 
 function App() {
@@ -112,6 +115,10 @@ function App() {
         </Route>
         <Route path='/get-oos-memebership' element={<GetOOSMembership />} />
         <Route element={<RequireAuth />}>
+          {/* for reviwer */}
+          <Route path='/abstract/reviewer' element={<AbstractReview />} />
+          <Route path='/abstract/reviewe/:id' element={<AbstractReviewDetails />} />
+
           <Route element={<AdminPanel />}>
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/abstracts' element={<AbstractsManagement />} />
@@ -120,6 +127,7 @@ function App() {
             <Route path='/admin/registration/:id' element={<ViewRegistrationDetails />} />
             <Route path='/admin/invoice/:order_id' element={<ViewInvoiceDetails />} />
             <Route path='/admin/registration-desk' element={<RegistrationDesk />} />
+            <Route path="/admin/reviewed/abstracts" element={<ReviewedAbstracts />} /> {/* New route */}
             <Route path="/review-abstract/:id" element={<ReviewAbstract />} /> {/* New route */}
           </Route>
         </Route>

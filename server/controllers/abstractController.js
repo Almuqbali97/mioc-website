@@ -4,7 +4,7 @@ import { validateEmail } from "../helpers/validateEmail.js";
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
 import { GetObjectCommand, S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { abstractNotificationEmail, abstractSuccssfullSubmissionEmail } from '../utils/notificationEmails.js'
+import { abstractNotificationEmail, abstractSuccssfullSubmissionEmail, sendAbstractApprovalEmail } from '../utils/notificationEmails.js'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 dotenv.config();
 
@@ -89,7 +89,6 @@ export const submitAbstract = async (req, res) => {
     return res.status(500).json({ message: 'Something went wrong please try again' });
   }
 };
-
 
 export const submitVideoAbstract = async (req, res) => {
   const abstractsCollection = getAbstractsCollection();
@@ -335,5 +334,25 @@ export const updateAbstract = async (req, res) => {
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ message: 'Something went wrong, please try again' });
+  }
+};
+
+export const approveAbstract = async (req, res) => {
+  const { id, firstName, lastName, email, title } = req.body;
+
+  try {
+    // Log the request body for debugging
+    console.log('Received request to approve abstract:', req.body);
+
+    // Perform any necessary logic for approving the abstract (e.g., update database)
+
+    // Send the approval email
+    await sendAbstractApprovalEmail(email, firstName, lastName, title, id);
+
+    // Respond to the client
+    res.status(200).json({ message: 'Abstract approved and email sent successfully.' });
+  } catch (error) {
+    console.error('Error approving abstract:', error);
+    res.status(500).json({ message: 'Failed to approve abstract and send email.' });
   }
 };

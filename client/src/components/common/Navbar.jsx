@@ -69,7 +69,7 @@ const Dropdown = ({ title, items, handleLinkClick }) => {
 
     return (
         <div className="relative" ref={dropdownRef}>
-            <button className="flex items-center gap-1 text-sm font-semibold leading-6 hover:text-blue-500 uppercase" onClick={handleToggle}>
+            <button className="flex items-center gap-1 text-sm font-semibold leading-6 hover:text-primary_blue uppercase" onClick={handleToggle}>
                 {title}
                 <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
             </button>
@@ -127,11 +127,11 @@ export default function Navbar() {
                 <div className="hidden lg:flex space-x-7 xl:space-x-10">
                     <Dropdown title="Organization" items={organization} handleLinkClick={handleLinkClick} />
                     <Dropdown title="Registration" items={registration} handleLinkClick={handleLinkClick} />
-                    <Link to="/abstract-submission" className="text-sm font-semibold hover:text-blue-500 leading-6 uppercase" onClick={handleLinkClick}>
+                    <Link to="/abstract-submission" className="text-sm font-semibold hover:text-primary_blue leading-6 uppercase" onClick={handleLinkClick}>
                         Abstract
                     </Link>
                     <Dropdown title="Program" items={program} handleLinkClick={handleLinkClick} />
-                    <Link to="/faculty" className="text-sm font-semibold hover:text-blue-500 leading-6 uppercase" onClick={handleLinkClick}>
+                    <Link to="/faculty" className="text-sm font-semibold hover:text-primary_blue leading-6 uppercase" onClick={handleLinkClick}>
                         Faculty
                     </Link>
                     <Dropdown title="Sponsors/Exhibitors" items={sponsersAndExhibitors} handleLinkClick={handleLinkClick} />
