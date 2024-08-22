@@ -13,7 +13,7 @@ const PartnersSection = () => {
                             Partners
                             <svg className="absolute -bottom-0.5 w-full max-h-1.5" viewBox="0 0 55 5" xmlns="http://www.w3.org/2000/svg"
                                 preserveAspectRatio="none">
-                                <path d="M0.652466 4.00002C15.8925 2.66668 48.0351 0.400018 54.6853 2.00002" stroke="#d8a757" stroke-width="2"></path>
+                                <path d="M0.652466 4.00002C15.8925 2.66668 48.0351 0.400018 54.6853 2.00002" stroke="#d8a757" strokeWidth="2"></path>
                             </svg>
                         </span>
                     </p>
@@ -44,15 +44,15 @@ const PartnersSection = () => {
                                 fill="currentColor"
                             >
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
                         </a>
                     </div>
-                    <span class="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
-                    <span class="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
 
                 </div>
                 <div className="p-8  shadow-2xl relative">
@@ -76,15 +76,15 @@ const PartnersSection = () => {
                                 fill="currentColor"
                             >
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
                         </a>
                     </div>
-                    <span class="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
-                    <span class="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
                 </div>
 
                 <div className="p-8  shadow-2xl relative">
@@ -109,15 +109,15 @@ const PartnersSection = () => {
                                 fill="currentColor"
                             >
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
                         </a>
                     </div>
-                    <span class="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
-                    <span class="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
                 </div>
 
 
@@ -143,15 +143,15 @@ const PartnersSection = () => {
                                 fill="currentColor"
                             >
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                 />
                             </svg>
                         </a>
                     </div>
-                    <span class="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
-                    <span class="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="hidden md:block absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
+                    <span className="md:hidden absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary_blue  to-primary_brown"></span>
 
                 </div>
             </div>

@@ -679,7 +679,7 @@ export function oosCertificateEmailTemplate(fullName, oosId, amount, paymentDate
 
                                                                         <div class="details">
                                                                             <p>
-                                                                                <span>Registration type:
+                                                                                <span>Payment type:
                                                                                     ${registrationType} OOS Membership</span>
                                                                             </p>
                                                                             <p>

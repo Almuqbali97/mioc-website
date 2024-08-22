@@ -22,7 +22,6 @@ const OosCheckout = () => {
         membershipType,
         membership_id,
     } = location.state || {};
-    console.log(membership_id);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -58,7 +57,6 @@ const OosCheckout = () => {
         promo_code: '',
         customer_identifier: personalInfo.firstName + '.' + personalInfo.lastName + generateCustomerIdentifier(),
     });
-
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
         try {

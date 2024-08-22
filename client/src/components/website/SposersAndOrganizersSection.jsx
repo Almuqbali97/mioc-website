@@ -7,7 +7,7 @@ import emcoWhite from '../../assets/images/EMCOwhite-cropped.svg';
 import IKSwhite from '../../assets/images/IKSwhite2-cropped.svg';
 
 const customBg = `data:image/svg+xml;base64,${btoa(
-    `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="250" preserveAspectRatio="none" viewBox="0 0 1440 250">
+    `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="250" preserveAspectRatio="none" viewBox="0 0 1440 250">
     <g mask="url(&quot;#SvgjsMask1012&quot;)" fill="none">
         <rect width="1440" height="250" x="0" y="0" fill="rgba(9, 92, 159, 1)"></rect>
         <path d="M10 250L260 0L392 0L142 250z" fill="url(&quot;#SvgjsLinearGradient1013&quot;)"></path>

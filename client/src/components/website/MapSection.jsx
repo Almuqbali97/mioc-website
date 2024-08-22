@@ -1,7 +1,7 @@
 import React from 'react';
 import SocialIcons from './SocialIcons';
 const svgBg = `data:image/svg+xml;base64,${btoa(
-    `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
+    `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
     <g mask="url(&quot;#SvgjsMask1178&quot;)" fill="none">
         <rect width="1440" height="560" x="0" y="0" fill="url(&quot;#SvgjsLinearGradient1179&quot;)"></rect>
         <path d="M1440 0L1155.32 0L1440 84.38z" fill="rgba(255, 255, 255, .1)"></path>
