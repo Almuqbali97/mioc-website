@@ -346,6 +346,11 @@ const AbstractSubmission = () => {
                     </div>
                 </div>}
                 {currentStep === 3 && <div className="p-4 space-y-2">
+                    <div className="bg-red-50 p-4 rounded-lg shadow-md mb-8 mt-11">
+                        <h3 className="text-xl font-semibold mb-2">Important Information</h3>
+                        <h2 className="text-lg font-semibold mb-2">Get a chance to win a free conference registration and accommodation</h2>
+                        <p>If you are a <strong>young ophthalmologist</strong>, submit your topic in the category of <strong>Ophthalmic Education/ young Ophthalmologist</strong>  in order to get a chance to win a free conference registration and accommodation.</p>
+                    </div>
                     <h3 className="text-base font-semibold">Step 3: Abstract Info</h3>
                     <div className="flex max-w-xs space-x-3">
                         <span className="w-12 h-2 rounded-full bg-primary_blue"></span>

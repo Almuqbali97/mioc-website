@@ -195,7 +195,7 @@ const ProfileDropdown = () => {
             <GeneralModal isOpen={isProfileOpen} onClose={handleProfileClose}>
                 <UserProfile onClose={handleProfileClose} />
             </GeneralModal>
-        </div >
+        </div>
     );
 };
 

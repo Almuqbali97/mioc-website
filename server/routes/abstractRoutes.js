@@ -64,10 +64,8 @@ router.get('/get/all', isAuthenticated, isAdmin, getAllAbstracts);
 router.get('/get/spesific/:id', isAuthenticated, isAdmin, getAbstractById);
 // for reviwer
 router.get('/reviewer/get/all', isAuthenticated, isRevewier, getAllAbstracts);
-// router.get('/reviewer/get/spesific/:id', isAuthenticated, isRevewier, getAbstractById);
-router.get('/reviewer/get/spesific/:id', getAbstractById);
-// router.post('/reviewer/review/:id', isAuthenticated, isRevewier, reviewAbstract);
-router.post('/reviewer/review/:id', reviewAbstract);
+router.get('/reviewer/get/spesific/:id', isAuthenticated, isRevewier, getAbstractById);
+router.post('/reviewer/review/:id', isAuthenticated, isRevewier, reviewAbstract);
 
 router.post('/approve', approveAbstract);
 router.post('/reject');

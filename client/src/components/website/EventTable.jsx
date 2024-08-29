@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 
 const sessions = [
     {
@@ -8,7 +7,7 @@ const sessions = [
         hall2: 'Optometry: Advancements and future directions',
         hall3: 'Oculoplasty : Orbit: The Pandora’s box',
         hall4: 'Free Papers',
-        hall5: 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course)',
+        hall5: 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course) Part 1 - 60 mins',
         hall6: 'Phaco Wet lab',
     },
     {
@@ -17,7 +16,7 @@ const sessions = [
         hall2: 'Coffee Break',
         hall3: 'Coffee Break',
         hall4: 'Coffee Break',
-        hall5: 'Coffee Break',
+        hall5: 'Break',
         hall6: 'Coffee Break',
     },
     {
@@ -26,7 +25,11 @@ const sessions = [
         hall2: 'Optometric Business Management',
         hall3: 'Paediatric Oph 1: Through a Child’s Eyes: Navigating Pediatric Retina and lens Diseases for Better Vision and Quality of Life',
         hall4: 'Free Papers',
-        hall5: 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course)',
+        hall5: [
+            'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course) Part 2 - 60 mins',
+            'Break',
+            'Arabic Session 60 mins'
+        ],
         hall6: 'Phaco Wet lab',
     },
     {
@@ -44,7 +47,7 @@ const sessions = [
         hall2: 'Optometry: Navigating Low Vision Challenges',
         hall3: 'Retina 1: Pearls in Medical Retina',
         hall4: 'Free Papers',
-        hall5: 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course)',
+        hall5: 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course) Part 1 - 60 mins',
         hall6: 'Suturing Wet lab',
     },
     {
@@ -53,41 +56,76 @@ const sessions = [
         hall2: 'Coffee Break',
         hall3: 'Coffee Break',
         hall4: 'Coffee Break',
-        hall5: 'Coffee Break',
+        hall5: 'Break',
         hall6: 'Coffee Break',
     },
     {
         time: '16:00-17:30',
         hall1: 'Glaucoma Session 1: Tips and tricks from glaucoma surgeons to other ocular surgeons',
-        hall2: 'Junior Optometrist session - winning research',
+        hall2: 'Optometry: The Era of Myopia Management',
         hall3: [
             'Industry Session 1 (Retina) 40 min',
             'Break',
             'Industry Session 2 (Retina) 40 min'
         ],
         hall4: 'Free Papers',
-        hall5: 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course)',
+        hall5: [
+            'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course) Part 2 - 60 mins',
+            'Break',
+            'Award Ceremony - 60 mins'
+        ],
         hall6: 'Suturing Wet lab',
     },
 ];
 
-const categories = [
-    'All',
-    'Ant. Seg/Cataract & IOL',
-    'Optometry',
-    'Oculoplasty',
-    'Free Papers',
-    'Artificial intelligence',
-    'Phaco Wet lab',
-    'Cornea',
-    'Optometric Business Management',
-    'Paediatric Oph',
-    'Glaucoma',
-    'Retina',
-    'Junior Optometrist session',
-    'Industry Session',
-    'Suturing Wet lab'
-];
+const getColorClass = (hall) => {
+    if (Array.isArray(hall)) {
+        return hall.map(getColorClass);
+    }
+    switch (hall) {
+        case 'Ant. Seg/Cataract & IOL: From Cloudy to Clarity: Revolutionizing Cataract surgeries in challenging cases':
+            return 'bg-[#017100] text-black border-gray-300';
+        case 'Optometry: Advancements and future directions':
+        case 'Optometry: Navigating Low Vision Challenges':
+        case 'Junior Optometrist session - winning research':
+            return 'bg-[#FF95CA] text-black border-gray-300';
+        case 'Oculoplasty : Orbit: The Pandora’s box':
+            return 'bg-[#929000] text-black border-gray-300';
+        case 'Free Papers':
+            return 'bg-[#D4FB79] border-gray-300';
+        case 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course) Part 1 - 60 mins':
+        case 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course) Part 2 - 60 mins':
+        case 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course) Part 1 - 60 mins':
+        case 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course) Part 2 - 60 mins':
+            return 'bg-[#61D836] border-gray-300';
+        case 'Phaco Wet lab':
+            return 'bg-[#CB9DFF] text-black border-gray-300';
+        case 'Suturing Wet lab':
+            return 'bg-[#808CC9] text-black border-gray-300';
+        case 'Cornea/ Keratoconus':
+            return 'bg-[#73FCD6] text-black border-gray-300';
+        case 'Optometric Business Management':
+            return 'bg-[#FF95CA] text-black border-gray-300';
+        case 'Optometry: The Era of Myopia Management':
+            return 'bg-[#FF95CA] text-black border-gray-300';
+        case 'Paediatric Oph 1: Through a Child’s Eyes: Navigating Pediatric Retina and lens Diseases for Better Vision and Quality of Life':
+            return 'bg-[#FEAE00] text-black border-gray-300';
+        case 'Glaucoma Course: Correlating structure and function in Glaucoma':
+        case 'Glaucoma Session 1: Tips and tricks from glaucoma surgeons to other ocular surgeons':
+            return 'bg-[#56C1FF] text-black border-gray-300';
+        case 'Retina 1: Pearls in Medical Retina':
+            return 'bg-[#FF968D] text-black border-gray-300';
+        case 'Industry Session 1 (Retina) 40 min':
+        case 'Industry Session 2 (Retina) 40 min':
+            return 'bg-[#009193] text-black border-gray-300';
+        case 'Break':
+            return 'bg-white text-black border-gray-300';
+        case 'Award Ceremony - 60 mins':
+            return 'bg-[#61D836] text-black border-gray-300';
+        default:
+            return '';
+    }
+};
 
 const EventTable = () => {
     const [filter, setFilter] = useState('All');
@@ -102,64 +140,8 @@ const EventTable = () => {
         return filteredSession;
     });
 
-    const getColorClass = (hall) => {
-        if (Array.isArray(hall)) {
-            return hall.map(getColorClass);
-        }
-        switch (hall) {
-            case 'Ant. Seg/Cataract & IOL: From Cloudy to Clarity: Revolutionizing Cataract surgeries in challenging cases':
-                return 'bg-[#017100] text-black border-gray-300';
-            case 'Optometry: Advancements and future directions':
-                return 'bg-[#FF95CA] text-black border-gray-300';
-            case 'Oculoplasty : Orbit: The Pandora’s box':
-                return 'bg-[#929000] text-black border-gray-300';
-            case 'Free Papers':
-                return 'bg-[#D4FB79] border-gray-300';
-            case 'The Cutting-Edge Artificial intelligence in Ophthalmology (Instructional Course)':
-                return 'bg-[#61D836] border-gray-300';
-            case 'Phaco Wet lab':
-                return 'bg-[#CB9DFF] text-black border-gray-300';
-            case 'Cornea/ Keratoconus':
-                return 'bg-[#73FCD6] text-black border-gray-300';
-            case 'Optometric Business Management':
-                return 'bg-[#FF95CA] text-black border-gray-300';
-            case 'Paediatric Oph 1: Through a Child’s Eyes: Navigating Pediatric Retina and lens Diseases for Better Vision and Quality of Life':
-                return 'bg-[#FEAE00] text-black border-gray-300';
-            case 'Glaucoma Course: Correlating structure and function in Glaucoma':
-                return 'bg-[#56C1FF] text-black border-gray-300';
-            case 'Glaucoma Session 1: Tips and tricks from glaucoma surgeons to other ocular surgeons':
-                return 'bg-[#56C1FF] text-black border-gray-300';
-            case 'Optometry: Navigating Low Vision Challenges':
-                return 'bg-[#FF95CA] text-black border-gray-300';
-            case 'Retina 1: Pearls in Medical Retina':
-                return 'bg-[#FF968D] text-black border-gray-300';
-            case 'Refractive Surgery Workup: A Step-by-Step Guide (Instructional Course)':
-                return 'bg-[#61D836] border-gray-300';
-            case 'Suturing Wet lab':
-                return 'bg-[#808CC9] text-black border-gray-300';
-            case 'Junior Optometrist session - winning research':
-                return 'bg-[#FF95CA] text-black border-gray-300';
-            case 'Industry Session 1 (Retina) 40 min':
-                return 'bg-[#009193] text-black border-gray-300';
-            case 'Industry Session 2 (Retina) 40 min':
-                return 'bg-[#009193] text-black border-gray-300';
-            case 'Break':
-                return 'bg-white text-black border-gray-300';
-            default:
-                return '';
-        }
-    };
-
     return (
         <div className="p-4">
-            {/* <div className="mb-4">
-                <label className="mr-2">Filter by Topic:</label>
-                <select value={filter} onChange={e => setFilter(e.target.value)} className="p-2 border rounded">
-                    {categories.map(category => (
-                        <option key={category} value={category}>{category}</option>
-                    ))}
-                </select>
-            </div> */}
             <div className="overflow-x-auto rounded-md shadow-2xl mb-12">
                 <table className="border-collapse border border-gray-200 min-w-[500px]">
                     <thead>
@@ -175,7 +157,23 @@ const EventTable = () => {
                     </thead>
                     <tbody>
                         {filteredSessions.map((session, index) => {
-                            if (session.hall1 === 'Coffee Break' || session.hall1 === 'Lunch Break') {
+                            if (session.hall1 === 'Coffee Break') {
+                                return (
+                                    <tr key={index}>
+                                        <td className="border-[2.3px] border-gray-300 p-2 bg-gray-200 text-center min-w-[50px] md:min-w-[100px] text-xs md:text-sm">{session.time}</td>
+                                        <td className="border-[2.3px] border-gray-300 p-2 border-r-0 text-center bg-gray-200 text-xs md:text-sm" colSpan="4">
+                                            {session.hall1}
+                                        </td>
+                                        <td className="border-[1px] border-black p-2 text-center bg-[#61D836] text-xs md:text-sm font-semibold" colSpan="1">
+                                            Short Break
+                                        </td>
+                                        <td className="border-[2.3px] border-gray-300 p-2 border-l-0 text-center bg-gray-200 text-xs md:text-sm" colSpan="1">
+                                            {session.hall1}
+                                        </td>
+                                    </tr>
+                                );
+                            }
+                            if (session.hall1 === 'Lunch Break') {
                                 return (
                                     <tr key={index}>
                                         <td className="border-[2.3px] border-gray-300 p-2 bg-gray-200 text-center min-w-[50px] md:min-w-[100px] text-xs md:text-sm">{session.time}</td>
@@ -209,7 +207,15 @@ const EventTable = () => {
                                         {session.hall4}
                                     </td>
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall5)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
-                                        {session.hall5}
+                                        {Array.isArray(session.hall5) ? (
+                                            session.hall5.map((item, subIndex) => (
+                                                <div key={subIndex} className={`mb-1 p-2 ${getColorClass(item)} text-center text-xs md:text-sm font-medium min-w-[100px] xs:h-[20px]${item != 'Break' && 'md:h-[30px]'} `}>
+                                                    {item}
+                                                </div>
+                                            ))
+                                        ) : (
+                                            session.hall5
+                                        )}
                                     </td>
                                     <td className={`border-[1px] border-gray-900 px-3 py-2 ${getColorClass(session.hall6)} text-xs md:text-sm font-medium min-w-[100px] h-[110px] `}>
                                         {session.hall6}

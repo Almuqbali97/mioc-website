@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 
 const sessionsDayTwo = [
     {
@@ -7,7 +6,7 @@ const sessionsDayTwo = [
         hall1: 'Glaucoma Session 2: Hot topics in surgical management: what to do next if a trabeculectomy fails?',
         hall2: 'Aesthetics',
         hall3: 'Paediatric Oph 2: Solving the Strabismus Conundrum: Expert Strategies for Complex Cases',
-        hall4: 'Ocular Imaging',
+        hall4: 'Optometry: Anterior Ocular Health and Contact Lenses',
         hall5: 'Dry Eye & Ocular Surface Society (DEOSS) Session',
         hall6: 'Phaco Wet lab',
     },
@@ -24,13 +23,13 @@ const sessionsDayTwo = [
         time: '11:00-12:30',
         hall1: 'Refractive Surgery and Ocular Surface',
         hall2: [
-            'Industry Session 3 (Aesthetics)',
+            'Industry Session 3 (Aesthetics) 40 min',
             'Break',
-            'Industry Session 4 (Ant.Seg.)'
+            'Industry Session 4 (Ant.Seg.) 40 min'
         ],
-        hall3: 'Optometry Certified Course: Anterior Ocular Health and Contact Lenses',
-        hall4: 'MEACOUS -Uveitis Course',
-        hall5: 'Oculoplasty : Dacryology: Nitty gritty of lacrimal apparatus',
+        hall3: 'MEACOUS -Uveitis Course',
+        hall4: 'Optometry Certified Course: Modern Approaches of Contact Lenses Practise',
+        hall5: 'Oph. Nursing Session: Let’s Keep an eye on ocular emergencies',
         hall6: 'Phaco Wet lab',
     },
     {
@@ -46,9 +45,9 @@ const sessionsDayTwo = [
         time: '14:00-15:30',
         hall1: 'Glaucoma Session 3: Masquerade angle closure glaucoma attacks',
         hall2: 'Neuro Oph.',
-        hall3: 'Retina 2: What’s new in Retina world-Are we there yet ?',
-        hall4: 'Comprehensive Keratoconus Management: The Optometrist’s Role (Instructional Course)',
-        hall5: 'Oph. Nursing Session: Let’s keep an eye on ocular emergencies',
+        hall3: 'Retina 2: What’s new in Retina world-Are we there yet?',
+        hall4: 'Certified Course: Paediatric Optometry',
+        hall5: 'Oph. Nursing (Hands-on workshop) Mastering Eye Safety: Expert Tips for Preparing Intraocular Lenses with Confidence!',
         hall6: 'Aesthetic Workshop',
     },
     {
@@ -62,15 +61,15 @@ const sessionsDayTwo = [
     },
     {
         time: '16:00-17:30',
-        hall1: 'Optometry: Modern Approaches of Contact Lenses Practice',
+        hall1: 'Comprehensive Keratoconus Management: The Optometrist’s Role (Instructional Course)',
         hall2: 'Neuro Imaging Course',
         hall3: [
-            'Industry Session 5 (Retina)',
+            'Industry Session 5 (Bayer Symposium) 40 min',
             'Break',
-            'Industry Session 6 (Retina)'
+            'Industry Session 6 (Retina) 40 min'
         ],
-        hall4: 'MEACOUS -Uveitis Session 1',
-        hall5: 'Oph. Nursing (Hands-on workshop) Mastering Eye Safety: Expert Tips for Preparing Intraocular Lenses with Confidence!”',
+        hall4: 'Junior Optometrist session - winning research',
+        hall5: 'MEACOUS -Uveitis Session 1',
         hall6: 'Aesthetic Workshop',
     },
 ];
@@ -80,12 +79,11 @@ const categoriesDayTwo = [
     'Glaucoma',
     'Aesthetics',
     'Paediatric Oph',
-    'Ocular Imaging',
+    'Optometry',
     'Dry Eye',
     'Phaco Wet lab',
     'Refractive Surgery',
     'Industry Session',
-    'Optometry',
     'MEACOUS',
     'Oculoplasty',
     'Neuro Oph.',
@@ -117,41 +115,38 @@ const DayTwoEventTable = () => {
             case 'Glaucoma Session 3: Masquerade angle closure glaucoma attacks':
                 return 'bg-[#56C1FF] text-black border-gray-300';
             case 'Aesthetics':
+            case 'Aesthetic Workshop':
                 return 'bg-[#F27200] text-black border-gray-300';
             case 'Paediatric Oph 2: Solving the Strabismus Conundrum: Expert Strategies for Complex Cases':
                 return 'bg-[#FEAE00] text-black border-gray-300';
-            case 'Ocular Imaging':
-                return 'bg-[#00AB8E] text-black border-gray-300';
+            case 'Optometry: Anterior Ocular Health and Contact Lenses':
+            case 'Optometry Certified Course: Modern Approaches of Contact Lenses Practise':
+            case 'Certified Course: Paediatric Optometry':
+            case 'Junior Optometrist session - winning research':
+                return 'bg-[#FF95CA] text-black border-gray-300';
             case 'Dry Eye & Ocular Surface Society (DEOSS) Session':
                 return 'bg-[#CB8FAB] border-gray-300';
             case 'Phaco Wet lab':
                 return 'bg-[#CB9DFF] text-black border-gray-300';
             case 'Refractive Surgery and Ocular Surface':
                 return 'bg-[#73FCD6] border-gray-300';
-            case 'Optometry Certified Course: Anterior Ocular Health and Contact Lenses':
-            case 'Optometry: Modern Approaches of Contact Lenses Practice':
-                return 'bg-[#FF95CA] text-black border-gray-300';
             case 'MEACOUS -Uveitis Course':
             case 'MEACOUS -Uveitis Session 1':
                 return 'bg-[#FF85FF] text-black border-gray-300';
-            case 'Oculoplasty : Dacryology: Nitty gritty of lacrimal apparatus':
-                return 'bg-[#929000] text-black border-gray-300';
+            case 'Oph. Nursing Session: Let’s Keep an eye on ocular emergencies':
+            case 'Oph. Nursing (Hands-on workshop) Mastering Eye Safety: Expert Tips for Preparing Intraocular Lenses with Confidence!':
+                return 'bg-[#FFD479] text-black border-gray-300';
             case 'Neuro Oph.':
             case 'Neuro Imaging Course':
                 return 'bg-[#FFFC79] text-black border-gray-300';
-            case 'Retina 2: What’s new in Retina world-Are we there yet ?':
+            case 'Retina 2: What’s new in Retina world-Are we there yet?':
                 return 'bg-[#FF968D] text-black border-gray-300';
             case 'Comprehensive Keratoconus Management: The Optometrist’s Role (Instructional Course)':
                 return 'bg-[#61D836] border-gray-300';
-            case 'Oph. Nursing Session: Let’s keep an eye on ocular emergencies':
-            case 'Oph. Nursing (Hands-on workshop) Mastering Eye Safety: Expert Tips for Preparing Intraocular Lenses with Confidence!”':
-                return 'bg-[#FFD479] text-black border-gray-300';
-            case 'Aesthetic Workshop':
-                return 'bg-[#F27200] text-black border-gray-300';
-            case 'Industry Session 3 (Aesthetics)':
-            case 'Industry Session 4 (Ant.Seg.)':
-            case 'Industry Session 5 (Retina)':
-            case 'Industry Session 6 (Retina)':
+            case 'Industry Session 3 (Aesthetics) 40 min':
+            case 'Industry Session 4 (Ant.Seg.) 40 min':
+            case 'Industry Session 5 (Bayer Symposium) 40 min':
+            case 'Industry Session 6 (Retina) 40 min':
                 return 'bg-[#009193] text-black border-gray-300';
             case 'Break':
                 return 'bg-white text-black border-gray-300';
@@ -225,12 +220,12 @@ const DayTwoEventTable = () => {
                                         {session.hall6}
                                     </td>
                                 </tr>
-                    );
+                            );
                         })}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        </div >
     );
 };
 

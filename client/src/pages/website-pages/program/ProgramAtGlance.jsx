@@ -48,6 +48,7 @@ const ProgramAtGlance = () => {
             </div>
 
             <div className='w-full max-w-[97%] lg:max-w-[84%] mx-auto'>
+                <h1 className='my-4 font-bold text-lg'>The Program:</h1>
                 <Tabs>
                     <TabList className="flex justify-around bg-gray-200 p-2 rounded-t-md">
                         <Tab className="cursor-pointer p-2 flex-grow text-center font-bold" selectedClassName="bg-white rounded-md  border-b-2 border-primary_blue">
