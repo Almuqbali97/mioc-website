@@ -54,10 +54,17 @@ const MapSection = () => {
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Contact</h3>
-                                    <p className="mt-1 text-white">Email: info@mioc.org.om</p>
-                                    <p className="mt-1 text-white">Support: support@mioc.org.om</p>
-                                    <p className="mt-1 text-white">Phone: +968 79191556</p>
+                                    <p className="mt-1 text-white">
+                                        Email: <a href="mailto:info@mioc.org.om" className="text-blue-200 font-semibold hover:underline">info@mioc.org.om</a>
+                                    </p>
+                                    <p className="mt-1 text-white">
+                                        Support: <a href="mailto:support@mioc.org.om" className="text-blue-200 font-semibold hover:underline">support@mioc.org.om</a>
+                                    </p>
+                                    <p className="mt-1 text-white">
+                                        Phone: <a href="tel:+96879191556" className="text-blue-200 font-semibold hover:underline">+968 79191556</a>
+                                    </p>
                                 </div>
+
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Social</h3>
 
