@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'; // Make sure to import the necessary CSS
+import 'react-phone-input-2/lib/style.css';
 import { countries } from '../../../constants';
 import Loading from '../../../components/common/Loading.jsx';
+
+const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf'];
 
 const SubmitVisaApplication = () => {
     const [formData, setFormData] = useState({
@@ -10,13 +12,17 @@ const SubmitVisaApplication = () => {
         lastName: '',
         mobile: '',
         email: '',
-        country: ''
+        country: '',
+        passportFile: null,
+        personalFile: null
     });
 
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [showResponse, setShowResponse] = useState(false);
+    const [passportPreview, setPassportPreview] = useState(null);
+    const [personalPreview, setPersonalPreview] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,6 +34,36 @@ const SubmitVisaApplication = () => {
             ...errors,
             [name]: ''
         });
+    };
+
+    const handleFileChange = (e) => {
+        const { name, files } = e.target;
+        const file = files[0];
+        if (file) {
+            if (!allowedFileTypes.includes(file.type)) {
+                setErrors({ ...errors, [name]: 'Invalid file type. Only JPEG, PNG, and PDF files are allowed.' });
+                return;
+            }
+
+            setFormData({
+                ...formData,
+                [name]: file
+            });
+            setErrors({
+                ...errors,
+                [name]: ''
+            });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (name === 'passportFile') {
+                    setPassportPreview(reader.result);
+                } else if (name === 'personalFile') {
+                    setPersonalPreview(reader.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handlePhoneChange = (value) => {
@@ -48,12 +84,41 @@ const SubmitVisaApplication = () => {
         if (!formData.mobile) newErrors.mobile = 'Mobile number is required';
         if (!formData.email) newErrors.email = 'Email is required';
         if (!formData.country) newErrors.country = 'Country is required';
+        if (!formData.passportFile) newErrors.passportFile = 'Passport image is required';
+        if (!formData.personalFile) newErrors.personalFile = 'Personal image is required';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
+    const getPresignedUrl = async (fileType) => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/visa/presigned-url?fileType=${fileType}&firstName=${formData.firstName}&lastName=${formData.lastName}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error generating presigned URL:', error);
+            throw new Error('Failed to upload files');
+        }
+    };
+
+    const uploadFileToS3 = async (file, url) => {
+        try {
+            await fetch(url, {
+                method: 'PUT',
+                body: file,
+                headers: {
+                    'Content-Type': file.type || 'image/jpeg'
+                }
+            });
+        } catch (error) {
+            console.error('Error uploading file to S3:', error);
+            throw new Error('Failed to upload file');
+        }
+    };
+
     const handleSubmit = async (e) => {
+        window.scrollTo(0, 0)
         e.preventDefault();
         if (!validateForm()) return;
 
@@ -61,12 +126,28 @@ const SubmitVisaApplication = () => {
         setShowResponse(false);
 
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL + '/submit/visa-request', {
+            // Get presigned URLs and upload files to S3
+            const passportData = await getPresignedUrl('passport');
+            await uploadFileToS3(formData.passportFile, passportData.presignedURL);
+
+            const personalData = await getPresignedUrl('personal');
+            await uploadFileToS3(formData.personalFile, personalData.presignedURL);
+
+            // Submit form data with S3 keys
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/submit/visa-request`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    mobile: formData.mobile,
+                    email: formData.email,
+                    country: formData.country,
+                    passportFileName: passportData.key,
+                    personalFileName: personalData.key
+                })
             });
 
             const result = await response.json();
@@ -79,8 +160,12 @@ const SubmitVisaApplication = () => {
                     lastName: '',
                     mobile: '',
                     email: '',
-                    country: ''
+                    country: '',
+                    passportFile: null,
+                    personalFile: null
                 });
+                setPassportPreview(null);
+                setPersonalPreview(null);
             } else {
                 setErrors({ ...errors, server: result.message || 'Failed to submit visa request' });
             }
@@ -96,7 +181,9 @@ const SubmitVisaApplication = () => {
     return (
         <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 mb-10">
             <h1 className="text-3xl font-bold mb-4">Visa Request</h1>
-            <p className="text-[0.9rem] text-gray-900 mb-6 bg-red-100 p-2 rounded-md"> Note <span className='text-red-500 font-bold'>*</span>: Applications of individuals who have not registered for the conference will be ignored.</p>
+            <p className="text-[0.9rem] text-gray-900 mb-6 bg-red-100 p-2 rounded-md">
+                Note <span className='text-red-500 font-bold'>*</span>: Applications of individuals who have not registered for the conference will be ignored.
+            </p>
             {loading && <div className='flex justify-center'><div className='max-w-[200px]'><Loading /></div></div>}
             {!loading && showResponse && (
                 <div className={`p-4 mb-4 rounded-lg ${successMessage ? 'bg-green-100' : 'bg-red-100'}`}>
@@ -168,7 +255,6 @@ const SubmitVisaApplication = () => {
                         />
                         {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
                     </div>
-
                     <div className="mb-4">
                         <label htmlFor="country" className="block text-gray-700">Country *</label>
                         <select
@@ -186,8 +272,51 @@ const SubmitVisaApplication = () => {
                         </select>
                         {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
                     </div>
-                    <button type="submit" className="w-full bg-primary_blue text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:ring focus:ring-blue-300">
-                        Submit
+                    <div className="mb-4">
+                        <label htmlFor="personalFile" className="block text-gray-700">Personal Image (JPEG, PNG, PDF) *</label>
+                        <input
+                            type="file"
+                            id="personalFile"
+                            name="personalFile"
+                            accept=".jpeg, .jpg, .png, .pdf"
+                            onChange={handleFileChange}
+                            className="w-full border px-3 py-2 rounded-lg focus:ring focus:ring-blue-300"
+                            required
+                        />
+                        {errors.personalFile && <p className="text-red-500 text-sm">{errors.personalFile}</p>}
+                        {personalPreview && !formData.personalFile.type.includes('pdf') && (
+                            <img src={personalPreview} alt="Personal Image Preview" className="mt-2 h-32" />
+                        )}
+                        {personalPreview && formData.personalFile.type.includes('pdf') && (
+                            <p className="mt-2 text-gray-700">{formData.personalFile.name}</p>
+                        )}
+
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="passportFile" className="block text-gray-700">Passport Image (JPEG, PNG, PDF) *</label>
+                        <input
+                            type="file"
+                            id="passportFile"
+                            name="passportFile"
+                            accept=".jpeg, .jpg, .png, .pdf"
+                            onChange={handleFileChange}
+                            className="w-full border px-3 py-2 rounded-lg focus:ring focus:ring-blue-300"
+                            required
+                        />
+                        {errors.passportFile && <p className="text-red-500 text-sm">{errors.passportFile}</p>}
+                        {passportPreview && !formData.passportFile.type.includes('pdf') && (
+                            <img src={passportPreview} alt="Passport Preview" className="mt-2 h-32" />
+                        )}
+                        {passportPreview && formData.passportFile.type.includes('pdf') && (
+                            <p className="mt-2 text-gray-700">{formData.passportFile.name}</p>
+                        )}
+                    </div>
+                    <button
+                        type="submit"
+                        className={`w-full bg-primary_blue text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:ring focus:ring-blue-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        disabled={loading}
+                    >
+                        {loading ? 'Submitting...' : 'Submit'}
                     </button>
                 </form>
             )}
