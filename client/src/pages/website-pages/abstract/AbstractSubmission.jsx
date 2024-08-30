@@ -52,7 +52,6 @@ const AbstractSubmission = () => {
         conclusions: 0,
         description: 0
     });
-
     const handleChange = async (e) => {
         const { name, value, files } = e.target;
         setErrors({ ...errors, [name]: '' });
@@ -349,7 +348,7 @@ const AbstractSubmission = () => {
                     <div className="bg-red-50 p-4 rounded-lg shadow-md mb-8 mt-11">
                         <h3 className="text-xl font-semibold mb-2">Important Information</h3>
                         <h2 className="text-lg font-semibold mb-2">Get a chance to win a free conference registration and accommodation</h2>
-                        <p>If you are a <strong>young ophthalmologist</strong>, submit your topic in the category of <strong>Ophthalmic Education/ young Ophthalmologist</strong>  in order to get a chance to win a free conference registration and accommodation.</p>
+                        <p>If you are a <strong>Young ophthalmologist</strong>, submit your topic in the topic type of <strong>Young Ophthalmologist</strong>  in order to get a chance to win a free conference registration and accommodation.</p>
                     </div>
                     <h3 className="text-base font-semibold">Step 3: Abstract Info</h3>
                     <div className="flex max-w-xs space-x-3">
@@ -565,7 +564,7 @@ const AbstractSubmission = () => {
                                     value={formData.topic}
                                     name='topic' id="topic" className="bg-gray-50 border border-gray-300 text-gray-900 mb-3 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-none dark:text-white">
                                     <option defaultValue>Select topic</option>
-                                    {topics.map(topic => <option key={topic} value={topic}>{topic}</option>)}
+                                    {topics.map(topic => <option key={topic} value={topic}>{topic === 'Ophthalmic Education/Young Ophthalmologists' ? 'Young Ophthalmologist' : topic}</option>)}
                                 </select>
                                 {errors.topic && <p className="text-red-500 text-sm">{errors.topic}</p>}
                                 <label htmlFor="presentationType" className="block my-2 text-sm font-medium text-gray-900 dark:text-white">Select Your Presentation Type *</label>
