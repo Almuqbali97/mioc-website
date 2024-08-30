@@ -80,20 +80,25 @@ const OosPricingTable = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/oos-membership/checkout', {
-            state: {
-                selectedCountry,
-                nationality,
-                personalInfo,
-                addressInfo,
-                workInfo,
-                otherWorkPlace,
-                otherProfession,
-                selectedPrice,
-                membershipType
-            }
-        });
-        closeModal();
+        if (step === 4) {
+            navigate('/oos-membership/checkout', {
+                state: {
+                    selectedCountry,
+                    nationality,
+                    personalInfo,
+                    addressInfo,
+                    workInfo,
+                    otherWorkPlace,
+                    otherProfession,
+                    selectedPrice,
+                    membershipType
+                }
+            });
+            closeModal();
+        } else {
+            // Otherwise, move to the next step
+            nextStep();
+        }
     };
 
     const validateStep = () => {
