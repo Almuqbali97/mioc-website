@@ -117,7 +117,7 @@ function App() {
         <Route element={<RequireAuth />}>
           {/* for reviwer */}
           <Route path='/abstract/reviewer' element={<AbstractReview />} />
-          <Route path='/abstract/reviewe/:id' element={<AbstractReviewDetails />} />
+          <Route path='/abstract/review/:id' element={<AbstractReviewDetails />} />
 
           <Route element={<AdminPanel />}>
             <Route path='/admin' element={<AdminPage />} />

@@ -10,7 +10,7 @@ import { handleFileDownload } from '../../../helper/handleFilesDownload';
 import DirectFileDownload from '../../../helper/DirectFileDownload';
 let abstractDates = [
     { text: 'Abstract Submission Open', date: '01 June 2024' },
-    { text: 'Abstract submission deadline', date: '01 September 2024' },
+    { text: 'Abstract submission deadline', date: '15 September 2024' },
     { text: 'Abstract notification of acceptance', date: '01 October 2024' },
 ]
 import { topics } from '../../../constants';

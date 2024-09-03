@@ -8,7 +8,7 @@ export const isRevewier = (req, res, next) => {
         "nisreenasser87@gmail.com",
         "umali_mahrezi@yahoo.com",
         "dr.masoomian@yahoo.com",
-        "alfarsi23@hotmail.com",
+        "m.mameesh@gmail.com",
         "sajinidurairaj@yahoo.co.in",
         "asooy927@gmail.com",
         "alfarsi52888@gmail.com",

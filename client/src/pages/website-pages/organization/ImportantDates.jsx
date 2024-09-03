@@ -29,7 +29,7 @@ let importantDates = [
     },
     {
         event: "Abstract Submission Deadline",
-        date: "01 September 2024"
+        date: "15 September 2024"
     },
     {
         event: "Notification to Submitting Author",

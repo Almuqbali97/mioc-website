@@ -38,6 +38,31 @@ const userProfileMenu = [
     { name: 'Conference Registration', to: '/user/conference/registration' },
 ]
 
+const reviewers = [
+    "drrikin@gmail.com",
+    "SawsanAl.bloushi@gmail.com",
+    "tr.saifbanioraba@gmail.com",
+    "walugail@yahoo.co.uk",
+    "rashid3099@hotmail.com",
+    "nisreenasser87@gmail.com",
+    "umali_mahrezi@yahoo.com",
+    "dr.masoomian@yahoo.com",
+    "m.mameesh@gmail.com",
+    "sajinidurairaj@yahoo.co.in",
+    "asooy927@gmail.com",
+    "alfarsi52888@gmail.com",
+    "draliraza12@gmail.com",
+    "kisheyeh@gmail.com",
+    "almahrouqi.h@gmail.com",
+    "sreelathasantosh@gmail.com",
+    "predev28@gmail.com",
+    "amal_alaliyani@icloud.com",
+    "dr.shihab89@gmail.com",
+    "optomnoufal@gmail.com",
+    "ashokabandara75@gmail.com",
+    "almuqbalimusab@gmail.com",
+];
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
@@ -271,6 +296,13 @@ export default function Navbar() {
                                                             {item.name}
                                                         </DisclosureButton>
                                                     ))}
+                                                    {reviewers.includes(user?.email) && <DisclosureButton as={Link} to={'/abstract/reviewer'} className="block w-full text-start bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
+                                                        <div className="w-full">
+                                                            {/* <Link to={'/abstract/reviewer'}> */}
+                                                                Reviewer Page
+                                                            {/* </Link> */}
+                                                        </div>
+                                                    </DisclosureButton>}
                                                 </DisclosurePanel>
                                                 <Link to={'/logout'} className="text-sm font-semibold leading-6 px-3 text-red-500 hover:text-red-600" onClick={handleLinkClick}>
                                                     Logout <span aria-hidden="true">&rarr;</span>
