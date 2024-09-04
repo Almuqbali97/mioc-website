@@ -675,7 +675,7 @@ export async function abstractSuccssfullSubmissionEmail(email, firstName, lastNa
                                                                         style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'playfair display', georgia, 'times new roman', serif;font-size:16px;font-style:normal;font-weight:normal;color:#333333">
                                                                         You can edit the submitted abstract and submit
                                                                         more abstracts until the deadline on September
-                                                                        01, 2024.</p>
+                                                                        15, 2024.</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">

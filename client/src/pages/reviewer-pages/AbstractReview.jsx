@@ -6,7 +6,7 @@ import AuthContext from '../../context/AuthProvider';
 const reviewerTopics = {
     "drrikin@gmail.com": ["Cataract & Lens Surgery"],
     "SawsanAl.bloushi@gmail.com": ["Contact Lens and Refraction", "Optometry"],
-    "tr.saifbanioraba@gmail.com": ["Cornea, External Eye Diseases and Eye Banking"],
+    "doctor.saif@hotmail.com": ["Cornea, External Eye Diseases and Eye Banking"],
     "walugail@yahoo.co.uk": ["Glaucoma"],
     "rashid3099@hotmail.com": ["Keratoconus"],
     "nisreenasser87@gmail.com": ["Neuro-ophthalmology"],
@@ -21,7 +21,7 @@ const reviewerTopics = {
     "almahrouqi.h@gmail.com": ["Refractive Surgery"],
     "sreelathasantosh@gmail.com": ["Retina - Medical"],
     "predev28@gmail.com": ["Retina - Surgical"],
-    "amal_alaliyani@icloud.com": ["Uveitis"],
+    "alaliyani92@gmail.com": ["Uveitis"],
     "dr.shihab89@gmail.com": ["Video Presentation"],
     "optomnoufal@gmail.com": ["Vision Rehabilitation"],
     "ashokabandara75@gmail.com": ["Miscellaneous"],

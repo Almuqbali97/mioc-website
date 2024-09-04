@@ -2,7 +2,7 @@ export const isRevewier = (req, res, next) => {
     const reviewers = [
         "drrikin@gmail.com",
         "SawsanAl.bloushi@gmail.com",
-        "tr.saifbanioraba@gmail.com",
+        "doctor.saif@hotmail.com",
         "walugail@yahoo.co.uk",
         "rashid3099@hotmail.com",
         "nisreenasser87@gmail.com",
@@ -17,7 +17,7 @@ export const isRevewier = (req, res, next) => {
         "almahrouqi.h@gmail.com",
         "sreelathasantosh@gmail.com",
         "predev28@gmail.com",
-        "amal_alaliyani@icloud.com",
+        "alaliyani92@gmail.com",
         "dr.shihab89@gmail.com",
         "optomnoufal@gmail.com",
         "ashokabandara75@gmail.com",

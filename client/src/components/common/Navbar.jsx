@@ -60,6 +60,8 @@ const reviewers = [
     "dr.shihab89@gmail.com",
     "optomnoufal@gmail.com",
     "ashokabandara75@gmail.com",
+    "doctor.saif@hotmail.com",
+    "alaliyani92@gmail.com",
     "almuqbalimusab@gmail.com",
 ];
 
@@ -299,7 +301,7 @@ export default function Navbar() {
                                                     {reviewers.includes(user?.email) && <DisclosureButton as={Link} to={'/abstract/reviewer'} className="block w-full text-start bg-primary_blue rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-blue-100 hover:bg-opacity-80" onClick={handleLinkClick}>
                                                         <div className="w-full">
                                                             {/* <Link to={'/abstract/reviewer'}> */}
-                                                                Reviewer Page
+                                                            Reviewer Page
                                                             {/* </Link> */}
                                                         </div>
                                                     </DisclosureButton>}

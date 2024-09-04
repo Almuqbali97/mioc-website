@@ -63,6 +63,8 @@ const ProfileDropdown = () => {
         "optomnoufal@gmail.com",
         "ashokabandara75@gmail.com",
         "almuqbalimusab@gmail.com",
+        "doctor.saif@hotmail.com",
+        "alaliyani92@gmail.com",
     ];
 
     return (
