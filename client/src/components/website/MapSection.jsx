@@ -38,7 +38,7 @@ const MapSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="rounded-lg overflow-hidden">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14627.625307802917!2d58.306235074996955!3d23.57180754583634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8e00f6179b8d43%3A0x6f79c844903bc554!2sOman%20Convention%20Centre!5e0!3m2!1sen!2som!4v1717076429038!5m2!1sen!2som"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7312.301544328304!2d58.442535547569435!3d23.598925109688306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ffc9ed5a48df%3A0x581ddef38ac8c15!2sMedical%20City%20Polyclinic!5e0!3m2!1sen!2som!4v1725519621388!5m2!1sen!2som"
                                 width="100%" height="480" style={{ border: "0" }} allowFullScreen="" loading="lazy"></iframe>
                         </div>
                         <div>
@@ -50,7 +50,7 @@ const MapSection = () => {
                                 </div>
                                 <div className="px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Our Address</h3>
-                                    <p className="mt-1 text-white">Convention & Exhibition Centre, Muscat, Oman</p>
+                                    <p className="mt-1 text-white">Al Inshirah St, Muscat, Oman</p>
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-white">Contact</h3>

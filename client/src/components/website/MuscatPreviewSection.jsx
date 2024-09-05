@@ -42,7 +42,7 @@ const MuscatPreviewSection = () => {
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">MUSCAT</h2>
                         <h3 className="text-2xl font-semibold text-blue-700 mb-2">Your Host City</h3>
                         <p className="text-gray-700 leading-tight mb-4">
-                            The Sultanate of Oman is located in the southern part of the Arabian Peninsula with a total area of 309,500 square kilometers.Oman is a high-income country with and divided 11 governorates.
+                            The Sultanate of Oman is located in the southern part of the Arabian Peninsula with a total area of 309,500 square kilometers.Oman is a high-income country with and divided 11 governorates. We are excited to have you soon surrounded by Omani hospitality
                         </p>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
@@ -54,12 +54,12 @@ const MuscatPreviewSection = () => {
             </div>
             <div className="flex flex-col justify-center items-center min-h-screen w-full">
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
-                    <img src="https://www.worldconstructionnetwork.com/wp-content/uploads/sites/26/2017/10/1l-image-99.jpg" alt="Mountain" className="w-full h-64 object-cover" />
+                    <img src="https://www.hoteliermiddleeast.com/cloud/2024/06/12/St.-Regis-Al-Mouj-Muscat-Resort-Resized.jpg" alt="Mountain" className="w-full h-64 object-cover" />
                     <div className="p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">CONFERENCE VENUE</h2>
-                        <h3 className="text-2xl font-semibold text-blue-700 mb-2">Convention & Exhibition Center Muscat</h3>
+                        <h3 className="text-2xl font-semibold text-blue-700 mb-2">The St.Regis Al Mouj Muscat</h3>
                         <p className="text-gray-700 leading-tight mb-4">
-                            Oman Convention and Exhibition centre is one of largest event venue in the region and its strategically located in the business district, within a 15 minute drive from Muscat International Airport.
+                            The St. Regis Al Mouj Muscat, located in the vibrant Al Mouj district, epitomizes luxury and sophistication near the heart of Muscat. Within a 15-minute drive from Muscat International Airport, it is perfectly positioned for both leisure and business travelers
                         </p>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
