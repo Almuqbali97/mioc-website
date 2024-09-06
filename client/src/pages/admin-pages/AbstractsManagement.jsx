@@ -3,6 +3,61 @@ import { useNavigate } from 'react-router-dom';
 import { topics } from '../../constants';
 import Loading from '../../components/common/Loading';
 
+const AbstractStatistics = ({ abstracts }) => {
+    // Count total abstracts
+    const totalAbstracts = abstracts.length;
+
+    // Count abstracts by topic
+    const topicCounts = topics.reduce((acc, topic) => {
+        acc[topic] = abstracts.filter(abstract => abstract.topic === topic).length;
+        return acc;
+    }, {});
+
+    // Count by presentation type
+    const totalOralPresentations = abstracts.filter(abstract => abstract.presentationType === 'Oral presentation').length;
+    const totalVideoPresentations = abstracts.filter(abstract => abstract.presentationType === 'Video').length;
+    const totalPosters = abstracts.filter(abstract => abstract.presentationType === 'Poster').length;
+
+    return (
+        <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-4">Abstract Statistics</h3>
+            <table className="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                    </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">Total Abstracts</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{totalAbstracts}</td>
+                    </tr>
+                    {topics.map(topic => (
+                        <tr key={topic}>
+                            <td className="px-6 py-4 whitespace-nowrap">Total {topic} Abstracts</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{topicCounts[topic]}</td>
+                        </tr>
+                    ))}
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">Total Oral Presentations</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{totalOralPresentations}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">Total Video Presentations</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{totalVideoPresentations}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">Total Posters</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{totalPosters}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+
 const AbstractsManagement = () => {
     const [abstracts, setAbstracts] = useState([]);
     const [fetchMsg, setFetchMsg] = useState(null);
@@ -75,6 +130,8 @@ const AbstractsManagement = () => {
                     ))}
                 </select>
             </div>
+            {/* Add the new AbstractStatistics component here */}
+            <AbstractStatistics abstracts={abstracts} />
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
                     <thead className="bg-indigo-600 text-white">
@@ -185,4 +242,6 @@ const AbstractsManagement = () => {
     );
 };
 
+
 export default AbstractsManagement;
+
