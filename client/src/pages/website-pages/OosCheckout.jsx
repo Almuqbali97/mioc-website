@@ -27,7 +27,7 @@ const OosCheckout = () => {
     }, []);
 
     const [formData, setFormData] = useState({
-        merchant_id: '304',
+        merchant_id: '277',
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: selectedPrice,
