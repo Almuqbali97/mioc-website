@@ -22,24 +22,26 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-app.use(cors({
-    origin: ["*", 'http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/', "https://mioc.netlify.app/"], // Replace with your client URL
-    methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true // Allow cookies to be sent
-}));
+// app.use(cors({
+//     origin: ['http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/', "https://mioc.netlify.app/"], // Replace with your client URL
+//     methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true // Allow cookies to be sent
+// }));
 
-// const allowedOrigins = [
-//     'http://localhost:5000',
-//     'https://spayuattrns.bmtest.om/transaction.do?command=initiateTransaction',
-//     'https://smartpaytrns.bankmuscat.com',
-//     'http://localhost:5173',
-//     'https://mioc-website-client.vercel.app',
-//     'https://mioc.org.om',
-//     'https://mti.bankmuscat.com:6443/',
-//     'https://mioc.netlify.app',
-//     'https://mioc-client.onrender.com' // Include Render client URL here
-// ];
+const allowedOrigins = [
+    "*",
+    'http://localhost:5000',
+    'https://spayuattrns.bmtest.om/transaction.do?command=initiateTransaction',
+    'https://spayuattrns.bmtest.om',
+    'https://smartpaytrns.bankmuscat.com',
+    'http://localhost:5173',
+    'https://mioc-website-client.vercel.app',
+    'https://mioc.org.om',
+    'https://mti.bankmuscat.com:6443/',
+    'https://mioc.netlify.app',
+    'https://mioc-client.onrender.com' // Include Render client URL here
+];
 
 // app.use(cors({
 //     origin: function (origin, callback) {
@@ -55,6 +57,41 @@ app.use(cors({
 //     allowedHeaders: ['Content-Type'],
 //     credentials: true // Allow cookies to be sent
 // }));
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         console.log("Received origin:", origin); // Log the origin to see what is received
+//         if (!origin) return callback(null, true);
+//         if (allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             console.log("Origin not allowed:", origin); // This helps identify which origins are rejected
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true
+// }));
+
+app.use(cors({
+    // origin: function (origin, callback) {
+    //     // Allow requests with no origin (like mobile apps, curl requests, or server-to-server communication)
+    //     if (!origin) {
+    //         return callback(null, true);
+    //     }
+    //     if (allowedOrigins.includes(origin)) {
+    //         callback(null, true);
+    //     } else {
+    //         callback(new Error('Not allowed by CORS'), false);
+    //     }
+    // },
+    origin: "*",
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true // Allow cookies to be sent
+}));
+
 
 app.use(express.json());
 app.use(cookieParser());
