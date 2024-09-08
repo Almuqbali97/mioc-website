@@ -21,7 +21,7 @@ app.set('view engine', 'ejs'); // Replace 'ejs' with whatever engine you're usin
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors({
-    origin: ['http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/',"https://mioc.netlify.app/"], // Replace with your client URL
+    origin: ["*", 'http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/', "https://mioc.netlify.app/"], // Replace with your client URL
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Allow cookies to be sent
