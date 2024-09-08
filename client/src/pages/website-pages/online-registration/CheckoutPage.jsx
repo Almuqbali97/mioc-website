@@ -20,7 +20,7 @@ const CheckoutPage = () => {
     const [isLoading, setIsLoading] = useState(null);
 
     const [formData, setFormData] = useState({
-        merchant_id: '277',
+        merchant_id: '304',
         order_id: generateOrderId(),
         currency: 'OMR',
         amount: selectedPrice,
