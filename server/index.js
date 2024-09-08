@@ -22,6 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 const allowedOrigins = [
     'http://localhost:5000',
+    'https://spayuattrns.bmtest.om/transaction.do?command=initiateTransaction',
+    'https://smartpaytrns.bankmuscat.com',
     'http://localhost:5173',
     'https://mioc-website-client.vercel.app',
     'https://mioc.org.om',
