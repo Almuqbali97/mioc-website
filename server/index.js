@@ -20,12 +20,38 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.set('view engine', 'ejs'); // Replace 'ejs' with whatever engine you're using
 app.set('views', path.join(__dirname, 'views'));
 
+const allowedOrigins = [
+    'http://localhost:5000',
+    'http://localhost:5173',
+    'https://mioc-website-client.vercel.app',
+    'https://mioc.org.om',
+    'https://mti.bankmuscat.com:6443/',
+    'https://mioc.netlify.app',
+    'https://mioc-client.onrender.com' // Include Render client URL here
+];
+
+// app.use(cors({
+//     origin: ["*", 'http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/', "https://mioc.netlify.app/"], // Replace with your client URL
+//     methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true // Allow cookies to be sent
+// }));
+
 app.use(cors({
-    origin: ["*", 'http://localhost:5000', 'http://localhost:5173', 'https://mioc-website-client.vercel.app', 'https://mioc.org.om', 'https://mti.bankmuscat.com:6443/', "https://mioc.netlify.app/"], // Replace with your client URL
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Allow cookies to be sent
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
