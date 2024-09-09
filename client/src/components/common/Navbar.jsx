@@ -40,7 +40,7 @@ const userProfileMenu = [
 
 const reviewers = [
     "drrikin@gmail.com",
-    "SawsanAl.bloushi@gmail.com",
+    "sawsanal.bloushi@gmail.com",
     "tr.saifbanioraba@gmail.com",
     "walugail@yahoo.co.uk",
     "rashid3099@hotmail.com",

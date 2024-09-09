@@ -5,7 +5,7 @@ import AuthContext from '../../context/AuthProvider';
 
 const reviewerTopics = {
     "drrikin@gmail.com": ["Cataract & Lens Surgery"],
-    "SawsanAl.bloushi@gmail.com": ["Contact Lens and Refraction", "Optometry"],
+    "sawsanal.bloushi@gmail.com": ["Contact Lens and Refraction", "Optometry"],
     "doctor.saif@hotmail.com": ["Cornea, External Eye Diseases and Eye Banking"],
     "walugail@yahoo.co.uk": ["Glaucoma"],
     "rashid3099@hotmail.com": ["Keratoconus"],

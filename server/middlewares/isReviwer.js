@@ -1,7 +1,7 @@
 export const isRevewier = (req, res, next) => {
     const reviewers = [
         "drrikin@gmail.com",
-        "SawsanAl.bloushi@gmail.com",
+        "sawsanal.bloushi@gmail.com",
         "doctor.saif@hotmail.com",
         "walugail@yahoo.co.uk",
         "rashid3099@hotmail.com",
